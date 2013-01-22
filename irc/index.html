@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+    <section>
+        <section>
+            <h1>social irc bots&nbsp;</h1>
+            <h1>in the Cloud</h1>
+            <p>with</p>
+            <p>node.js</p>
+            <p>and</p>
+            <p>MongoDB</p>
+        </section>
+        <section>
+            <div>presented by</div>
+            <br/>
+            <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+        </section>
+        <section data-state="blackout">
+            <div>
+                <div> Open Platform Evangelist </div>
+                <div style="">at</div>
+                <div style="">Red Hat</div>
+                <div style="">
+                    <br>
+                </div>
+                <div style="">ryanj@redhat.com</div>
+            </div>
+        </section>
+    </section>
+    <section>
+      <section>
+      <h1>IRC</h1>
+      <div class="fragment roll-in">is</div>
+      <div>
+      <p class="fragment roll-in">just</p>
+      <p class="fragment roll-in">multiplayer notepad</p>
+      </div>
+      </section>
+        <section data-state="alert">
+<div>
+    <p>
+      <a class='image' href="http://www.zazzle.com/irc_is_just_multiplayer_notepad_tees-235837046911006156">
+        <img src="img/irc_is_just_multiplayer_notepad_tees_512.jpg" alt='multiplayer notepad'/>
+      </a>
+    </p>
+    <p><q>Hello, nice to troll you!</q></p>
+</div>
+         </section>
+        </section>
+
+    <section>
+        <section>
+      <h1>IRC</h1>
+      <div>is</div>
+      <div>
+      <ul>
+        <li><span style='text-decoration:line-through;' class='highlight-red visible'>just multiplayer notepad</span> </li>
+        <li class="fragment roll-in">
+            a drama club for nerds</li>
+      </ul>
+      </div>
+        </section>
+	    <section>
+<h2>Acting / Emoting</h2>
+					<blockquote cite="http://en.wikipedia.org/wiki/Emote">
+An emote is an entry into a text-based chat client that indicates an action taking place. Unlike emoticons, they are not text art, and instead describe the action using words.</blockquote>
+        <p><a href='http://en.wikipedia.org/wiki/Emote'>http://en.wikipedia.org/wiki/Emote</a></p>
+        </section>
+        <section>
+            <h2>Real Drama</h2>
+<div>
+    <p class="fragment roll-in">
+<a href="http://www.hambule.co.uk/hamnet/">The Hamnet Players<br/>http://www.hambule.co.uk/hamnet/</a>
+    </p>
+    <p class="fragment roll-in">
+      <a href="http://yin.arts.uci.edu/~players/">The Plaintext Players<br/>http://yin.arts.uci.edu/~players/</a>
+    </p>
+</div>
+        </section>
+        <section>
+            <h2>The Cyposium?</h2>
+<div>
+    <p class="fragment roll-in">
+      <a href="http://www.cyposium.net/"><img src='img/cyposium_logo.png'/><br/>http://www.cyposium.net/</a>
+    </p>   
+</div>
+        </section>
+	<section>
+           <h1>Making a big entrance</h1>
+            <p>To perform an action,</p>
+            <p>type '/me' followed by a description of an action:</p>
+            <br/>
+            <pre class="fragment roll-in"><code contenteditable>/me rolls eyes at IRC over-actors</code></pre>
+        </section>
+      </section>
+      <section>
+		<section>
+            <h2>IRC Bots are</h2>
+<div>
+    <p class="fragment roll-in">
+<ul><li class="fragment roll-in">talking apps
+<li class="fragment roll-in">scripted actors who appear to be another user in the room</li>
+</ul>
+    </p>   
+</div>
+        </section>
+
+		<section>
+            <h2>IRC Bot Abilities</h2>
+<div>
+    <p class="fragment roll-in">
+<ul><li class="fragment roll-in">most bots know a few simple jokes</li>
+<li class="fragment roll-in">many know how to assist with bug reports</li>
+<li class="fragment roll-in">they may offer links to relevant information</li>
+<li class="fragment roll-in">or even fight against spam</li>   
+</ul>
+</p>
+</div>
+        </section>
+      </section>
+
+      <section>
+      <h2>IRC is</h2>
+      <div>
+      <ul>
+        <li class='fragment fade-out'><span style='text-decoration:line-through;'>just multiplayer notepad</span> </li>
+        </li>
+        <li> drama club for nerds<span class="fragment roll-in">✓</span></li>
+        <li class="fragment roll-in">
+            an <span class='fragment highlight-blue'>open protocol</span> for realtime mutiuser communication via text <span class='fragment roll-in'>(<a href='http://www.ietf.org/rfc/rfc1459.txt'>rfc1459</a>)</span><span class="fragment roll-in">✓</span></li>
+        <li class="fragment roll-in">
+            found at the heart of every high-tech company that I've worked for</span><span class="fragment roll-in">✓</span></li>
+        <li class="fragment roll-in">
+            a serious contender for "most valuable communication tool" in many organizations</span><span class="fragment roll-in">✓</span></li>
+        <li class="fragment roll-in">
+            realtime communication</span><span class="fragment roll-in">✓</span></li>
+      </ul>
+      </div>
+      </section>
+      <section>
+        <section>
+          <h2>IRC IS</h2> 
+          <h1 class='fragment roll-in'><span class='fragment grow'>OPEN</span></h1>
+        </section>
+        <section>
+          <h2>Open clients</h2> 
+          <h1 class='fragment roll-in'><span class='fragment grow'>XCHAT, colloquy</span></h1>
+        </section>
+        <section>
+          <h2>Web Clients</h2> 
+<div>
+<p>Give it a try: </p>
+<p><a href='http://webchat.freenode.net/'>http://webchat.freenode.net/</a> </p>
+</div>
+        </section>
+        <section>
+          <h2>Open servers</h2> 
+          <h1 class='fragment roll-in'><span class='fragment grow'>freenode</span></h1>
+          <div class='fragment roll-in'>
+		  <pre><code contenteditable>/join #openshift</code></pre>
+<p>OpenShift on <a href='http://freenode.net/ '>freenode IRC</a></p>
+        </div>
+        </section>
+        <section>
+          <h2>Hosting Options</h2> 
+          <h1 class='fragment roll-in'><span class='fragment grow'>DIY, on premise, cloud, or hosted</span></h1>
+<div>
+<p class='fragment roll-in'>It's built on an open standard, allowing you to host it as a service (on your own hardware), or from within a private network (for added security).</p>
+<p class='fragment roll-in'>OpenShift was designed with many of the same characteristics in mind, <span class='fragment highlight-red'>minus the drama</span>.</p>
+</div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>OpenShift IS</h2> 
+          <h1 class='fragment roll-in'><span class='fragment grow'>OPEN</span></h1>
+        </section>
+        <section>
+          <h1>Open cartridge format</h1> 
+        </section>
+        <section>
+          <h2>Open servers</h2> 
+          <h1 class='fragment roll-in'><span class='fragment grow'>OpenShift Origin</span></h1>
+        </section>
+        <section>
+          <h2>Hosting Options</h2> 
+          <h1 class='fragment roll-in'><span class='fragment grow'>DIY, on premise, cloud, or hosted</span></h1>
+        </section>
+        <section>
+          <h2>Developer Preview</h2> 
+          <div><p>Make sure that you sign up for a <a href="https://openshift.redhat.com/app/account/new">free OpenShift account</a></p>
+<p class='fragment roll-in'><a href="https://openshift.redhat.com/app/account/new">http://openshift.redhat.com/</a></p>
+<p><ul>
+<li class='fragment roll-in'>Free-as-in-beer</li>
+<li class='fragment roll-in'>Free-as-in-freedom</li>
+<li class='fragment roll-in'>512 MB RAM / 1 GB storage per gears <span class='fragment highlight-blue'><i>(3 free)</i></span></li> 
+<li class='fragment roll-in'>Need more resources, just ask!</li>
+<li class='fragment roll-in'><i>REALLY</i> a Developer Preview</li>
+</ul></p>
+</div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>The Cloud Landscape</h2> 
+          <h1 class='fragment roll-in'><span class='fragment roll-in'>Public Cloud</span><span class='fragment roll-in'> + </span><span class='fragment roll-in'>Private Cloud</span><span class='fragment roll-in'> = </span></h1>
+         <h1 class='fragment roll-in'><span class='fragment roll-in'>Hybrid Cloud</span></h1>
+        </section>
+        <section>
+          <h2>OpenShift is...</h2>
+          <div class='fragment roll-in'><img width='80%' src='img/paas-overview.png'/></div> 
+        </section>
+        <section>
+          <h2>The big picture</h2>
+          <div class='fragment roll-in'><img src='img/PaaS-landscape.png'/></div> 
+        </section>
+        <section>
+          <h2>OpenStack</h2> 
+          <h1 class='fragment roll-in'>IS OPEN</h1>
+          <div class='fragment roll-in'>and<br/></div>
+          <div class='fragment roll-in'><h1>focused on IaaS</h1></div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Getting Started with OpenShift</h2> 
+          <h4 class='fragment roll-in'>pre-requisites:</h4>
+          <div class='fragment roll-in'>ruby, rubygems</div>
+          <div class='fragment roll-in'>git</div>
+        </section>
+        <section>
+          <h2>Installing the 'rhc' client tool</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>sudo gem install rhc</code></pre></div>
+          <div class='fragment roll-in'>and</div>
+          <div class='fragment roll-in'>install <a href='http://nodejs.org/'>node.js</a></div>
+        </section>
+        <section>
+          <h2>Help with client tools</h2> 
+          <ul>
+          <li class='fragment roll-in'><a href="https://openshift.redhat.com/community/developers/get-started">Openshift Getting Started guide</a></li>
+          <li class='fragment roll-in'><a href="https://openshift.redhat.com/community/developers/install-the-client-tools">RHC client tools installation</a></li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Configuring your dev environment</h2> 
+          <pre class='fragment roll-in'><code contenteditable>rhc setup</code></pre>
+          <div><ul><li class='fragment roll-in'>sets your openshift email address</li>
+                   <li class='fragment roll-in'>verifies your ssh key configuration</li>
+                   <li class='fragment roll-in'>selects your application namespace</li></ul></div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Gearing up a new app on OpenShift</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE</code></pre></div>
+          <div class='fragment roll-in'>or</div>
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create keeprbot nodejs-0.6</code></pre></div>
+        </section>
+				<section>
+<pre><code>Application Options
+-------------------
+  Namespace:  ryanj
+  Cartridges: nodejs-0.6
+  Gear Size:  default
+  Scaling:    no
+
+Creating application 'keeprbot' ... done
+
+Waiting for your DNS name to be available ... done
+
+Downloading the application Git repository ...
+Cloning into 'keeprbot'...</code></pre>
+                </section>
+				<section>
+<pre><code contenteditable>keeprbot @ http://keeprbot-ryanj.rhcloud.com/ (uuid: 25918304bf8d406e89802a1e642063a0)
+---------------------------------------------------
+  Created:   10:23 PM
+  Gear Size: small
+  Git URL:  
+ssh://25918304bf8d406e89802a1e642063a0@keeprbot-ryanj.rhcloud.com/~/git/keeprbot.git/
+  SSH:       25918304bf8d406e89802a1e642063a0@keeprbot-ryanj.rhcloud.com
+
+  nodejs-0.6 (Node.js 0.6)
+  ------------------------
+
+RESULT:
+Application keeprbot was created.</code></pre>
+                </section>
+                <section>
+<h2>Success!</h2> 
+<p>You now have a basic node.js app up an running on OpenShift!</p>
+<br/>
+                  <p class='fragment roll-in'>Your gear is now configured with:</p> 
+          <div><ul><li class='fragment roll-in'>it's own git repo</li>
+                   <li class='fragment roll-in'>it's own web server</li>
+                   <li class='fragment roll-in'>ssh access</li>
+                   <li class='fragment roll-in'>logging</li>
+                   <li class='fragment roll-in'>publicly accessible DNS</li></ul></div>
+                </section>
+      </section>
+      <section>
+        <section>
+          <h2>Building your bot</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable> cd ircbot </code></pre></div>
+        </section>
+				<section data-markdown>
+					<script type="text/template">
+## Installing dependencies
+Using Node's [npm package manager](https://npmjs.org/):
+
+    npm install irc -S
+
+Include the `-S` flag in order to save this dependency to your application's `package.json` file. 
+
+[https://npmjs.org/package/irc](https://npmjs.org/package/irc)
+                    </script>
+                </section>
+				<section data-markdown>
+					<script type="text/template">
+### Bot Basics
+Add the following to your server.js to load and configure the irc library: 
+
+    var irc = require('irc');
+    var bot = new irc.Client('chat.freenode.net', 'YOUR_BOT_NAME', {
+        channels: ['#botzoo', '#botwar'],
+        port: 8001,
+        debug: true
+    });
+                    </script>
+                </section>
+                </section>
+                <section>
+				<section data-markdown>
+					<script type="text/template">
+
+## Teaching your bot to speak
+Listen and respond to conversations as they happen:
+
+    bot.addListener('message', function(from, to, message) {
+        if(  message.indexOf('Know any good jokes?') > -1
+          || message.indexOf('good joke') > -1
+        ) {
+            bot.say(to, 'Knock knock!');
+        }
+    });
+                    </script>
+                </section>
+				<section data-markdown>
+					<script type="text/template">
+Getting to the punchline:
+
+    bot.addListener('message', function(from, to, message) {
+        if(  message.indexOf('who is there?') > -1
+          || message.indexOf("who's there?") > -1
+          || message.indexOf("Who's there?") > -1
+          || message.indexOf("Who is there?") > -1
+          )
+        {
+            bot.say(to, 'Doris');
+        }
+    });
+    bot.addListener('message', function(from, to, message) {
+        if(  message.indexOf('Doris who?') > -1
+          || message.indexOf("doris who?") > -1
+          )
+        {
+            bot.say(to, "Doris locked, that's why I'm knocking!");
+        }
+    });
+                    </script>
+                </section>
+				<section data-markdown>
+					<script type="text/template">
+## Committing your changes
+
+    git add package.json server.js
+
+Commit your changes locally
+
+    git commit -m 'adding irc npm dependency, initializing irc library, adding a few jokes'
+
+                    </script>
+                </section>
+        <section>
+          <h2>deployment</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>git push</code></pre></div>
+          <div class='fragment roll-in'><p><b><i>Done!</i></b> Your bot should now be live on IRC.</p></div>
+        </section>
+      </section>
+      <section>
+      <section>
+          <h2>Interacting with your new bot</h2> 
+          <div class='fragment roll-in'>Login to IRC, and enter one of the channels that your bot has been configured to join:</div>
+          <div class='fragment roll-in'><pre><code contenteditable>/join #botzoo</code></pre></div>
+<br/>
+<div class='fragment roll-in'><p>If you don't already have an IRC client, you can connect to freenode on the web:</p>
+<p><a href="http://webchat.freenode.net/">http://webchat.freenode.net/</a></p></div>
+                </section>
+				<section data-markdown>
+					<script type="text/template">
+
+Ask if anyone knows a good joke:
+
+    [guest]  Know any good jokes?
+    [ircbot] Knock knock!
+    [guest]  Who is there?
+    [ircbot] Doris
+    [guest]  Doris who?
+    [ircbot] Doris locked, that's why I'm knocking!
+    [guest]  meh...
+                    </script>
+                </section>
+				<section>
+<h3>Bot debugging and maintainance</h3>
+<p>If your bot decides to quit mid-conversation, it may be suffering from a bug.</p>
+<br/>
+<p>Checking it's logs may reveal what set it off:</p>
+<pre><code contenteditable>rhc tail topbot</code></pre>
+<p>Or, debug it while running locally:</p>
+<pre><code contenteditable>node server.js</code></pre>
+                </section>
+              </section>
+      <section>
+        <section>
+          <h2>Teaching your bot to keep score</h2> 
+        </section>
+        <section>
+          <h2>Setting up MongoDB on Openshift</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add mongodb-2.2</code></pre></div>
+        </section>
+        <section>
+          <pre><code contenteditable>Adding mongodb-2.2 to application 'keeprbot' ... Success
+
+mongodb-2.2 (MongoDB NoSQL Database 2.2)
+----------------------------------------
+  Connection URL: mongodb://127.6.102.129:27017/
+  Database Name:  keeprbot
+  Password:       T5xJwCiDZYGn
+  Username:       admin
+
+RESULT:
+Added mongodb-2.2 to application keeprbot</code></pre>
+        </section>
+        <section>
+          <pre><code contenteditable>Adding mongodb-2.2 to application 'keeprbot' ... Success
+
+MongoDB 2.2 database added.  Please make note of these credentials:
+
+   Root User: admin
+   Root Password: T5xJwCiDZYGn
+   Database Name: keeprbot
+
+Connection URL: mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
+
+You can manage your new MongoDB by also embedding rockmongo-1.1
+The rockmongo username and password will be the same as the MongoDB credentials above.</code></pre>
+        </section>
+        <section>
+          <h2>RockMongo on Openshift</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add rockmongo-1.1</code></pre></div>
+          <div class='fragment roll-in'><p><i>(optional)</i></p></div>
+        </section>
+        <section>
+          <h2>Creating a scoreboard</h2> 
+          <div class='fragment roll-in'>db.createCollection("scores");</div>
+          <div class='fragment roll-in'>{ "ok" : 1 }</div>
+        </section>
+        <section>
+          <h2>Setting a score</h2> 
+          <div class='fragment roll-in'>db.scores.insert({name:'ryanj',value:'1'});</div>
+        </section>
+        <section>
+          <h2>Showing the scoreboard</h2> 
+          <div class='fragment roll-in'>db.scores.find().sort({value:-1}).limit(10);</div>
+          <div class='fragment roll-in'>response</div>
+        </section>
+        <section>
+          <h2>updating your app</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>git push</code></pre></div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Social Rewards</h2> 
+        </section>
+        <section>
+          <h2>Allocating points</h2> 
+          <div class='fragment roll-in'>keeprbot++</div>
+          <div class='fragment roll-in'>response</div>
+        </section>
+        <section>
+          <h2>Checking the Scoreboard</h2> 
+          <div class='fragment roll-in'>keeprbot scoreboard</div>
+          <div class='fragment roll-in'>response</div>
+        </section>
+      </section>
+            <section>
+				<section data-markdown>
+					<script type="text/template">
+You can find much more information about this npm IRC library here: 
+
+[https://github.com/martynsmith/node-irc](https://github.com/martynsmith/node-irc)
+
+<br/>
+***Thanks for following along!***
+
+--ryanj
+                    </script>
+                </section>
+			  <section data-markdown>
+					<script type="text/template">
+#### References
+* https://openshift.redhat.com/community/get-started
+* https://openshift.redhat.com/community/developers/install-the-client-tools
+* https://openshift.redhat.com/community/blogs/any-version-of-nodejs-you-want-in-the-cloud-openshift-does-it-paas-style
+* https://openshift.redhat.com/community/content/open-irc-port-6667
+* http://www.youtube.com/watch?v=O2rGTXHvPCQ&t=18s
+* https://github.com/ramr/nodejs-custom-version-openshift
+* https://node-irc.readthedocs.org/en/latest/
+					</script>
+			  </section>
+            </section>
+			<section>
+                <section data-state="customevent" id='custom_events'>
+					<h2>Custom Events</h2>
+					<p>
+						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
+					</p>
+					<pre><code contenteditable style="font-size: 18px; margin-top: 20px;">Reveal.addEventListener( 'customevent', function() {
+	console.log( '"customevent" has fired' );
+} );
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Export to PDF</h2>
+					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, below is an example that's been uploaded to SlideShare.</p>
+					<iframe id="slideshare" src="http://www.slideshare.net/slideshow/embed_code/13872948" width="455" height="356" style="margin:0;overflow:hidden;border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen> </iframe>
+					<script>
+						document.getElementById('slideshare').attributeName = 'allowfullscreen';
+					</script>
+				</section>
+			</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
