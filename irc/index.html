@@ -336,7 +336,7 @@ Application keeprbot was created.</code></pre>
       <section>
         <section>
           <h2>Building your bot</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable> cd ircbot </code></pre></div>
+          <div class='fragment roll-in'><pre><code contenteditable> cd keeprbot </code></pre></div>
         </section>
 				<section data-markdown>
 					<script type="text/template">
@@ -356,7 +356,8 @@ Include the `-S` flag in order to save this dependency to your application's `pa
 Add the following to your server.js to load and configure the irc library: 
 
     var irc = require('irc');
-    var bot = new irc.Client('chat.freenode.net', 'YOUR_BOT_NAME', {
+    var bot_name = process.env.OPENSHIFT_APP_NAME || 'keeprbot';
+    var bot = new irc.Client('chat.freenode.net', bot_name, {
         channels: ['#botzoo', '#botwar'],
         port: 8001,
         debug: true
@@ -437,11 +438,11 @@ Commit your changes locally
 Ask if anyone knows a good joke:
 
     [guest]  Know any good jokes?
-    [ircbot] Knock knock!
+    [keeprbot] Knock knock!
     [guest]  Who is there?
-    [ircbot] Doris
+    [keeprbot] Doris
     [guest]  Doris who?
-    [ircbot] Doris locked, that's why I'm knocking!
+    [keeprbot] Doris locked, that's why I'm knocking!
     [guest]  meh...
                     </script>
                 </section>
@@ -496,21 +497,60 @@ The rockmongo username and password will be the same as the MongoDB credentials 
           <div class='fragment roll-in'><p><i>(optional)</i></p></div>
         </section>
         <section>
-          <h2>Creating a scoreboard</h2> 
-          <div class='fragment roll-in'>db.createCollection("scores");</div>
-          <div class='fragment roll-in'>{ "ok" : 1 }</div>
+          <h2>Adding a Mongojs dependency</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>npm install -S mongojs</code></pre>
+</div>
+        </section>
+        <section>
+          <h2>Connecting to MongoDB</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>var mongojs = require('mongojs');
+var connection_string = bot_name;
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+ process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+ process.env.OPENSHIFT_MONGODB_DB_HOST + '/' +
+ process.env.OPENSHIFT_APP_NAME;
+}
+var db = mongojs(connection_string, ['scoreboard']);</code></pre>
+</div>
         </section>
         <section>
           <h2>Setting a score</h2> 
-          <div class='fragment roll-in'>db.scores.insert({name:'ryanj',value:'1'});</div>
+          <div class='fragment roll-in'><pre><code contenteditable>bot.addListener('message', function(from, to, message) {
+    if(  message.indexOf('++') > -1 ){
+        var subject = message.slice(0,message.indexOf('++'));
+        db.scoreboard.find({query: {name: subject}}).limit(1, function(err, doc) {
+            if( typeof(doc)=='object' && (doc instanceof Array) && doc[0] && doc[0].name){
+                 // update
+                 db.scoreboard.update({name: subject}, {$inc:{score:1}}, function(err) {
+                     bot.say(to, "score: " + ( 1 + doc[0].score ));
+                 });
+            }else{
+                 // insert 
+                 db.scoreboard.insert({name: subject, score: 1}, function(err) {
+                     bot.say(to, "score: 1");
+                 });
+            }
+        });
+    }
+});</code></pre></div>
         </section>
         <section>
           <h2>Showing the scoreboard</h2> 
-          <div class='fragment roll-in'>db.scores.find().sort({value:-1}).limit(10);</div>
-          <div class='fragment roll-in'>response</div>
+          <div class='fragment roll-in'><pre><code contenteditable>bot.addListener('message', function(from, to, message) {
+    if(  message.indexOf('scoreboard') > -1 ){
+        db.scoreboard.find().sort({score:-1}).limit(10).forEach(function(err, doc){
+            if (doc && doc.name && doc.score ) {
+                bot.say(to, doc.name + ": " + doc.score);
+            }
+        });
+    }
+});</code></pre></div>
         </section>
         <section>
           <h2>updating your app</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>git add package.json server.js</code></pre></div>
+          <div class='fragment roll-in'><pre><code contenteditable>git commit -m 'adding a social scoreboard'</code></pre></div>
           <div class='fragment roll-in'><pre><code contenteditable>git push</code></pre></div>
         </section>
       </section>
@@ -521,12 +561,10 @@ The rockmongo username and password will be the same as the MongoDB credentials 
         <section>
           <h2>Allocating points</h2> 
           <div class='fragment roll-in'>keeprbot++</div>
-          <div class='fragment roll-in'>response</div>
         </section>
         <section>
           <h2>Checking the Scoreboard</h2> 
           <div class='fragment roll-in'>keeprbot scoreboard</div>
-          <div class='fragment roll-in'>response</div>
         </section>
       </section>
             <section>
@@ -555,30 +593,7 @@ You can find much more information about this npm IRC library here:
 					</script>
 			  </section>
             </section>
-			<section>
-                <section data-state="customevent" id='custom_events'>
-					<h2>Custom Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code contenteditable style="font-size: 18px; margin-top: 20px;">Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, below is an example that's been uploaded to SlideShare.</p>
-					<iframe id="slideshare" src="http://www.slideshare.net/slideshow/embed_code/13872948" width="455" height="356" style="margin:0;overflow:hidden;border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen> </iframe>
-					<script>
-						document.getElementById('slideshare').attributeName = 'allowfullscreen';
-					</script>
-				</section>
-			</section>
-
 			</div>
-
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
