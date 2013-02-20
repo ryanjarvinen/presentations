@@ -42,6 +42,9 @@
             <p>node.js</p>
             <p>and</p>
             <p>MongoDB</p>
+            <br/>
+            <p><a href='http://bit.ly/11Qft8j'>http://bit.ly/11Qft8j</a></p>
+
         </section>
         <section>
             <div>presented by</div>
@@ -60,6 +63,24 @@
             </div>
         </section>
     </section>
+      <section>
+        <section>
+          <h1>Agenda</h1>
+          <ul>
+          <li class='fragment roll-in'>Learn some IRC basics</li>
+          <li class='fragment roll-in'>Create a bot and teach it to speak</li>
+          <li class='fragment roll-in'>Learn some MongoDB basics</li>
+          <li class='fragment roll-in'>Go live with a Mongo-powered IRC bot in ~30 mins</li>
+          </ul>
+        </section>
+            <section>
+          <h1>Code du jour</h1>
+          <p><a href='https://github.com/ryanj/keeprbot.git'>https://github.com/ryanj/keeprbot.git</a></p>
+<br/>
+          <p><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=MONGOLA2013'>Signup with Code - MONGOLA2013</a></p>
+        </section>
+      </section>
+
     <section>
       <section>
       <h1>IRC</h1>
@@ -200,7 +221,11 @@ An emote is an entry into a text-based chat client that indicates an action taki
         </section>
         <section>
           <h2>Hosting Options</h2> 
-          <h1 class='fragment roll-in'><span class='fragment grow'>DIY, on premise, cloud, or hosted</span></h1>
+          <h2 class='fragment roll-in'>DIY</h2>
+          <h2 class='fragment roll-in'>Public IRC Servers</h2>
+          <h2 class='fragment roll-in'>Cloud Servers + IRC</h2>
+        </section>
+        <section>
 <div>
 <p class='fragment roll-in'>It's built on an open standard, allowing you to host it as a service (on your own hardware), or from within a private network (for added security).</p>
 <p class='fragment roll-in'>OpenShift was designed with many of the same characteristics in mind, <span class='fragment highlight-red'>minus the drama</span>.</p>
@@ -214,14 +239,18 @@ An emote is an entry into a text-based chat client that indicates an action taki
         </section>
         <section>
           <h1>Open cartridge format</h1> 
+          <img style='width:70%' class='fragment roll-in' alt='OpenShift Cartridge' src='img/Openshift-Cartridge.png'/>
         </section>
         <section>
           <h2>Open servers</h2> 
           <h1 class='fragment roll-in'><span class='fragment grow'>OpenShift Origin</span></h1>
+          <img style='width:70%' class='fragment roll-in' alt='gear' src='img/gear.png'/>
         </section>
         <section>
           <h2>Hosting Options</h2> 
-          <h1 class='fragment roll-in'><span class='fragment grow'>DIY, on premise, cloud, or hosted</span></h1>
+          <h1 class='fragment roll-in'>DIY - OpenShift Origin</h1>
+          <h1 class='fragment roll-in'>OpenShift Online</h1>
+          <h1 class='fragment roll-in'>OpenShift Enterprise</h1>
         </section>
         <section>
           <h2>Developer Preview</h2> 
@@ -570,6 +599,10 @@ var db = mongojs(connection_string, ['scoreboard']);</code></pre>
           <h2>Checking the Scoreboard</h2> 
           <div class='fragment roll-in'>keeprbot scoreboard</div>
         </section>
+      </section>
+      <section>
+        <h1>Bots on demand</h1>
+        <pre><code contenteditable>rhc app create ircbot nodejs-0.6 mongodb-2.2 --from-code=https://github.com/ryanj/keeprbot.git</code></pre>
       </section>
             <section>
 				<section data-markdown>
