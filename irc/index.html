@@ -607,11 +607,20 @@ var db = mongojs(connection_string, ['scoreboard']);</code></pre>
         </section>
         <section>
           <h2>Allocating points</h2> 
-          <div class='fragment roll-in'>ircbot++</div>
+          <div class='fragment roll-in'><code>term++</code></div>
+<pre class='fragment roll-in'><code contenteditable>[raphael]   Anyone down for pizza?
+[donatello] pizza++
+[ircbot]    score: 43
+[raphael]   Let's order two
+[leonardo]  Good idea, Raph! raphael++
+[ircbot]    score: 23</code></pre>
         </section>
         <section>
           <h2>Checking the Scoreboard</h2> 
-          <div class='fragment roll-in'>ircbot scoreboard</div>
+          <div class='fragment roll-in'><code>ircbot scoreboard</code></div>
+<pre class='fragment roll-in'><code contenteditable>[ircbot] ircbot: 7
+[ircbot] ryanj: 4
+[ircbot] doris: -2 </code></pre>
         </section>
       </section>
       <section>
@@ -626,14 +635,14 @@ You can find much more information about this npm IRC library here:
 [https://github.com/martynsmith/node-irc](https://github.com/martynsmith/node-irc)
                     </script>
                 </section>
-                          <section>
+                          <section data-state="yellow">
             <img alt='irc bot' title='irc bot' src='img/alphie_hello_cloud.png'/>
 <br/>
 <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b>
 </p>
 
                           </section>
-			  <section data-markdown>
+			  <section data-state="blackout" data-markdown>
 					<script type="text/template">
 #### References
 * https://openshift.redhat.com/community/get-started#cli
