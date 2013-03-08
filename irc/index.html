@@ -12,16 +12,16 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<link rel="stylesheet" href="../sharedcss/reveal.min.css">
-		<link rel="stylesheet" href="../sharedcss/theme/default.css" id="theme">
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="../sharedlib/css/zenburn.css">
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
 
-		<link rel="stylesheet" href="../sharedcss/print/pdf.css" type="text/css" media="print">
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
 
 		<!--[if lt IE 9]>
-		<script src="../sharedlib/js/html5shiv.js"></script>
+		<script src="../shared/lib/js/html5shiv.js"></script>
 		<![endif]-->
 	</head>
 
@@ -244,12 +244,12 @@ An emote is an entry into a text-based chat client that indicates an action taki
         </section>
         <section>
           <h1>Open cartridge format</h1> 
-          <img style='width:70%' class='fragment roll-in' alt='OpenShift Cartridge' src='../sharedimg/Openshift-Cartridge.png'/>
+          <img style='width:70%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
         </section>
         <section>
           <h2>PaaS Source</h2> 
           <h1 class='fragment roll-in'><span class='fragment grow'>OpenShift Origin</span></h1>
-          <img style='width:70%' class='fragment roll-in' alt='OpenShift gear' src='../sharedimg/gear.png'/>
+          <img style='width:70%' class='fragment roll-in' alt='OpenShift gear' src='../shared/img/gear.png'/>
         </section>
         <section>
           <h2>OpenShift Hosting</h2> 
@@ -280,11 +280,11 @@ An emote is an entry into a text-based chat client that indicates an action taki
         </section>
         <section>
           <h2>OpenShift is...</h2>
-          <div class='fragment roll-in'><img width='80%' src='../sharedimg/paas-overview.png'/></div> 
+          <div class='fragment roll-in'><img width='80%' src='../shared/img/paas-overview.png'/></div> 
         </section>
         <section>
           <h2>The big picture</h2>
-          <div class='fragment roll-in'><img src='../sharedimg/PaaS-landscape.png'/></div> 
+          <div class='fragment roll-in'><img src='../shared/img/PaaS-landscape.png'/></div> 
         </section>
         <section>
           <h2>OpenStack</h2> 
@@ -605,7 +605,7 @@ var db = mongojs(connection_string, ['scoreboard']);</code></pre>
                   <p><a href='https://github.com/martynsmith/node-irc'>https://github.com/martynsmith/node-irc</a></p>
                 </section>
                  <section data-state="yellow">
-            <img alt='irc bot' title='irc bot' src='../sharedimg/alphie_hello_cloud.png'/>
+            <img alt='irc bot' title='irc bot' src='../shared/img/alphie_hello_cloud.png'/>
 <br/>
 <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b>
 </p>
@@ -624,11 +624,11 @@ var db = mongojs(connection_string, ['scoreboard']);</code></pre>
 		</section>
             </section>
 			</div>
-                  <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../sharedimg/RH_logo-trans_reverse.png"/>
+                  <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
 		</div>
 
-		<script src="../sharedlib/js/head.min.js"></script>
-		<script src="../sharedjs/reveal.min.js"></script>
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
 
 		<script>
 
@@ -645,13 +645,13 @@ var db = mongojs(connection_string, ['scoreboard']);</code></pre>
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
-					{ src: '../sharedlib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '../sharedplugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../sharedplugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../sharedplugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: '../sharedplugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: '../sharedplugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: '../sharedplugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
 
