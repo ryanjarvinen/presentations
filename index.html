@@ -12,16 +12,13 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<link rel="stylesheet" href="irc/css/reveal.min.css">
-		<link rel="stylesheet" href="irc/css/theme/default.css" id="theme">
+		<link rel="stylesheet" href=".include/css/reveal.min.css">
+		<link rel="stylesheet" href=".include/css/theme/default.css" id="theme">
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="irc/lib/css/zenburn.css">
+		<link rel="stylesheet" href=".include/lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+		<link rel="stylesheet" href=".include/css/print/pdf.css" type="text/css" media="print">
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -45,8 +42,8 @@
 
 		</div>
 
-		<script src="irc/lib/js/head.min.js"></script>
-		<script src="irc/js/reveal.min.js"></script>
+		<script src=".include/lib/js/head.min.js"></script>
+		<script src=".include/js/reveal.min.js"></script>
 
 		<script>
 
@@ -63,13 +60,13 @@
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
-					{ src: 'irc/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'irc/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'irc/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'irc/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'irc/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'irc/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'irc/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+					{ src: '.include/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '.include/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '.include/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '.include/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '.include/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '.include/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '.include/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
 

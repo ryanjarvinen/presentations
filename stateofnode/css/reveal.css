@@ -302,7 +302,7 @@ body {
 .reveal code {
 	font-family: monospace;
 	overflow: auto;
-	max-height: 400px;
+	/* max-height: 400px; */
 }
 
 .reveal table th,
@@ -1233,6 +1233,9 @@ body {
 }
 .alert .reveal .state-background {
 	background: rgba( 200, 50, 30, 0.6 );
+}
+.gold .reveal .state-background {
+	background: rgba( 190, 162, 0, 100.0 );
 }
 .soothe .reveal .state-background {
 	background: rgba( 50, 200, 90, 0.4 );

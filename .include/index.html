@@ -12,16 +12,16 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<link rel="stylesheet" href="../.include/css/reveal.min.css">
-		<link rel="stylesheet" href="../.include/css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="../.include/lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<link rel="stylesheet" href="../.include/css/print/pdf.css" type="text/css" media="print">
+		<link rel="stylesheet" href="css/print/pdf.css" type="text/css" media="print">
 
 		<!--[if lt IE 9]>
-		<script src="../.include/lib/js/html5shiv.js"></script>
+		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
 	</head>
 
@@ -244,12 +244,12 @@ An emote is an entry into a text-based chat client that indicates an action taki
         </section>
         <section>
           <h1>Open cartridge format</h1> 
-          <img style='width:70%' class='fragment roll-in' alt='OpenShift Cartridge' src='../.include/img/Openshift-Cartridge.png'/>
+          <img style='width:70%' class='fragment roll-in' alt='OpenShift Cartridge' src='img/Openshift-Cartridge.png'/>
         </section>
         <section>
           <h2>PaaS Source</h2> 
           <h1 class='fragment roll-in'><span class='fragment grow'>OpenShift Origin</span></h1>
-          <img style='width:70%' class='fragment roll-in' alt='OpenShift gear' src='../.include/img/gear.png'/>
+          <img style='width:70%' class='fragment roll-in' alt='OpenShift gear' src='img/gear.png'/>
         </section>
         <section>
           <h2>OpenShift Hosting</h2> 
@@ -280,11 +280,11 @@ An emote is an entry into a text-based chat client that indicates an action taki
         </section>
         <section>
           <h2>OpenShift is...</h2>
-          <div class='fragment roll-in'><img width='80%' src='../.include/img/paas-overview.png'/></div> 
+          <div class='fragment roll-in'><img width='80%' src='img/paas-overview.png'/></div> 
         </section>
         <section>
           <h2>The big picture</h2>
-          <div class='fragment roll-in'><img src='../.include/img/PaaS-landscape.png'/></div> 
+          <div class='fragment roll-in'><img src='img/PaaS-landscape.png'/></div> 
         </section>
         <section>
           <h2>OpenStack</h2> 
@@ -314,8 +314,8 @@ An emote is an entry into a text-based chat client that indicates an action taki
         <section>
           <h2>Help with client tools</h2> 
           <ul>
-          <p>RHC client tool installation<br/><a href="https://openshift.redhat.com/community/get-started#cli">https://openshift.redhat.com/community/get-started#cli</a></p><br/>
-          <p>Openshift Getting Started guide<br/><a href="https://openshift.redhat.com/community/developers/get-started">https://openshift.redhat.com/community/developers/get-started</a></p>
+          <li class='fragment roll-in'><a href="https://openshift.redhat.com/community/get-started#cli">RHC client tool installation</a><br/><a href="https://openshift.redhat.com/community/get-started#cli">https://openshift.redhat.com/community/get-started#cli</a><br/></li>
+          <li class='fragment roll-in'><a href="https://openshift.redhat.com/community/developers/get-started">Openshift Getting Started guide</a><br/><a href="https://openshift.redhat.com/community/developers/get-started">https://openshift.redhat.com/community/developers/get-started</a></li>
           </ul>
         </section>
       </section>
@@ -323,9 +323,9 @@ An emote is an entry into a text-based chat client that indicates an action taki
         <section>
           <h2>Configuring your dev environment</h2> 
           <pre class='fragment roll-in'><code contenteditable>rhc setup</code></pre>
-          <div><p>Will automatically:</p><ul><li class='fragment roll-in'>set your openshift email address</li>
-                   <li class='fragment roll-in'>verify your ssh key configuration</li>
-                   <li class='fragment roll-in'>configure your application namespace</li></ul></div>
+          <div><ul><li class='fragment roll-in'>sets your openshift email address</li>
+                   <li class='fragment roll-in'>verifies your ssh key configuration</li>
+                   <li class='fragment roll-in'>selects your application namespace</li></ul></div>
         </section>
       </section>
       <section>
@@ -335,7 +335,7 @@ An emote is an entry into a text-based chat client that indicates an action taki
           <div class='fragment roll-in'>or</div>
           <div class='fragment roll-in'><pre><code contenteditable>rhc app create ircbot nodejs-0.6</code></pre></div>
         </section>
-	<section>
+				<section>
 <pre><code>Application Options
 -------------------
   Namespace:  ryanj
@@ -349,8 +349,8 @@ Waiting for your DNS name to be available ... done
 
 Downloading the application Git repository ...
 Cloning into 'ircbot'...</code></pre>
-        </section>
-	<section>
+                </section>
+				<section>
 <pre><code contenteditable>ircbot @ http://ircbot-ryanj.rhcloud.com/ (uuid: 25918304bf8d406e89802a1e642063a0)
 ---------------------------------------------------
   Created:   10:23 PM
@@ -364,8 +364,8 @@ ssh://25918304bf8d406e89802a1e642063a0@ircbot-ryanj.rhcloud.com/~/git/ircbot.git
 
 RESULT:
 Application ircbot was created.</code></pre>
-        </section>
-        <section>
+                </section>
+                <section>
 <h2>Success!</h2> 
 <p>You now have a basic node.js app up an running on OpenShift!</p>
 <br/>
@@ -375,71 +375,92 @@ Application ircbot was created.</code></pre>
                    <li class='fragment roll-in'>ssh access</li>
                    <li class='fragment roll-in'>logging</li>
                    <li class='fragment roll-in'>publicly accessible DNS</li></ul></div>
-        </section>
+                </section>
       </section>
       <section>
         <section>
           <h2>Building your bot</h2> 
           <div class='fragment roll-in'><pre><code contenteditable> cd ircbot </code></pre></div>
         </section>
-	<section>
-          <h2>Installing dependencies</h2>
-          <p>Using Node's <a href="https://npmjs.org/">npm package manager</a>:
-          <pre><code contenteditable>npm install irc -S</code></pre>
-          <p>Include the `-S` flag in order to save this dependency to your application's `package.json` file.</p>
-          <p><a href="http://npmjs.org/package/irc/">http://npmjs.org/package/irc/</a></p>
-        </section>
-	<section>
-	  <h3>Bot Basics</h3>
-	  <p>Add the following to your server.js to load and configure the irc library:</p>
-    <pre><code contenteditable>var irc = require('irc');
-var bot_name = process.env.OPENSHIFT_APP_NAME || 'ircbot';
-var bot = new irc.Client('chat.freenode.net', bot_name, {
-    channels: ['#botzoo', '#botwar'],
-    port: 8001,
-    debug: true
-});</code></pre>
-        </section>
-      </section>
-      <section>
-	<section>
-	  <h2>Teaching your bot to speak</h2>
-	  <p>Listen and respond to conversations as they happen:</p>
-	  <pre><code contenteditable>bot.addListener('message', function(from, to, message) {
-  if(  message.indexOf('Know any good jokes?') > -1
-    || message.indexOf('good joke') > -1
-  ) {
-    bot.say(to, 'Knock knock!');
-  }
-});</code></pre>
-        </section>
-	<section>
-<p>Getting to the punchline:</p>
-<pre><code contenteditable>bot.addListener('message', function(from, to, message) {
-  if(  message.indexOf('who is there?') > -1
-    || message.indexOf("who's there?") > -1
-    || message.indexOf("Who's there?") > -1
-    || message.indexOf("Who is there?") > -1
-    )
-    {
-        bot.say(to, 'Doris');
-    }
-});
-bot.addListener('message', function(from, to, message) {
-    if(  message.indexOf('Doris who?') > -1
-      || message.indexOf("doris who?") > -1
-      )
-    {
-        bot.say(to, "Doris locked, that's why I'm knocking!");
-    }
-});</code></pre>
-        </section>
-	<section>
-	  <h2>Committing your changes</h2>
-    </code></pre>git add package.json server.js</code></pre>
-<p>Commit your changes locally</p>
-    </code></pre>git commit -m 'adding irc npm dependency, initializing irc library, adding a few jokes'</code></pre>
-        </section>
+				<section data-markdown>
+					<script type="text/template">
+## Installing dependencies
+Using Node's [npm package manager](https://npmjs.org/):
+
+    npm install irc -S
+
+Include the `-S` flag in order to save this dependency to your application's `package.json` file. 
+
+[https://npmjs.org/package/irc](https://npmjs.org/package/irc)
+                    </script>
+                </section>
+				<section data-markdown>
+					<script type="text/template">
+### Bot Basics
+Add the following to your server.js to load and configure the irc library: 
+
+    var irc = require('irc');
+    var bot_name = process.env.OPENSHIFT_APP_NAME || 'ircbot';
+    var bot = new irc.Client('chat.freenode.net', bot_name, {
+        channels: ['#botzoo', '#botwar'],
+        port: 8001,
+        debug: true
+    });
+                    </script>
+                </section>
+                </section>
+                <section>
+				<section data-markdown>
+					<script type="text/template">
+
+## Teaching your bot to speak
+Listen and respond to conversations as they happen:
+
+    bot.addListener('message', function(from, to, message) {
+        if(  message.indexOf('Know any good jokes?') > -1
+          || message.indexOf('good joke') > -1
+        ) {
+            bot.say(to, 'Knock knock!');
+        }
+    });
+                    </script>
+                </section>
+				<section data-markdown>
+					<script type="text/template">
+Getting to the punchline:
+
+    bot.addListener('message', function(from, to, message) {
+        if(  message.indexOf('who is there?') > -1
+          || message.indexOf("who's there?") > -1
+          || message.indexOf("Who's there?") > -1
+          || message.indexOf("Who is there?") > -1
+          )
+        {
+            bot.say(to, 'Doris');
+        }
+    });
+    bot.addListener('message', function(from, to, message) {
+        if(  message.indexOf('Doris who?') > -1
+          || message.indexOf("doris who?") > -1
+          )
+        {
+            bot.say(to, "Doris locked, that's why I'm knocking!");
+        }
+    });
+                    </script>
+                </section>
+				<section data-markdown>
+					<script type="text/template">
+## Committing your changes
+
+    git add package.json server.js
+
+Commit your changes locally
+
+    git commit -m 'adding irc npm dependency, initializing irc library, adding a few jokes'
+
+                    </script>
+                </section>
         <section>
           <h2>deployment</h2> 
           <div class='fragment roll-in'><pre><code contenteditable>git push</code></pre></div>
@@ -447,25 +468,29 @@ bot.addListener('message', function(from, to, message) {
         </section>
       </section>
       <section>
-        <section>
+      <section>
           <h2>Interacting with your new bot</h2> 
           <div class='fragment roll-in'>Login to IRC, and enter one of the channels that your bot has been configured to join:</div>
           <div class='fragment roll-in'><pre><code contenteditable>/join #botzoo</code></pre></div>
 <br/>
 <div class='fragment roll-in'><p>If you don't already have an IRC client, you can connect to freenode on the web:</p>
 <p><a href="http://webchat.freenode.net/">http://webchat.freenode.net/</a></p></div>
-        </section>
-	<section>
-<p>Ask if anyone knows a good joke:</p>
-<pre><code contenteditable>[guest]  Know any good jokes?
-[ircbot] Knock knock!
-[guest]  Who is there?
-[ircbot] Doris
-[guest]  Doris who?
-[ircbot] Doris locked, that's why I'm knocking!
-[guest]  meh...</code></pre>
-        </section>
-	<section>
+                </section>
+				<section data-markdown>
+					<script type="text/template">
+
+Ask if anyone knows a good joke:
+
+    [guest]  Know any good jokes?
+    [ircbot] Knock knock!
+    [guest]  Who is there?
+    [ircbot] Doris
+    [guest]  Doris who?
+    [ircbot] Doris locked, that's why I'm knocking!
+    [guest]  meh...
+                    </script>
+                </section>
+				<section>
 <h3>Bot debugging and maintainance</h3>
 <p>If your bot decides to quit mid-conversation, it may be suffering from a bug.</p>
 <br/>
@@ -473,8 +498,8 @@ bot.addListener('message', function(from, to, message) {
 <pre><code contenteditable>rhc tail ircbot</code></pre>
 <p>Or, debug it while running locally:</p>
 <pre><code contenteditable>npm start</code></pre>
-        </section>
-      </section>
+                </section>
+              </section>
       <section>
         <section>
           <h1>Teaching your bot to keep score</h1> 
@@ -600,35 +625,39 @@ var db = mongojs(connection_string, ['scoreboard']);</code></pre>
         <pre><code contenteditable>rhc app create ircbot nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/irc-leaderboard-quickstart.git</code></pre>
       </section>
             <section>
-		<section>
-                  <p>You can find much more information about this npm IRC library here: </p>
-                  <p><a href='https://github.com/martynsmith/node-irc'>https://github.com/martynsmith/node-irc</a></p>
+				<section data-markdown>
+					<script type="text/template">
+You can find much more information about this npm IRC library here: 
+
+[https://github.com/martynsmith/node-irc](https://github.com/martynsmith/node-irc)
+                    </script>
                 </section>
-                 <section data-state="yellow">
-            <img alt='irc bot' title='irc bot' src='../.include/img/alphie_hello_cloud.png'/>
+                          <section data-state="yellow">
+            <img alt='irc bot' title='irc bot' src='img/alphie_hello_cloud.png'/>
 <br/>
 <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b>
 </p>
 
-                 </section>
-		<section data-state="blackout">
-<h4>References</h4>
-<ul>
-  <li><a href="https://openshift.redhat.com/community/blogs/building-social-irc-bots-with-nodejs">Building social IRC Bots with Node.js (Part 1)</a></li>
-  <li><a href="https://openshift.redhat.com/community/blogs/leaderboards-for-irc-social-nodejs-bots-part-2">Leaderboards for IRC - Social Node.js Bots (Part 2)</a></li>
-  <li><a href="https://openshift.redhat.com/community/get-started#cli">RHC command-line installer help</a></li>
-  <li><a href="https://openshift.redhat.com/community/content/open-irc-port-6667">Why contact Freenode on port 8001?</a></li>
-  <li><a href="http://www.youtube.com/watch?v=O2rGTXHvPCQ&t=18s">IRC - It's how hackers talk. Luckily, I speak "leet"</a></li>
-  <li><a href="https://node-irc.readthedocs.org/en/latest/">node-irc</a></li>
-  <li><a href="https://openshift.redhat.com/community/blogs/any-version-of-nodejs-you-want-in-the-cloud-openshift-does-it-paas-style">Run any version of Node.js on OpenShift</a></li>
-		</section>
+                          </section>
+			  <section data-state="blackout" data-markdown>
+					<script type="text/template">
+#### References
+* [Building social IRC Bots with Node.js (Part 1)](https://openshift.redhat.com/community/blogs/building-social-irc-bots-with-nodejs)
+* [Leaderboards for IRC - Social Node.js Bots (Part 2)](https://openshift.redhat.com/community/blogs/leaderboards-for-irc-social-nodejs-bots-part-2)
+* [RHC command-line installer help](https://openshift.redhat.com/community/get-started#cli)
+* [Why contact Freenode on port 8001?](https://openshift.redhat.com/community/content/open-irc-port-6667)
+* [IRC - It's how hackers talk. Luckily, I speak "leet"](http://www.youtube.com/watch?v=O2rGTXHvPCQ&t=18s)
+* [node-irc](https://node-irc.readthedocs.org/en/latest/)
+* [Run any version of Node.js on OpenShift](https://openshift.redhat.com/community/blogs/any-version-of-nodejs-you-want-in-the-cloud-openshift-does-it-paas-style)
+					</script>
+			  </section>
             </section>
 			</div>
-                  <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../.include/img/RH_logo-trans_reverse.png"/>
 		</div>
+<img style='height:10%;position:absolute;bottom:20px;left:20px;' src='img/RH_logo-trans_reverse.png'/>
 
-		<script src="../.include/lib/js/head.min.js"></script>
-		<script src="../.include/js/reveal.min.js"></script>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
 
 		<script>
 
@@ -645,13 +674,13 @@ var db = mongojs(connection_string, ['scoreboard']);</code></pre>
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
-					{ src: '../.include/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '../.include/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../.include/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../.include/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: '../.include/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: '../.include/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: '../.include/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
 
