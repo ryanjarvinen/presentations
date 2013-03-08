@@ -12,16 +12,16 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
 
-		<link rel="stylesheet" href="css/print/pdf.css" type="text/css" media="print">
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
 
 		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
+		<script src="../shared/lib/js/html5shiv.js"></script>
 		<![endif]-->
 	</head>
 
@@ -120,15 +120,11 @@ emitter.emit(event, arg1, arg2);
 <li class="fragment roll-in">and, a multitude of dependency issues...</li>
 </ul>
       </section>
-		<section data-markdown>
-					<script type="text/template">
-## Installing dependencies
-Using Node's [npm package manager](https://npmjs.org/):
-
-    npm install irc -S
-
-Include the `-S` flag in order to save this dependency to your application's `package.json` file. 
-                    </script>
+		<section>
+<h2>Installing dependencies</h2>
+<p>Using Node's [npm package manager](https://npmjs.org/):</p>
+<pre><code contenteditable>npm install irc -S</code></pre>
+<p>Include the <code>-S</code> flag in order to save this dependency to your application's <code>package.json</code> file.</p>
                 </section>
     </section>
     <section>
@@ -221,11 +217,11 @@ Include the `-S` flag in order to save this dependency to your application's `pa
       </section>
     </section>
 			</div>
+                  <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
 		</div>
-<img style='height:10%;position:absolute;bottom:20px;left:20px;' src='img/RH_logo-trans_reverse.png'/>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
 
 		<script>
 
@@ -242,13 +238,13 @@ Include the `-S` flag in order to save this dependency to your application's `pa
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
 
