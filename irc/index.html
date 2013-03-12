@@ -406,8 +406,8 @@ var bot = new irc.Client('chat.freenode.net', bot_name, {
 	  <h2>Teaching your bot to speak</h2>
 	  <p>Listen and respond to conversations as they happen:</p>
 	  <pre><code contenteditable>bot.addListener('message', function(from, to, message) {
-  if(  message.indexOf('Know any good jokes?') > -1
-    || message.indexOf('good joke') > -1
+  if(  message.indexOf('Know any good jokes?') &gt; -1
+    || message.indexOf('good joke') &gt; -1
   ) {
     bot.say(to, 'Knock knock!');
   }
@@ -416,18 +416,18 @@ var bot = new irc.Client('chat.freenode.net', bot_name, {
 	<section>
 <p>Getting to the punchline:</p>
 <pre><code contenteditable>bot.addListener('message', function(from, to, message) {
-  if(  message.indexOf('who is there?') > -1
-    || message.indexOf("who's there?") > -1
-    || message.indexOf("Who's there?") > -1
-    || message.indexOf("Who is there?") > -1
+  if(  message.indexOf('who is there?') &gt; -1
+    || message.indexOf("who's there?") &gt; -1
+    || message.indexOf("Who's there?") &gt; -1
+    || message.indexOf("Who is there?") &gt; -1
     )
     {
         bot.say(to, 'Doris');
     }
 });
 bot.addListener('message', function(from, to, message) {
-    if(  message.indexOf('Doris who?') > -1
-      || message.indexOf("doris who?") > -1
+    if(  message.indexOf('Doris who?') &gt; -1
+      || message.indexOf("doris who?") &gt; -1
       )
     {
         bot.say(to, "Doris locked, that's why I'm knocking!");
@@ -526,9 +526,10 @@ The rockmongo username and password will be the same as the MongoDB credentials 
 var connection_string = bot_name;
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
- process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
- process.env.OPENSHIFT_MONGODB_DB_HOST + '/' +
- process.env.OPENSHIFT_APP_NAME;
+  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+  process.env.OPENSHIFT_APP_NAME;
 }
 var db = mongojs(connection_string, ['scoreboard']);</code></pre>
 </div>
@@ -536,20 +537,16 @@ var db = mongojs(connection_string, ['scoreboard']);</code></pre>
         <section>
           <h2>Setting a score</h2> 
           <div class='fragment roll-in'><pre><code contenteditable>bot.addListener('message', function(from, to, message) {
-    if(  message.indexOf('++') > -1 ){
+    if(  message.indexOf('++') &gt; -1 ){
         var subject = message.slice(0,message.indexOf('++'));
-        db.scoreboard.find({query: {name: subject}}).limit(1, function(err, doc) {
-            if( typeof(doc)=='object' && (doc instanceof Array) && doc[0] && doc[0].name){
-                 // update
-                 db.scoreboard.update({name: subject}, {$inc:{score:1}}, function(err) {
-                     bot.say(to, "score: " + ( 1 + doc[0].score ));
-                 });
-            }else{
-                 // insert 
-                 db.scoreboard.insert({name: subject, score: 1}, function(err) {
-                     bot.say(to, "score: 1");
-                 });
-            }
+        db.scoreboard.findAndModify({
+            query: { name: subject },
+            update: { $inc: { score:1 }},
+            new: true,
+            upsert: true
+        }, function(err, doc) {
+            console.log(doc);
+            bot.say(to, "score: " + doc.score );
         });
     }
 });</code></pre></div>
@@ -557,9 +554,9 @@ var db = mongojs(connection_string, ['scoreboard']);</code></pre>
         <section>
           <h2>Showing the scoreboard</h2> 
           <div class='fragment roll-in'><pre><code contenteditable>bot.addListener('message', function(from, to, message) {
-    if(  message.indexOf('scoreboard') > -1 ){
+    if(  message.indexOf('scoreboard') &gt; -1 ){
         db.scoreboard.find().sort({score:-1}).limit(10).forEach(function(err, doc){
-            if (doc && doc.name && doc.score ) {
+            if (doc &amp;&amp; doc.name &amp;&amp; doc.score ) {
                 bot.say(to, doc.name + ": " + doc.score);
             }
         });
