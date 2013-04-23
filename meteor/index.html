@@ -38,7 +38,8 @@
             <p>with</p>
             <h1>Meteor</h1>
             <br/>
-            <p><a href='http://bit.ly/11Qft8j'>http://bit.ly/11Qft8j</a></p>
+            <p><a href='http://bit.ly/15CVL1Q'>http://bit.ly/15CVL1Q</a></p>
+            <p><a href='http://socuteurl.com/meeperchirp'>http://socuteurl.com/meeperchirp</a></p>
         </section>
         <section>
             <div>presented by</div>
@@ -67,7 +68,7 @@
       </section>
       <section>
         <h1>Code du jour</h1>
-        <p><a href='https://github.com/openshift-quickstart/irc-leaderboard-quickstart'>https://github.com/openshift-quickstart/irc-leaderboard-quickstart</a></p>
+        <p><a href='https://github.com/ryanj/meteor-showcase'>https://github.com/ryanj/meteor-showcase</a></p>
 <br/>
         <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=MONGOATL13'>Signup with Code - MONGOATL13</a></p>
       </section>
@@ -272,139 +273,9 @@ Application showcase was created.</code></pre>
                    <li class='fragment roll-in'>MongoDB</li>
                    <li class='fragment roll-in'>publicly accessible DNS</li></ul></div>
         </section>
-      </section>
-      <section>
         <section>
-          <h2>Building your bot</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable> cd ircbot </code></pre></div>
-        </section>
-	<section>
-          <h2>Installing dependencies</h2>
-          <p>Using Node's <a href="https://npmjs.org/">npm package manager</a>:
-          <pre><code contenteditable>npm install irc -S</code></pre>
-          <p>Include the `-S` flag in order to save this dependency to your application's `package.json` file.</p>
-          <p><a href="http://npmjs.org/package/irc/">http://npmjs.org/package/irc/</a></p>
-        </section>
-	<section>
-	  <h3>Bot Basics</h3>
-	  <p>Add the following to your server.js to load and configure the irc library:</p>
-    <pre><code contenteditable>var irc = require('irc');
-var bot_name = process.env.OPENSHIFT_APP_NAME || 'ircbot';
-var bot = new irc.Client('chat.freenode.net', bot_name, {
-    channels: ['#botzoo', '#botwar'],
-    port: 8001,
-    debug: true
-});</code></pre>
-        </section>
-      </section>
-      <section>
-	<section>
-	  <h2>Teaching your bot to speak</h2>
-	  <p>Listen and respond to conversations as they happen:</p>
-	  <pre><code contenteditable>bot.addListener('message', function(from, to, message) {
-  if(  message.indexOf('Know any good jokes?') &gt; -1
-    || message.indexOf('good joke') &gt; -1
-  ) {
-    bot.say(to, 'Knock knock!');
-  }
-});</code></pre>
-        </section>
-	<section>
-<p>Getting to the punchline:</p>
-<pre><code contenteditable>bot.addListener('message', function(from, to, message) {
-  if(  message.indexOf('who is there?') &gt; -1
-    || message.indexOf("who's there?") &gt; -1
-    || message.indexOf("Who's there?") &gt; -1
-    || message.indexOf("Who is there?") &gt; -1
-    )
-    {
-        bot.say(to, 'Doris');
-    }
-});
-bot.addListener('message', function(from, to, message) {
-    if(  message.indexOf('Doris who?') &gt; -1
-      || message.indexOf("doris who?") &gt; -1
-      )
-    {
-        bot.say(to, "Doris locked, that's why I'm knocking!");
-    }
-});</code></pre>
-        </section>
-	<section>
-	  <h2>Committing your changes</h2>
-    </code></pre>git add package.json server.js</code></pre>
-<p>Commit your changes locally</p>
-    </code></pre>git commit -m 'adding irc npm dependency, initializing irc library, adding a few jokes'</code></pre>
-        </section>
-        <section>
-          <h2>deployment</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>git push</code></pre></div>
-          <div class='fragment roll-in'><p><b><i>Done!</i></b> Your bot should now be live on IRC.</p></div>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h2>Interacting with your new bot</h2> 
-          <div class='fragment roll-in'>Login to IRC, and enter one of the channels that your bot has been configured to join:</div>
-          <div class='fragment roll-in'><pre><code contenteditable>/join #botzoo</code></pre></div>
-<br/>
-<div class='fragment roll-in'><p>If you don't already have an IRC client, you can connect to freenode on the web:</p>
-<p><a href="http://webchat.freenode.net/">http://webchat.freenode.net/</a></p></div>
-        </section>
-	<section>
-<p>Ask if anyone knows a good joke:</p>
-<pre><code contenteditable>[guest]  Know any good jokes?
-[ircbot] Knock knock!
-[guest]  Who is there?
-[ircbot] Doris
-[guest]  Doris who?
-[ircbot] Doris locked, that's why I'm knocking!
-[guest]  meh...</code></pre>
-        </section>
-	<section>
-<h3>Bot debugging and maintainance</h3>
-<p>If your bot decides to quit mid-conversation, it may be suffering from a bug.</p>
-<br/>
-<p>Checking it's logs may reveal what set it off:</p>
-<pre><code contenteditable>rhc tail ircbot</code></pre>
-<p>Or, debug it while running locally:</p>
-<pre><code contenteditable>npm start</code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h1>Teaching your bot to keep score</h1> 
-        </section>
-        <section>
-          <h2>Setting up MongoDB on Openshift</h2> 
+          <h2>Add MongoDB to an existing app</h2> 
           <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add mongodb-2.2</code></pre></div>
-        </section>
-        <section>
-          <pre><code contenteditable>Adding mongodb-2.2 to application 'ircbot' ... Success
-
-mongodb-2.2 (MongoDB NoSQL Database 2.2)
-----------------------------------------
-  Connection URL: mongodb://127.6.102.129:27017/
-  Database Name:  ircbot
-  Password:       T5xJwCiDZYGn
-  Username:       admin
-
-RESULT:
-Added mongodb-2.2 to application ircbot</code></pre>
-        </section>
-        <section>
-          <pre><code contenteditable>Adding mongodb-2.2 to application 'ircbot' ... Success
-
-MongoDB 2.2 database added.  Please make note of these credentials:
-
-   Root User: admin
-   Root Password: T5xJwCiDZYGn
-   Database Name: ircbot
-
-Connection URL: mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
-
-You can manage your new MongoDB by also embedding rockmongo-1.1
-The rockmongo username and password will be the same as the MongoDB credentials above.</code></pre>
         </section>
         <section>
           <h2>RockMongo on Openshift</h2> 
@@ -412,111 +283,233 @@ The rockmongo username and password will be the same as the MongoDB credentials 
           <div class='fragment roll-in'><p><i>(optional)</i></p></div>
         </section>
         <section>
-          <h2>Adding a Mongojs dependency</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>npm install -S mongojs</code></pre>
-</div>
-        </section>
-        <section>
-          <h2>Connecting to MongoDB</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>var mongojs = require('mongojs');
-var connection_string = bot_name;
+          <h2>Environment Variables</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
   process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
   process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
   process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
   process.env.OPENSHIFT_APP_NAME;
-}
-var db = mongojs(connection_string, ['scoreboard']);</code></pre>
+}else{
+  connection_string = db_name;
+}</code></pre>
 </div>
         </section>
-        <section>
-          <h2>Setting a score</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>bot.addListener('message', function(from, to, message) {
-    if(  message.indexOf('++') &gt; -1 ){
-        var subject = message.slice(0,message.indexOf('++'));
-        db.scoreboard.findAndModify({
-            query: { name: subject },
-            update: { $inc: { score:1 }},
-            new: true,
-            upsert: true
-        }, function(err, doc) {
-            bot.say(to, "score: " + doc.score );
-        });
-    }
-});</code></pre></div>
-        </section>
-        <section>
-          <h2>Showing the scoreboard</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>bot.addListener('message', function(from, to, message) {
-    if(  message.indexOf('scoreboard') &gt; -1 ){
-        db.scoreboard.find().sort({score:-1}).limit(10).forEach(function(err, doc){
-            if (doc &amp;&amp; doc.name &amp;&amp; doc.score ) {
-                bot.say(to, doc.name + ": " + doc.score);
-            }
-        });
-    }
-});</code></pre></div>
-        </section>
-        <section>
-          <h2>updating your app</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>git add package.json server.js</code></pre></div>
-          <div class='fragment roll-in'><pre><code contenteditable>git commit -m 'adding a social scoreboard'</code></pre></div>
-          <div class='fragment roll-in'><pre><code contenteditable>git push</code></pre></div>
-        </section>
       </section>
       <section>
         <section>
-          <h2>Social Rewards</h2> 
+          <h1>Let's look at some code<span class='fragment roll-in'>!</span></h1>
+          <a href='https://github.com/ryanj/meteor-showcase'>https://github.com/ryanj/meteor-showcase</a>
         </section>
-        <section>
-          <h2>Allocating points</h2> 
-          <div class='fragment roll-in'><code>term++</code></div>
-<pre class='fragment roll-in'><code contenteditable>[raphael]   Anyone down for pizza?
-[donatello] pizza++
-[ircbot]    score: 43
-[raphael]   Let's order two
-[leonardo]  Good idea, Raph! raphael++
-[ircbot]    score: 23</code></pre>
+	      <section>
+          <h2>Client code and Server code</h2>
+          <pre><code contenteditable>if (Meteor.isServer) { 
+  ...
+}</code></pre>
+          <pre><code contenteditable>if (Meteor.isClient) { 
+  ...
+}</code></pre>
         </section>
-        <section>
-          <h2>Checking the Scoreboard</h2> 
-          <div class='fragment roll-in'><code>ircbot scoreboard</code></div>
-<pre class='fragment roll-in'><code contenteditable>[ircbot] ircbot: 7
-[ircbot] ryanj: 4
-[ircbot] doris: -2 </code></pre>
+	      <section>
+          <h2>Protecting DB Access</h2>
+          <pre><code contenteditable>Showcase.allow({
+  remove: function (userId, item) {
+    var username = false;
+    if(userId){
+      username = Meteor.users.findOne(userId).profile.name;
+    }   
+    return (item.author == username || username == 'ryan jarvinen');
+  },  
+  insert: function (userId, item) {
+    return (userId) ? true : false;
+  },  
+  update: function (userId, item, fieldNames, modifier) {
+</code></pre>
+        </section>
+	      <section>
+          <pre><code contenteditable>update: function (userId, item, fieldNames, modifier) {
+  var username = false;
+  if(userId){
+    username = Meteor.users.findOne(userId).profile.name;
+  }
+  if(item.score &gt; 9000){
+    // OVER 9000?!?!
+    return false;
+  }else if( _.isEqual(modifier, {$inc:{score: +5}})){
+    //allow voting by anyone
+    console.log('option1 - voter');
+    return true;
+  }else if( _.isEqual(modifier, {$inc:{score: -5}}) &amp;&amp; item.score &gt; 4 ){
+    //allow voting by anyone
+    console.log('option1 - voter');
+    return true;
+  }else if(username == 'ryan jarvinen') {
+    //allow updates by admins (me) :-P
+    console.log('option2 - admin');
+    return true;
+  }else{
+    //allow updates by owners
+    console.log('option3 - owner');
+    return ( username == item.author ) ? true : false;
+  }
+}</code></pre>
+        </section>
+	      <section>
+          <h2>Templates (HTML)</h2>
+          <pre><code contenteditable>&lt;head&gt;
+  &lt;title&gt;meteorshowcase&lt;/title&gt;
+&lt;/head&gt;
+    
+&lt;body&gt;
+  {{&gt; nav}}                           
+  {{&gt; list}}                                     
+  {{&gt; submit}}                           
+  {{&gt; edit}}            
+  {{&gt; view}}                           
+&lt;/body&gt;</code></pre>
+        </section>
+	      <section>
+          <h2>Templates (HTML)</h2>
+          <pre><code contenteditable> &lt;template name="list"&gt;
+  &lt;div class="showcase"&gt;
+    {{#each items}}      
+      {{&gt; item}}                 
+      &lt;hr/&gt;
+    {{/each}}
+  &lt;/div&gt;                         
+&lt;/template&gt;   
+</code></pre>
+        </section>
+	      <section>
+          <h2>Templates (HTML)</h2>
+          <pre><code contenteditable>&lt;template name="item"&gt;        
+  &lt;div class="item row {{selected}}"&gt;
+    &lt;div class="name span2"&gt;&lt;a class='view'&gt;&lt;img src='{{image_url}}'/&gt;{{name}}&lt;/a&gt;&lt;/div&gt;
+    &lt;div class="description span4"&gt;{{description}}&lt;/div&gt;
+    &lt;div class='span4'&gt;
+      &lt;div class="date"&gt;Submitted: {{datestring}} {{timestring}}&lt;/div&gt;
+      &lt;div class="author"&gt;By: {{author}}&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class='span2'&gt;
+      &lt;a class="dec" href="#"&gt;&lt;b class='icon-minus-sign'&gt;&lt;/b&gt;&lt;/a&gt;
+      &lt;span style='font-size:larger;font-weight:bold;' class='score'&gt;{{score}}&lt;/score&gt;
+      &lt;a class="inc" href="#"&gt;&lt;b class='icon-plus-sign'&gt;&lt;/b&gt;&lt;/a&gt;   
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;  
+</code></pre>
+        </section>
+	      <section>
+          <h2>Templates (HTML)</h2>
+          <pre><code contenteditable>&lt;template name="view"&gt;
+&lt;div id='modal_view' class="modal fade in" 
+  &lt;div class="modal-header"&gt;
+    &lt;a href="#" data-dismiss="modal" class="close pull-right;"&gt;&times;&lt;/a&gt;
+    &lt;h3 class="item_title"&gt;{{app_name}}&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-body"&gt;
+    &lt;div class'image_url'&gt;&lt;a href='{{demo_url}}'&gt;&lt;img src='{{image_url}}'/&gt;&lt;/a&gt;&lt;/div&gt;
+    &lt;div class='name'&gt;{{app_name}}&lt;/div&gt;
+    &lt;div class='description'&gt;{{description}}&lt;/div&gt;
+    &lt;div class='authored_by'&gt;By: &lt;span class='author'&gt;{{author}}&lt;/span&gt;&lt;/div&gt;
+    &lt;div class='date'&gt;Submitted on: {{date}}&lt;/div&gt;
+    &lt;div class='score'&gt;Score: {{score}}&lt;/div&gt;
+    &lt;div class='source_url'&gt;Source code: &lt;a href='{{source_url}}'&gt;{{source_url}}&lt;/a&gt;&lt;/div&gt;
+    &lt;p&gt;&lt;a href="{{clone_url}}" class="shift btn btn-large btn-inverse btn-block"&gt;Run on OpenShift &lt;b class='icon-cog'&gt;&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-footer"&gt;
+    {{# if currentUser }}&lt;a href="#" $('#modal_edit').modal('show') &amp;&amp; $('#modal_view').modal('hide');" class="edit pull-left btn btn-info"&gt;Settings &lt;b class='icon-wrench'&gt;&lt;/b&gt;&lt;/a&gt;{{/if}}
+    &lt;a href="{{demo_url}}" onclick="console.log('Opening app...');" class="pull-right btn btn-primary"&gt;Visit &lt;b class='icon-globe'&gt;&lt;/b&gt;&lt;/a&gt;
+    &lt;a href="#" data-dismiss="modal" onclick="$('#modal_view').modal('hide');" class="btn pull-right"&gt;Cancel &lt;b class='icon-remove'&gt;&lt;/b&gt;&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+</code></pre>
+        </section>
+	      <section>
+          <h2>Templates (js)</h2>
+          <pre><code contenteditable>Template.list.items = function () {
+  var nav_config = Session.get('nav_settings');
+  var sort_by = Session.get('sort_by');
+  var sort_order = {};
+  var filter = Session.get('filter');
+  if (!filter || filter == undefined){ filter = '' };
+  sort_order[sort_by] = nav_config[sort_by] || -1;
+  return Showcase.find({ name: { $regex: filter, $options: 'i'}}, {sort: sort_order}).fetch();
+};  
+
+Template.nav.username = function () {
+  var u = Meteor.user();
+  return u &amp;&amp; u.profile &amp;&amp; u.profile.name;
+};</code></pre>
+        </section>
+	      <section>
+          <h2>Events</h2>
+          <pre><code contenteditable>Template.item.events({
+  'click a.inc': function () {
+    Showcase.update(Session.get("selected_item"), {$inc: {score: 5}});
+  },
+  'click a.dec': function () {
+    Showcase.update(Session.get("selected_item"), {$inc: {score: -5}});
+  },
+  'dblclick': function () {
+    $('#modal_view').modal('show');
+  },
+  'click a.view': function () {
+    console.log('not opening popup');
+    //$('#modal_view').modal('show');
+  }
+});
+</code></pre>
         </section>
       </section>
       <section>
-        <h1>Bots on-demand</h1>
-        <pre><code contenteditable>rhc app create ircbot nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/irc-leaderboard-quickstart.git</code></pre>
+	      <section>
+          <h2><span class='fragment roll-in'>Smart</span> Packages</h2>
+          <pre><code contenteditable>meteor add jquery
+meteor add bootstrap
+meteor add underscore
+meteor add oauth-github
+meteor remove insecure</code></pre>
+        </section>
       </section>
-            <section>
-		<section>
-                  <p>You can find much more information about this npm IRC library here: </p>
-                  <p><a href='https://github.com/martynsmith/node-irc'>https://github.com/martynsmith/node-irc</a></p>
-                </section>
-		<section data-state="blackout">
-<h4>References</h4>
-<ul>
-  <li><a href="https://openshift.redhat.com/community/blogs/building-social-irc-bots-with-nodejs">Building social IRC Bots with Node.js (Part 1)</a></li>
-  <li><a href="https://openshift.redhat.com/community/blogs/leaderboards-for-irc-social-nodejs-bots-part-2">Leaderboards for IRC - Social Node.js Bots (Part 2)</a></li>
-  <li><a href="https://openshift.redhat.com/community/get-started#cli">RHC command-line installer help</a></li>
-  <li><a href="https://openshift.redhat.com/community/content/open-irc-port-6667">Why contact Freenode on port 8001?</a></li>
-  <li><a href="http://www.youtube.com/watch?v=O2rGTXHvPCQ&t=18s">IRC - It's how hackers talk. Luckily, I speak "leet"</a></li>
-  <li><a href="https://node-irc.readthedocs.org/en/latest/">node-irc</a></li>
-  <li><a href="https://openshift.redhat.com/community/blogs/any-version-of-nodejs-you-want-in-the-cloud-openshift-does-it-paas-style">Run any version of Node.js on OpenShift</a></li>
-		</section>
-                 <section data-state="yellow">
-            <img alt='irc bot' title='irc bot' src='../shared/img/alphie_hello_cloud.png'/>
+      <section>
+	      <section>
+          <h2>Meteor Deployment</h2>
+          <pre><code contenteditable>meteor deploy</code></pre>
+        </section>
+	      <section>
+          <h2>Bundles</h2>
+          <pre><code contenteditable>meteor bundle bundle.tar.gz</code></pre>
+        </section>
+	      <section>
+          <h2>Deploying to OpenShift</h2>
+          <p>GNU / Linux</p>
+          <pre><code contenteditable>tar -xvkf bundle.tar.gz --transform 's|^bundle/||' -C ../meteor/</code></pre>
+          <p>BSD / OSX</p>
+          <pre><code contenteditable>tar -xvkf bundle.tar.gz --transform 's|^bundle/||' -C ../meteor/</code></pre>
+<pre><code contenteditable>cd ../meteor
+git add .
+git commit -am "Adding a meteor.js application bundle"
+git push</code></pre>
+        </section>
+      </section>
+      <section>
+		    <section>
+          <p>For more information about Meteor: </p>
+          <p>visit <a href='http://meteor.com/'>http://meteor.com/</a></p>
+        </section>
+        <section data-state="blackout">
+            <a href='https://www.openshift.com/blogs/cloudy-with-a-chance-of-meteorjs'><img alt='meteor fireballs' src='https://www.openshift.com/sites/default/files/meteorshift_1.png'/></a>
 <br/>
 <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b>
 </p>
 
-                 </section>
-            </section>
+        </section>
+      </section>
 			</div>
-                  <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+      <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
 		</div>
 
 		<script src="../shared/lib/js/head.min.js"></script>
