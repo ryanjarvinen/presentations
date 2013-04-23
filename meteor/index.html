@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+    <section>
+        <section>
+            <h1>MongoDB&nbsp;</h1>
+            <h1>in the Browser</h1>
+            <p>with</p>
+            <h1>Meteor</h1>
+            <br/>
+            <p><a href='http://bit.ly/11Qft8j'>http://bit.ly/11Qft8j</a></p>
+        </section>
+        <section>
+            <div>presented by</div>
+            <br/>
+            <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+        </section>
+        <section data-state="blackout">
+            <div>
+              <div>Open Platform Evangelist</div>
+              <div>at</div>
+              <div>Red Hat</div>
+              <br/>
+              <div>ryanj@redhat.com</div>
+            </div>
+        </section>
+    </section>
+    <section>
+      <section>
+        <h1>Agenda</h1>
+        <ul>
+          <li class='fragment roll-in'>Learn some Meteor basics</li>
+          <li class='fragment roll-in'>Learn about Cloud Basics and OpenShift</li>
+          <li class='fragment roll-in'>Review Client-Side Security for Meteor</li>
+          <li class='fragment roll-in'>Combine, minify, and bundle to deploy anywhere!</li>
+        </ul>
+      </section>
+      <section>
+        <h1>Code du jour</h1>
+        <p><a href='https://github.com/openshift-quickstart/irc-leaderboard-quickstart'>https://github.com/openshift-quickstart/irc-leaderboard-quickstart</a></p>
+<br/>
+        <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=MONGOATL13'>Signup with Code - MONGOATL13</a></p>
+      </section>
+    </section>
+
+    <section>
+      <section>
+      <h1>Meteor</h1>
+      <div class="fragment roll-in">is&hellip;</div>
+      <div class="fragment roll-in"><a href='http://docs.meteor.com/#sevenprinciples'>&lt;seven principles&gt;</a></div>
+      </section>
+      <section>
+      <h1>Data on the Wire</h1>
+      <div class="fragment roll-in">Don't send HTML over the network.<br/>Just send data, let the client decide how to render it.</div>
+      </section>
+      <section>
+      <h1>One Language</h1>
+      <div class="fragment roll-in">Javascript</div>
+      </section>
+      <section>
+      <h1>Database Everywhere</h1>
+      <div class="fragment roll-in">Use the same APIs on the client and the server.</div>
+      </section>
+      <section>
+      <h1>Latency Compensation</h1>
+      <div class="fragment roll-in">On the client, use prefetching and model simulation to make it look like you have a zero-latency connection to the database.</div>
+      </section>
+      <section>
+      <h1>Full Stack Reactivity</h1>
+      <div class="fragment roll-in">Make realtime your default.<br/>All layers from DB to templates should make an event-driven interface available.</div>
+      </section>
+      <section>
+      <h1>Embrace the Ecosystem</h1>
+      <div class="fragment roll-in">Meteor is Open Source and integrates with existing open source tools and frameworks (rather than replacing them).</div>
+      </section>
+      <section>
+      <h1>Simplicity Equals Productivity</h1>
+      <div class="fragment roll-in">The best way to make something seem simple is to have it actually be simple.</div>
+      </section>
+    </section>
+
+      <section>
+        <section>
+          <h2>OpenShift IS</h2> 
+          <h1 class='fragment roll-in'><span class='fragment grow'>OPEN SOURCE</span></h1>
+        </section>
+        <section>
+          <h1>Open client interface</h1> 
+          <p><a href='https://github.com/openshift/rhc'>https://github.com/openshift/rhc</a></p>
+        </section>
+        <section>
+          <h1>Open cartridge format</h1> 
+          <img style='width:70%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
+        </section>
+        <section>
+          <h1>OpenShift Origin</h1>
+          <p class='fragment roll-in'><a href="http://openshift.github.io/">http://openshift.github.io</a></p>
+        </section>
+        <section>
+          <h3>Hosting Options</h3> 
+          <h2 class='fragment roll-in'>OpenShift Origin / DIY</h2>
+          <h2 class='fragment roll-in'>OpenShift Enterprise</h2>
+          <h2 class='fragment roll-in'>OpenShift Online</h2>
+        </section>
+        <section>
+          <h2>Developer Preview</h2> 
+<p>Sign up for an OpenShift Online account:</p>
+<p class='fragment roll-in'> <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=MONGOATL13">http://openshift.com</a></p>
+<p><ul>
+<li class='fragment roll-in'>Free-as-in-beer (<span class='fragment highlight-red'>no cost</span>)</li>
+<li class='fragment roll-in'>Free-as-in-freedom (<span class='fragment highlight-red'>open source</span>)</li>
+<li class='fragment roll-in'>512 MB RAM / 1 GB storage per gear (<span class='fragment highlight-red'><i>3 free</i></span>)</li> 
+<li class='fragment roll-in'>Need more resources? (<span class='fragment highlight-red'>just ask!</span>)</li>
+<li class='fragment roll-in'><i>REALLY</i> a Developer Preview (<span class='fragment highlight-red'>GA this summer</span>)</li>
+</ul></p>
+
+<div>
+</div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>The Cloud Landscape</h1> 
+        </section>
+        <section>
+          <h2>OpenShift is...</h2>
+          <div class='fragment roll-in'><img width='80%' src='../shared/img/paas-overview.png'/></div> 
+        </section>
+        <section>
+          <h2>Secure and Efficient</h2>
+          <div class='fragment roll-in'><img src='../shared/img/gear.png'/></div> 
+          <div class='fragment roll-in'><a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div> 
+        </section>
+        <section>
+          <h2>The big picture</h2>
+          <div class='fragment roll-in'><img src='../shared/img/PaaS-landscape.png'/></div> 
+        </section>
+        <section>
+          <h2>OpenStack</h2> 
+          <h1 class='fragment roll-in'>IS OPEN</h1>
+          <div class='fragment roll-in'>and<br/></div>
+          <div class='fragment roll-in'><h1>focused on IaaS</h1></div>
+        </section>
+        <section>
+          <h2>Buzz Words</h2> 
+          <h1 class='fragment roll-in'><span class='fragment roll-in'>Public Cloud</span><span class='fragment roll-in'> + </span><span class='fragment roll-in'>Private Cloud</span><span class='fragment roll-in'> = </span></h1>
+         <h1 class='fragment roll-in'><span class='fragment roll-in'>Hybrid Cloud</span></h1>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Getting Started with OpenShift</h2> 
+          <h4 class='fragment roll-in'>pre-requisites:</h4>
+          <div class='fragment roll-in'>ruby, rubygems</div>
+          <div class='fragment roll-in'>git</div>
+        </section>
+        <section>
+          <h2>Installing the 'rhc' client tool</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>sudo gem install rhc</code></pre></div>
+          <div class='fragment roll-in'>and</div>
+          <div class='fragment roll-in'>make sure that <a href='http://nodejs.org/'>node.js</a> is available in your development environment</div>
+        </section>
+        <section>
+          <h2>Help with client tools</h2> 
+          <ul>
+          <p>RHC client tool installation<br/><a href="https://openshift.redhat.com/community/developers/rhc-client-tools-install">https://openshift.redhat.com/community/developers/rhc-client-tools-install</a></p><br/>
+          <p>Openshift Getting Started guide<br/><a href="https://openshift.redhat.com/community/developers/get-started">https://openshift.redhat.com/community/developers/get-started</a></p>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Configuring your dev environment</h2> 
+          <pre><code contenteditable>rhc setup</code></pre>
+          <div><p>Will automatically:</p><ul><li class='fragment roll-in'>set your openshift email address</li>
+                   <li class='fragment roll-in'>verify your ssh key configuration</li>
+                   <li class='fragment roll-in'>configure your application namespace</li></ul></div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Gearing up a new app on OpenShift</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE APP_CART_2 APP_CART_3</code></pre></div>
+          <div class='fragment roll-in'>or</div>
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create showcase nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git</code></pre></div>
+        </section>
+	<section>
+<pre><code>Application Options
+-------------------
+  Namespace:   rjdemo
+  Cartridges:  nodejs-0.6, mongodb-2.2
+  Source Code:
+https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
+  Gear Size:   default
+  Scaling:     no
+
+Creating application 'showcase' ... done
+
+Waiting for your DNS name to be available ... done
+
+Downloading the application Git repository ...
+Cloning into 'showcase'...
+
+Your application code is now in 'showcase'</code></pre>
+        </section>
+	<section>
+<pre><code contenteditable>showcase @ http://showcase-rjdemo.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
+-------------------------------------------------------------
+  Created:         1:05 PM
+  Gears:           1 (defaults to small)
+  Git URL:        
+ssh://5175981a5973ca7a69000501@showcase-rjdemo.rhcloud.com/~/git/showcase.git/
+  Initial Git URL:
+https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
+  SSH:             5175981a5973ca7a69000501@meteorshow-rjdemo.rhcloud.com
+
+  nodejs-0.6 (Node.js 0.6)
+  ------------------------
+    Gears: Located with mongodb-2.2
+
+  mongodb-2.2 (MongoDB NoSQL Database 2.2)
+  ----------------------------------------
+    Gears:          Located with nodejs-0.6
+    Connection URL:
+mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
+    Database Name:  showcase
+    Password:       PTk4cCetTj2w
+    Username:       admin
+
+RESULT:
+Application showcase was created.</code></pre>
+        </section>
+        <section>
+<h2>Success!</h2> 
+<p>You should now have MongoDB and a basic node.js app up an running on OpenShift!</p>
+<br/>
+                  <p class='fragment roll-in'>Your gear is now configured with:</p> 
+          <div><ul><li class='fragment roll-in'>it's own git repo</li>
+                   <li class='fragment roll-in'>it's own web server</li>
+                   <li class='fragment roll-in'>ssh access</li>
+                   <li class='fragment roll-in'>logging</li>
+                   <li class='fragment roll-in'>MongoDB</li>
+                   <li class='fragment roll-in'>publicly accessible DNS</li></ul></div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Building your bot</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable> cd ircbot </code></pre></div>
+        </section>
+	<section>
+          <h2>Installing dependencies</h2>
+          <p>Using Node's <a href="https://npmjs.org/">npm package manager</a>:
+          <pre><code contenteditable>npm install irc -S</code></pre>
+          <p>Include the `-S` flag in order to save this dependency to your application's `package.json` file.</p>
+          <p><a href="http://npmjs.org/package/irc/">http://npmjs.org/package/irc/</a></p>
+        </section>
+	<section>
+	  <h3>Bot Basics</h3>
+	  <p>Add the following to your server.js to load and configure the irc library:</p>
+    <pre><code contenteditable>var irc = require('irc');
+var bot_name = process.env.OPENSHIFT_APP_NAME || 'ircbot';
+var bot = new irc.Client('chat.freenode.net', bot_name, {
+    channels: ['#botzoo', '#botwar'],
+    port: 8001,
+    debug: true
+});</code></pre>
+        </section>
+      </section>
+      <section>
+	<section>
+	  <h2>Teaching your bot to speak</h2>
+	  <p>Listen and respond to conversations as they happen:</p>
+	  <pre><code contenteditable>bot.addListener('message', function(from, to, message) {
+  if(  message.indexOf('Know any good jokes?') &gt; -1
+    || message.indexOf('good joke') &gt; -1
+  ) {
+    bot.say(to, 'Knock knock!');
+  }
+});</code></pre>
+        </section>
+	<section>
+<p>Getting to the punchline:</p>
+<pre><code contenteditable>bot.addListener('message', function(from, to, message) {
+  if(  message.indexOf('who is there?') &gt; -1
+    || message.indexOf("who's there?") &gt; -1
+    || message.indexOf("Who's there?") &gt; -1
+    || message.indexOf("Who is there?") &gt; -1
+    )
+    {
+        bot.say(to, 'Doris');
+    }
+});
+bot.addListener('message', function(from, to, message) {
+    if(  message.indexOf('Doris who?') &gt; -1
+      || message.indexOf("doris who?") &gt; -1
+      )
+    {
+        bot.say(to, "Doris locked, that's why I'm knocking!");
+    }
+});</code></pre>
+        </section>
+	<section>
+	  <h2>Committing your changes</h2>
+    </code></pre>git add package.json server.js</code></pre>
+<p>Commit your changes locally</p>
+    </code></pre>git commit -m 'adding irc npm dependency, initializing irc library, adding a few jokes'</code></pre>
+        </section>
+        <section>
+          <h2>deployment</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>git push</code></pre></div>
+          <div class='fragment roll-in'><p><b><i>Done!</i></b> Your bot should now be live on IRC.</p></div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Interacting with your new bot</h2> 
+          <div class='fragment roll-in'>Login to IRC, and enter one of the channels that your bot has been configured to join:</div>
+          <div class='fragment roll-in'><pre><code contenteditable>/join #botzoo</code></pre></div>
+<br/>
+<div class='fragment roll-in'><p>If you don't already have an IRC client, you can connect to freenode on the web:</p>
+<p><a href="http://webchat.freenode.net/">http://webchat.freenode.net/</a></p></div>
+        </section>
+	<section>
+<p>Ask if anyone knows a good joke:</p>
+<pre><code contenteditable>[guest]  Know any good jokes?
+[ircbot] Knock knock!
+[guest]  Who is there?
+[ircbot] Doris
+[guest]  Doris who?
+[ircbot] Doris locked, that's why I'm knocking!
+[guest]  meh...</code></pre>
+        </section>
+	<section>
+<h3>Bot debugging and maintainance</h3>
+<p>If your bot decides to quit mid-conversation, it may be suffering from a bug.</p>
+<br/>
+<p>Checking it's logs may reveal what set it off:</p>
+<pre><code contenteditable>rhc tail ircbot</code></pre>
+<p>Or, debug it while running locally:</p>
+<pre><code contenteditable>npm start</code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Teaching your bot to keep score</h1> 
+        </section>
+        <section>
+          <h2>Setting up MongoDB on Openshift</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add mongodb-2.2</code></pre></div>
+        </section>
+        <section>
+          <pre><code contenteditable>Adding mongodb-2.2 to application 'ircbot' ... Success
+
+mongodb-2.2 (MongoDB NoSQL Database 2.2)
+----------------------------------------
+  Connection URL: mongodb://127.6.102.129:27017/
+  Database Name:  ircbot
+  Password:       T5xJwCiDZYGn
+  Username:       admin
+
+RESULT:
+Added mongodb-2.2 to application ircbot</code></pre>
+        </section>
+        <section>
+          <pre><code contenteditable>Adding mongodb-2.2 to application 'ircbot' ... Success
+
+MongoDB 2.2 database added.  Please make note of these credentials:
+
+   Root User: admin
+   Root Password: T5xJwCiDZYGn
+   Database Name: ircbot
+
+Connection URL: mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
+
+You can manage your new MongoDB by also embedding rockmongo-1.1
+The rockmongo username and password will be the same as the MongoDB credentials above.</code></pre>
+        </section>
+        <section>
+          <h2>RockMongo on Openshift</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add rockmongo-1.1</code></pre></div>
+          <div class='fragment roll-in'><p><i>(optional)</i></p></div>
+        </section>
+        <section>
+          <h2>Adding a Mongojs dependency</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>npm install -S mongojs</code></pre>
+</div>
+        </section>
+        <section>
+          <h2>Connecting to MongoDB</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>var mongojs = require('mongojs');
+var connection_string = bot_name;
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+  process.env.OPENSHIFT_APP_NAME;
+}
+var db = mongojs(connection_string, ['scoreboard']);</code></pre>
+</div>
+        </section>
+        <section>
+          <h2>Setting a score</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>bot.addListener('message', function(from, to, message) {
+    if(  message.indexOf('++') &gt; -1 ){
+        var subject = message.slice(0,message.indexOf('++'));
+        db.scoreboard.findAndModify({
+            query: { name: subject },
+            update: { $inc: { score:1 }},
+            new: true,
+            upsert: true
+        }, function(err, doc) {
+            bot.say(to, "score: " + doc.score );
+        });
+    }
+});</code></pre></div>
+        </section>
+        <section>
+          <h2>Showing the scoreboard</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>bot.addListener('message', function(from, to, message) {
+    if(  message.indexOf('scoreboard') &gt; -1 ){
+        db.scoreboard.find().sort({score:-1}).limit(10).forEach(function(err, doc){
+            if (doc &amp;&amp; doc.name &amp;&amp; doc.score ) {
+                bot.say(to, doc.name + ": " + doc.score);
+            }
+        });
+    }
+});</code></pre></div>
+        </section>
+        <section>
+          <h2>updating your app</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>git add package.json server.js</code></pre></div>
+          <div class='fragment roll-in'><pre><code contenteditable>git commit -m 'adding a social scoreboard'</code></pre></div>
+          <div class='fragment roll-in'><pre><code contenteditable>git push</code></pre></div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Social Rewards</h2> 
+        </section>
+        <section>
+          <h2>Allocating points</h2> 
+          <div class='fragment roll-in'><code>term++</code></div>
+<pre class='fragment roll-in'><code contenteditable>[raphael]   Anyone down for pizza?
+[donatello] pizza++
+[ircbot]    score: 43
+[raphael]   Let's order two
+[leonardo]  Good idea, Raph! raphael++
+[ircbot]    score: 23</code></pre>
+        </section>
+        <section>
+          <h2>Checking the Scoreboard</h2> 
+          <div class='fragment roll-in'><code>ircbot scoreboard</code></div>
+<pre class='fragment roll-in'><code contenteditable>[ircbot] ircbot: 7
+[ircbot] ryanj: 4
+[ircbot] doris: -2 </code></pre>
+        </section>
+      </section>
+      <section>
+        <h1>Bots on-demand</h1>
+        <pre><code contenteditable>rhc app create ircbot nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/irc-leaderboard-quickstart.git</code></pre>
+      </section>
+            <section>
+		<section>
+                  <p>You can find much more information about this npm IRC library here: </p>
+                  <p><a href='https://github.com/martynsmith/node-irc'>https://github.com/martynsmith/node-irc</a></p>
+                </section>
+		<section data-state="blackout">
+<h4>References</h4>
+<ul>
+  <li><a href="https://openshift.redhat.com/community/blogs/building-social-irc-bots-with-nodejs">Building social IRC Bots with Node.js (Part 1)</a></li>
+  <li><a href="https://openshift.redhat.com/community/blogs/leaderboards-for-irc-social-nodejs-bots-part-2">Leaderboards for IRC - Social Node.js Bots (Part 2)</a></li>
+  <li><a href="https://openshift.redhat.com/community/get-started#cli">RHC command-line installer help</a></li>
+  <li><a href="https://openshift.redhat.com/community/content/open-irc-port-6667">Why contact Freenode on port 8001?</a></li>
+  <li><a href="http://www.youtube.com/watch?v=O2rGTXHvPCQ&t=18s">IRC - It's how hackers talk. Luckily, I speak "leet"</a></li>
+  <li><a href="https://node-irc.readthedocs.org/en/latest/">node-irc</a></li>
+  <li><a href="https://openshift.redhat.com/community/blogs/any-version-of-nodejs-you-want-in-the-cloud-openshift-does-it-paas-style">Run any version of Node.js on OpenShift</a></li>
+		</section>
+                 <section data-state="yellow">
+            <img alt='irc bot' title='irc bot' src='../shared/img/alphie_hello_cloud.png'/>
+<br/>
+<p><b><i>Thanks for following along! &nbsp; --ryanj</i></b>
+</p>
+
+                 </section>
+            </section>
+			</div>
+                  <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
