@@ -213,7 +213,7 @@
           <h2>Gearing up a new app on OpenShift</h2> 
           <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE APP_CART_2 APP_CART_3</code></pre></div>
           <div class='fragment roll-in'>or</div>
-          <div class='fragment roll-in'><pre><code contenteditable>rhc app create showcase nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git</code></pre></div>
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create instantappstore nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git</code></pre></div>
         </section>
 	<section>
 <pre><code>Application Options
@@ -225,25 +225,25 @@ https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
   Gear Size:   default
   Scaling:     no
 
-Creating application 'showcase' ... done
+Creating application 'instantappstore' ... done
 
 Waiting for your DNS name to be available ... done
 
 Downloading the application Git repository ...
-Cloning into 'showcase'...
+Cloning into 'instantappstore'...
 
-Your application code is now in 'showcase'</code></pre>
+Your application code is now in 'instantappstore'</code></pre>
         </section>
 	<section>
-<pre><code contenteditable>showcase @ http://showcase-rjdemo.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
+<pre><code contenteditable>instantappstore @ http://intstantappstore-rjdemo.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
 -------------------------------------------------------------
   Created:         1:05 PM
   Gears:           1 (defaults to small)
   Git URL:        
-ssh://5175981a5973ca7a69000501@showcase-rjdemo.rhcloud.com/~/git/showcase.git/
+ssh://5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com/~/git/instantappstore.git/
   Initial Git URL:
 https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
-  SSH:             5175981a5973ca7a69000501@meteorshow-rjdemo.rhcloud.com
+  SSH:             5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com
 
   nodejs-0.6 (Node.js 0.6)
   ------------------------
@@ -254,16 +254,16 @@ https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
     Gears:          Located with nodejs-0.6
     Connection URL:
 mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
-    Database Name:  showcase
+    Database Name:  instantappstore
     Password:       PTk4cCetTj2w
     Username:       admin
 
 RESULT:
-Application showcase was created.</code></pre>
+Application instantappstore was created.</code></pre>
         </section>
         <section>
 <h2>Success!</h2> 
-<p>You should now have MongoDB and a basic node.js app up an running on OpenShift!</p>
+<p>You should now have MongoDB and a basic node.js app running on OpenShift!</p>
 <br/>
                   <p class='fragment roll-in'>Your gear is now configured with:</p> 
           <div><ul><li class='fragment roll-in'>it's own git repo</li>
@@ -470,7 +470,7 @@ Template.nav.username = function () {
           <pre><code contenteditable>meteor add jquery
 meteor add bootstrap
 meteor add underscore
-meteor add oauth-github
+meteor add accounts-github
 meteor remove insecure</code></pre>
         </section>
       </section>
