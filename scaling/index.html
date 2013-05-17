@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+
+		<div class="slides">
+    <section>
+      <section>
+        <h1>Scaling Nodejs</h1>
+        <p>on</p>
+        <h1>OpenShift</h1>
+        <br/>
+        <p><a href='http://bit.ly/15CVL1Q'>http://bit.ly/15CVL1Q</a></p>
+        <p><a href='http://socuteurl.com/meeperchirp'>http://socuteurl.com/meeperchirp</a></p>
+      </section>
+      <section>
+        <div>presented by</div>
+        <br/>
+        <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+      </section>
+      <section data-state="blackout">
+        <div>
+          <div>Open Platform Evangelist</div>
+          <div>at</div>
+          <div>Red Hat</div>
+          <br/>
+          <div>ryanj@redhat.com</div>
+        </div>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>Agenda</h1>
+        <ol>
+          <li class="fragment"><strong>Cloud Basics and OpenShift</strong></li>
+          <li class="fragment"><strong>Horizontally scalable application architecture</strong></li>
+          <li class="fragment"><strong>Spin up a new app from source</strong></li>
+          <li class="fragment"><strong>Configure OpenShift / HAProxy for scaling</strong></li>
+        </ol>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Cloud Overview</h2> 
+        <div class='fragment roll-in'><img width='70%' src='../shared/img/paas-overview.png'/></div>
+      </section>
+      <section>
+        <h2>OpenShift</h2>
+        <ul>
+          <li class="fragment roll-in">Auto-scaling application hosting</li>
+          <li class="fragment roll-in">Web-service architectures on-demand</li>
+          <li class='fragment roll-in'>Free as in beer (<span class='fragment highlight-red'>no cost</span>, <span class='fragment highlight-red'>no time limit</span>)</li>
+          <li class='fragment roll-in'>Free as in freedom (<span class='fragment highlight-red'>open source</span>)</li>
+          <li class='fragment roll-in'>512 MB RAM / 1 GB storage per gear (<span class='fragment highlight-red'><i>3 free</i></span>)</li> 
+          <li class='fragment roll-in'>Need more resources? (<span class='fragment highlight-red'>just ask!</span>)</li>
+          <li class='fragment roll-in'><i>REALLY</i> a Developer Preview (<span class='fragment highlight-red'>GA this summer</span>)</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Secure and Efficient</h2>
+        <div class='fragment roll-in'><img style='width:50%' src='../shared/img/gear.png'/></div>
+        <div class='fragment roll-in'><a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div>
+      </section>
+      <section>
+        <h2>One Source to Bind Them All</h2>
+        <img style='width:60%' src="../shared/img/Three_products.png">
+      </section>
+      <section>
+        <h2>OpenShift Online</h2> 
+        <p>free OpenShift Online accounts:</p>
+        <p class='fragment roll-in'> <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=NodePDX">http://openshift.com</a></p>
+      </section>
+      <section>
+        <h1>OpenShift Origin</h1>
+        <p class='fragment roll-in'><a href="http://openshift.github.io/">http://openshift.github.io</a></p>
+      </section>
+      <section>
+        <h2>Open cartridge format</h2>
+        <img style='width:65%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
+      </section>
+      <section>
+        <h2>Nodejs Cartridge Updates</h2>
+        <p><a href='https://github.com/ryanj/nodejs-custom-version-openshift'>github.com/ryanj/nodejs-custom-version-openshift</a></p>
+        <p>github.com/openshift/origin-server/pull/1624</p>
+      </section>
+      <section>
+        <h2>The big picture</h2>
+        <div class='fragment roll-in'><img src='../shared/img/PaaS-landscape.png'/></div> 
+      </section>
+      <section>
+        <h2>Open client interface</h2>
+        <p><a href='https://github.com/openshift/rhc'>https://github.com/openshift/rhc</a></p>
+        <div class='fragment roll-in'><pre><code contenteditable>sudo gem install rhc</code></pre></div>
+        <div class='fragment roll-in'>and</div>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc setup</code></pre></div>
+        <p class='fragment roll-in'>Will automatically:</p>
+        <ul>
+          <li class='fragment roll-in'>link your dev env with your openshift account</li>
+          <li class='fragment roll-in'>verify your ssh key configuration</li>
+          <li class='fragment roll-in'>configure your application namespace</li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section>
+         <h2>Scaling - Two ways</h2>
+      </section>
+      <section>
+        <h2>Vertical - bigger, taller, more expensive</h2>
+        <p><img style='width:40%' src="../shared/img/sumo.jpg"></p>
+      </section>
+      <section>
+        <h2>Horizontal - distributed, cheap, linear</h2>
+        <p><img style="width:60%" src="../shared/img/ants.jpg"></p>
+      </section>
+      <section>
+        <h2>What you need for horizontal</h2>
+        <ol>
+          <li class="fragment roll-in">Commodity "hardware"</li>   
+          <li class="fragment roll-in">Easy instance creation and deletion</li>
+          <li class="fragment roll-in">Software built to grow sideways</li>
+        </ol>
+      </section>
+      <section>
+        <h2>OpenShift Architecture</h2>
+        <img src="../shared/img/arch.jpg">
+      </section>
+      <section>
+        <h2>OpenShift Scaling</h2>
+        <img src="../shared/img/scaling.jpg">
+      </section>
+      <section style="top: -231.5px; display: block;" class="past">
+        <h2>Scaling Tips</h2>
+        <ul>
+          <li class="fragment roll-in">Go Stateless, Move sessions to the back-end</li>
+          <li class="fragment roll-in">Build with reusable, loosely coupled pieces</li>
+          <li class="fragment roll-in">Design for retries and small pieces failing</li>
+          <li class="fragment roll-in">Borrow the best technologies</li>
+          <li class="fragment roll-in">Caching is your friend (when used correctly)</li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>OpenShift Scaling Hooks</h2>
+        <p>Setting a min and max scale from the command line</p>
+        <p><pre><code contenteditable>rhc cartridge-scale nodejs-0.6 -a nodeapp --min 3 --max 5</code></pre></p>
+      </section>
+      <section>
+        <h2>Scaling Web UI</h2>
+        <p><a href="https://openshift.redhat.com/app/console/applications/nodefly/scaling"><img style='width:85%' src="https://www.openshift.com/sites/default/files/scaling_config.png" alt="Application scaling settings" title=""></a></p>
+      </section>
+      <section>
+        <h2>HAProxy Scaling Hooks</h2>
+        <p>Adding and removing instances / scaling up and down</p>
+        <p><pre><code contenteditable>haproxy_ctld --up</code></pre></p>
+        <p><pre><code contenteditable>haproxy_ctld --down</code></pre></p>
+        <p>HAProxy on / off switches</p>
+        <pre><code contenteditable>haproxy_ctld_daemon start</code></pre>
+        <pre><code contenteditable>haproxy_ctld_daemon stop</code></pre>
+        <pre><code contenteditable>haproxy_ctld_daemon restart</code></pre>
+        <p>These hooks are available on the command line within your gear, and via a REST API</p>
+      </section>
+      <section>
+        <h3>HAProxy Web UI</h3>
+        <p>http://$YOUR_APP_DNS/haproxy-status/</p>
+        <br/>
+        <h3>HAProxy raw data</h3>
+        <p>http://$YOUR_APP_DNS/haproxy-status/;csv</p>
+      </section>
+    </section>
+
+
+
+
+      <section>
+        <section>
+          <h1>Demo time<span class='fragment roll-in'>!</span></h1>
+          <p><a href='https://github.com/ryanj/meteor-showcase'>https://github.com/ryanj/meteor-showcase</a></p>
+        </section>
+        <section>
+          <h2>Gearing up a new app on OpenShift</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE APP_CART_2 APP_CART_3</code></pre></div>
+          <div class='fragment roll-in'>or</div>
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create -s instantappstore nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git</code></pre></div>
+        </section>
+        <section>
+<pre><code>Application Options
+-------------------
+  Namespace:   rjdemo
+  Cartridges:  nodejs-0.6, mongodb-2.2
+  Source Code:
+https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
+  Gear Size:   default
+  Scaling:     no
+
+Creating application 'instantappstore' ... done
+
+Waiting for your DNS name to be available ... done
+
+Downloading the application Git repository ...
+Cloning into 'instantappstore'...
+
+Your application code is now in 'instantappstore'</code></pre>
+        </section>
+	<section>
+<pre><code contenteditable>instantappstore @ http://intstantappstore-rjdemo.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
+-------------------------------------------------------------
+  Created:         1:05 PM
+  Gears:           1 (defaults to small)
+  Git URL:        
+ssh://5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com/~/git/instantappstore.git/
+  Initial Git URL:
+https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
+  SSH:             5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com
+
+  nodejs-0.6 (Node.js 0.6)
+  ------------------------
+    Gears: Located with mongodb-2.2
+
+  mongodb-2.2 (MongoDB NoSQL Database 2.2)
+  ----------------------------------------
+    Gears:          Located with nodejs-0.6
+    Connection URL:
+mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
+    Database Name:  instantappstore
+    Password:       PTk4cCetTj2w
+    Username:       admin
+
+RESULT:
+Application instantappstore was created.</code></pre>
+        </section>
+        <section>
+          <h2>Success!</h2> 
+          <p>You should now have MongoDB and a basic node.js app running on OpenShift!</p>
+          <br/>
+          <p class='fragment roll-in'>Your gear is now configured with:</p> 
+          <div><ul><li class='fragment roll-in'>it's own git repo</li>
+                   <li class='fragment roll-in'>it's own web server</li>
+                   <li class='fragment roll-in'>ssh access</li>
+                   <li class='fragment roll-in'>logging</li>
+                   <li class='fragment roll-in'>MongoDB</li>
+                   <li class='fragment roll-in'>publicly accessible DNS</li></ul></div>
+        </section>
+        <section>
+          <h2>Add MongoDB to an existing app</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add mongodb-2.2</code></pre></div>
+        </section>
+        <section>
+          <h2>Environment Variables</h2> 
+          <div class='fragment roll-in'>
+<pre><code contenteditable>var ip_addr  = process.env.OPENSHIFT_INTERNAL_IP   || '127.0.0.1';
+var port     = process.env.OPENSHIFT_INTERNAL_PORT || 8000;
+var hostname = process.env.OPENSHIFT_APP_DNS       || 'localhost';
+</code></pre>
+          </div>
+        </section>
+        <section>
+          <h2>generating load</h2>
+          <p><pre><code contenteditable>while true ; do ab -n 10000 -c 500 http://nodefly-rjdemo.rhcloud.com/ ; done</code></pre></p>
+        </section>
+      </section>
+
+
+
+    <section>
+      <section>
+        <h2>Hacking from last night</h2>
+        <p>Cluster sibling awareness:</p>
+        <p><a href='https://github.com/ryanj/openshift.npm'>https://github.com/ryanj/openshift.npm</a></p>
+      </section>
+      <section>
+        <p>Come hang out with us:</p>
+        <p>#openshift on freenode irc</p>
+      </section>
+      <section data-state="blackout">
+        <p>More information about scaling with OpenShift: </p>
+        <a href='https://www.openshift.com/blogs/step-by-step-nodejs-guide-for-realtime-monitoring-and-scaling'><img alt='scale up' src='https://www.openshift.com/sites/default/files/meteorshift_1.png'/></a>
+        <p><a href='https://www.openshift.com/blogs/step-by-step-nodejs-guide-for-realtime-monitoring-and-scaling'>https://www.openshift.com/blogs/step-by-step-nodejs-guide-for-realtime-monitoring-and-scaling</a></p>
+        <br/>
+        <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b></p>
+        <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=NODEPDX'>Signup with Code - NODEPDX</a></p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Bonus Round!</h2>
+        <p>A git-based approach for porting your applications to OpenShift</p>
+        <p><a href='https://gist.github.com/ryanj/5267357'>https://gist.github.com/ryanj/5267357</a></p>
+      </section>
+    </section>
+			</div>
+      <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
