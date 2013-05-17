@@ -175,7 +175,7 @@
       </section>
       <section>
         <h2>Scaling Web UI</h2>
-        <p><a href="https://openshift.redhat.com/app/console/applications/nodefly/scaling"><img style='width:85%' src="https://www.openshift.com/sites/default/files/scaling_config.png" alt="Application scaling settings" title=""></a></p>
+        <p><a href="https://openshift.redhat.com/app/console/applications/nodepdxbot/scaling"><img style='width:85%' src="https://www.openshift.com/sites/default/files/scaling_config.png" alt="Application scaling settings" title=""></a></p>
       </section>
       <section>
         <h2>HAProxy Scaling Hooks</h2>
@@ -203,13 +203,13 @@
       <section>
         <section>
           <h1>Demo time<span class='fragment roll-in'>!</span></h1>
-          <p><a href='https://github.com/ryanj/meteor-showcase'>https://github.com/ryanj/meteor-showcase</a></p>
+          <p><a href='https://github.com/openshift-quickstart/irc-leaderboard-quickstart'>https://github.com/openshift-quickstart/irc-leaderboard-quickstart</a></p>
         </section>
         <section>
           <h2>Gearing up a new app on OpenShift</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE APP_CART_2 APP_CART_3</code></pre></div>
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE CART_2 CART_3</code></pre></div>
           <div class='fragment roll-in'>or</div>
-          <div class='fragment roll-in'><pre><code contenteditable>rhc app create -s instantappstore nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git</code></pre></div>
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create -s nodepdxbot nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/irc-leaderboard-quickstart.git</code></pre></div>
         </section>
         <section>
 <pre><code>Application Options
@@ -267,7 +267,9 @@ Application instantappstore was created.</code></pre>
                    <li class='fragment roll-in'>ssh access</li>
                    <li class='fragment roll-in'>logging</li>
                    <li class='fragment roll-in'>MongoDB</li>
-                   <li class='fragment roll-in'>publicly accessible DNS</li></ul></div>
+                   <li class='fragment roll-in'>publicly accessible DNS</li>
+                   <li class='fragment roll-in'>a custom build of nodejs</li>
+          </ul></div>
         </section>
         <section>
           <h2>Add MongoDB to an existing app</h2> 
@@ -284,7 +286,7 @@ var hostname = process.env.OPENSHIFT_APP_DNS       || 'localhost';
         </section>
         <section>
           <h2>generating load</h2>
-          <p><pre><code contenteditable>while true ; do ab -n 10000 -c 500 http://nodefly-rjdemo.rhcloud.com/ ; done</code></pre></p>
+          <p><pre><code contenteditable>while true ; do ab -n 10000 -c 500 https://nodepdxbot-rjdemo.rhcloud.com/ ; done</code></pre></p>
         </section>
       </section>
 
@@ -301,12 +303,14 @@ var hostname = process.env.OPENSHIFT_APP_DNS       || 'localhost';
         <p>#openshift on freenode irc</p>
       </section>
       <section data-state="blackout">
-        <p>More information about scaling with OpenShift: </p>
+        <p>More information about scaling with OpenShift:</p>
         <a href='https://www.openshift.com/blogs/step-by-step-nodejs-guide-for-realtime-monitoring-and-scaling'><img alt='scale up' src='https://www.openshift.com/sites/default/files/meteorshift_1.png'/></a>
         <p><a href='https://www.openshift.com/blogs/step-by-step-nodejs-guide-for-realtime-monitoring-and-scaling'>https://www.openshift.com/blogs/step-by-step-nodejs-guide-for-realtime-monitoring-and-scaling</a></p>
         <br/>
         <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b></p>
         <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=NODEPDX'>Signup with Code - NODEPDX</a></p>
+        <br/>
+        <p><i>*mention freebies</i></p>
       </section>
     </section>
     <section>
