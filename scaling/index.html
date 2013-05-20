@@ -196,30 +196,26 @@
         <p>http://$YOUR_APP_DNS/haproxy-status/;csv</p>
       </section>
     </section>
-
-
-
-
+    <section>
       <section>
-        <section>
-          <h1>Demo time<span class='fragment roll-in'>!</span></h1>
-          <p><a href='https://github.com/openshift-quickstart/irc-leaderboard-quickstart'>https://github.com/openshift-quickstart/irc-leaderboard-quickstart</a></p>
-        </section>
-        <section>
-          <h2>Gearing up a new app on OpenShift</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE CART_2 CART_3</code></pre></div>
-          <div class='fragment roll-in'>or</div>
-          <div class='fragment roll-in'><pre><code contenteditable>rhc app create -s nodepdxbot nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/irc-leaderboard-quickstart.git</code></pre></div>
-        </section>
-        <section>
+        <h1>Demo time<span class='fragment roll-in'>!</span></h1>
+        <p><a href='https://github.com/openshift-quickstart/irc-leaderboard-quickstart'>https://github.com/openshift-quickstart/irc-leaderboard-quickstart</a></p>
+      </section>
+      <section>
+        <h2>Gearing up a new app on OpenShift</h2> 
+        <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE CART_2 CART_3</code></pre></div>
+        <div class='fragment roll-in'>or</div>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc app create -s nodepdxbot nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/irc-leaderboard-quickstart.git</code></pre></div>
+      </section>
+      <section>
 <pre><code>Application Options
 -------------------
-  Namespace:   rjdemo
-  Cartridges:  nodejs-0.6, mongodb-2.2
-  Source Code:
+Namespace:   rjdemo
+Cartridges:  nodejs-0.6, mongodb-2.2
+Source Code:
 https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
-  Gear Size:   default
-  Scaling:     no
+Gear Size:   default
+Scaling:     no
 
 Creating application 'instantappstore' ... done
 
@@ -229,69 +225,82 @@ Downloading the application Git repository ...
 Cloning into 'instantappstore'...
 
 Your application code is now in 'instantappstore'</code></pre>
-        </section>
-	<section>
+      </section>
+	    <section>
 <pre><code contenteditable>instantappstore @ http://intstantappstore-rjdemo.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
 -------------------------------------------------------------
-  Created:         1:05 PM
-  Gears:           1 (defaults to small)
-  Git URL:        
+Created:         1:05 PM
+Gears:           1 (defaults to small)
+Git URL:        
 ssh://5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com/~/git/instantappstore.git/
-  Initial Git URL:
+Initial Git URL:
 https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
-  SSH:             5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com
+SSH:             5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com
 
-  nodejs-0.6 (Node.js 0.6)
-  ------------------------
-    Gears: Located with mongodb-2.2
+nodejs-0.6 (Node.js 0.6)
+------------------------
+  Gears: Located with mongodb-2.2
 
-  mongodb-2.2 (MongoDB NoSQL Database 2.2)
-  ----------------------------------------
-    Gears:          Located with nodejs-0.6
-    Connection URL:
+mongodb-2.2 (MongoDB NoSQL Database 2.2)
+----------------------------------------
+  Gears:          Located with nodejs-0.6
+  Connection URL:
 mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
-    Database Name:  instantappstore
-    Password:       PTk4cCetTj2w
-    Username:       admin
+  Database Name:  instantappstore
+  Password:       PTk4cCetTj2w
+  Username:       admin
 
 RESULT:
 Application instantappstore was created.</code></pre>
-        </section>
-        <section>
-          <h2>Success!</h2> 
-          <p>You should now have MongoDB and a basic node.js app running on OpenShift!</p>
-          <br/>
-          <p class='fragment roll-in'>Your gear is now configured with:</p> 
-          <div><ul><li class='fragment roll-in'>it's own git repo</li>
-                   <li class='fragment roll-in'>it's own web server</li>
-                   <li class='fragment roll-in'>ssh access</li>
-                   <li class='fragment roll-in'>logging</li>
-                   <li class='fragment roll-in'>MongoDB</li>
-                   <li class='fragment roll-in'>publicly accessible DNS</li>
-                   <li class='fragment roll-in'>a custom build of nodejs</li>
-          </ul></div>
-        </section>
-        <section>
-          <h2>Add MongoDB to an existing app</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add mongodb-2.2</code></pre></div>
-        </section>
-        <section>
-          <h2>Environment Variables</h2> 
-          <div class='fragment roll-in'>
+      </section>
+      <section>
+        <h2>Success!</h2> 
+        <p>You should now have MongoDB and a basic node.js app running on OpenShift!</p>
+        <br/>
+        <p class='fragment roll-in'>Your gear is now configured with:</p> 
+        <div><ul><li class='fragment roll-in'>it's own git repo</li>
+                 <li class='fragment roll-in'>it's own web server</li>
+                 <li class='fragment roll-in'>ssh access</li>
+                 <li class='fragment roll-in'>logging</li>
+                 <li class='fragment roll-in'>MongoDB</li>
+                 <li class='fragment roll-in'>publicly accessible DNS</li>
+                 <li class='fragment roll-in'>a custom build of nodejs</li>
+        </ul></div>
+      </section>
+      <section>
+        <h2>Run your existing applications on OpenShift</h2>
+        <p>Follow this git-based approach for porting your apps to OpenShift</p>
+        <p><a href='https://gist.github.com/ryanj/5267357'>https://gist.github.com/ryanj/5267357</a></p>
+        <p class='fragment roll-in'>Make sure that you bind to the correct IP_address and port number...</p>
+      </section>
+      <section>
+        <h2>Environment Variables</h2> 
+        <div class='fragment roll-in'>
 <pre><code contenteditable>var ip_addr  = process.env.OPENSHIFT_INTERNAL_IP   || '127.0.0.1';
 var port     = process.env.OPENSHIFT_INTERNAL_PORT || 8000;
 var hostname = process.env.OPENSHIFT_APP_DNS       || 'localhost';
 </code></pre>
-          </div>
-        </section>
-        <section>
-          <h2>generating load</h2>
-          <p><pre><code contenteditable>while true ; do ab -n 10000 -c 500 https://nodepdxbot-rjdemo.rhcloud.com/ ; done</code></pre></p>
-        </section>
+        </div>
       </section>
-
-
-
+      <section>
+        <h2>Adding cartridges to existing applications</h2> 
+        <div class='fragment roll-in'>
+          <p>This command should make mongodb services avilable to your application if run from within your local application source folder</p>
+          <pre><code contenteditable>rhc cartridge add mongodb-2.2</code></pre>
+        </div>
+      </section>
+      <section>
+        <h2>generating load</h2>
+        <div>
+          <p>For scalable applications, generate load from the command line to see automatic scaling in action:</p>
+          <pre><code contenteditable>while true ; do ab -n 10000 -c 400 https://nodepdxbot-rjdemo.rhcloud.com/ ; done</code></pre>
+        </div>
+        <div>
+          <p>I usually run the above command from within an openshift gear, to bypass wifi issues.  Connecting to any of your openshift applications via the command line is easy: </p>
+          <pre><code contenteditable>rhc shh APP_NAME</code></pre>
+        </div>
+      </section>
+    </section>
     <section>
       <section>
         <h2>Hacking from last night</h2>
@@ -311,13 +320,6 @@ var hostname = process.env.OPENSHIFT_APP_DNS       || 'localhost';
         <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=NODEPDX'>Signup with Code - NODEPDX</a></p>
         <br/>
         <p><i>*mention freebies</i></p>
-      </section>
-    </section>
-    <section>
-      <section>
-        <h2>Bonus Round!</h2>
-        <p>A git-based approach for porting your applications to OpenShift</p>
-        <p><a href='https://gist.github.com/ryanj/5267357'>https://gist.github.com/ryanj/5267357</a></p>
       </section>
     </section>
 			</div>
