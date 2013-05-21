@@ -163,6 +163,7 @@
           <li class="fragment roll-in">Build with reusable, loosely coupled pieces</li>
           <li class="fragment roll-in">Design for retries and small pieces failing</li>
           <li class="fragment roll-in">Borrow the best technologies</li>
+          <li class="fragment roll-in">Profile your data, evaluate your need for speed, durability, and read vs write performance</li>
           <li class="fragment roll-in">Caching is your friend (when used correctly)</li>
         </ul>
       </section>
@@ -295,8 +296,9 @@ var hostname = process.env.OPENSHIFT_APP_DNS       || 'localhost';
           <p>For scalable applications, generate load from the command line to see automatic scaling in action:</p>
           <pre><code contenteditable>while true ; do ab -n 10000 -c 400 https://nodepdxbot-rjdemo.rhcloud.com/ ; done</code></pre>
         </div>
-        <div>
-          <p>I usually run the above command from within an openshift gear, to bypass wifi issues.  Connecting to any of your openshift applications via the command line is easy: </p>
+        <br/>
+        <div class='fragment roll-in'>
+          <p>Run the above command from within an openshift gear to bypass wifi issues.</p><p>Connect to one of your OpenShift apps from the command line: </p>
           <pre><code contenteditable>rhc shh APP_NAME</code></pre>
         </div>
       </section>
@@ -304,7 +306,7 @@ var hostname = process.env.OPENSHIFT_APP_DNS       || 'localhost';
     <section>
       <section>
         <h2>Hacking from last night</h2>
-        <p>Cluster sibling awareness:</p>
+        <p>Cluster sibling awareness now available in Nodejs:</p>
         <p><a href='https://github.com/ryanj/openshift.npm'>https://github.com/ryanj/openshift.npm</a></p>
       </section>
       <section>
@@ -318,8 +320,6 @@ var hostname = process.env.OPENSHIFT_APP_DNS       || 'localhost';
         <br/>
         <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b></p>
         <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=NODEPDX'>Signup with Code - NODEPDX</a></p>
-        <br/>
-        <p><i>*mention freebies</i></p>
       </section>
     </section>
 			</div>
