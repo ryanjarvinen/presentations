@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Drupal for the Open Cloud</title>
+
+		<meta name="description" content="Learn how to adapt your existing Drupal projects to run on OpenShift, Red Hat's Open Source application-hosting platform. We'll cover cloud hosting basics, and show you how to spin up demo sites in mere minutes.">
+		<meta name="author" content="Ryan Jarvinen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+
+		<div class="slides">
+    <section>
+      <section>
+        <h1>Drupal hosting</h1>
+        <p>in the</p>
+        <h1>Open Cloud</h1>
+        <br/>
+        <p><a href='http://bit.ly/19GST1p'>http://bit.ly/19GST1p</a></p>
+        <p><a href='http://socuteurl.com/gleefulkitty'>http://socuteurl.com/gleefulkitty</a></p>
+      </section>
+      <section>
+        <div>presented by</div>
+        <br/>
+        <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+      </section>
+      <section data-state="blackout">
+        <div>
+          <div>Open Platform Evangelist</div>
+          <div>at</div>
+          <div>Red Hat</div>
+          <br/>
+          <div>ryanj@redhat.com</div>
+        </div>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>Agenda</h1>
+        <ol>
+          <li class="fragment"><strong>Cloud Basics and OpenShift</strong></li>
+          <li class="fragment"><strong>Portable Drupal applications</strong></li>
+          <li class="fragment"><strong>Shifting exsting Drupal sites to run in the Open Cloud</strong></li>
+          <li class="fragment"><strong>Release Management with Git</strong></li>
+          <li class="fragment"><strong>Advanced Monitoring and Scaling</strong></li>
+        </ol>
+      </section>
+      <section>
+        <h1>Code du jour</h1>
+        <p><a href='https://github.com/smerrill/drupal-quickstart'>https://github.com/smerrill/drupal-quickstart</a></p>
+<br/>
+        <p><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=drupalcampLA13'>Signup with Code - drupalcampLA13</a></p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>The Cloud</h1>
+        <h1 class='fragment roll-in'><span class='fragment grow'>IS</span></h1>
+        <h2 class='fragment roll-in'><span class='fragment grow'>being liberated</span></h2>
+      </section>
+      <section>
+        <h1>The Cloud Landscape</h1>
+        <div class='fragment roll-in'><img width='80%' src='img/paas-overview.png'/></div>
+      </section>
+      <section>
+        <h2>OpenStack</h2>
+        <h1 class='fragment roll-in'>IS OPEN</h1>
+        <div class='fragment roll-in'>and<br/></div>
+        <div class='fragment roll-in'><h1>focused on IaaS</h1></div>
+      </section>
+      <section>
+        <h2>The big picture</h2>
+        <div class='fragment roll-in'><img src='img/PaaS-landscape.png'/></div>
+      </section>
+      <section>
+        <h2 class='fragment roll-in'><span class='fragment roll-in'>Public Cloud</span><span class='fragment roll-in'> + </span><span class='fragment roll-in'>Private Cloud</span><span class='fragment roll-in'> = </span></h2>
+        <h2 class='fragment roll-in'><span class='fragment roll-in'>Hybrid Cloud</span></h2>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>Portable Drupal?</h1>
+      </section>
+      <section>
+        <h2>Gearing up a new app on OpenShift</h2> 
+        <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE CART_2 CART_3</code></pre></div>
+        <div class='fragment roll-in'>or</div>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc app create dcla php-5.3 mysql-5.1 --from-code=https://github.com/smerrill/drupal-quickstart</code></pre></div>
+      </section>
+      <section>
+<pre><code>Application Options
+-------------------
+  Namespace:   rjdemo
+  Cartridges:  php-5.3, mysql-5.1
+  Source Code: https://github.com/smerrill/drupal-quickstart
+  Gear Size:   default
+  Scaling:     no
+
+Creating application 'dcla' ... 
+
+done
+
+  Application dcla was created.
+  The cartridge php deployed a template application
+
+mysql-5.1: Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT
+  Starting Apache+mod_php HTTPD server
+  MySQL 5.1 database added.  Please make note of these credentials:
+       Root User: adminz3kcLEm
+   Root Password: 61ajycfyT5uu
+   Database Name: dcla
+Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
+You can manage your new MySQL database by also embedding phpmyadmin-3.4.
+The phpmyadmin username and password will be the same as the MySQL credentials above.
+
+Waiting for your DNS name to be available ... done</code></pre>
+      </section>
+	    <section>
+<pre><code contenteditable>Cloning into 'dcla'...
+The authenticity of host 'dcla-rjdemo.rhcloud.com (54.234.77.138)' can't be established.
+RSA key fingerprint is cf:ee:77:cb:0e:fc:02:d7:72:7e:ae:80:c0:90:88:a7.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'dcla-rjdemo.rhcloud.com' (RSA) to the list of known hosts.
+
+Your application 'dcla' is now available.
+
+  URL:        http://dcla-rjdemo.rhcloud.com/
+  SSH to:     51e2dc0f4382eccaae0000e5@dcla-rjdemo.rhcloud.com
+  Git remote: ssh://51e2dc0f4382eccaae0000e5@dcla-rjdemo.rhcloud.com/~/git/dcla.git/
+  Cloned to:  /home/ryan/src/dcla
+
+Run 'rhc show-app dcla' for more details about your app.</code></pre>
+      </section>
+      <section>
+        <h2>Success!</h2> 
+        <p>You should now have a basic Drupal app running on OpenShift!</p>
+        <br/>
+        <p class='fragment roll-in'>Your gear is now configured with:</p> 
+        <div><ul><li class='fragment roll-in'>it's own git repo</li>
+                 <li class='fragment roll-in'>it's own Apache webserver</li>
+                 <li class='fragment roll-in'>ssh access</li>
+                 <li class='fragment roll-in'>logging</li>
+                 <li class='fragment roll-in'>MySQL</li>
+                 <li class='fragment roll-in'>publicly accessible DNS</li>
+        </ul></div>
+      </section>
+    </section>
+ 
+    <section>
+      <section>
+        <h1>Shifting exsting Drupal sites to run in the Open Cloud</h1>
+      </section>
+      <section>
+        <h2>One port to bind ...</h2>
+      </section>
+      <section>
+        <h2>Environment Variables</h2> 
+        <div class='fragment roll-in'>
+<pre><code contenteditable>$ip_addr = getenv('OPENSHIFT_PHP_IP') || '127.0.0.1';
+$port     = getenv("OPENSHIFT_PHP_PORT") || 8000;
+$hostname = getenv('OPENSHIFT_APP_DNS')  || 'localhost';
+</code></pre>
+        </div>
+      </section>
+      <section>
+       <h1>secret-free source</h1>
+       <p><a href='https://www.openshift.com/blogs/secret-free-source-on-paas'>https://www.openshift.com/blogs/secret-free-source-on-paas</a></p>
+      </section>
+      <section>
+        <h2>Adding cartridges to existing applications</h2> 
+        <div class='fragment roll-in'>
+          <p>This command should make mysql services avilable to your application if run from within your local application source folder</p>
+          <pre><code contenteditable>rhc cartridge add mysql</code></pre>
+        </div>
+      </section>
+      <section>
+        <h2>Backups, snapshots, and DB bootstrapping</h2>
+      </section>
+    </section>
+
+
+    <section>
+      <section>
+        <h1>Release Management with OpenShift</h1>
+      </section>
+      <section>
+        <h1>The Cloud Landscape</h1>
+        <div class='fragment roll-in'><img width='80%' src='img/paas-overview.png'/></div>
+      </section>
+      <section>
+        <h2>OpenStack</h2>
+        <h1 class='fragment roll-in'>IS OPEN</h1>
+        <div class='fragment roll-in'>and<br/></div>
+        <div class='fragment roll-in'><h1>focused on IaaS</h1></div>
+      </section>
+      <section>
+        <h2>The big picture</h2>
+        <div class='fragment roll-in'><img src='img/PaaS-landscape.png'/></div>
+      </section>
+      <section>
+        <h2 class='fragment roll-in'><span class='fragment roll-in'>Public Cloud</span><span class='fragment roll-in'> + </span><span class='fragment roll-in'>Private Cloud</span><span class='fragment roll-in'> = </span></h2>
+        <h2 class='fragment roll-in'><span class='fragment roll-in'>Hybrid Cloud</span></h2>
+      </section>
+    </section>
+
+
+    <section>
+      <section>
+         <h2>Scaling - Two ways</h2>
+      </section>
+      <section>
+        <h2>Vertical - bigger, taller, more expensive</h2>
+        <p><img style='width:40%' src="../shared/img/sumo.jpg"></p>
+      </section>
+      <section>
+        <h2>Horizontal - distributed, cheap, linear</h2>
+        <p><img style="width:60%" src="../shared/img/ants.jpg"></p>
+      </section>
+      <section>
+        <h2>What you need for horizontal</h2>
+        <ol>
+          <li class="fragment roll-in">Commodity "hardware"</li>   
+          <li class="fragment roll-in">Easy instance creation and deletion</li>
+          <li class="fragment roll-in">Software built to grow sideways</li>
+        </ol>
+      </section>
+      <section>
+        <h2>OpenShift Architecture</h2>
+        <img src="../shared/img/arch.jpg">
+      </section>
+      <section>
+        <h2>OpenShift Scaling</h2>
+        <img src="../shared/img/scaling.jpg">
+      </section>
+      <section style="top: -231.5px; display: block;" class="past">
+        <h2>Scaling Tips</h2>
+        <ul>
+          <li class="fragment roll-in">Build with reusable, loosely coupled pieces</li>
+          <li class="fragment roll-in">Design for retries and small pieces failing</li>
+          <li class="fragment roll-in">Borrow the best technologies</li>
+          <li class="fragment roll-in">Move static assests to a CDN</li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>OpenShift Scaling Hooks</h2>
+        <p>Setting a min and max scale from the command line</p>
+        <p><pre><code contenteditable>rhc cartridge-scale nodejs-0.6 -a nodeapp --min 3 --max 5</code></pre></p>
+      </section>
+      <section>
+        <h2>Scaling Web UI</h2>
+        <p><a href="https://openshift.redhat.com/app/console/applications/nodepdxbot/scaling"><img style='width:85%' src="https://www.openshift.com/sites/default/files/scaling_config.png" alt="Application scaling settings" title=""></a></p>
+      </section>
+      <section>
+        <h2>HAProxy Scaling Hooks</h2>
+        <p>Adding and removing instances / scaling up and down</p>
+        <p><pre><code contenteditable>haproxy_ctld --up</code></pre></p>
+        <p><pre><code contenteditable>haproxy_ctld --down</code></pre></p>
+        <p>HAProxy on / off switches</p>
+        <pre><code contenteditable>haproxy_ctld_daemon start</code></pre>
+        <pre><code contenteditable>haproxy_ctld_daemon stop</code></pre>
+        <pre><code contenteditable>haproxy_ctld_daemon restart</code></pre>
+        <p>These hooks are available on the command line within your gear, and via a REST API</p>
+      </section>
+      <section>
+        <h3>HAProxy Web UI</h3>
+        <p>http://$YOUR_APP_DNS/haproxy-status/</p>
+        <br/>
+        <h3>HAProxy raw data</h3>
+        <p>http://$YOUR_APP_DNS/haproxy-status/;csv</p>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <p>Come hang out with us:</p>
+        <p>#openshift on freenode irc</p>
+      </section>
+      <section data-state="blackout">
+        <p>More information about running Drupal on OpenShift:</p>
+        <a href='https://www.openshift.com/blogs/how-to-migrate-drupal-to-openshift'><img alt='scale up' src='https://www.openshift.com/sites/default/files/meteorshift_1.png'/></a>
+        <p><a href='https://www.openshift.com/blogs/how-to-migrate-drupal-to-openshift'>https://www.openshift.com/blogs/how-to-migrate-drupal-to-openshift</a></p>
+        <p><a href='https://github.com/openshift/drupal-example'>https://github.com/openshift/drupal-example</a></p>
+        <br/>
+        <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b></p>
+        <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=drupalcampLA13'>Signup with Code - drupalcampLA13</a></p>
+      </section>
+    </section>
+			</div>
+      <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
