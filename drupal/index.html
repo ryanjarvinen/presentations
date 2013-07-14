@@ -76,22 +76,45 @@
     <section>
       <section>
         <h1>The Cloud</h1>
-        <h1 class='fragment roll-in'><span class='fragment grow'>IS</span></h1>
-        <h2 class='fragment roll-in'><span class='fragment grow'>being liberated</span></h2>
+        <h2 class='fragment roll-in'><span class='fragment grow'>IS</span></h2>
+        <h1 class='fragment roll-in'><span class='fragment grow'>being liberated</span></h1>
       </section>
       <section>
         <h1>The Cloud Landscape</h1>
-        <div class='fragment roll-in'><img width='80%' src='img/paas-overview.png'/></div>
+        <div class='fragment roll-in'><img width='80%' src='../shared/img/paas-overview.png'/></div>
       </section>
       <section>
-        <h2>OpenStack</h2>
-        <h1 class='fragment roll-in'>IS OPEN</h1>
-        <div class='fragment roll-in'>and<br/></div>
-        <div class='fragment roll-in'><h1>focused on IaaS</h1></div>
+        <h2>OpenStack is</h2>
+        <h1 class='fragment roll-in'>OPEN</h1>
+        <div class='fragment roll-in'>and</div>
+        <div class='fragment roll-in'><h1>focused on Infrastucture</h1></div>
+        <div class='fragment roll-in'>(IaaS)</div>
       </section>
       <section>
-        <h2>The big picture</h2>
+        <h2>What does OpenShift do?</h2>
         <div class='fragment roll-in'><img src='../shared/img/PaaS-landscape.png'/></div>
+      </section>
+      <section>
+        <h2>Secure and Efficient</h2>
+        <div class='fragment roll-in'><img style='width:50%' src='../shared/img/gear.png'/></div>
+        <div class='fragment roll-in'><a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div>
+      </section>
+      <section>
+        <h2>One Source to Bind Them All</h2>
+        <img style='width:60%' src="../shared/img/Three_products.png">
+      </section>
+      <section>
+        <h2>OpenShift Online</h2>
+        <p>free OpenShift Online accounts:</p>
+        <p class='fragment roll-in'> <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=NodePDX">http://openshift.com</a></p>
+      </section>
+      <section>
+        <h1>OpenShift Origin</h1>
+        <p class='fragment roll-in'><a href="http://openshift.github.io/">http://openshift.github.io</a></p>
+      </section>
+      <section>
+        <h2>Open cartridge format</h2>
+        <img style='width:65%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
       </section>
       <section>
         <h2 class='fragment roll-in'><span class='fragment roll-in'>Public Cloud</span><span class='fragment roll-in'> + </span><span class='fragment roll-in'>Private Cloud</span><span class='fragment roll-in'> = </span></h2>
@@ -172,7 +195,11 @@ Run 'rhc show-app dcla' for more details about your app.</code></pre>
         <h1>Shifting exsting Drupal sites to run in the Open Cloud</h1>
       </section>
       <section>
-        <h2>One port to bind ...</h2>
+        <div>How to port your existing Drupal applications to OpenShift:</div>
+        <div>i<a href='https://www.openshift.com/blogs/how-to-migrate-drupal-to-openshift'>https://www.openshift.com/blogs/how-to-migrate-drupal-to-openshift</a></div>
+      </section>
+      <section>
+        <h2>Which parts are OpenShift-specific?</h2>
       </section>
       <section>
         <h2>Environment Variables</h2> 
@@ -182,6 +209,10 @@ $port     = getenv("OPENSHIFT_PHP_PORT") || 8000;
 $hostname = getenv('OPENSHIFT_APP_DNS')  || 'localhost';
 </code></pre>
         </div>
+      </section>
+      <section>
+        <h2>OpenShift action-hooks</h2>
+        <a href='https://www.openshift.com/developers/deploying-and-building-applications'>https://www.openshift.com/developers/deploying-and-building-applications</a>
       </section>
       <section>
        <h1>secret-free source</h1>
