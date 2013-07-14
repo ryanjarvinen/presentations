@@ -241,6 +241,10 @@ $hostname = getenv('OPENSHIFT_APP_DNS')  || 'localhost';
 
     <section>
       <section>
+         <h1>Scaling</h1>
+         <div class='fragment roll-in'>In order to scale Drupal on OpenShift, you must configure Drupal to upload static assets (images, and other user-contributed files) to a CDN.</div>
+      </section>
+      <section>
          <h2>Scaling - Two ways</h2>
       </section>
       <section>
@@ -254,8 +258,8 @@ $hostname = getenv('OPENSHIFT_APP_DNS')  || 'localhost';
       <section>
         <h2>What you need for horizontal</h2>
         <ol>
-          <li class="fragment roll-in">Commodity "hardware"</li>   
-          <li class="fragment roll-in">Easy instance creation and deletion</li>
+          <li class="fragment roll-in">Commodity "hardware" (IaaS)</li>   
+          <li class="fragment roll-in">Easy instance creation and deletion (PaaS)</li>
           <li class="fragment roll-in">Software built to grow sideways</li>
         </ol>
       </section>
@@ -272,7 +276,7 @@ $hostname = getenv('OPENSHIFT_APP_DNS')  || 'localhost';
         <ul>
           <li class="fragment roll-in">Build with reusable, loosely coupled pieces</li>
           <li class="fragment roll-in">Design for retries and small pieces failing</li>
-          <li class="fragment roll-in">Borrow the best technologies</li>
+          <li class="fragment roll-in">Borrow from the best technologies</li>
           <li class="fragment roll-in">Move static assests to a CDN</li>
         </ul>
       </section>
