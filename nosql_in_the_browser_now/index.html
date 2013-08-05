@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>MongoDB in the browser and Realtime application design with Meteor.js</title>
+
+		<meta name="description" content="Meteor allows you to quickly build interactive, realtime applications, which can relay data changes between connected browsers using websockets, node.js, and MongoDB. In this session, we'll take a look at the data APIs and security controls that Meteor provides, allowing for safe access to MongoDB from client-side applications.">
+		<meta name="author" content="ryan jarvinen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+    <section>
+        <section>
+            <h1>MongoDB&nbsp;</h1>
+            <h1>in the Browser</h1>
+            <p>with</p>
+            <h1>Meteor</h1>
+            <br/>
+            <p><a href='bit.ly/14td6eO'>bit.ly/14td6eO</a></p>
+            <p><a href='http://socuteurl.com/mooshybean'>http://socuteurl.com/mooshybean</a></p>
+        </section>
+        <section>
+            <div>presented by</div>
+            <br/>
+            <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+        </section>
+        <section data-state="blackout">
+            <div>
+              <div>Open Platform Evangelist</div>
+              <div>at</div>
+              <div>Red Hat</div>
+              <br/>
+              <div>ryanj@redhat.com</div>
+            </div>
+        </section>
+    </section>
+    <section>
+      <section>
+        <h1>Agenda</h1>
+        <ul>
+          <li class='fragment roll-in'>Learn some Meteor basics</li>
+          <li class='fragment roll-in'>Learn about Cloud Basics and OpenShift</li>
+          <li class='fragment roll-in'>Review Client-Side Security for Meteor</li>
+          <li class='fragment roll-in'>Combine, minify, and bundle to deploy anywhere!</li>
+        </ul>
+      </section>
+      <section>
+        <h1>Code du jour</h1>
+        <p><a href='https://github.com/ryanj/meteor-showcase'>https://github.com/ryanj/meteor-showcase</a></p>
+<br/>
+        <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=MONGOATL13'>Signup with Code - MONGOATL13</a></p>
+      </section>
+    </section>
+
+    <section>
+      <section>
+      <h1>Meteor</h1>
+      <div class="fragment roll-in">is&hellip;</div>
+      <div class="fragment roll-in"><a href='http://docs.meteor.com/#sevenprinciples'>&lt;seven principles&gt;</a></div>
+      </section>
+      <section>
+      <h1>Data on the Wire</h1>
+      <div class="fragment roll-in">Don't send HTML over the network.<br/>Just send data, let the client decide how to render it.</div>
+      </section>
+      <section>
+      <h1>One Language</h1>
+      <div class="fragment roll-in">Javascript</div>
+      </section>
+      <section>
+      <h1>Database Everywhere</h1>
+      <div class="fragment roll-in">Use the same APIs on the client and the server.</div>
+      </section>
+      <section>
+      <h1>Latency Compensation</h1>
+      <div class="fragment roll-in">On the client, use prefetching and model simulation to make it look like you have a zero-latency connection to the database.</div>
+      </section>
+      <section>
+      <h1>Full Stack Reactivity</h1>
+      <div class="fragment roll-in">Make realtime your default.<br/>All layers from DB to templates should make an event-driven interface available.</div>
+      </section>
+      <section>
+      <h1>Embrace the Ecosystem</h1>
+      <div class="fragment roll-in">Meteor is Open Source and integrates with existing open source tools and frameworks (rather than replacing them).</div>
+      </section>
+      <section>
+      <h1>Simplicity Equals Productivity</h1>
+      <div class="fragment roll-in">The best way to make something seem simple is to have it actually be simple.</div>
+      </section>
+    </section>
+
+      <section>
+        <section>
+          <h2>OpenShift IS</h2> 
+          <h1 class='fragment roll-in'><span class='fragment grow'>OPEN SOURCE</span></h1>
+        </section>
+        <section>
+          <h1>Open client interface</h1> 
+          <p><a href='https://github.com/openshift/rhc'>https://github.com/openshift/rhc</a></p>
+        </section>
+        <section>
+          <h1>Open cartridge format</h1> 
+          <img style='width:70%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
+        </section>
+        <section>
+          <h1>OpenShift Origin</h1>
+          <p class='fragment roll-in'><a href="http://openshift.github.io/">http://openshift.github.io</a></p>
+        </section>
+        <section>
+          <h3>Hosting Options</h3> 
+          <h2 class='fragment roll-in'>OpenShift Origin / DIY</h2>
+          <h2 class='fragment roll-in'>OpenShift Enterprise</h2>
+          <h2 class='fragment roll-in'>OpenShift Online</h2>
+        </section>
+        <section>
+          <h2>Developer Preview</h2> 
+<p>Sign up for an OpenShift Online account:</p>
+<p class='fragment roll-in'> <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=MONGOATL13">http://openshift.com</a></p>
+<p><ul>
+<li class='fragment roll-in'>Free-as-in-beer (<span class='fragment highlight-red'>no cost</span>)</li>
+<li class='fragment roll-in'>Free-as-in-freedom (<span class='fragment highlight-red'>open source</span>)</li>
+<li class='fragment roll-in'>512 MB RAM / 1 GB storage per gear (<span class='fragment highlight-red'><i>3 free</i></span>)</li> 
+<li class='fragment roll-in'>Need more resources? (<span class='fragment highlight-red'>just ask!</span>)</li>
+<li class='fragment roll-in'><i>REALLY</i> a Developer Preview (<span class='fragment highlight-red'>GA this summer</span>)</li>
+</ul></p>
+
+<div>
+</div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>The Cloud Landscape</h1> 
+        </section>
+        <section>
+          <h2>OpenShift is...</h2>
+          <div class='fragment roll-in'><img width='80%' src='../shared/img/paas-overview.png'/></div> 
+        </section>
+        <section>
+          <h2>Secure and Efficient</h2>
+          <div class='fragment roll-in'><img src='../shared/img/gear.png'/></div> 
+          <div class='fragment roll-in'><a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div> 
+        </section>
+        <section>
+          <h2>The big picture</h2>
+          <div class='fragment roll-in'><img src='../shared/img/PaaS-landscape.png'/></div> 
+        </section>
+        <section>
+          <h2>OpenStack</h2> 
+          <h1 class='fragment roll-in'>IS OPEN</h1>
+          <div class='fragment roll-in'>and<br/></div>
+          <div class='fragment roll-in'><h1>focused on IaaS</h1></div>
+        </section>
+        <section>
+          <h2>Buzz Words</h2> 
+          <h1 class='fragment roll-in'><span class='fragment roll-in'>Public Cloud</span><span class='fragment roll-in'> + </span><span class='fragment roll-in'>Private Cloud</span><span class='fragment roll-in'> = </span></h1>
+         <h1 class='fragment roll-in'><span class='fragment roll-in'>Hybrid Cloud</span></h1>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Getting Started with OpenShift</h2> 
+          <h4 class='fragment roll-in'>pre-requisites:</h4>
+          <div class='fragment roll-in'>ruby, rubygems</div>
+          <div class='fragment roll-in'>git</div>
+        </section>
+        <section>
+          <h2>Installing the 'rhc' client tool</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>sudo gem install rhc</code></pre></div>
+          <div class='fragment roll-in'>and</div>
+          <div class='fragment roll-in'>make sure that <a href='http://nodejs.org/'>node.js</a> is available in your development environment</div>
+        </section>
+        <section>
+          <h2>Help with client tools</h2> 
+          <ul>
+          <p>RHC client tool installation<br/><a href="https://openshift.redhat.com/community/developers/rhc-client-tools-install">https://openshift.redhat.com/community/developers/rhc-client-tools-install</a></p><br/>
+          <p>Openshift Getting Started guide<br/><a href="https://openshift.redhat.com/community/developers/get-started">https://openshift.redhat.com/community/developers/get-started</a></p>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Configuring your dev environment</h2> 
+          <pre><code contenteditable>rhc setup</code></pre>
+          <div><p>Will automatically:</p><ul><li class='fragment roll-in'>set your openshift email address</li>
+                   <li class='fragment roll-in'>verify your ssh key configuration</li>
+                   <li class='fragment roll-in'>configure your application namespace</li></ul></div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Gearing up a new app on OpenShift</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE APP_CART_2 APP_CART_3</code></pre></div>
+          <div class='fragment roll-in'>or</div>
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create instantappstore nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git</code></pre></div>
+        </section>
+	<section>
+<pre><code>Application Options
+-------------------
+  Namespace:   rjdemo
+  Cartridges:  nodejs-0.6, mongodb-2.2
+  Source Code:
+https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
+  Gear Size:   default
+  Scaling:     no
+
+Creating application 'instantappstore' ... done
+
+Waiting for your DNS name to be available ... done
+
+Downloading the application Git repository ...
+Cloning into 'instantappstore'...
+
+Your application code is now in 'instantappstore'</code></pre>
+        </section>
+	<section>
+<pre><code contenteditable>instantappstore @ http://intstantappstore-rjdemo.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
+-------------------------------------------------------------
+  Created:         1:05 PM
+  Gears:           1 (defaults to small)
+  Git URL:        
+ssh://5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com/~/git/instantappstore.git/
+  Initial Git URL:
+https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
+  SSH:             5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com
+
+  nodejs-0.6 (Node.js 0.6)
+  ------------------------
+    Gears: Located with mongodb-2.2
+
+  mongodb-2.2 (MongoDB NoSQL Database 2.2)
+  ----------------------------------------
+    Gears:          Located with nodejs-0.6
+    Connection URL:
+mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
+    Database Name:  instantappstore
+    Password:       PTk4cCetTj2w
+    Username:       admin
+
+RESULT:
+Application instantappstore was created.</code></pre>
+        </section>
+        <section>
+<h2>Success!</h2> 
+<p>You should now have MongoDB and a basic node.js app running on OpenShift!</p>
+<br/>
+                  <p class='fragment roll-in'>Your gear is now configured with:</p> 
+          <div><ul><li class='fragment roll-in'>it's own git repo</li>
+                   <li class='fragment roll-in'>it's own web server</li>
+                   <li class='fragment roll-in'>ssh access</li>
+                   <li class='fragment roll-in'>logging</li>
+                   <li class='fragment roll-in'>MongoDB</li>
+                   <li class='fragment roll-in'>publicly accessible DNS</li></ul></div>
+        </section>
+        <section>
+          <h2>Add MongoDB to an existing app</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add mongodb-2.2</code></pre></div>
+        </section>
+        <section>
+          <h2>RockMongo on Openshift</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add rockmongo-1.1</code></pre></div>
+          <div class='fragment roll-in'><p><i>(optional)</i></p></div>
+        </section>
+        <section>
+          <h2>Environment Variables</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+  process.env.OPENSHIFT_APP_NAME;
+}else{
+  connection_string = db_name;
+}</code></pre>
+</div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Let's look at some code<span class='fragment roll-in'>!</span></h1>
+          <a href='https://github.com/ryanj/meteor-showcase'>https://github.com/ryanj/meteor-showcase</a>
+        </section>
+	      <section>
+          <h2>Client code and Server code</h2>
+          <pre><code contenteditable>if (Meteor.isServer) { 
+  ...
+}</code></pre>
+          <pre><code contenteditable>if (Meteor.isClient) { 
+  ...
+}</code></pre>
+        </section>
+	      <section>
+          <h2>Protecting DB Access</h2>
+          <pre><code contenteditable>Showcase.allow({
+  remove: function (userId, item) {
+    var username = false;
+    if(userId){
+      username = Meteor.users.findOne(userId).profile.name;
+    }   
+    return (item.author == username || username == 'ryan jarvinen');
+  },  
+  insert: function (userId, item) {
+    return (userId) ? true : false;
+  },  
+  update: function (userId, item, fieldNames, modifier) {
+</code></pre>
+        </section>
+	      <section>
+          <pre><code contenteditable>update: function (userId, item, fieldNames, modifier) {
+  var username = false;
+  if(userId){
+    username = Meteor.users.findOne(userId).profile.name;
+  }
+  if(item.score &gt; 9000){
+    // OVER 9000?!?!
+    return false;
+  }else if( _.isEqual(modifier, {$inc:{score: +5}})){
+    //allow voting by anyone
+    console.log('option1 - voter');
+    return true;
+  }else if( _.isEqual(modifier, {$inc:{score: -5}}) &amp;&amp; item.score &gt; 4 ){
+    //allow voting by anyone
+    console.log('option1 - voter');
+    return true;
+  }else if(username == 'ryan jarvinen') {
+    //allow updates by admins (me) :-P
+    console.log('option2 - admin');
+    return true;
+  }else{
+    //allow updates by owners
+    console.log('option3 - owner');
+    return ( username == item.author ) ? true : false;
+  }
+}</code></pre>
+        </section>
+	      <section>
+          <h2>Templates (HTML)</h2>
+          <pre><code contenteditable>&lt;head&gt;
+  &lt;title&gt;meteorshowcase&lt;/title&gt;
+&lt;/head&gt;
+    
+&lt;body&gt;
+  {{&gt; nav}}                           
+  {{&gt; list}}                                     
+  {{&gt; submit}}                           
+  {{&gt; edit}}            
+  {{&gt; view}}                           
+&lt;/body&gt;</code></pre>
+        </section>
+	      <section>
+          <h2>Templates (HTML)</h2>
+          <pre><code contenteditable> &lt;template name="list"&gt;
+  &lt;div class="showcase"&gt;
+    {{#each items}}      
+      {{&gt; item}}                 
+      &lt;hr/&gt;
+    {{/each}}
+  &lt;/div&gt;                         
+&lt;/template&gt;   
+</code></pre>
+        </section>
+	      <section>
+          <h2>Templates (HTML)</h2>
+          <pre><code contenteditable>&lt;template name="item"&gt;        
+  &lt;div class="item row {{selected}}"&gt;
+    &lt;div class="name span2"&gt;&lt;a class='view'&gt;&lt;img src='{{image_url}}'/&gt;{{name}}&lt;/a&gt;&lt;/div&gt;
+    &lt;div class="description span4"&gt;{{description}}&lt;/div&gt;
+    &lt;div class='span4'&gt;
+      &lt;div class="date"&gt;Submitted: {{datestring}} {{timestring}}&lt;/div&gt;
+      &lt;div class="author"&gt;By: {{author}}&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class='span2'&gt;
+      &lt;a class="dec" href="#"&gt;&lt;b class='icon-minus-sign'&gt;&lt;/b&gt;&lt;/a&gt;
+      &lt;span style='font-size:larger;font-weight:bold;' class='score'&gt;{{score}}&lt;/score&gt;
+      &lt;a class="inc" href="#"&gt;&lt;b class='icon-plus-sign'&gt;&lt;/b&gt;&lt;/a&gt;   
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;  
+</code></pre>
+        </section>
+	      <section>
+          <h2>Templates (HTML)</h2>
+          <pre><code contenteditable>&lt;template name="view"&gt;
+&lt;div id='modal_view' class="modal fade in" 
+  &lt;div class="modal-header"&gt;
+    &lt;a href="#" data-dismiss="modal" class="close pull-right;"&gt;&times;&lt;/a&gt;
+    &lt;h3 class="item_title"&gt;{{app_name}}&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-body"&gt;
+    &lt;div class'image_url'&gt;&lt;a href='{{demo_url}}'&gt;&lt;img src='{{image_url}}'/&gt;&lt;/a&gt;&lt;/div&gt;
+    &lt;div class='name'&gt;{{app_name}}&lt;/div&gt;
+    &lt;div class='description'&gt;{{description}}&lt;/div&gt;
+    &lt;div class='authored_by'&gt;By: &lt;span class='author'&gt;{{author}}&lt;/span&gt;&lt;/div&gt;
+    &lt;div class='date'&gt;Submitted on: {{date}}&lt;/div&gt;
+    &lt;div class='score'&gt;Score: {{score}}&lt;/div&gt;
+    &lt;div class='source_url'&gt;Source code: &lt;a href='{{source_url}}'&gt;{{source_url}}&lt;/a&gt;&lt;/div&gt;
+    &lt;p&gt;&lt;a href="{{clone_url}}" class="shift btn btn-large btn-inverse btn-block"&gt;Run on OpenShift &lt;b class='icon-cog'&gt;&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-footer"&gt;
+    {{# if currentUser }}&lt;a href="#" $('#modal_edit').modal('show') &amp;&amp; $('#modal_view').modal('hide');" class="edit pull-left btn btn-info"&gt;Settings &lt;b class='icon-wrench'&gt;&lt;/b&gt;&lt;/a&gt;{{/if}}
+    &lt;a href="{{demo_url}}" onclick="console.log('Opening app...');" class="pull-right btn btn-primary"&gt;Visit &lt;b class='icon-globe'&gt;&lt;/b&gt;&lt;/a&gt;
+    &lt;a href="#" data-dismiss="modal" onclick="$('#modal_view').modal('hide');" class="btn pull-right"&gt;Cancel &lt;b class='icon-remove'&gt;&lt;/b&gt;&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+</code></pre>
+        </section>
+	      <section>
+          <h2>Templates (js)</h2>
+          <pre><code contenteditable>Template.list.items = function () {
+  var nav_config = Session.get('nav_settings');
+  var sort_by = Session.get('sort_by');
+  var sort_order = {};
+  var filter = Session.get('filter');
+  if (!filter || filter == undefined){ filter = '' };
+  sort_order[sort_by] = nav_config[sort_by] || -1;
+  return Showcase.find({ name: { $regex: filter, $options: 'i'}}, {sort: sort_order}).fetch();
+};  
+
+Template.nav.username = function () {
+  var u = Meteor.user();
+  return u &amp;&amp; u.profile &amp;&amp; u.profile.name;
+};</code></pre>
+        </section>
+	      <section>
+          <h2>Events</h2>
+          <pre><code contenteditable>Template.item.events({
+  'click a.inc': function () {
+    Showcase.update(Session.get("selected_item"), {$inc: {score: 5}});
+  },
+  'click a.dec': function () {
+    Showcase.update(Session.get("selected_item"), {$inc: {score: -5}});
+  },
+  'dblclick': function () {
+    $('#modal_view').modal('show');
+  },
+  'click a.view': function () {
+    console.log('not opening popup');
+    //$('#modal_view').modal('show');
+  }
+});
+</code></pre>
+        </section>
+      </section>
+      <section>
+	      <section>
+          <h2><span class='fragment roll-in'>Smart</span> Packages</h2>
+          <pre><code contenteditable>meteor add jquery
+meteor add bootstrap
+meteor add underscore
+meteor add accounts-github
+meteor remove insecure</code></pre>
+        </section>
+      </section>
+      <section>
+	      <section>
+          <h2>Meteor Deployment</h2>
+          <pre><code contenteditable>meteor deploy</code></pre>
+        </section>
+	      <section>
+          <h2>Bundles</h2>
+          <pre><code contenteditable>meteor bundle bundle.tar.gz</code></pre>
+        </section>
+	      <section>
+          <h2>Deploying to OpenShift</h2>
+          <p>GNU / Linux</p>
+          <pre><code contenteditable>tar -xvkf bundle.tar.gz --transform 's|^bundle/||' -C ../meteor/</code></pre>
+          <p>BSD / OSX</p>
+          <pre><code contenteditable>tar -xvkf bundle.tar.gz --transform 's|^bundle/||' -C ../meteor/</code></pre>
+<pre><code contenteditable>cd ../meteor
+git add .
+git commit -am "Adding a meteor.js application bundle"
+git push</code></pre>
+        </section>
+      </section>
+      <section>
+		    <section>
+          <p>For more information about Meteor: </p>
+          <p>visit <a href='http://meteor.com/'>http://meteor.com/</a></p>
+        </section>
+        <section data-state="blackout">
+            <a href='https://www.openshift.com/blogs/cloudy-with-a-chance-of-meteorjs'><img alt='meteor fireballs' src='https://www.openshift.com/sites/default/files/meteorshift_1.png'/></a>
+<br/>
+<p><b><i>Thanks for following along! &nbsp; --ryanj</i></b>
+</p>
+
+        </section>
+      </section>
+			</div>
+      <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
