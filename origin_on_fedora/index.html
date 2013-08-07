@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>OpenShift Origin on Fedora - the upstream of the cloud</title>
+
+		<meta name="description" content="Meteor allows you to quickly build interactive, realtime applications, which can relay data changes between connected browsers using websockets, node.js, and MongoDB. In this session, we'll take a look at the data APIs and security controls that Meteor provides, allowing for safe access to MongoDB from client-side applications.">
+		<meta name="author" content="ryan jarvinen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+    <section>
+        <section>
+            <h1>OpenShift Origin </h1>
+            <p>on</p>
+            <h1>Fedora linux</h1>
+            <br/>
+            <h3>The Upstream of the Cloud</h3>
+            <p><a href='bit.ly/16yl6sZ'>bit.ly/16yl6sZ</a></p>
+            <p><a href='http://socuteurl.com/snugglybugglebugglekins'>http://socuteurl.com/snugglybugglebugglekins</a></p>
+        </section>
+        <section>
+            <div>presented by</div>
+            <br/>
+            <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+        </section>
+        <section data-state="blackout">
+            <div>
+              <div>Open Platform Evangelist</div>
+              <div>at</div>
+              <div>Red Hat</div>
+              <br/>
+              <div>ryanj@redhat.com</div>
+            </div>
+        </section>
+    </section>
+
+        <section>
+          <h2>Agenda</h2>
+          <ol>
+                        <li class='fragment roll-in'>Learn about Cloud Basics and OpenShift</li>
+                        <li class="fragment"><strong>Understand OpenShift Architecture</strong></li>
+                        <li class="fragment"><strong>Learn how to install OpenShift Origin on Fedora</strong></li>
+                    </ol>
+        </section>
+        
+        <section>
+            <h2>Assumptions</h2>
+            <ol>
+                        <li class="fragment"><strong>You write web code or are a devops person</strong></li>
+                        <li class="fragment"><strong>You can use command line, git, and ssh</strong></li>
+                        <li class="fragment"><strong>You want to see what is involved in running a PaaS</strong></li>
+                        <li class="fragment"><strong>You will ask questions</strong></li>
+                    </ol>
+        </section>
+        
+        <section>
+            <h2>But I know OpenStack...</h2>
+            <img width="700" height="550" src="../shared/img/paas-overview.png">
+        </section>
+        
+        <section>
+          <h2>What problems does it solve</h2>
+          <p>Let's see from a developer AND sysadmin perspective</p>
+        </section>
+        
+        
+        
+        <section>
+        <p> Assume on linux
+          </p><ol>
+            <li class="fragment">Install Apache with Mod_WSGI</li>            
+            <li class="fragment">Make sure we have all the Python extensions set so Apache can see them</li>
+            <li class="fragment">Configure firewall so that only http, https, and ssh are available to outside world</li>
+            <li class="fragment">Install Postgresql</li>
+            <li class="fragment">PG_hba.conf, create db user, create db user password, set up access privs, and test account</li>
+            <li class="fragment">Create DB, give user permissions to the DB</li>
+            <li class="fragment">Set up a git repository and then figure out how to structure and deploy</li>
+            <li class="fragment">Now I can write code - hello world, then database connection, then real app</li>
+            <li class="fragment">Get it working with a public DNS</li>
+            <li class="fragment">Now I am stuck maintaining the machine</li>
+          </ol>
+          <p></p>
+        </section>
+        
+        <section>
+          <p>
+            OR 
+          </p>
+          <ul>
+            <li class="fragment">Fill out a mile high stack of request forms for a VM from Ops and wait</li>
+            <li class="fragment">Then realize it's not configured properly, submit ticket and wait</li>
+            <li class="fragment">Repeat same information, and wait</li>
+            <li class="fragment">Your ops person moves to a different group, GOTO Line 1....</li>
+          </ul>
+      
+          <h2 class="fragment">DEMO</h2>
+
+        </section>
+            
+        <section>
+        <p>As a sysadmin</p>
+        <ol>
+          <li class="fragment">First off, every time that developer reqests development machines, I am busy with real problems</li>
+          <li class="fragment">They always want to try some new language with some new datastore that they don't even know how to install, let alone manage</li>
+          <li class="fragment">There is whole bunch of account creation and lockdown I need to remember for each VM or they get Sudo or they annoy me all the time</li>
+          <li class="fragment">Each one of them ends up configuring their machine wildly differently</li>         
+          <li class="fragment">They never give up the resources from their VMs - spreadsheets and emails</li>
+          <li class="fragment">If there is a security fix I need to go into each VM and update it</li>
+          <li class="fragment">I don't want to spend my time updating DNS tables</li>
+        </ol>
+        <h2 class="fragment">DEMO some more</h2>
+        </section>
+        
+        <section>
+          <h3>OpenShift Enterprise or Origin creates a peaceful environment for Devs AND SysAdmins</h3>
+          <img width="300" height="303" src="../shared/img/DarthLuke.png">
+          <ul>
+            <li class="fragment"><strong>Operations care about stability and performance</strong></li>
+            <li class="fragment"><strong>Developers just want environments without waiting</strong></li>
+            <li class="fragment"><strong>And neither wants to talk to each other</strong></li>
+          </ul>         
+        </section>
+        
+        <section>
+            <h2>One Source to Bind Them All</h2>
+            <img src="../shared/img/Three_products.png">
+            <br>&nbsp;
+        </section>
+        
+        <section>           
+            <img width="1052" height="664" src="../shared/img/PaaS-landscape.png">
+            <p>&nbsp;</p>
+        </section>
+          
+        <section>
+          <h2>On to Construction</h2>
+          <img src="../shared/img/ironman_2_blueprints.jpg"/>
+        </section>
+        
+        <section>
+          <h2>Where to get the code++</h2>
+          <ol>
+            <li>Code is available at <a href="http://openshift.github.io" class="roll"><span data-title="http://openshift.github.io">http://openshift.github.io</span></a></li>
+            <li>Current work and roadmap is on Trello <a href="https://trello.com/openshift" class="roll"><span data-title="https://trello.com/openshift">https://trello.com/openshift</span></a></li>
+            <li>A whole bunch of slide decks <a href="http://www.slideshare.net/search/slideshow?searchfrom=header&amp;q=OpenShift+Origin" class="roll"><span data-title="are up on slideshare">are up on slideshare</span></a></li>
+          </ol>
+        </section>
+        
+        <section>
+          <h2>Terminology</h2>
+          <ul>
+            <li class="fragment"><strong>Broker – Management host, orchestration of Nodes</strong></li>
+            <li class="fragment"><strong>Node – Compute host containing Gears</strong></li>
+            <li class="fragment"><strong>Gear – Allocation of fixed memory, compute, and storage resources for running applications</strong></li>
+            <li class="fragment"><strong>Cartridge – A technology/framework (PHP, Perl, Java/JEE, Ruby, Python, MySQL, etc.) to build applications</strong></li>            
+          </ul>
+        </section>
+        
+        <section>
+          <h2>Server Types</h2>
+          <img src="../shared/img/broker-node.png"/>
+        </section>
+        
+        <section>
+          <h2>The Broker is responsible for state, DNS, and authentication.</h2>
+          <img src="../shared/img/broker-view.png"/>
+        </section>
+        
+        <section>
+          <h2>Now configure an application on a Node</h2>
+          <img src="../shared/img/selinux.png"/>
+        </section>
+        
+        <section>
+          <h2>What is a gear</h2>
+          <img src="../shared/img/containers.png"/>
+        </section>
+        
+        <section>
+          <h2>What is a cartridge</h2>
+          <img src="../shared/img/cartridges.png"/>
+        </section>
+        
+        <section>
+          <h2>Flow of request</h2>
+          <img src="../shared/img/flow.png"/>
+        </section>
+        
+        
+        <section>
+          <h2>Multi-tenant networking</h2>
+          <img src="../shared/img/networking.png"/>
+        </section>
+        
+        <section>
+          <h2>Whole Stack</h2>
+          <img src="../shared/img/whole-stack.png"/>
+        </section>
+        
+        <section>
+          <h3>Easy to install on Fedora 18/19</h3>
+          <li><a href="http://www.krishnaraman.net/installing-openshift-origin-using-vagrant-and-puppet/" class="roll"><span data-title="Using Vagrant and Puppet">Using Vagrant and Puppet</span></a></li>
+          <p>&nbsp;</p>
+          <h3>And instructions for OpenStack and Heat</h3>
+          <li><a href="https://github.com/openstack/heat-templates/openshift-origin" class="roll"><span data-title="Install Instructions">Install Instructions</span></a></li>
+          <p>&nbsp;</p>
+          <h3>And instructions here for CloudStack</h3>
+          <li><a href="http://presentations-techsmacktalk.rhcloud.com/hplandl/img/install-instructions.pdf" class="roll"><span data-title="Install Instructions">Install Instructions</span></a></li>
+        </section>
+        
+        <section>
+          <h2>What does it look like under the hood?</h2>
+          <h3>Back to the VM!!</h3>
+        </section>
+
+
+      <section>
+        <section>
+          <h2>OpenShift Origin is</h2> 
+          <h1 class='fragment roll-in'><span class='fragment grow'>Upstream</span></h1>
+        </section>
+        <section>
+          <h1>Open client interface</h1> 
+          <p><a href='https://github.com/openshift/rhc'>https://github.com/openshift/rhc</a></p>
+        </section>
+        <section>
+          <h1>Open cartridge format</h1> 
+          <img style='width:70%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
+        </section>
+        <section>
+          <h1>OpenShift Origin</h1>
+          <p class='fragment roll-in'><a href="http://openshift.github.io/">http://openshift.github.io</a></p>
+        </section>
+        <section>
+          <h3>Hosting Options</h3> 
+          <h2 class='fragment roll-in'>OpenShift Origin / DIY</h2>
+          <h2 class='fragment roll-in'>OpenShift Enterprise</h2>
+          <h2 class='fragment roll-in'>OpenShift Online</h2>
+        </section>
+        <section>
+<p>Sign up for an OpenShift Online account:</p>
+<p class='fragment roll-in'> <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=MONGOATL13">http://openshift.com</a></p>
+<p><ul>
+<li class='fragment roll-in'>Free-as-in-beer (<span class='fragment highlight-red'>no cost</span>)</li>
+<li class='fragment roll-in'>Free-as-in-freedom (<span class='fragment highlight-red'>open source</span>)</li>
+<li class='fragment roll-in'>512 MB RAM / 1 GB storage per gear (<span class='fragment highlight-red'><i>3 free</i></span>)</li> 
+<li class='fragment roll-in'>Need more resources? (<span class='fragment highlight-red'>just ask!</span>)</li>
+<li class='fragment roll-in'><i>REALLY</i> a Developer Preview (<span class='fragment highlight-red'>GA this summer</span>)</li>
+</ul></p>
+
+<div>
+</div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>The Cloud Landscape</h1> 
+        </section>
+        <section>
+          <h2>OpenShift is...</h2>
+          <div class='fragment roll-in'><img width='80%' src='../shared/img/paas-overview.png'/></div> 
+        </section>
+        <section>
+          <h2>Secure and Efficient</h2>
+          <div class='fragment roll-in'><img src='../shared/img/gear.png'/></div> 
+          <div class='fragment roll-in'><a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div> 
+        </section>
+        <section>
+          <h2>The big picture</h2>
+          <div class='fragment roll-in'><img src='../shared/img/PaaS-landscape.png'/></div> 
+        </section>
+        <section>
+          <h2>OpenStack</h2> 
+          <h1 class='fragment roll-in'>IS OPEN</h1>
+          <div class='fragment roll-in'>and<br/></div>
+          <div class='fragment roll-in'><h1>focused on IaaS</h1></div>
+        </section>
+        <section>
+          <h2>Buzz Words</h2> 
+          <h1 class='fragment roll-in'><span class='fragment roll-in'>Public Cloud</span><span class='fragment roll-in'> + </span><span class='fragment roll-in'>Private Cloud</span><span class='fragment roll-in'> = </span></h1>
+         <h1 class='fragment roll-in'><span class='fragment roll-in'>Hybrid Cloud</span></h1>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Getting Started with OpenShift</h2> 
+          <h4 class='fragment roll-in'>pre-requisites:</h4>
+          <div class='fragment roll-in'>ruby, rubygems</div>
+          <div class='fragment roll-in'>git</div>
+        </section>
+        <section>
+          <h2>Installing the 'rhc' client tool</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>sudo gem install rhc</code></pre></div>
+          <div class='fragment roll-in'>and</div>
+          <div class='fragment roll-in'>make sure that <a href='http://nodejs.org/'>node.js</a> is available in your development environment</div>
+        </section>
+        <section>
+          <h2>Help with client tools</h2> 
+          <ul>
+          <p>RHC client tool installation<br/><a href="https://openshift.redhat.com/community/developers/rhc-client-tools-install">https://openshift.redhat.com/community/developers/rhc-client-tools-install</a></p><br/>
+          <p>Openshift Getting Started guide<br/><a href="https://openshift.redhat.com/community/developers/get-started">https://openshift.redhat.com/community/developers/get-started</a></p>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Configuring your dev environment</h2> 
+          <pre><code contenteditable>rhc setup</code></pre>
+          <div><p>Will automatically:</p><ul><li class='fragment roll-in'>set your openshift email address</li>
+                   <li class='fragment roll-in'>verify your ssh key configuration</li>
+                   <li class='fragment roll-in'>configure your application namespace</li></ul></div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Gearing up a new app on OpenShift</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE APP_CART_2 APP_CART_3</code></pre></div>
+          <div class='fragment roll-in'>or</div>
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create instantappstore nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git</code></pre></div>
+        </section>
+	<section>
+<pre><code>Application Options
+-------------------
+  Namespace:   rjdemo
+  Cartridges:  nodejs-0.6, mongodb-2.2
+  Source Code:
+https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
+  Gear Size:   default
+  Scaling:     no
+
+Creating application 'instantappstore' ... done
+
+Waiting for your DNS name to be available ... done
+
+Downloading the application Git repository ...
+Cloning into 'instantappstore'...
+
+Your application code is now in 'instantappstore'</code></pre>
+        </section>
+	<section>
+<pre><code contenteditable>instantappstore @ http://intstantappstore-rjdemo.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
+-------------------------------------------------------------
+  Created:         1:05 PM
+  Gears:           1 (defaults to small)
+  Git URL:        
+ssh://5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com/~/git/instantappstore.git/
+  Initial Git URL:
+https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
+  SSH:             5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com
+
+  nodejs-0.6 (Node.js 0.6)
+  ------------------------
+    Gears: Located with mongodb-2.2
+
+  mongodb-2.2 (MongoDB NoSQL Database 2.2)
+  ----------------------------------------
+    Gears:          Located with nodejs-0.6
+    Connection URL:
+mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
+    Database Name:  instantappstore
+    Password:       PTk4cCetTj2w
+    Username:       admin
+
+RESULT:
+Application instantappstore was created.</code></pre>
+        </section>
+        <section>
+<h2>Success!</h2> 
+<p>You should now have MongoDB and a basic node.js app running on OpenShift!</p>
+<br/>
+                  <p class='fragment roll-in'>Your gear is now configured with:</p> 
+          <div><ul><li class='fragment roll-in'>it's own git repo</li>
+                   <li class='fragment roll-in'>it's own web server</li>
+                   <li class='fragment roll-in'>ssh access</li>
+                   <li class='fragment roll-in'>logging</li>
+                   <li class='fragment roll-in'>MongoDB</li>
+                   <li class='fragment roll-in'>publicly accessible DNS</li></ul></div>
+        </section>
+        <section>
+          <h2>Add MongoDB to an existing app</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add mongodb-2.2</code></pre></div>
+        </section>
+        <section>
+          <h2>RockMongo on Openshift</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add rockmongo-1.1</code></pre></div>
+          <div class='fragment roll-in'><p><i>(optional)</i></p></div>
+        </section>
+        <section>
+          <h2>Environment Variables</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+  process.env.OPENSHIFT_APP_NAME;
+}else{
+  connection_string = db_name;
+}</code></pre>
+</div>
+        </section>
+      </section>
+        
+        <section>
+          <h3>Let's talk about community</h3>
+          <ul>
+          <li class="fragment">Friday G+ hangouts</li>
+          <li class="fragment">Community Days</li>
+          <li class="fragment">Engineers in the IRC channel</li> 
+          <li class="fragment">Many ways for you to be invloved</li>
+          </ul>
+        </section>
+        
+        <section>
+        <h3>How about our commitment to FOSS</h3>
+        <ul>
+          <li class="fragment">Meritocracy for our pull requests</li>
+          <li class="fragment">Everything from core, quickstarts, and cartridges, to small typo fixes in the command line tools </li>
+          <li class="fragment"><a href="https://trello.com/openshift" class="roll"><span data-title="Public Trello cards">Public Trello cards</span></a></li>
+          <li class="fragment"><a href="https://tcms-openshift.rhcloud.com/plan/2/openshift-origin" class="roll"><span data-title="Public Test plans">Public Test plans</span></a></li>
+          <li class="fragment"><a href="https://www.openshift.com/ideas" class="roll"><span data-title="Voting on Features">Voting on Features</span></a></li>
+          <li class="fragment"><a href="https://bugzilla.redhat.com/" class="roll"><span data-title="Public Bugzilla">Public Bugzilla</span></a></li>
+          <li class="fragment"><a href="http://getupcloud.com" class="roll"><span data-title="getupcloud.com">getupcloud.com</span></a> is using Origin to offer a competitive service in Latin America - they presented at RH Summit </li>
+        </ul>
+        </section>
+        
+      <section>
+        <section>
+            <h2>Let's wrap it up</h2>
+            <ol>
+                 <li class="fragment">Openshift makes life great for you</li>
+                 <li class="fragment">Adds a covering of Awesome Sauce on any servers, cloudy or otherwise</li>
+                 <li class="fragment">Free and in Beer and as in Apache Freedom</li>
+                 <li class="fragment">We LOVE pull requests <a href="http://openshift.github.io" class="roll"><span data-title="http://openshift.github.io">http://openshift.github.io</span></a></li>
+            </ol>
+                   <p class="fragment">Come hang out with us:<br>
+                   #openshift-dev on freenode irc <br>
+                   OR <br>
+                   dev@lists.openshift.redhat.com</p>
+            
+        </section>
+        <section data-state="blackout">
+            <a href='https://www.openshift.com/blogs/cloudy-with-a-chance-of-meteorjs'><img alt='meteor fireballs' src='https://www.openshift.com/sites/default/files/meteorshift_1.png'/></a>
+<br/>
+<p><b><i>Thanks for following along! &nbsp; --ryanj</i></b>
+</p>
+
+        </section>
+      </section>
+
+
+
+			</div>
+      <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
