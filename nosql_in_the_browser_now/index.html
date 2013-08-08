@@ -61,7 +61,6 @@
         <h1>Agenda</h1>
         <ul>
           <li class='fragment roll-in'>Learn some Meteor basics</li>
-          <li class='fragment roll-in'>Learn about Cloud Basics and OpenShift</li>
           <li class='fragment roll-in'>Review Client-Side Security for Meteor</li>
           <li class='fragment roll-in'>Combine, minify, and bundle to deploy anywhere!</li>
         </ul>
@@ -70,7 +69,7 @@
         <h1>Code du jour</h1>
         <p><a href='https://github.com/ryanj/meteor-showcase'>https://github.com/ryanj/meteor-showcase</a></p>
 <br/>
-        <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=MONGOATL13'>Signup with Code - MONGOATL13</a></p>
+        <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=NOSQLNOW13'>Signup with Code - NOSQLNOW13</a></p>
       </section>
     </section>
 
@@ -114,98 +113,6 @@
         <section>
           <h2>OpenShift IS</h2> 
           <h1 class='fragment roll-in'><span class='fragment grow'>OPEN SOURCE</span></h1>
-        </section>
-        <section>
-          <h1>Open client interface</h1> 
-          <p><a href='https://github.com/openshift/rhc'>https://github.com/openshift/rhc</a></p>
-        </section>
-        <section>
-          <h1>Open cartridge format</h1> 
-          <img style='width:70%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
-        </section>
-        <section>
-          <h1>OpenShift Origin</h1>
-          <p class='fragment roll-in'><a href="http://openshift.github.io/">http://openshift.github.io</a></p>
-        </section>
-        <section>
-          <h3>Hosting Options</h3> 
-          <h2 class='fragment roll-in'>OpenShift Origin / DIY</h2>
-          <h2 class='fragment roll-in'>OpenShift Enterprise</h2>
-          <h2 class='fragment roll-in'>OpenShift Online</h2>
-        </section>
-        <section>
-          <h2>Developer Preview</h2> 
-<p>Sign up for an OpenShift Online account:</p>
-<p class='fragment roll-in'> <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=MONGOATL13">http://openshift.com</a></p>
-<p><ul>
-<li class='fragment roll-in'>Free-as-in-beer (<span class='fragment highlight-red'>no cost</span>)</li>
-<li class='fragment roll-in'>Free-as-in-freedom (<span class='fragment highlight-red'>open source</span>)</li>
-<li class='fragment roll-in'>512 MB RAM / 1 GB storage per gear (<span class='fragment highlight-red'><i>3 free</i></span>)</li> 
-<li class='fragment roll-in'>Need more resources? (<span class='fragment highlight-red'>just ask!</span>)</li>
-<li class='fragment roll-in'><i>REALLY</i> a Developer Preview (<span class='fragment highlight-red'>GA this summer</span>)</li>
-</ul></p>
-
-<div>
-</div>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h1>The Cloud Landscape</h1> 
-        </section>
-        <section>
-          <h2>OpenShift is...</h2>
-          <div class='fragment roll-in'><img width='80%' src='../shared/img/paas-overview.png'/></div> 
-        </section>
-        <section>
-          <h2>Secure and Efficient</h2>
-          <div class='fragment roll-in'><img src='../shared/img/gear.png'/></div> 
-          <div class='fragment roll-in'><a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div> 
-        </section>
-        <section>
-          <h2>The big picture</h2>
-          <div class='fragment roll-in'><img src='../shared/img/PaaS-landscape.png'/></div> 
-        </section>
-        <section>
-          <h2>OpenStack</h2> 
-          <h1 class='fragment roll-in'>IS OPEN</h1>
-          <div class='fragment roll-in'>and<br/></div>
-          <div class='fragment roll-in'><h1>focused on IaaS</h1></div>
-        </section>
-        <section>
-          <h2>Buzz Words</h2> 
-          <h1 class='fragment roll-in'><span class='fragment roll-in'>Public Cloud</span><span class='fragment roll-in'> + </span><span class='fragment roll-in'>Private Cloud</span><span class='fragment roll-in'> = </span></h1>
-         <h1 class='fragment roll-in'><span class='fragment roll-in'>Hybrid Cloud</span></h1>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h2>Getting Started with OpenShift</h2> 
-          <h4 class='fragment roll-in'>pre-requisites:</h4>
-          <div class='fragment roll-in'>ruby, rubygems</div>
-          <div class='fragment roll-in'>git</div>
-        </section>
-        <section>
-          <h2>Installing the 'rhc' client tool</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>sudo gem install rhc</code></pre></div>
-          <div class='fragment roll-in'>and</div>
-          <div class='fragment roll-in'>make sure that <a href='http://nodejs.org/'>node.js</a> is available in your development environment</div>
-        </section>
-        <section>
-          <h2>Help with client tools</h2> 
-          <ul>
-          <p>RHC client tool installation<br/><a href="https://openshift.redhat.com/community/developers/rhc-client-tools-install">https://openshift.redhat.com/community/developers/rhc-client-tools-install</a></p><br/>
-          <p>Openshift Getting Started guide<br/><a href="https://openshift.redhat.com/community/developers/get-started">https://openshift.redhat.com/community/developers/get-started</a></p>
-          </ul>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h2>Configuring your dev environment</h2> 
-          <pre><code contenteditable>rhc setup</code></pre>
-          <div><p>Will automatically:</p><ul><li class='fragment roll-in'>set your openshift email address</li>
-                   <li class='fragment roll-in'>verify your ssh key configuration</li>
-                   <li class='fragment roll-in'>configure your application namespace</li></ul></div>
         </section>
       </section>
       <section>
