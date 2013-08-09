@@ -338,7 +338,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
         
         <section>
           <h2>What is a cartridge</h2>
-          <img src="../shared/img/cartridges.png"/>
+          <a href='http://openshift.github.io/documentation/oo_cartridge_developers_guide.html'><img src="../shared/img/cartridges.png"/></a>
         </section>
         
         <section>
@@ -376,12 +376,13 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
           <h1 class='fragment roll-in'><span class='fragment grow'>Upstream</span></h1>
         </section>
         <section>
-          <h1>Open client interface</h1> 
+          <h2>Open client interface</h2> 
           <p><a href='https://github.com/openshift/rhc'>https://github.com/openshift/rhc</a></p>
         </section>
         <section>
-          <h1>Open cartridge format</h1> 
-          <img style='width:70%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
+          <h3>Open cartridge format</h3> 
+          <a href='http://openshift.github.io/documentation/oo_cartridge_developers_guide.html'><img style='width:50%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/></a>
+          <p><a href='http://openshift.github.io/documentation/oo_cartridge_developers_guide.html'>cart developer's guide</a></p>
         </section>
         <section>
           <h1>OpenShift Origin</h1>
@@ -397,14 +398,24 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
         </section>
         
         <section>
-          <h3>Easy to install on Fedora 18/19</h3>
-          <li><a href="http://www.krishnaraman.net/installing-openshift-origin-using-vagrant-and-puppet/" class="roll"><span data-title="Using Vagrant and Puppet">Using Vagrant and Puppet</span></a></li>
-          <p>&nbsp;</p>
-          <h3>And instructions for OpenStack and Heat</h3>
-          <li><a href="https://github.com/openstack/heat-templates/openshift-origin" class="roll"><span data-title="Install Instructions">Install Instructions</span></a></li>
-          <p>&nbsp;</p>
-          <h3>And instructions here for CloudStack</h3>
-          <li><a href="http://presentations-techsmacktalk.rhcloud.com/hplandl/img/install-instructions.pdf" class="roll"><span data-title="Install Instructions">Install Instructions</span></a></li>
+          <h3>Installation on Fedora</h3>
+          <ul>
+            <li><a href="http://www.krishnaraman.net/installing-openshift-origin-using-vagrant-and-puppet/" class="roll"><span data-title="Using Vagrant and Puppet">Using Vagrant for dev sandboxes</span></a></li>
+            <li><a href='http://openshift.github.io/documentation/oo_deployment_guide_puppet.html'>Installing via puppet</a></li>
+            <li><a href='http://openshift.github.io/documentation/oo_deployment_guide_comprehensive.html'>Advanced installation Notes</a></li>
+            <li><a href='https://mirror.openshift.com/pub/origin-server/nightly/fedora-19/latest/x86_64/'>Nightly RPMs</a></li>
+          </ul>
+          <p>VMs available</p>
+        </section>
+        
+        <section>
+          <h3>Installing in "the cloud"</h3>
+          <ul>
+            <li><a href="https://github.com/openstack/heat-templates/openshift-origin" class="roll"><span data-title="Install Instructions">via OpenStack+Heat</span></a></li>
+            <li><a href="http://presentations-techsmacktalk.rhcloud.com/hplandl/img/install-instructions.pdf" class="roll"><span data-title="Install Instructions">Origin on Cloudstack</span></a></li>
+          </ul>
+          <p>Would love to see us on the fedora cloud images page eventually</p>
+          <p>Soon: look for OpenShift images via RDO / OpenStack management tools</p>
         </section>
 
       </section>
@@ -450,6 +461,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
             
         </section>
         <section data-state="blackout">
+            <h2>See you on the upstream side of the Cloud</h2>
             <a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=FLOCK13'><img style='width:35%;' alt='meteor fireballs' src='../shared/img/Openshift-Cartridge.png'/></a>
 <br/>
 <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b>
