@@ -31,7 +31,7 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-    <section>
+      <section>
         <section>
             <h1>OpenShift Origin </h1>
             <p>on</p>
@@ -55,38 +55,67 @@
               <div>ryanj@redhat.com</div>
             </div>
         </section>
-    </section>
+      </section>
 
+      <section>
         <section>
           <h2>Agenda</h2>
           <ol>
-                        <li class='fragment roll-in'>Learn about Cloud Basics and OpenShift</li>
-                        <li class="fragment"><strong>Understand OpenShift Architecture</strong></li>
-                        <li class="fragment"><strong>Learn how to install OpenShift Origin on Fedora</strong></li>
-                    </ol>
+            <li class='fragment roll-in'>Cloud Overview</li>
+            <li class='fragment roll-in'>OpenShift Demo</li>
+            <li class="fragment roll-in">OpenShift Internals</li>
+            <li class="fragment roll-in">Origin on Fedora</li>
+          </ol>
         </section>
         
         <section>
-            <h2>Assumptions</h2>
+          <h2>Assumptions</h2>
+          <ol>
+            <li class="fragment"><strong>You are a hard-code systems geek</strong></li>
+            <li class="fragment"><strong>You use the command line, git, and ssh</strong></li>
+            <li class="fragment"><strong>Manually managing large clusters is a pain</strong></li>
+            <li class="fragment"><strong>Allowing developers to self-provision instances makes things easier for everyone</strong></li>
+            <li class="fragment"><strong>You will ask questions</strong></li>
+          </ol>
+        </section>
+      </section>
+        
+      <section>
+        <section>
+            <h1>Living upstream from the cloud</h2>
+        </section>
+        <section>
+            <h3>making your way upstream</h3>
             <ol>
-                        <li class="fragment"><strong>You write web code or are a devops person</strong></li>
-                        <li class="fragment"><strong>You can use command line, git, and ssh</strong></li>
-                        <li class="fragment"><strong>You want to see what is involved in running a PaaS</strong></li>
-                        <li class="fragment"><strong>You will ask questions</strong></li>
-                    </ol>
+              <li class="fragment"><strong>Run on an upsteam OS distro (easy)</strong></li>
+              <li class="fragment"><strong>RDO provides upstream OpenStack (IaaS)</strong></li>
+              <li class="fragment"><strong>The next layer: OpenShift</strong></li>
+            </ol>
         </section>
-        
         <section>
-            <h2>But I know OpenStack...</h2>
+            <h3>cloud autopsy</h3>
             <img width="700" height="550" src="../shared/img/paas-overview.png">
         </section>
-        
         <section>
-          <h2>What problems does it solve</h2>
-          <p>Let's see from a developer AND sysadmin perspective</p>
+          <h2>OpenStack</h2>
+          <ul>
+            <li class="fragment"><strong>is OpenStack what developers need from a cloud product?</strong></li>
+            <li class="fragment"><strong>What about end-users?</strong></li>
+          </ul>
+          <br/>
+          <br/>
+          <p class='fragment roll-in'>Upstream available via RDO</p>
         </section>
-        
-        
+      </section>
+
+      <section>
+        <section>
+          <h2>introducting OpenShift</h2>
+        </section>
+        <section>
+          <h2>What problems does it solve?</h2>
+          <p>Let's see from a developer AND sysadmin perspective&hellip;</p>
+        </section>
         
         <section>
         <p> Assume on linux
@@ -115,9 +144,6 @@
             <li class="fragment">Repeat same information, and wait</li>
             <li class="fragment">Your ops person moves to a different group, GOTO Line 1....</li>
           </ul>
-      
-          <h2 class="fragment">DEMO</h2>
-
         </section>
             
         <section>
@@ -131,7 +157,6 @@
           <li class="fragment">If there is a security fix I need to go into each VM and update it</li>
           <li class="fragment">I don't want to spend my time updating DNS tables</li>
         </ol>
-        <h2 class="fragment">DEMO some more</h2>
         </section>
         
         <section>
@@ -143,167 +168,8 @@
             <li class="fragment"><strong>And neither wants to talk to each other</strong></li>
           </ul>         
         </section>
-        
-        <section>
-            <h2>One Source to Bind Them All</h2>
-            <img src="../shared/img/Three_products.png">
-            <br>&nbsp;
-        </section>
-        
-        <section>           
-            <img width="1052" height="664" src="../shared/img/PaaS-landscape.png">
-            <p>&nbsp;</p>
-        </section>
-          
-        <section>
-          <h2>On to Construction</h2>
-          <img src="../shared/img/ironman_2_blueprints.jpg"/>
-        </section>
-        
-        <section>
-          <h2>Where to get the code++</h2>
-          <ol>
-            <li>Code is available at <a href="http://openshift.github.io" class="roll"><span data-title="http://openshift.github.io">http://openshift.github.io</span></a></li>
-            <li>Current work and roadmap is on Trello <a href="https://trello.com/openshift" class="roll"><span data-title="https://trello.com/openshift">https://trello.com/openshift</span></a></li>
-            <li>A whole bunch of slide decks <a href="http://www.slideshare.net/search/slideshow?searchfrom=header&amp;q=OpenShift+Origin" class="roll"><span data-title="are up on slideshare">are up on slideshare</span></a></li>
-          </ol>
-        </section>
-        
-        <section>
-          <h2>Terminology</h2>
-          <ul>
-            <li class="fragment"><strong>Broker – Management host, orchestration of Nodes</strong></li>
-            <li class="fragment"><strong>Node – Compute host containing Gears</strong></li>
-            <li class="fragment"><strong>Gear – Allocation of fixed memory, compute, and storage resources for running applications</strong></li>
-            <li class="fragment"><strong>Cartridge – A technology/framework (PHP, Perl, Java/JEE, Ruby, Python, MySQL, etc.) to build applications</strong></li>            
-          </ul>
-        </section>
-        
-        <section>
-          <h2>Server Types</h2>
-          <img src="../shared/img/broker-node.png"/>
-        </section>
-        
-        <section>
-          <h2>The Broker is responsible for state, DNS, and authentication.</h2>
-          <img src="../shared/img/broker-view.png"/>
-        </section>
-        
-        <section>
-          <h2>Now configure an application on a Node</h2>
-          <img src="../shared/img/selinux.png"/>
-        </section>
-        
-        <section>
-          <h2>What is a gear</h2>
-          <img src="../shared/img/containers.png"/>
-        </section>
-        
-        <section>
-          <h2>What is a cartridge</h2>
-          <img src="../shared/img/cartridges.png"/>
-        </section>
-        
-        <section>
-          <h2>Flow of request</h2>
-          <img src="../shared/img/flow.png"/>
-        </section>
-        
-        
-        <section>
-          <h2>Multi-tenant networking</h2>
-          <img src="../shared/img/networking.png"/>
-        </section>
-        
-        <section>
-          <h2>Whole Stack</h2>
-          <img src="../shared/img/whole-stack.png"/>
-        </section>
-        
-        <section>
-          <h3>Easy to install on Fedora 18/19</h3>
-          <li><a href="http://www.krishnaraman.net/installing-openshift-origin-using-vagrant-and-puppet/" class="roll"><span data-title="Using Vagrant and Puppet">Using Vagrant and Puppet</span></a></li>
-          <p>&nbsp;</p>
-          <h3>And instructions for OpenStack and Heat</h3>
-          <li><a href="https://github.com/openstack/heat-templates/openshift-origin" class="roll"><span data-title="Install Instructions">Install Instructions</span></a></li>
-          <p>&nbsp;</p>
-          <h3>And instructions here for CloudStack</h3>
-          <li><a href="http://presentations-techsmacktalk.rhcloud.com/hplandl/img/install-instructions.pdf" class="roll"><span data-title="Install Instructions">Install Instructions</span></a></li>
-        </section>
-        
-        <section>
-          <h2>What does it look like under the hood?</h2>
-          <h3>Back to the VM!!</h3>
-        </section>
-
-
-      <section>
-        <section>
-          <h2>OpenShift Origin is</h2> 
-          <h1 class='fragment roll-in'><span class='fragment grow'>Upstream</span></h1>
-        </section>
-        <section>
-          <h1>Open client interface</h1> 
-          <p><a href='https://github.com/openshift/rhc'>https://github.com/openshift/rhc</a></p>
-        </section>
-        <section>
-          <h1>Open cartridge format</h1> 
-          <img style='width:70%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
-        </section>
-        <section>
-          <h1>OpenShift Origin</h1>
-          <p class='fragment roll-in'><a href="http://openshift.github.io/">http://openshift.github.io</a></p>
-        </section>
-        <section>
-          <h3>Hosting Options</h3> 
-          <h2 class='fragment roll-in'>OpenShift Origin / DIY</h2>
-          <h2 class='fragment roll-in'>OpenShift Enterprise</h2>
-          <h2 class='fragment roll-in'>OpenShift Online</h2>
-        </section>
-        <section>
-<p>Sign up for an OpenShift Online account:</p>
-<p class='fragment roll-in'> <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=MONGOATL13">http://openshift.com</a></p>
-<p><ul>
-<li class='fragment roll-in'>Free-as-in-beer (<span class='fragment highlight-red'>no cost</span>)</li>
-<li class='fragment roll-in'>Free-as-in-freedom (<span class='fragment highlight-red'>open source</span>)</li>
-<li class='fragment roll-in'>512 MB RAM / 1 GB storage per gear (<span class='fragment highlight-red'><i>3 free</i></span>)</li> 
-<li class='fragment roll-in'>Need more resources? (<span class='fragment highlight-red'>just ask!</span>)</li>
-<li class='fragment roll-in'><i>REALLY</i> a Developer Preview (<span class='fragment highlight-red'>GA this summer</span>)</li>
-</ul></p>
-
-<div>
-</div>
-        </section>
       </section>
-      <section>
-        <section>
-          <h1>The Cloud Landscape</h1> 
-        </section>
-        <section>
-          <h2>OpenShift is...</h2>
-          <div class='fragment roll-in'><img width='80%' src='../shared/img/paas-overview.png'/></div> 
-        </section>
-        <section>
-          <h2>Secure and Efficient</h2>
-          <div class='fragment roll-in'><img src='../shared/img/gear.png'/></div> 
-          <div class='fragment roll-in'><a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div> 
-        </section>
-        <section>
-          <h2>The big picture</h2>
-          <div class='fragment roll-in'><img src='../shared/img/PaaS-landscape.png'/></div> 
-        </section>
-        <section>
-          <h2>OpenStack</h2> 
-          <h1 class='fragment roll-in'>IS OPEN</h1>
-          <div class='fragment roll-in'>and<br/></div>
-          <div class='fragment roll-in'><h1>focused on IaaS</h1></div>
-        </section>
-        <section>
-          <h2>Buzz Words</h2> 
-          <h1 class='fragment roll-in'><span class='fragment roll-in'>Public Cloud</span><span class='fragment roll-in'> + </span><span class='fragment roll-in'>Private Cloud</span><span class='fragment roll-in'> = </span></h1>
-         <h1 class='fragment roll-in'><span class='fragment roll-in'>Hybrid Cloud</span></h1>
-        </section>
-      </section>
+
       <section>
         <section>
           <h2>Getting Started with OpenShift</h2> 
@@ -312,29 +178,31 @@
           <div class='fragment roll-in'>git</div>
         </section>
         <section>
+<p>Sign up for OpenShift Online:</p>
+<p class='fragment roll-in'> <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=FLOCK13">http://openshift.com</a></p>
+<p><ul>
+<li class='fragment roll-in'>Free-as-in-beer (<span class='fragment highlight-red'>no cost</span>)</li>
+<li class='fragment roll-in'>Free-as-in-freedom (<span class='fragment highlight-red'>open source</span>)</li>
+<li class='fragment roll-in'>512 MB RAM / 1 GB storage per gear (<span class='fragment highlight-red'><i>3 free</i></span>)</li> 
+<li class='fragment roll-in'>Pay for more resources as you scale up</li>
+</ul></p>
+        </section>
+        <section>
           <h2>Installing the 'rhc' client tool</h2> 
           <div class='fragment roll-in'><pre><code contenteditable>sudo gem install rhc</code></pre></div>
-          <div class='fragment roll-in'>and</div>
-          <div class='fragment roll-in'>make sure that <a href='http://nodejs.org/'>node.js</a> is available in your development environment</div>
         </section>
         <section>
-          <h2>Help with client tools</h2> 
-          <ul>
-          <p>RHC client tool installation<br/><a href="https://openshift.redhat.com/community/developers/rhc-client-tools-install">https://openshift.redhat.com/community/developers/rhc-client-tools-install</a></p><br/>
-          <p>Openshift Getting Started guide<br/><a href="https://openshift.redhat.com/community/developers/get-started">https://openshift.redhat.com/community/developers/get-started</a></p>
-          </ul>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h2>Configuring your dev environment</h2> 
+          <h2>Configure your dev environment</h2> 
           <pre><code contenteditable>rhc setup</code></pre>
           <div><p>Will automatically:</p><ul><li class='fragment roll-in'>set your openshift email address</li>
-                   <li class='fragment roll-in'>verify your ssh key configuration</li>
-                   <li class='fragment roll-in'>configure your application namespace</li></ul></div>
+            <li class='fragment roll-in'>verify your ssh key configuration</li>
+            <li class='fragment roll-in'>configure your application namespace</li></ul></div>
         </section>
       </section>
       <section>
+        <section>
+          <h2>Demo time</h2>
+        </section>
         <section>
           <h2>Gearing up a new app on OpenShift</h2> 
           <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE APP_CART_2 APP_CART_3</code></pre></div>
@@ -423,7 +291,124 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 </div>
         </section>
       </section>
+          
+      <section>
+        <section>
+          <h2>But how does it work?</h2>
+        </section>
+        <section>
+          <h2>On to Construction</h2>
+          <img src="../shared/img/ironman_2_blueprints.jpg"/>
+        </section>
         
+        <section>
+          <h2>Terminology</h2>
+          <ul>
+            <li class="fragment"><strong>Broker – Management host, orchestration of Nodes</strong></li>
+            <li class="fragment"><strong>Node – Compute host containing Gears</strong></li>
+            <li class="fragment"><strong>Gear – Allocation of fixed memory, compute, and storage resources for running applications</strong></li>
+            <li class="fragment"><strong>Cartridge – A technology/framework (PHP, Perl, Java/JEE, Ruby, Python, MySQL, etc.) to build applications</strong></li>            
+          </ul>
+        </section>
+        
+        <section>
+          <h2>Server Types</h2>
+          <img src="../shared/img/broker-node.png"/>
+        </section>
+        
+        <section>
+          <h2>The Broker is responsible for state, DNS, and authentication.</h2>
+          <img src="../shared/img/broker-view.png"/>
+        </section>
+        
+        <section>
+          <h2>Now configure an application on a Node</h2>
+          <img src="../shared/img/selinux.png"/>
+        </section>
+        
+        <section>
+          <h2>What is a gear</h2>
+          <img src="../shared/img/containers.png"/>
+        </section>
+        <section>
+          <h2>Secure and Efficient</h2>
+          <div class='fragment roll-in'><img src='../shared/img/gear.png'/></div> 
+          <div class='fragment roll-in'><a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div> 
+        </section>
+        
+        <section>
+          <h2>What is a cartridge</h2>
+          <img src="../shared/img/cartridges.png"/>
+        </section>
+        
+        <section>
+          <h2>Flow of request</h2>
+          <img src="../shared/img/flow.png"/>
+        </section>
+        
+        <section>
+          <h2>Multi-tenant networking</h2>
+          <img src="../shared/img/networking.png"/>
+        </section>
+        
+        <section>
+          <h2>Whole Stack</h2>
+          <img src="../shared/img/whole-stack.png"/>
+        </section>
+        
+        <section>           
+          <img width="1052" height="664" src="../shared/img/PaaS-landscape.png">
+        </section>
+        <section>
+          <h2>Buzz Words</h2> 
+          <h1 class='fragment roll-in'><span class='fragment roll-in'>Public Cloud</span><span class='fragment roll-in'> + </span><span class='fragment roll-in'>Private Cloud</span><span class='fragment roll-in'> = </span></h1>
+         <h1 class='fragment roll-in'><span class='fragment roll-in'>Hybrid Cloud</span></h1>
+        </section>
+        <section>
+            <h2>One Source to Bind Them All</h2>
+            <img src="../shared/img/Three_products.png">
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h2>Livin' on the Edge</h2> 
+          <h1 class='fragment roll-in'><span class='fragment grow'>Upstream</span></h1>
+        </section>
+        <section>
+          <h1>Open client interface</h1> 
+          <p><a href='https://github.com/openshift/rhc'>https://github.com/openshift/rhc</a></p>
+        </section>
+        <section>
+          <h1>Open cartridge format</h1> 
+          <img style='width:70%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
+        </section>
+        <section>
+          <h1>OpenShift Origin</h1>
+          <p class='fragment roll-in'><a href="http://openshift.github.io/">http://openshift.github.io</a></p>
+        </section>
+        <section>
+          <h2>Where to get the code++</h2>
+          <ol>
+            <li>Code is available at <a href="http://openshift.github.io" class="roll"><span data-title="http://openshift.github.io">http://openshift.github.io</span></a></li>
+            <li>Current work and roadmap is on Trello <a href="https://trello.com/openshift" class="roll"><span data-title="https://trello.com/openshift">https://trello.com/openshift</span></a></li>
+            <li>A whole bunch of slide decks <a href="http://www.slideshare.net/search/slideshow?searchfrom=header&amp;q=OpenShift+Origin" class="roll"><span data-title="are up on slideshare">are up on slideshare</span></a></li>
+          </ol>
+        </section>
+        
+        <section>
+          <h3>Easy to install on Fedora 18/19</h3>
+          <li><a href="http://www.krishnaraman.net/installing-openshift-origin-using-vagrant-and-puppet/" class="roll"><span data-title="Using Vagrant and Puppet">Using Vagrant and Puppet</span></a></li>
+          <p>&nbsp;</p>
+          <h3>And instructions for OpenStack and Heat</h3>
+          <li><a href="https://github.com/openstack/heat-templates/openshift-origin" class="roll"><span data-title="Install Instructions">Install Instructions</span></a></li>
+          <p>&nbsp;</p>
+          <h3>And instructions here for CloudStack</h3>
+          <li><a href="http://presentations-techsmacktalk.rhcloud.com/hplandl/img/install-instructions.pdf" class="roll"><span data-title="Install Instructions">Install Instructions</span></a></li>
+        </section>
+
+      </section>
+      <section>
         <section>
           <h3>Let's talk about community</h3>
           <ul>
@@ -446,16 +431,18 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
           <li class="fragment"><a href="http://getupcloud.com" class="roll"><span data-title="getupcloud.com">getupcloud.com</span></a> is using Origin to offer a competitive service in Latin America - they presented at RH Summit </li>
         </ul>
         </section>
+      </section>
         
       <section>
-        <section>
+        <section data-state="blackout">
             <h2>Let's wrap it up</h2>
             <ol>
-                 <li class="fragment">Openshift makes life great for you</li>
-                 <li class="fragment">Adds a covering of Awesome Sauce on any servers, cloudy or otherwise</li>
+                 <li class="fragment">Openshift makes work fun</li>
                  <li class="fragment">Free and in Beer and as in Apache Freedom</li>
                  <li class="fragment">We LOVE pull requests <a href="http://openshift.github.io" class="roll"><span data-title="http://openshift.github.io">http://openshift.github.io</span></a></li>
             </ol>
+        </section>
+        <section data-state="blackout">
                    <p class="fragment">Come hang out with us:<br>
                    #openshift-dev on freenode irc <br>
                    OR <br>
@@ -463,15 +450,13 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
             
         </section>
         <section data-state="blackout">
-            <a href='https://www.openshift.com/blogs/cloudy-with-a-chance-of-meteorjs'><img alt='meteor fireballs' src='https://www.openshift.com/sites/default/files/meteorshift_1.png'/></a>
+            <a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=FLOCK13'><img style='width:35%;' alt='meteor fireballs' src='../shared/img/Openshift-Cartridge.png'/></a>
 <br/>
 <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b>
 </p>
 
         </section>
       </section>
-
-
 
 			</div>
       <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
