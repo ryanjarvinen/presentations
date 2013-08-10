@@ -4,8 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Federated and Free | Distributed and Decentralized
-Applications on OpenShift</title>
+		<title>Federated and Free | Distributed and Decentralized Applications on OpenShift</title>
 
 		<meta name="description" content="Centralized social networks (FB, Google+, and twitter) provide a common location for folks to flock to, helping you to make connections and to share valuable experiences while online. But, who can you trust to store your data securely? Catch a glimpse of what future social networks may look like, as we explore the underlying architecture of federated network applications. By the end of this talk, you'll have everything you need in order to launch your own federated social network hub on OpenShift.">
 		<meta name="author" content="Ryan Jarvinen">
@@ -55,275 +54,300 @@ Applications on OpenShift</title>
         </div>
       </section>
     </section>
-<!--    <section>-->
-<!--      <section>-->
-<!--        <h1>Agenda</h1>-->
-<!--        <ol>-->
-<!--          <li class="fragment"><strong>Cloud Basics and OpenShift</strong></li>-->
-<!--          <li class="fragment"><strong>Portable Drupal applications</strong></li>-->
-<!--          <li class="fragment"><strong>Shifting exsting Drupal sites to run in the Open Cloud</strong></li>-->
-<!--          <li class="fragment"><strong>Release Management with Git</strong></li>-->
-<!--          <li class="fragment"><strong>Advanced Monitoring and Scaling</strong></li>-->
-<!--        </ol>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h1>Code du jour</h1>-->
-<!--        <p><a href='https://github.com/smerrill/drupal-quickstart'>https://github.com/smerrill/drupal-quickstart</a></p>-->
-<!--<br/>-->
-<!--        <p><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=drupalcampLA13'>Signup with Code - drupalcampLA13</a></p>-->
-<!--      </section>-->
-<!--    </section>-->
-<!--    <section>-->
-<!--      <section>-->
-<!--        <h1>The Cloud</h1>-->
-<!--        <h2 class='fragment roll-in'><span class='fragment grow'>IS</span></h2>-->
-<!--        <h1 class='fragment roll-in'><span class='fragment grow'>being liberated</span></h1>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h1>The Cloud Landscape</h1>-->
-<!--        <div class='fragment roll-in'><img width='80%' src='../shared/img/paas-overview.png'/></div>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>OpenStack is</h2>-->
-<!--        <h1 class='fragment roll-in'>OPEN</h1>-->
-<!--        <div class='fragment roll-in'>and</div>-->
-<!--        <div class='fragment roll-in'><h1>focused on Infrastucture</h1></div>-->
-<!--        <div class='fragment roll-in'>(IaaS)</div>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>What does OpenShift do?</h2>-->
-<!--        <div class='fragment roll-in'><img src='../shared/img/PaaS-landscape.png'/></div>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>Secure and Efficient</h2>-->
-<!--        <div class='fragment roll-in'><img style='width:50%' src='../shared/img/gear.png'/></div>-->
-<!--        <div class='fragment roll-in'><a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>One Source to Bind Them All</h2>-->
-<!--        <img style='width:60%' src="../shared/img/Three_products.png">-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>OpenShift Online</h2>-->
-<!--        <p>free OpenShift Online accounts:</p>-->
-<!--        <p class='fragment roll-in'> <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=NodePDX">http://openshift.com</a></p>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h1>OpenShift Origin</h1>-->
-<!--        <p class='fragment roll-in'><a href="http://openshift.github.io/">http://openshift.github.io</a></p>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>Open cartridge format</h2>-->
-<!--        <img style='width:65%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2 class='fragment roll-in'><span class='fragment roll-in'>Public Cloud</span><span class='fragment roll-in'> + </span><span class='fragment roll-in'>Private Cloud</span><span class='fragment roll-in'> = </span></h2>-->
-<!--        <h2 class='fragment roll-in'><span class='fragment roll-in'>Hybrid Cloud</span></h2>-->
-<!--      </section>-->
-<!--    </section>-->
-<!--    <section>-->
-<!--      <section>-->
-<!--        <h1>Portable Drupal?</h1>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>Gearing up a new app on OpenShift</h2> -->
-<!--        <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE CART_2 CART_3</code></pre></div>-->
-<!--        <div class='fragment roll-in'>or</div>-->
-<!--        <div class='fragment roll-in'><pre><code contenteditable>rhc app create dcla php-5.3 mysql-5.1 --from-code=https://github.com/smerrill/drupal-quickstart</code></pre></div>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--<pre><code>Application Options-->
-<!----------------------->
-<!--  Namespace:   rjdemo-->
-<!--  Cartridges:  php-5.3, mysql-5.1-->
-<!--  Source Code: https://github.com/smerrill/drupal-quickstart-->
-<!--  Gear Size:   default-->
-<!--  Scaling:     no-->
-<!---->
-<!--Creating application 'dcla' ... -->
-<!---->
-<!--done-->
-<!---->
-<!--  Application dcla was created.-->
-<!--  The cartridge php deployed a template application-->
-<!---->
-<!--mysql-5.1: Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT-->
-<!--  Starting Apache+mod_php HTTPD server-->
-<!--  MySQL 5.1 database added.  Please make note of these credentials:-->
-<!--       Root User: adminz3kcLEm-->
-<!--   Root Password: 61ajycfyT5uu-->
-<!--   Database Name: dcla-->
-<!--Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/-->
-<!--You can manage your new MySQL database by also embedding phpmyadmin-3.4.-->
-<!--The phpmyadmin username and password will be the same as the MySQL credentials above.-->
-<!---->
-<!--Waiting for your DNS name to be available ... done</code></pre>-->
-<!--      </section>-->
-<!--	    <section>-->
-<!--<pre><code contenteditable>Cloning into 'dcla'...-->
-<!--The authenticity of host 'dcla-rjdemo.rhcloud.com (54.234.77.138)' can't be established.-->
-<!--RSA key fingerprint is cf:ee:77:cb:0e:fc:02:d7:72:7e:ae:80:c0:90:88:a7.-->
-<!--Are you sure you want to continue connecting (yes/no)? yes-->
-<!--Warning: Permanently added 'dcla-rjdemo.rhcloud.com' (RSA) to the list of known hosts.-->
-<!---->
-<!--Your application 'dcla' is now available.-->
-<!---->
-<!--  URL:        http://dcla-rjdemo.rhcloud.com/-->
-<!--  SSH to:     51e2dc0f4382eccaae0000e5@dcla-rjdemo.rhcloud.com-->
-<!--  Git remote: ssh://51e2dc0f4382eccaae0000e5@dcla-rjdemo.rhcloud.com/~/git/dcla.git/-->
-<!--  Cloned to:  /home/ryan/src/dcla-->
-<!---->
-<!--Run 'rhc show-app dcla' for more details about your app.</code></pre>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>Success!</h2> -->
-<!--        <p>You should now have a basic Drupal app running on OpenShift!</p>-->
-<!--        <br/>-->
-<!--        <p class='fragment roll-in'>Your gear is now configured with:</p> -->
-<!--        <div><ul><li class='fragment roll-in'>it's own git repo</li>-->
-<!--                 <li class='fragment roll-in'>it's own Apache webserver</li>-->
-<!--                 <li class='fragment roll-in'>ssh access</li>-->
-<!--                 <li class='fragment roll-in'>logging</li>-->
-<!--                 <li class='fragment roll-in'>MySQL</li>-->
-<!--                 <li class='fragment roll-in'>publicly accessible DNS</li>-->
-<!--        </ul></div>-->
-<!--      </section>-->
-<!--    </section>-->
-<!-- -->
-<!--    <section>-->
-<!--      <section>-->
-<!--        <h2>Shifting exsting Drupal sites to run in the Open Cloud</h2>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <div>How to port your existing Drupal applications to OpenShift:</div>-->
-<!--        <div><a href='https://www.openshift.com/blogs/how-to-migrate-drupal-to-openshift'>https://www.openshift.com/blogs/how-to-migrate-drupal-to-openshift</a></div>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>Which parts are OpenShift-specific?</h2>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>Environment Variables</h2> -->
-<!--        <div class='fragment roll-in'>-->
-<!--<pre><code contenteditable>$ip_addr = getenv('OPENSHIFT_PHP_IP') || '127.0.0.1';-->
-<!--$port     = getenv("OPENSHIFT_PHP_PORT") || 8000;-->
-<!--$hostname = getenv('OPENSHIFT_APP_DNS')  || 'localhost';-->
-<!--</code></pre>-->
-<!--        </div>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>OpenShift action-hooks</h2>-->
-<!--        <a href='https://www.openshift.com/developers/deploying-and-building-applications'>https://www.openshift.com/developers/deploying-and-building-applications</a>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--       <h1>secret-free source</h1>-->
-<!--       <p><a href='https://www.openshift.com/blogs/secret-free-source-on-paas'>https://www.openshift.com/blogs/secret-free-source-on-paas</a></p>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>Adding cartridges to existing applications</h2> -->
-<!--        <div class='fragment roll-in'>-->
-<!--          <p>This command should make mysql services avilable to your application if run from within your local application source folder</p>-->
-<!--          <pre><code contenteditable>rhc cartridge add mysql</code></pre>-->
-<!--        </div>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>Backups, snapshots, and DB bootstrapping</h2>-->
-<!--      </section>-->
-<!--    </section>-->
-<!---->
-<!---->
-<!--    <section>-->
-<!--      <section>-->
-<!--        <h1>Release Management with OpenShift</h1>-->
-<!--        <div class='fragment roll-in'><a href='https://www.openshift.com/blogs/release-management-in-the-cloud'>https://www.openshift.com/blogs/release-management-in-the-cloud</a></div>-->
-<!--      </section>-->
-<!--    </section>-->
-<!---->
-<!---->
-<!--    <section>-->
-<!--      <section>-->
-<!--         <h1>Scaling</h1>-->
-<!--         <div class='fragment roll-in'>In order to scale Drupal on OpenShift, you must configure Drupal to upload static assets (images, and other user-contributed files) to a CDN.</div>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--         <h2>Scaling - Two ways</h2>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>Vertical - bigger, taller, more expensive</h2>-->
-<!--        <p><img style='width:40%' src="../shared/img/sumo.jpg"></p>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>Horizontal - distributed, cheap, linear</h2>-->
-<!--        <p><img style="width:60%" src="../shared/img/ants.jpg"></p>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>What you need for horizontal</h2>-->
-<!--        <ol>-->
-<!--          <li class="fragment roll-in">Commodity "hardware" (IaaS)</li>   -->
-<!--          <li class="fragment roll-in">Easy instance creation and deletion (PaaS)</li>-->
-<!--          <li class="fragment roll-in">Software built to grow sideways</li>-->
-<!--        </ol>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>OpenShift Architecture</h2>-->
-<!--        <img src="../shared/img/arch.jpg">-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>OpenShift Scaling</h2>-->
-<!--        <img src="../shared/img/scaling.jpg">-->
-<!--      </section>-->
-<!--      <section style="top: -231.5px; display: block;" class="past">-->
-<!--        <h2>Scaling Tips</h2>-->
-<!--        <ul>-->
-<!--          <li class="fragment roll-in">Build with reusable, loosely coupled pieces</li>-->
-<!--          <li class="fragment roll-in">Design for retries and small pieces failing</li>-->
-<!--          <li class="fragment roll-in">Borrow from the best technologies</li>-->
-<!--          <li class="fragment roll-in">Move static assests to a CDN</li>-->
-<!--        </ul>-->
-<!--      </section>-->
-<!--    </section>-->
-<!--    <section>-->
-<!--      <section>-->
-<!--        <h2>OpenShift Scaling Hooks</h2>-->
-<!--        <p>Setting a min and max scale from the command line</p>-->
-<!--        <p><pre><code contenteditable>rhc cartridge-scale nodejs-0.6 -a nodeapp --min 3 --max 5</code></pre></p>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>Scaling Web UI</h2>-->
-<!--        <p><a href="https://openshift.redhat.com/app/console/applications/nodepdxbot/scaling"><img style='width:85%' src="https://www.openshift.com/sites/default/files/scaling_config.png" alt="Application scaling settings" title=""></a></p>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h2>HAProxy Scaling Hooks</h2>-->
-<!--        <p>Adding and removing instances / scaling up and down</p>-->
-<!--        <p><pre><code contenteditable>haproxy_ctld --up</code></pre></p>-->
-<!--        <p><pre><code contenteditable>haproxy_ctld --down</code></pre></p>-->
-<!--        <p>HAProxy on / off switches</p>-->
-<!--        <pre><code contenteditable>haproxy_ctld_daemon start</code></pre>-->
-<!--        <pre><code contenteditable>haproxy_ctld_daemon stop</code></pre>-->
-<!--        <pre><code contenteditable>haproxy_ctld_daemon restart</code></pre>-->
-<!--        <p>These hooks are available on the command line within your gear, and via a REST API</p>-->
-<!--      </section>-->
-<!--      <section>-->
-<!--        <h3>HAProxy Web UI</h3>-->
-<!--        <p>http://$YOUR_APP_DNS/haproxy-status/</p>-->
-<!--        <br/>-->
-<!--        <h3>HAProxy raw data</h3>-->
-<!--        <p>http://$YOUR_APP_DNS/haproxy-status/;csv</p>-->
-<!--      </section>-->
-<!--    </section>-->
-
     <section>
       <section>
-        <p>Come hang out with us:</p>
-        <p>#openshift on freenode irc</p>
+        <p>One thing that the cloud has taught me</p>
+        <p class='fragment roll-in'>is to plan for failure</p>
       </section>
-      <section data-state="blackout">
-        <p>More information about running your own OpenShift:</p>
-        <p><a href='http://openshift.github.io/'>http:/openshift.github.io</a></p>
-        <br/>
-        <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b></p>
-        <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=flock2013'>Signup with Code - flock2013</a></p>
+      <section>
+        <p>Is your social network provider too big to fail?</p>
+        <p><img src='../shared/img/building_on_a_cloud.jpg'/></p>
+        <p class='fragment roll-in'><i><b>"What's the worst that could happen?"</b></i></p>
       </section>
     </section>
+    <section>
+      <section>
+        <h2>Who owns your data?</h2>
+      </section>
+      <section>
+        <h2>Terms of Service</h2>
+        <p class='fragment roll-in'>No negotiation</p>
+        <p class='fragment roll-in'>Subject to change at any moment</p>
+        <p class='fragment roll-in'>You may be banned without warning</p>
+        <p class='fragment roll-in'><img alt='change of terms' src='../shared/img/new_terms.jpg'/></p>
+      </section>
+      <section>
+        <p><i>Can your data be exported in an open format?</i></p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Who brokers your identity?</h2>
+      </section>
+      <section>
+        <ul>
+          <li class='fragment roll-in'>your email provider?</li>
+          <li class='fragment roll-in'>your phone company?</li>
+          <li class='fragment roll-in'>credit agencies?</li>
+          <li class='fragment roll-in'>your SSN?</li>
+          <li class='fragment roll-in'>google, apple (have you rooted)</li>
+          <li class='fragment roll-in'>facebook</li>
+          <li class='fragment roll-in'>linkedin</li>
+          <li class='fragment roll-in'>twitter</li>
+          <li class='fragment roll-in'>github</li>
+        </ul>
+      </section>
+      <section>
+        <img alt='cloud deal gets worse' src='../shared/img/cloud_deal_gets_worse.jpg'/>
+      </section>
+      <section>
+        <h3>Nymrights</h3>
+        <p><a href='http://nymrights.org/'>http://nymrights.org</a></p>
+        <br/>
+        <p>Focused on:</p>
+        <ul>
+          <li class='fragment roll-in'>stopping discrimination</li>
+          <li class='fragment roll-in'>preserving your right to privacy</li>
+        </ul>
+        <br/>
+        <br/>
+        <p class='fragment roll-in'>German Telemedia Act</p>
+      </section>
+      <section>
+        <p>What about laws in the US?</p>
+        <p class='fragment roll-in'>As we move our lives online, we often lose the ability to negotiate with the businesses we deal with on a daily basis</p>
+        <p class='fragment roll-in'>No democratic process to work with</p>
+        <p class='fragment roll-in'>Only free market supply and demand to rely on</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Establishing an Open Protocol for decentralized identity on the web</h2>
+      </section>
+      <section>
+        <h3>identity standards</h3>
+        <ul>
+          <li class='fragment roll-in'><a href='http://openid.net/'>OpenID</a></li>
+          <li class='fragment roll-in'><a href='http://oauth.net/core/1.0/'>OAuth</a></li>
+          <li class='fragment roll-in'><a href='http://oauth.net/2/'>OAuth2</a></li>
+        </ul>
+        <p class='fragment roll-in'>open protocols, but currently access control is still generally centralized</p>
+      </section>
+      <section>
+        <h3>what happens when we get locked out?<h3>
+        <p><img src='../shared/img/cloud_data_export_lockout.png'/></p>
+      </section>
+      <section>
+        <p class='fragment roll-in'>Or, better yet, what is our switching cost?</p>
+        <p class='fragment roll-in'>In a way, the tech industry has recently been strugling with the same question in regard to hardware / infrastucture (IaaS)</p>
+        <p class='fragment roll-in'>Who is the customer? Do I have any control?</p>
+      </section>
+      <section>
+        <h3>As a consumer, I seek out utilities that specialize in serving my interests</h3>
+        <ul>
+          <li class='fragment roll-in'>Cell phone contracts (why I buy my own cell phone hardware)</li>
+          <li class='fragment roll-in'>Does your ISP prioritize their own video streaming solution over other data sharing the same wire?</li>
+          <li class='fragment roll-in'>"I like being able to fire people"</li>
+          <li class='fragment roll-in'>I like businesses that develop and adopt standards, enabling communities, ecosystems</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Who does your online presence broker recognize as their customers?</h3>
+        <p class='fragment roll-in'>Most are advertising or info focused</p>
+      </section>
+      <section>
+        <h3>App.net - the open version of twitter?</h3>
+        <ul>
+          <li class='fragment roll-in'>you are the customer!</li>
+          <li class='fragment roll-in'>correct incentives?</li>
+          <li class='fragment roll-in'>is adertising a valid form of monetization? (opt-in, personalized?)</li>
+          <li class='fragment roll-in'>can I host my own? is there lock in?</li>
+          <li class='fragment roll-in'>is it a walled garden?  will it ever reach crtitcal mass? will it become too big to fail?</li>
+          <li class='fragment roll-in'>platform and product are still tightly coupled</li>
+        </ul>
+      </section>
+      <section>
+        <p>Identity managers have incredible control over their platforms</p>
+        <ol>
+          <li class='fragment roll-in'>Identity and platform must be decoupled</li>
+          <li class='fragment roll-in'>We need a platform as a service!</li>
+          <li class='fragment roll-in'>We want open systems all the way down</li>
+        </ol>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>Starting over from scratch</h3>
+        <h2>With an Open Cloud</h2>
+      </section>
+      <section>
+        <h3>The solution will need to be:</h3>
+        <ol>
+          <li class='fragment roll-in'>open, secure</li>
+          <li class='fragment roll-in'>properly monetized, good incentives</li>
+          <li class='fragment roll-in'>no lock in, minimal switching cost</li>
+        </ol>
+        <br/>
+        <br/>
+        <p class='fragment roll-in'>Reality check:</p> 
+        <ul>
+          <li class='fragment roll-in'>uptime is critical</li>
+          <li class='fragment roll-in'>decouple platform and product. pay for serice uptime</li>
+          <li class='fragment roll-in'>interop, portability is critical</li>
+          <li class='fragment roll-in'>no lock in, minimal switching cost</li>
+        </ul>
+      </section>
+      <section>
+        <h3>But who wants to do all of this work anyway?</h3>
+        <p class='fragment roll-in'>Thats why we have OpenShift Online</p>
+        <p class='fragment roll-in'>don't like RedHat? Try GetUpCloud.com</p>
+        <p class='fragment roll-in'>I have a feeling that you may see some major IaaS providers offering their own OpenShift managed hosting service soon</p>
+      </section>
+      <section>
+        <h3>Open Source the Cloud</h3>
+        <ol>
+          <li class='fragment roll-in'>OS - liberated!</li>
+          <li class='fragment roll-in'>Infrastructure - liberated! (OpenStack, RDO)</li>
+          <li class='fragment roll-in'>Platform - liberated! (OpenShift)</li>
+          <li class='fragment roll-in'>Integrate with OpenStack or other open systems to use your existing identity, authentication, authorization services.</li>
+          <li class='fragment roll-in'>Host your own OpenID, OAuth, etc..</li>
+        </ol>
+      </section>
+      <section>
+        <p>The cloud is a free market for services. We're seeing a lot of specialization in storage, compute, caching, hosting, monitoring - all being handled by different open and pluggable vendor solutions.</p>
+        <br/>
+        <h3 class='fragment roll-in'>Predictions?</h3>
+        <ul>
+          <li class='fragment roll-in'>Domain registries that support OAuth-style provisioning</li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Meanwhile, back in cloud city&hellip;</h2>
+        <img class='fragment roll-in' src='../shared/img/dubai-abobe-clouds.jpg'/>
+      </section>
+      <section>
+        <h3>Diaspora</h3>
+        <ul>
+          <li class='fragment roll-in'>decentralized social</li>
+          <li class='fragment roll-in'>multi-home pub/sub style arch</li>
+          <li class='fragment roll-in'><a href='https://diasporafoundation.org/'>Diaspora Foundation</a></li>
+          <li class='fragment roll-in'><a href='https://joindiaspora.com/'>http://JoinDiaspora.com</a></li>
+          <li class='fragment roll-in'>Focus on privacy, freedom, users owning their own data</li>
+          <li class='fragment roll-in'>Interoperability</li>
+        </ul>
+      </section>
+      <section>
+        <h4>Establishing a protocol, or not:</h4>
+        <ul>
+          <li class='fragment roll-in'>decouple identity and data / activity</li>
+          <li class='fragment roll-in'>interact with folks across social hubs (federation)</li>
+          <li class='fragment roll-in'>tent.io (developing a protocol, asking great questions)</li>
+          <li class='fragment roll-in'>pump.io (streams)</li>
+          <li class='fragment roll-in'>leveldb (streams, streams, streams)</li>
+          <li class='fragment roll-in'>OpenSocial (old?)</li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>The solution will need to be&hellip;</h2>
+      </section>
+      <section>
+        <p>Are we there yet?</p>
+        <ol>
+          <li class='fragment roll-in'>open, secure</li>
+          <li class='fragment roll-in'>properly monetized, good incentives</li>
+          <li class='fragment roll-in'>no lock in, minimal switching costs</li>
+        </ol>
+      </section>
+      <section>
+        <h4>Data formats, standards, projects to keep an eye on:</h4>
+        <ul>
+          <li class='fragment roll-in'>RSS 3.0</li>
+          <li class='fragment roll-in'>Activity Streams 3.0</li>
+          <li class='fragment roll-in'>GNU Social</li>
+        </ul>
+      </section>
+      <section>
+        <h4>Open App store</h4>
+        <p>practical killer apps, an open realtime office</p>
+        <p class='fragment roll-in'>even for the windows users</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h4>Building communities around an open infrastucture, OS, and platform</h4>
+        <ul>
+          <li class='fragment roll-in'>OpenShift Origin</li>
+          <li class='fragment roll-in'>Code For America</li>
+          <li class='fragment roll-in'>CryptoParty</li>
+        </ul>
+      </section>
+      <section>
+        <h3>code for america</h3>
+        <p>An organization built around:</p>
+        <ul>
+          <li class='fragment roll-in'>Civic app development</li>
+          <li class='fragment roll-in'>Community building</li>
+          <li class='fragment roll-in'>Hackathons</li>
+          <li class='fragment roll-in'>Democracy</li>
+          <li class='fragment roll-in'>Open data policies</li>
+        </ul>
+        <p class='fragment roll-in'><a href='http://codeforamerica.org/'>CodeForAmerica.org</a></p>
+      </section>
+      <section>
+        <h4>take back your data, take back your identity</h4>
+        <ul>
+          <li class='fragment roll-in'>define your own TOS</li>
+          <li class='fragment roll-in'>pay for uptime, not for usage terms</li>
+          <li class='fragment roll-in'>treat your utilities like utilities</li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>Walls of cryptography</h3>
+      </section>
+      <section>
+        <h4>Types of crypto:</h4>
+        <ol>
+          <li class='fragment roll-in'>Disk encryption</li>
+          <li class='fragment roll-in'>File encryption</li>
+          <li class='fragment roll-in'>Network i/o encryption</li>
+        </ol>
+        <br/>
+        <br/>
+        <p class='fragment roll-in'>Who controls the lines of transmission?</p>
+        <p class='fragment roll-in'>ISPs, telcos, NSA (prism, xkeyscore)?</p>
+      </section>
+      <section>
+        <h4>Fully Homomorphic Encryption</h4>
+        <ul>
+          <li class='fragment roll-in'>Support for blind processing operations</li>
+          <li class='fragment roll-in'>Data stays encrypted while being transacted upon</li>
+        </ul>
+        <br/>
+        <br/>
+        <p class='fragment roll-in'><a href='https://en.wikipedia.org/wiki/Homomorphic_encryption'>https://en.wikipedia.org/wiki/Homomorphic_encryption</a></p>
+      </section>
+    </section>
+
+    <section>
+      <section data-state="blackout">
+        <p>For information about running your own OpenShift:</p>
+        <p><a href='http://openshift.github.io/'>http:/openshift.github.io</a></p>
+        <br/>
+        <p><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=flock2013'>Or, sign up for a free OpenShift Online account<br/>(FLOCK2013)</a></p>
+        <br/>
+        <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b></p>
+      </section>
+      <section data-state="blackout">
+        <img src='../shared/img/stay_classy_cloud_city.jpg'/>
+      </section>
+    </section>
+
 			</div>
       <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
 		</div>
