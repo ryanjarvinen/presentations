@@ -38,8 +38,8 @@
             <p>with</p>
             <h1>Meteor</h1>
             <br/>
-            <p><a href='bit.ly/14td6eO'>bit.ly/14td6eO</a></p>
-            <p><a href='http://socuteurl.com/mooshybean'>http://socuteurl.com/mooshybean</a></p>
+            <p><a href='http://bit.ly/14td6eO'>bit.ly/14td6eO</a></p>
+            <p><a href='http://socuteurl.com/mooshybean'>socuteurl.com/mooshybean</a></p>
         </section>
         <section>
             <div>presented by</div>
@@ -113,95 +113,6 @@
         <section>
           <h2>OpenShift IS</h2> 
           <h1 class='fragment roll-in'><span class='fragment grow'>OPEN SOURCE</span></h1>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h2>Gearing up a new app on OpenShift</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE APP_CART_2 APP_CART_3</code></pre></div>
-          <div class='fragment roll-in'>or</div>
-          <div class='fragment roll-in'><pre><code contenteditable>rhc app create instantappstore nodejs-0.6 mongodb-2.2 --from-code=https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git</code></pre></div>
-        </section>
-	<section>
-<pre><code>Application Options
--------------------
-  Namespace:   rjdemo
-  Cartridges:  nodejs-0.6, mongodb-2.2
-  Source Code:
-https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
-  Gear Size:   default
-  Scaling:     no
-
-Creating application 'instantappstore' ... done
-
-Waiting for your DNS name to be available ... done
-
-Downloading the application Git repository ...
-Cloning into 'instantappstore'...
-
-Your application code is now in 'instantappstore'</code></pre>
-        </section>
-	<section>
-<pre><code contenteditable>instantappstore @ http://intstantappstore-rjdemo.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
--------------------------------------------------------------
-  Created:         1:05 PM
-  Gears:           1 (defaults to small)
-  Git URL:        
-ssh://5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com/~/git/instantappstore.git/
-  Initial Git URL:
-https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
-  SSH:             5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com
-
-  nodejs-0.6 (Node.js 0.6)
-  ------------------------
-    Gears: Located with mongodb-2.2
-
-  mongodb-2.2 (MongoDB NoSQL Database 2.2)
-  ----------------------------------------
-    Gears:          Located with nodejs-0.6
-    Connection URL:
-mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
-    Database Name:  instantappstore
-    Password:       PTk4cCetTj2w
-    Username:       admin
-
-RESULT:
-Application instantappstore was created.</code></pre>
-        </section>
-        <section>
-<h2>Success!</h2> 
-<p>You should now have MongoDB and a basic node.js app running on OpenShift!</p>
-<br/>
-                  <p class='fragment roll-in'>Your gear is now configured with:</p> 
-          <div><ul><li class='fragment roll-in'>it's own git repo</li>
-                   <li class='fragment roll-in'>it's own web server</li>
-                   <li class='fragment roll-in'>ssh access</li>
-                   <li class='fragment roll-in'>logging</li>
-                   <li class='fragment roll-in'>MongoDB</li>
-                   <li class='fragment roll-in'>publicly accessible DNS</li></ul></div>
-        </section>
-        <section>
-          <h2>Add MongoDB to an existing app</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add mongodb-2.2</code></pre></div>
-        </section>
-        <section>
-          <h2>RockMongo on Openshift</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add rockmongo-1.1</code></pre></div>
-          <div class='fragment roll-in'><p><i>(optional)</i></p></div>
-        </section>
-        <section>
-          <h2>Environment Variables</h2> 
-          <div class='fragment roll-in'><pre><code contenteditable>
-if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
-  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-  process.env.OPENSHIFT_APP_NAME;
-}else{
-  connection_string = db_name;
-}</code></pre>
-</div>
         </section>
       </section>
       <section>
@@ -374,11 +285,14 @@ Template.nav.username = function () {
       <section>
 	      <section>
           <h2><span class='fragment roll-in'>Smart</span> Packages</h2>
-          <pre><code contenteditable>meteor add jquery
-meteor add bootstrap
-meteor add underscore
-meteor add accounts-github
-meteor remove insecure</code></pre>
+          <pre><code contenteditable>mrt add jquery
+mrt add bootstrap
+mrt add underscore
+mrt add accounts-base
+mrt add accounts-github
+meteor remove insecure
+meteor remove autopublish
+</code></pre>
         </section>
       </section>
       <section>
@@ -390,6 +304,8 @@ meteor remove insecure</code></pre>
           <h2>Bundles</h2>
           <pre><code contenteditable>meteor bundle bundle.tar.gz</code></pre>
         </section>
+      </section>
+      <section>
 	      <section>
           <h2>Deploying to OpenShift</h2>
           <p>GNU / Linux</p>
@@ -401,6 +317,102 @@ git add .
 git commit -am "Adding a meteor.js application bundle"
 git push</code></pre>
         </section>
+        <section>
+          <h2>Gearing up a new app on OpenShift</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE APP_CART_2 APP_CART_3</code></pre></div>
+          <div class='fragment roll-in'>or</div>
+          <div class='fragment roll-in'><pre><code contenteditable>rhc app create instantappstore nodejs mongodb-2.2 --from-code=https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git</code></pre></div>
+        </section>
+	<section>
+<pre><code>Application Options
+-------------------
+  Namespace:   rjdemo
+  Cartridges:  nodejs-0.6, mongodb-2.2
+  Source Code:
+https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
+  Gear Size:   default
+  Scaling:     no
+
+Creating application 'instantappstore' ... done
+
+Waiting for your DNS name to be available ... done
+
+Downloading the application Git repository ...
+Cloning into 'instantappstore'...
+
+Your application code is now in 'instantappstore'</code></pre>
+        </section>
+	<section>
+<pre><code contenteditable>instantappstore @ http://intstantappstore-rjdemo.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
+-------------------------------------------------------------
+  Created:         1:05 PM
+  Gears:           1 (defaults to small)
+  Git URL:        
+ssh://5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com/~/git/instantappstore.git/
+  Initial Git URL:
+https://github.com/openshift-quickstart/openshift-meteorjs-quickstart.git
+  SSH:             5175981a5973ca7a69000501@instantappstore-rjdemo.rhcloud.com
+
+  nodejs-0.6 (Node.js 0.6)
+  ------------------------
+    Gears: Located with mongodb-2.2
+
+  mongodb-2.2 (MongoDB NoSQL Database 2.2)
+  ----------------------------------------
+    Gears:          Located with nodejs-0.6
+    Connection URL:
+mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
+    Database Name:  instantappstore
+    Password:       PTk4cCetTj2w
+    Username:       admin
+
+RESULT:
+Application instantappstore was created.</code></pre>
+        </section>
+        <section>
+<h2>Success!</h2> 
+<p>You should now have MongoDB and a basic node.js app running on OpenShift!</p>
+<br/>
+                  <p class='fragment roll-in'>Your gear is now configured with:</p> 
+          <div><ul><li class='fragment roll-in'>it's own git repo</li>
+                   <li class='fragment roll-in'>it's own web server</li>
+                   <li class='fragment roll-in'>ssh access</li>
+                   <li class='fragment roll-in'>logging</li>
+                   <li class='fragment roll-in'>MongoDB</li>
+                   <li class='fragment roll-in'>publicly accessible DNS</li></ul></div>
+        </section>
+        <section>
+          <h2>Add MongoDB to an existing app</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add mongodb-2.2</code></pre></div>
+        </section>
+        <section>
+          <h2>RockMongo on Openshift</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge add rockmongo-1.1</code></pre></div>
+          <div class='fragment roll-in'><p><i>(optional)</i></p></div>
+        </section>
+        <section>
+          <h2>Environment Variables</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+  process.env.OPENSHIFT_APP_NAME;
+}else{
+  connection_string = db_name;
+}</code></pre>
+</div>
+        </section>
+      </section>
+      <section>
+        <h2>Realtime front-end alternatives:</h2>
+        <ul>
+          <li class='fragment roll-in'>Angular.js</li>
+          <li class='fragment roll-in'>Ember.js</li>
+          <li class='fragment roll-in'>Hoodie.io</li>
+          <li class='fragment roll-in'>leveldb?</li>
+        </ul>
       </section>
       <section>
 		    <section>
