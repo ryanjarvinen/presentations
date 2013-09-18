@@ -226,13 +226,13 @@
 <p>Or, while connected over ssh:</p>
 <pre><code contenteditable>env | grep DB</code></pre>
 <pre><code contenteditable>OPENSHIFT_POSTGRESQL_DB_PASSWORD=lXcFVx4hIZgR
-OPENSHIFT_POSTGRESQL_DB_SOCKET=/var/lib/openshift/523672f7e0b8cd02d70003bc/postgresql//socket/
+OPENSHIFT_POSTGRESQL_DB_SOCKET=/var/lib/openshift/523672f7e0b8cd02d70003bc/postgresql/socket/
 OPENSHIFT_POSTGRESQL_DB_HOST=127.7.8.130
-OPENSHIFT_POSTGRESQL_DB_PID=/var/lib/openshift/523672f7e0b8cd02d70003bc/postgresql//pid/postgres.pid
+OPENSHIFT_POSTGRESQL_DB_PID=/var/lib/openshift/523672f7e0b8cd02d70003bc/postgresql/pid/postgres.pid
 OPENSHIFT_POSTGRESQL_DB_USERNAME=adminpahue6e
 OPENSHIFT_POSTGRESQL_DB_URL=postgresql://adminpahue6e:lXcFVx4hIZgR@127.7.8.130:5432
 OPENSHIFT_POSTGRESQL_DB_PORT=5432
-OPENSHIFT_POSTGRESQL_DB_LOG_DIR=/var/lib/openshift/523672f7e0b8cd02d70003bc/postgresql//log/</code></pre>
+OPENSHIFT_POSTGRESQL_DB_LOG_DIR=/var/lib/openshift/523672f7e0b8cd02d70003bc/postgresql/log/</code></pre>
       </section>
     </section>
     <section>
@@ -316,36 +316,15 @@ OPENSHIFT_POSTGRESQL_DB_LOG_DIR=/var/lib/openshift/523672f7e0b8cd02d70003bc/post
     </section>
     <section>
       <section>
-        <h1>Parks App</h1>
-        <h5>(flask and PostGIS)</h5>
-        <p><a href='https://github.com/ryanj/pg_parks/'>https://github.com/ryanj/pg_parks/</a></p>
-        <br/>
-        <p class='fragment roll-in'><a href='https://www.openshift.com/blogs/get-more-spatial-in-your-database-with-postgis-20-on-openshift'>blog post: More Spatial in Your Database with PostGIS 2.0</a></p>
-      </section>
-      <section>
-        <pre><code contenteditable>rhc app create -s pgparks python-2.7 postgresql-9.2 --from-code=https://github.com/ryanj/pg_parks.git</code></pre>
-        <br/>
-        <p class='fragment roll-in'><a href='http://pgparks-shifter.rhcloud.com/'>http://pgparks-shifter.rhcloud.com/</a></p>
-      </section>
-      <section>
-        <h3>Action Hooks</h3>
-        <ol>
-          <li class="fragment roll-in">enable postgis</li>
-          <li class="fragment roll-in">bootstrap your db</li>
-        </ol>
-        <br/>
-        <br/>
-        <p class="fragment roll-in"><a href='https://github.com/ryanj/pg_parks/'>https://github.com/ryanj/pg_parks/tree/master/.openshift/action_hooks</a></p>
-      </section>
-    </section>
-    <section>
-      <section>
         <h3>Living in the clouds</h3>
         <p class='fragment roll-in'>Code for America</p>
       </section>
       <section>
         <h3>Adopt a Cause</h3>
         <p><a href='https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart'>https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart</a></p>
+        <br/>
+        <p>This app should be using PostGIS for spatial queries:</p>
+        <p class='fragment roll-in'><a href='https://www.openshift.com/blogs/get-more-spatial-in-your-database-with-postgis-20-on-openshift'>blog post: More Spatial in Your Database with PostGIS 2.0</a></p>
       </section>
       <section>
         <p>Persist configuration details, <br/>while keeping your source clean:</p>
@@ -367,6 +346,16 @@ rhc env list</code></pre>
         <p>Automatic support for dependency resolution using standard packaging, native to each language:</p>
         <p><a href='https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart/blob/master/Gemfile'>gems</a> (ruby), <a href='https://github.com/shekhargulati/todo-flask-openshift-quickstart/blob/master/setup.py'>eggs</a> (python), and <a href='https://github.com/ryanj/darkslides/blob/master/package.json'>npm modules</a> (node.js)</p>
       </section>
+      <section>
+        <h3>Action Hooks</h3>
+        <ol>
+          <li class="fragment roll-in">enable postgis</li>
+          <li class="fragment roll-in">bootstrap your db</li>
+        </ol>
+        <br/>
+        <br/>
+        <p class="fragment roll-in"><a href='https://github.com/ryanj/pg_parks/'>https://github.com/ryanj/pg_parks/tree/master/.openshift/action_hooks</a></p>
+      </section>
     </section>
     <section>
       <section>
@@ -378,9 +367,6 @@ rhc env list</code></pre>
       <section>
         <h4>distributed multi-cloud federated applications</h4>
         <img class="fragment roll-in" src="../shared/img/dubai-abobe-clouds.jpg">
-      </section>
-      <section>
-        <h3>App store?</h3>
       </section>
     </section>
     <section>
