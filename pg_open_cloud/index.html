@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Writing portable postgreSQL-backed applications for the Open Cloud</title>
+
+		<meta name="description" content="Learn how to write PostgreSQL-backed applications that can be automatically cloned, built, monitored, and scaled in a matter of minutes">
+		<meta name="author" content="Ryan Jarvinen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+
+		<div class="slides">
+    <section>
+      <section>
+        <h1>PG Open Cloud</h1>
+        <p>Portable PG applications</p>
+        <br/>
+        <p><a href='http://bit.ly/1eddml6'>http://bit.ly/1eddml6</a></p>
+        <p><a href='http://ryanjarvinen.com/presentations/pg_open_cloud'>http://ryanjarvinen.com/presentations/pg_open_cloud</a></p>
+      </section>
+      <section>
+        <div>presented by</div>
+        <br/>
+        <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+      </section>
+      <section data-state="blackout">
+        <div>
+          <div>Open Platforms Engineer</div>
+          <div>at</div>
+          <div>Red Hat</div>
+          <br/>
+          <div>ryanj@redhat.com</div>
+        </div>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>Agenda</h1>
+        <ol>
+          <li class='fragment roll-in'>Open Cloud Overview</li>
+          <li class='fragment roll-in'>Learn how to write for the Open Cloud</li>
+        </ol>
+      </section>
+    </section>
+    <section>
+      <section>
+        <p style='font-size:larger;'><b>the Cloud</b></p>
+        <p class='fragment roll-in'><i>"what is it made of?"</i></p>
+      </section>
+      <section>
+        <p style='font-size:larger;'>The cloud is:</p>
+        <ul>
+          <li class='fragment roll-in'>hot air?</li>
+          <li class='fragment roll-in'>a series of tubes?</li>
+          <li class='fragment roll-in'>mostly cat photos<span class="fragment roll-in">✓</span></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Infrastructure</h2>
+        <ul>
+          <li class='fragment roll-in'><b>Communications:</b> fiber, switches, wireless</li>
+          <li class='fragment roll-in'><b>Storage and Compute:</b> chips, servers, disks, databases</li>
+          <li class='fragment roll-in'>&hellip;</li>
+          <li class='fragment roll-in'>DevOps <span  class='fragment roll-in'>(and friction)</span></li>
+          <li class='fragment roll-in'>&hellip;</li>
+          <li class='fragment roll-in'><b>Software as a Service:</b> Dropbox, Gmail</li>
+        </ul>
+      </section>
+      <section>
+        <h2>IaaS</h2>
+        <ul>
+          <li class="fragment roll-in">Amazon <span class="fragment roll-in">EC2</span></li>
+          <li class="fragment roll-in">RackSpace</li>
+          <li class="fragment roll-in">Linode</li>
+          <li class="fragment roll-in">BlueHost</li>
+        </ul>
+        <br/>
+        <br/>
+        <p class="fragment roll-in">* Many are VM / VPS-based services</p>
+      </section>
+      <section>
+        <h3>Building with Postgres normally looks like:</h3>
+      </section>
+      <section>
+        <ol>
+          <li class="fragment">Install Apache with Mod_WSGI</li>
+          <li class="fragment">Make sure we have all the Python extensions set so Apache can see them</li>
+          <li class="fragment">Configure firewall so that only http, https, and ssh are available to outside world</li>
+          <li class="fragment">Install Postgresql, and plugins</li>
+          <li class="fragment">update PG_hba.conf, create db user, create db user password, set up access privs, and a test account</li>
+          <li class="fragment">Create DB, give user permissions to the DB</li>
+          <li class="fragment">Set up a git repository and then figure out how to structure and deploy</li>
+          <li class="fragment">Now I can write code - hello world, then database connection, then real app</li> 
+          <li class="fragment">Get it working with a public DNS</li>
+          <li class="fragment">Now you are stuck maintaining the machine</li>
+        </ol>
+      </section>
+      <section>
+        <p>
+          <b>OR</b> - if your Ops team offers pre-built VMs:
+        </p>
+        <ol>
+          <li class="fragment">Fill out a mile high stack of request forms for a VM from Ops and wait</li>
+          <li class="fragment">Then realize it's not configured properly, submit ticket and wait</li>
+          <li class="fragment">Repeat same information, and wait</li>
+          <li class="fragment">Your ops person moves to a different group, GOTO Line 1....</li>
+        </ol>
+      </section>
+      <section>
+      <p>As a sysadmin:</p>
+      <ol>
+        <li class="fragment">We're busy keeping the site up, we'll need to provision your VM later</li>
+        <li class="fragment">Developers always want to try a new language or datastore that they don't know how to install, let alone manage</li>
+        <li class="fragment">There is whole bunch of account creation and lockdown for each VM.  I'll need to give them Sudo or they'll annoy me all the time</li>
+        <li class="fragment">Each machine ends up with a wildly different config</li>
+        <li class="fragment">Developers never give up the resources from their VMs - spreadsheets and emails</li>
+        <li class="fragment">If there is a security fix I need to go into each VM and update it</li>
+        <li class="fragment">I don't want to spend my time updating DNS tables</li>
+      </ol>
+      </section>
+      <section>
+        <h3>Platforms provide a peaceful environment for Devs AND SysAdmins</h3>
+        <img width="300" height="303" src="../shared/img/DarthLuke.png">
+        <ul>
+          <li class="fragment"><strong>Operations can ensure stability and performance</strong></li>
+          <li class="fragment"><strong>Developers can self-provision environments without waiting</strong></li>
+          <li class="fragment"><strong>The discussion shifts toward establishing policies for scaling</strong></li>
+        </ul>
+      </section>
+      <section>
+        <div class="fragment roll-in"><img width="70%" src="../shared/img/paas-overview.png"></div>
+      </section>
+      <section>
+        <h2>Public / Hosted PaaS</h2>
+        <ul>
+          <li class="fragment roll-in">Heroku</li>
+          <li class="fragment roll-in">EngineYard</li>
+          <li class="fragment roll-in">Google App Engine</li>
+          <li class="fragment roll-in">Amazon BeanStalk</li>
+        </ul>
+        <br/>
+        <br/>
+        <p class="fragment roll-in">* usually VM-based or proprietary application container technologies</p>
+      </section>
+      <section>
+        <p class="fragment roll-in">
+          <img src='../shared/img/building_on_a_cloud.jpg'/><br/>
+          the public cloud
+        </p>
+      </section>
+      <section>
+        <p>This all sounds great, but what about&hellip;</p>
+        <h2 class="fragment roll-in">Lock-in?</h2>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>the Open Cloud</h1>
+      </section>
+      <section>
+        <h2>IaaS</h2>
+        <ul>
+          <li class="fragment roll-in">OpenStack</li>
+          <li class="fragment roll-in">Eucalptus</li>
+          <li class="fragment roll-in">CloudStack</li>
+          <li class="fragment roll-in">Or, roll your own</li>
+        </ul>
+      </section>
+      <section>
+        <img src='../shared/img/akbar_seems_legit.jpg'/><br/>
+      </section>
+      <section>
+        <h2>Open PaaS</h2>
+        <ul>
+          <li class="fragment roll-in">OpenShift</li>
+          <li class="fragment roll-in">Cloud Foundry</li>
+        </ul>
+        <br/>
+        <br/>
+        <p class="fragment roll-in">Built around Containers</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>Triumph of the Open Cloud</h3>
+        <p>When "Big Cloud" fails you, you can always decide to host your own</p>
+      </section>
+      <section>
+        <h3>TinyTinyRSS</h3>
+        <p>Reusable, Redeployable code - host it anywhere</p>
+        <p><a href='https://github.com/openshift-quickstart/tiny_tiny_rss-openshift-quickstart'>https://github.com/openshift-quickstart/tiny_tiny_rss-openshift-quickstart</a></p>
+        <pre><code contenteditable>rhc app create rss php-5 postgresql-9 cron-1.4 --from-code=https://github.com/openshift-quickstart/tiny_tiny_rss-openshift-quickstart.git</code></pre>
+        <p><a href='https://rss-shifter.rhcloud.com/'>https://rss-shifter.rhcloud.com/</a></p>
+      </section>
+      <section>
+        <h4>Adding Postgres to existing applications:</h4>
+        <pre><code contenteditable>rhc cartridge add postgres-8.4</code></pre>
+        <pre><code contenteditable>rhc cartridge add postgres-9.2</code></pre>
+        <br/>
+        <p class="fragment roll-in"><i>done!</i></p>
+        <br/>
+        <p class="fragment roll-in"><a href='https://www.openshift.com/blogs/postgresql-92-comes-to-openshift'>blog post: PostgreSQL 9.2 Comes to OpenShift</a></p>
+      </section>
+      <section>
+<pre><code contenteditable>rhc app show rss</code></pre>
+<p>Or, while connected over ssh:</p>
+<pre><code contenteditable>env | grep DB</code></pre>
+<pre><code contenteditable>OPENSHIFT_POSTGRESQL_DB_PASSWORD=lXcFVx4hIZgR
+OPENSHIFT_POSTGRESQL_DB_SOCKET=/var/lib/openshift/523672f7e0b8cd02d70003bc/postgresql//socket/
+OPENSHIFT_POSTGRESQL_DB_HOST=127.7.8.130
+OPENSHIFT_POSTGRESQL_DB_PID=/var/lib/openshift/523672f7e0b8cd02d70003bc/postgresql//pid/postgres.pid
+OPENSHIFT_POSTGRESQL_DB_USERNAME=adminpahue6e
+OPENSHIFT_POSTGRESQL_DB_URL=postgresql://adminpahue6e:lXcFVx4hIZgR@127.7.8.130:5432
+OPENSHIFT_POSTGRESQL_DB_PORT=5432
+OPENSHIFT_POSTGRESQL_DB_LOG_DIR=/var/lib/openshift/523672f7e0b8cd02d70003bc/postgresql//log/</code></pre>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Terminology (Red Hat)</h2>
+        <ul>
+          <li class="fragment"><strong>Broker – Management host, orchestration of Nodes</strong></li>
+          <li class="fragment"><strong>Node – Compute host containing Gears</strong></li>
+          <li class="fragment"><strong>Gear – Allocation of fixed memory, compute, and storage resources for running applications</strong></li>
+          <li class="fragment"><strong>Cartridge – A technology/framework (Python, Ruby, Javascript, PHP, Perl, Java/JEE, PG, MySQL, etc.) for application service dependencies</strong></li> 
+        </ul>
+      </section>
+
+
+
+        <section>
+          <h2>Gears: Secure and Efficient</h2>
+          <div class='fragment roll-in'><img src='../shared/img/gear.png'/></div>
+          <div class='fragment roll-in'><a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div>
+        </section>
+        <section>
+          <h3>An Open Cartridge format</h3>
+          <a href='http://openshift.github.io/documentation/oo_cartridge_developers_guide.html'><img style='width:50%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/></a>
+          <p><a href='http://openshift.github.io/documentation/oo_cartridge_developers_guide.html'>cart developer's guide</a></p>
+        </section>
+        <section>
+          <a href='http://openshift.github.io/documentation/oo_cartridge_developers_guide.html'><img src="../shared/img/cartridges.png"/></a>
+        </section>
+
+        <section>
+          <h2>Open, and working in the Upstream</h2>
+          <img src="../shared/img/Three_products.png">
+        </section>
+
+
+
+    </section>
+    <section>
+      <section>
+        <h2>Writing Apps for the Open Cloud</h2>
+      </section>
+      <section>
+        <h3>ToDo App</h3>
+        <h5>(flask and SQLAlchemy)</h5>
+        <p><a href='https://github.com/shekhargulati/todo-flask-openshift-quickstart'>https://github.com/shekhargulati/todo-flask-openshift-quickstart</a></p>
+        <br/>
+        <p class='fragment roll-in'><a href='https://www.openshift.com/blogs/build-your-app-on-openshift-using-flask-sqlalchemy-and-postgresql-92'>blog post: Build Your App on OpenShift Using Flask, SQLAlchemy, and PostgreSQL 9.2</a></p>
+      </section>
+      <section>
+        <pre><code contenteditable>rhc app create -s task python-2.7 postgresql-9.2 --from-code=https://github.com/shekhargulati/todo-flask-openshift-quickstart.git</code></pre>
+        <br/>
+        <p><a href='http://task-shifter.rhcloud.com/'>http://task-shifter.rhcloud.com/</a></p>
+      </section>
+      <section>
+        <h2>OpenShift Scaling Hooks</h2>
+        <p>Setting a min and max scale from the command line</p>
+        <pre><code contenteditable>rhc cartridge-scale python-2.7 -a task --min 3 --max 5</code></pre>
+      </section>
+      <section>
+        <h2>Scaling Web UI</h2>
+        <p><a href="https://openshift.redhat.com/app/console/applications/nodepdxbot/scaling"><img style='width:85%' src="https://www.openshift.com/sites/default/files/scaling_config.png" alt="Application scaling settings" title=""></a></p>
+      </section>
+      <section>
+        <h2>HAProxy Scaling Hooks</h2>
+        <p>Adding and removing instances / scaling up and down</p>
+        <p><pre><code contenteditable>haproxy_ctld --up</code></pre></p>
+        <p><pre><code contenteditable>haproxy_ctld --down</code></pre></p>
+        <p>HAProxy on / off switches</p>
+        <pre><code contenteditable>haproxy_ctld_daemon start</code></pre>
+        <pre><code contenteditable>haproxy_ctld_daemon stop</code></pre>
+        <pre><code contenteditable>haproxy_ctld_daemon restart</code></pre>
+        <p>These hooks are available on the command line within your gear, and via a REST API</p>
+      </section>
+      <section>
+        <h3>HAProxy Web UI</h3>
+        <p>http://$YOUR_APP_DNS/haproxy-status/</p>
+        <br/> 
+        <h3>HAProxy raw data</h3>
+        <p>http://$YOUR_APP_DNS/haproxy-status/;csv</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>Parks App</h1>
+        <h5>(flask and PostGIS)</h5>
+        <p><a href='https://github.com/ryanj/pg_parks/'>https://github.com/ryanj/pg_parks/</a></p>
+        <br/>
+        <p class='fragment roll-in'><a href='https://www.openshift.com/blogs/get-more-spatial-in-your-database-with-postgis-20-on-openshift'>blog post: More Spatial in Your Database with PostGIS 2.0</a></p>
+      </section>
+      <section>
+        <pre><code contenteditable>rhc app create -s pgparks python-2.7 postgresql-9.2 --from-code=https://github.com/ryanj/pg_parks.git</code></pre>
+        <br/>
+        <p class='fragment roll-in'><a href='http://pgparks-shifter.rhcloud.com/'>http://pgparks-shifter.rhcloud.com/</a></p>
+      </section>
+      <section>
+        <h3>Action Hooks</h3>
+        <ol>
+          <li class="fragment roll-in">enable postgis</li>
+          <li class="fragment roll-in">bootstrap your db</li>
+        </ol>
+        <br/>
+        <br/>
+        <p class="fragment roll-in"><a href='https://github.com/ryanj/pg_parks/'>https://github.com/ryanj/pg_parks/tree/master/.openshift/action_hooks</a></p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>Living in the clouds</h3>
+        <p class='fragment roll-in'>Code for America</p>
+      </section>
+      <section>
+        <h3>Adopt a Cause</h3>
+        <p><a href='https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart'>https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart</a></p>
+      </section>
+      <section>
+        <p>Persist configuration details, <br/>while keeping your source clean:</p>
+        <pre><code contenteditable>rhc app create hydrant ruby-1.9 postgresql-8.4 --from=code=http://github.com/ryanj/adopt-a-hydrant.git --env SECRET_TOKEN="YOUR_SECRET_TOKEN"</code></pre>
+        <p><a href='http://hydrant-shifter.rhcloud.com/'>http://hydrant-shifter.rhcloud.com/</a></p>
+      </section>
+      <section>
+        <h3>Environment Variables</h3>
+        <p>Listing your custom env vars:</p>
+        <pre><code contenteditable>cd hydrant
+rhc env list</code></pre>
+        <p>Setting a variable:</p>
+        <pre><code contenteditable>rhc env set SECRET_TOKEN="a1fdacc3b1d14d6a92ed1219ed304d02529f535085262a90c39f072ef6de0ee9fe3a3d0194f02a2a8eb3"</code></pre>
+        <p>Help with configuration:</p>
+        <pre><code contenteditable>rhc help env</code></pre>
+      </section>
+      <section>
+        <h3>Dependencies</h3>
+        <p>Automatic support for dependency resolution using standard packaging, native to each language:</p>
+        <p><a href='https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart/blob/master/Gemfile'>gems</a> (ruby), <a href='https://github.com/shekhargulati/todo-flask-openshift-quickstart/blob/master/setup.py'>eggs</a> (python), and <a href='https://github.com/ryanj/darkslides/blob/master/package.json'>npm modules</a> (node.js)</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>Banners?</h3>
+        <p><a href='http://citibike-shifter.rhcloud.com/'>http://citibike-shifter.rhcloud.com/</a></p>
+        <br/>
+        <pre class='fragment roll-in'><code contenteditable>rhc env set CITIBIKE_NEARBY_STATIONS="268,257,258" -a citibikes</code></pre>
+      </section>
+      <section>
+        <h4>distributed multi-cloud federated applications</h4>
+        <img class="fragment roll-in" src="../shared/img/dubai-abobe-clouds.jpg">
+      </section>
+      <section>
+        <h3>App store?</h3>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>Join the Community</h3>
+        <ul>
+          <li class="fragment">Meritocracy for our pull requests</li>
+          <li class="fragment">Help with anything from core, quickstarts, and cartridges, to small typo fixes in the command line tools </li>
+          <li class="fragment">PEPs for major feature enhancements</li>
+          <li class="fragment"><a href="https://github.com/openshift/origin-server/blob/master/CONTRIBUTING.md" class="roll">Contribution Guidelines</a></li>
+          <li class="fragment"><a href="https://trello.com/openshift" class="roll"><span data-title="Public Trello cards">Public Trello cards</span></a></li>
+          <li class="fragment"><a href="https://tcms-openshift.rhcloud.com/plan/2/openshift-origin" class="roll"><span data-title="Public Test plans">Public Test plans</span></a></li>
+          <li class="fragment"><a href="https://bugzilla.redhat.com/" class="roll"><span data-title="Public Bugzilla">Public Bugzilla</span></a></li>
+          <li class="fragment"><a href="https://www.openshift.com/ideas" class="roll"><span data-title="Voting on Features">Vote on Features</span></a></li>
+        </ul>  
+      </section>
+      <section data-state="blackout">
+        <p>Check out the upstream source: <br/><a href='http://openshift.github.com/'>OpenShift Origin</a></p>
+        <br/>
+        <p>Try our hosted solution (3 apps free): <br/><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=PGOpen2013'>OpenShift Online</a></p>
+        <br/>
+        <p>Request an evaluation for: <br/><a href='https://www.openshift.com/products/enterprise'>OpenShift Enterprise</a></p>
+      </section>
+      <section data-state="blackout">
+        <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b></p>
+        <br/>
+        <p>slides: <a href='http://bit.ly/1eddml6'>http://bit.ly/1eddml6</a></p>
+      </section>
+    </section>
+
+			</div>
+      <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
