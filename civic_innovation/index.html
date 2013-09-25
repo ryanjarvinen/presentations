@@ -72,9 +72,22 @@
   <li class='fragment roll-in'><a hred='http://oaklandwiki.org/'>OaklandWiki</a> <span class='fragment roll-in'>(<a href='https://github.com/localwiki/localwiki'>localWiki</a>)</span></li>
   <li class='fragment roll-in'><a href='http://www.citycouncil.openoakland.org/'>CouncilMatic</a> <span class='fragment roll-in'>(<a href='http://www.councilmatic.org/'>CouncilMatic</a>)</span></li>
   <li class='fragment roll-in'><a href='http://rikiwiki.electronicartifacts.com/codeforamerica_oakland/opd-crime-statistics'>Crime in Oakland</a> <span class='fragment roll-in'>(<a href='http://www.crimeinchicago.org/'>Crime in Chicago</a>)</span></li>
-  <li class='fragment roll-in'><a href='http://adoptadrainoakland.com/'>Adopt a drain</a> <span class='fragment roll-in'>(<a href=''>or hydrant</a>)</span></li>
+  <li class='fragment roll-in'><a href='http://adoptadrainoakland.com/'>Adopt a drain</a> <span class='fragment roll-in'>(<a href='https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart'>or hydrant</a>)</span></li>
   <li class='fragment roll-in'>more: <a href='http://openoakland.org/projects/'>http://openoakland.org/projects/</a></li>
 </ul>
+      </section>
+      <section>
+        <h3>Adopt a Cause</h3>
+        <p><a href='https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart'>https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart</a></p>
+        <br/>
+        <p>This app should be using PostGIS for spatial queries:</p>
+        <p class='fragment roll-in'><a href='https://www.openshift.com/blogs/get-more-spatial-in-your-database-with-postgis-20-on-openshift'>blog post: More Spatial in Your Database with PostGIS 2.0</a></p>
+      </section>
+      <section>
+        <p>Persist configuration details, <br/>while keeping your source clean:</p>
+        <pre><code contenteditable>rhc app create hydrant ruby-1.9 postgresql-8.4 --from=code=http://github.com/ryanj/adopt-a-hydrant.git --env SECRET_TOKEN="YOUR_SECRET_TOKEN"</code></pre>
+        <br/>
+        <p><a href='http://hydrant-shifter.rhcloud.com/'>http://hydrant-shifter.rhcloud.com/</a></p>
       </section>
     </section>
     <section>
@@ -108,6 +121,13 @@
         <br/>
         <p><a class='fragment roll-in' href='http://github.com/ryanj/citibikenyc_dashboard'>http://github.com/ryanj/citibikenyc_dashboard</a></p>
         <p><a class='fragment roll-in' href='http://github.com/edgar/citibikenyc_dashboard'>http://github.com/edgar/citibikenyc_dashboard</a></p>
+        <br/><p><a class='fragment roll-in' href='https://www.openshift.com/blogs/nyc-shifts-civic-innovation-into-high-gear'><i>NYC Shifts Civic Innovation into High-Gear</i></a></p>
+      </section>
+      <section>
+        <h5>Clone your own bike station dashboard</h5>
+        <pre class='fragment roll-in'><code contenteditable>rhc env set CITIBIKE_NEARBY_STATIONS="268,257,258" -a citibikes</code></pre>
+        <br/>
+        <p><a href='http://citibike-shifter.rhcloud.com/'>http://citibike-shifter.rhcloud.com/</a></p>
       </section>
       <section>
         <p>cloud city (distributed)</p>
