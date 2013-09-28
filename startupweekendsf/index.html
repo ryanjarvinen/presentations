@@ -152,6 +152,9 @@
           <h1>Choose a Stack</h1> 
           <p>Budgeted time: <strong><em>5%</em></strong></p>
         </section>
+        <section>
+          <p>This should be a good match for your project focus, and for the talents available in your team.</p>
+        </section>
       </section>
       <section>
         <section>
@@ -176,17 +179,76 @@
           <h1>Team Collaboration</h1> 
           <p>Budgeted time: <strong><em>3%</em></strong></p>
         </section>
+        <section>
+          <p>Now that you have a local, OpenShift-compatible source code repository, sharing a clone of this codebase on GitHub will allow you to easily collaborate with the rest of your team:</p>
+
+<ol>
+<li><a href="http://github.com/">Sign up for a free GitHub account</a></li>
+<li><a href="http://github.com/new">Create an empty GitHub repo with a matching project name</a> (no README or other starter files)</li>
+<li>Push your local OpenShift project to GitHub (substituting your PROJECT_NAME, and GITHUB_USERNAME where listed below):</li>
+</ol>
+        </section>
+        <section>
+<pre>cd PROJECT_NAME
+git remote add github git@github.com:GITHUB_USERNAME/PROJECT_NAME.git
+git push github master</pre>
+
+<p><strong>Note:</strong> <em>New team members will be able to skip step two above if they are added as a "collaborator" on another team-member's GitHub repository.</em></p>
+        </section>
+        <section>
+<p>Additional team members will now be able to spin up their own demo servers by completing these two extra steps:</p>
+
+<ul>
+<li>Spin up another demo environment based on the team's public source code:</li>
+</ul>
+
+<pre>rhc app create YOUR_APP_NAME YOUR_DEVELOPMENT_LANGUAGE --from-code=http://github.com/PROJECT_USERNAME/REPO_NAME.git</pre>
+
+<ul>
+<li>Link your local repo source to the team's shared GitHub repo to share code with other members:</li>
+</ul>
+
+<pre>cd PROJECT_NAME
+git remote add github git@github.com:GITHUB_USERNAME/PROJECT_NAME.git</pre>
+        </section>
+        <section>
+<p>After committing your changes locally, or grabbing a fresh code update from your team members.  You'll be able to update your own demo site by typing:</p>
+
+<pre><code>git push
+</code></pre>
+        </section>
+        <section>
+<p>Next, share your progress with your team by publishing your updates to GitHub:</p>
+
+<pre><code>git push github master
+</code></pre>
+        </section>
+        <section>
+<p>Team members can access the most recently shared code by pulling down updates from Github:</p>
+
+<pre><code>git pull github
+</code></pre>
+        </section>
       </section>
       <section>
         <section>
           <h1>Designing for the User</h1> 
           <p>Budgeted time: <strong><em>20%</em></strong></p>
         </section>
+        <section>
+          <p><a href='http://getbootstrap.com/'>Twitter Bootstrap</a></p>
+        </section>
       </section>
       <section>
         <section>
           <h1>Model your data</h1> 
           <p>Budgeted time: <strong><em>10%</em></strong></p>
+        </section>
+        <section>
+          <p>Add a data store to any hosted app:</p>
+          <pre><code contenteditable>rhc cartridge add mongodb-2.2</code></pre>
+          <p>Access remote DBs locally:</p>
+          <pre><code contenteditable>rhc port-forward</code></pre>
         </section>
       </section>
       <section>
