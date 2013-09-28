@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+    <section>
+        <section>
+            <p>Welcome to</p>
+
+            <h1 class='fragment'>Startup</h1><h1 class='fragment'>Weekend</h1><h1 class='fragment'>SF</h1>
+        </section>
+        <section>
+            <h2>BOOTCAMP</h2>
+            <br/>
+            <p>with</p>
+            <p><a href="https://openshift.redhat.com/app/account/new?web_user%5Bpromo_code%5D=swbay"><img style="height:10%;border: none; background: none; box-shadow: none;margin:4%;" src="http://slide-shifter.rhcloud.com/img/OpenShift_Horizontal_RGB_Reverse.png" alt="OpenShift"></a> <a href="http://strongloop.com/"><img style="height:10%;border: none; background: none; box-shadow: none;" src="http://strongloop.com/wp-content/uploads/2013/04/logo-strongloop.png" alt="StrongLoop"></a></p>
+            <br/>
+            <p><a href='http://bit.ly/1dOstii'>http://bit.ly/1dOstii</a></p>
+            <p><a href='http://socuteurl.com/happybunny'>http://socuteurl.com/happybunny</a></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Agenda</h1> 
+          <ol>
+          <li class='fragment roll-in'>Introductions</li>
+          <li class='fragment roll-in'>Open cloud overview</li>
+          <li class='fragment roll-in'>Prep your development environments</li>
+         
+          <li class='fragment roll-in'>Choose the right stack</li>
+          <li class='fragment roll-in'>Deploy early, deploy often</li>
+          <li class='fragment roll-in'>Team collaboration</li>
+          <li class='fragment roll-in'>Design for the user</li>
+          <li class='fragment roll-in'>Model your data</li>
+          <li class='fragment roll-in'>Wire it all up</li>
+          <li class='fragment roll-in'>Polish and shine</li>
+          <li class='fragment roll-in'>Get ready for showtime!</li>
+          </ol>
+        </section>
+      </section>
+      <section>
+        <section>
+          <p><a href='http://swbay.startupweekend.org/'>introductions</a></p>
+        </section>
+        <section>
+          <p><img src='http://www.aceshowbiz.com/images/still/the-hunger-games-pic10.jpg'/></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Open Cloud Overview</h1> 
+        </section>
+        <section>
+          <h3>Cloud Hosted Applications</h3> 
+          <div class='fragment roll-in'><img width='80%' src='img/paas-overview.png'/></div> 
+        </section>
+        <section>
+          <h2>The big picture</h2>
+          <div class='fragment roll-in'><img src='img/PaaS-landscape.png'/></div> 
+        </section>
+        <section>
+          <h2>OpenStack</h2> 
+          <h1 class='fragment roll-in'>IS OPEN</h1>
+          <div class='fragment roll-in'>and<br/></div>
+          <div class='fragment roll-in'><h1>focused on IaaS</h1></div>
+        </section>
+        <section>
+          <h2>OpenShift Is&hellip;</h2> 
+          <h1 class='fragment roll-in'><span class='fragment grow'>OPEN</span></h1>
+        </section>
+        <section>
+          <h1>Open cartridge format</h1> 
+        </section>
+        <section>
+          <h2>Open Source</h2> 
+          <h1 class='fragment roll-in'><span class='fragment grow'>OpenShift Origin</span></h1>
+        </section>
+        <section>
+          <h2>OpenShift Online</h2> 
+          <div><p>Sign up for a <a href="https://openshift.redhat.com/app/account/new">free OpenShift account</a></p>
+<p class='fragment roll-in'><a href="https://openshift.redhat.com/app/account/new">http://openshift.redhat.com/</a></p>
+<p><ul>
+<li class='fragment roll-in'>Free-as-in-beer</li>
+<li class='fragment roll-in'>Free-as-in-freedom</li>
+<li class='fragment roll-in'>512 MB RAM / 1 GB storage per gears <span class='fragment highlight-blue'><i>(3 free)</i></span></li> 
+</ul></p>
+</div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Prep your Development Environment</h1> 
+          <p>Budgeted time: <strong><em>0%</em></strong></p>
+        </section>
+        <section>
+          <h2>Getting Started with OpenShift</h2> 
+          <h4 class='fragment roll-in'>pre-requisites:</h4>
+          <div class='fragment roll-in'>ruby, rubygems</div>
+          <div class='fragment roll-in'>git</div>
+        </section>
+        <section>
+          <h2>Installing the 'rhc' client tool</h2> 
+          <div class='fragment roll-in'><pre><code contenteditable>sudo gem install rhc</code></pre></div>
+          <div class='fragment roll-in'>and</div>
+          <div class='fragment roll-in'>install <a href='http://nodejs.org/'>node.js</a></div>
+        </section>
+        <section>
+          <h2>Help with client tools</h2> 
+          <ul>
+          <li class='fragment roll-in'><a href="https://openshift.redhat.com/community/developers/get-started">Openshift Getting Started guide</a></li>
+          <li class='fragment roll-in'><a href="https://openshift.redhat.com/community/developers/install-the-client-tools">RHC client tools installation</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Configuring your dev environment</h2> 
+          <pre class='fragment roll-in'><code contenteditable>rhc setup</code></pre>
+          <div><ul><li class='fragment roll-in'>sets your openshift email address</li>
+                   <li class='fragment roll-in'>verifies your ssh key configuration</li>
+                   <li class='fragment roll-in'>selects your application namespace</li></ul></div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Choose a Stack</h1> 
+          <p>Budgeted time: <strong><em>5%</em></strong></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Deploy early, deploy often</h1> 
+          <p>Budgeted time: <strong><em>2%</em></strong></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Team Collaboration</h1> 
+          <p>Budgeted time: <strong><em>3%</em></strong></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Designing for the User</h1> 
+          <p>Budgeted time: <strong><em>20%</em></strong></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Model your data</h1> 
+          <p>Budgeted time: <strong><em>10%</em></strong></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Wire it up</h1> 
+          <p>Budgeted time: <strong><em>30%</em></strong></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Polish and Shine</h1> 
+          <p>Budgeted time: <strong><em>30%</em></strong></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Get ready for showtime!</h1> 
+          <p>reveal.js</p>
+        </section>
+      </section>
+      <section>
+				<section>
+          <p>When in Doubt:</p>
+          <p>ask a mentor, or refer to <a href='https://www.openshift.com/blogs/seven-steps-to-hackathon-success'>Seven Steps To Hackathon Success</a></p>
+				</section>
+				<section>
+          <h1>Good Luck!</h1>
+				</section>
+				<section>
+<p><img src='http://media1.policymic.com/site/articles/18099/photo.jpg'/></p>
+        </section>
+      </section>
+			</div>
+                  <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
