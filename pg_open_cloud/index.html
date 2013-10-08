@@ -346,27 +346,40 @@ rhc env list</code></pre>
         <p>Automatic support for dependency resolution using standard packaging, native to each language:</p>
         <p><a href='https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart/blob/master/Gemfile'>gems</a> (ruby), <a href='https://github.com/shekhargulati/todo-flask-openshift-quickstart/blob/master/setup.py'>eggs</a> (python), and <a href='https://github.com/ryanj/darkslides/blob/master/package.json'>npm modules</a> (node.js)</p>
       </section>
+    </section>
+    <section>
+      <section>
+        <h2>Mapping National Parks</h2>
+        <p><i>with PostGIS</i></p>
+      <section>
+      </section>
+        <ul>
+          <li class="fragment">NodeJS / restify: <br/>
+            <span class='fragment'><a href='https://github.com/ryanj/restify-postGIS'>https://github.com/ryanj/restify-postGIS</a></span>
+          </li>
+          <li class="fragment">Pyton / Flask: <br/>
+            <span class='fragment'><a href='https://github.com/ryanj/flask-postGIS'>https://github.com/ryanj/flask-postGIS</a></span>
+          </li>
+        </ul>
+      </section>
       <section>
         <h3>Action Hooks</h3>
         <ol>
           <li class="fragment roll-in">enable postgis</li>
+          <li class="fragment roll-in">create your table schema</li>
+          <li class="fragment roll-in">add a geospatial index</li>
           <li class="fragment roll-in">bootstrap your db</li>
         </ol>
         <br/>
         <br/>
-        <p class="fragment roll-in"><a href='https://github.com/ryanj/pg_parks/'>https://github.com/ryanj/pg_parks/tree/master/.openshift/action_hooks</a></p>
+        <p class="fragment roll-in"><a href='https://github.com/ryanj/flask-postGIS/'>https://github.com/ryanj/flask-postGIS/tree/master/.openshift/action_hooks</a></p>
       </section>
     </section>
     <section>
       <section>
-        <h3>Banners?</h3>
-        <p><a href='http://citibike-shifter.rhcloud.com/'>http://citibike-shifter.rhcloud.com/</a></p>
+        <h4>Open Source Banners!</h4>
+        <p><a href='http://parkgis-shifter.rhcloud.com/'>http://parkgis-shifter.rhcloud.com/</a></p>
         <br/>
-        <pre class='fragment roll-in'><code contenteditable>rhc env set CITIBIKE_NEARBY_STATIONS="268,257,258" -a citibikes</code></pre>
-      </section>
-      <section>
-        <h4>distributed multi-cloud federated applications</h4>
-        <img class="fragment roll-in" src="../shared/img/dubai-abobe-clouds.jpg">
       </section>
     </section>
     <section>
