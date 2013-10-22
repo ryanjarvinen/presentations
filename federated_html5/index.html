@@ -130,15 +130,25 @@
           <li class='fragment roll-in'><a href='http://openid.net/'>OpenID</a></li>
           <li class='fragment roll-in'><a href='http://oauth.net/core/1.0/'>OAuth</a></li>
           <li class='fragment roll-in'><a href='http://oauth.net/2/'>OAuth2</a></li>
+          <li class='fragment roll-in'><a href='https://en.wikipedia.org/wiki/BrowserID'>BrowserID / Persona</a></li>
         </ul>
         <p class='fragment roll-in'>open protocols, but currently access control is still generally centralized</p>
+      </section>
+      <section>
+        <h3><a href='https://en.wikipedia.org/wiki/BrowserID'>BrowserID / Persona</a></h3>
+        <ul>
+          <li class='fragment roll-in'>based on the VerifiedEmailProtocol</li>
+          <li class='fragment roll-in'>focus on privacy</li>
+          <li class='fragment roll-in'>browser integration</li>
+          <li class='fragment roll-in'>provides identity bridging to support existing client auth schemes (OpenID, OAuth)</li>
+        </ul>
       </section>
       <section>
         <h3>what happens when we get locked out?<h3>
         <p><img src='../shared/img/cloud_data_export_lockout.png'/></p>
       </section>
       <section>
-        <p class='fragment roll-in'>Or, better yet, what is our switching cost?</p>
+        <p class='fragment roll-in'>Or, better yet: <b><span class='fragment roll-in'>"what is our switching cost?"</span></b></p>
         <p class='fragment roll-in'>In a way, the tech industry has recently been strugling with the same question in regard to hardware / infrastucture (IaaS)</p>
         <p class='fragment roll-in'>Who is the customer? Do I have any control?</p>
       </section>
@@ -249,7 +259,8 @@
           <li class='fragment roll-in'><a href='http://opensocial.org/'>OpenSocial</a> (old, now proprietary?)</li>
           <li class='fragment roll-in'><a href='https://tent.io/'>tent.io</a> (developing a protocol, asking great questions)</li>
           <li class='fragment roll-in'><a href='http://pump.io/'>pump.io</a> (activitystreams)</li>
-          <li class='fragment roll-in'><a href='http://vimeo.com/70232116'>leveldb</a> (streams, streams, streams)</li>
+          <li class='fragment roll-in'><a href='https://owncloud.com/'>OwnCloud</a> (Dropbox and more?)</li>
+          <li class='fragment roll-in'><a href='https://tahoe-lafs.org/trac/tahoe-lafs'>Tahoe-LAFS</a> (Least-Authority FS)</li>
         </ul>
       </section>
       <section>
@@ -274,17 +285,45 @@
         </ol>
       </section>
       <section>
-        <h4>Data formats, standards, projects to keep an eye on:</h4>
+        <h4>Open Data formats, standards, projects to keep an eye on:</h4>
         <ul>
           <li class='fragment roll-in'>RSS 3.0</li>
           <li class='fragment roll-in'>Activity Streams 3.0</li>
           <li class='fragment roll-in'>GNU Social</li>
         </ul>
       </section>
+    </section>
+    <section>
       <section>
-        <h4>Open App store</h4>
-        <p>practical killer apps, an open realtime office</p>
-        <p class='fragment roll-in'>even for the windows users</p>
+        <h3>Walls of cryptography</h3>
+      </section>
+      <section>
+        <h4>Types of crypto:</h4>
+        <ol>
+          <li class='fragment roll-in'>Disk encryption</li>
+          <li class='fragment roll-in'>File encryption</li>
+          <li class='fragment roll-in'>Network i/o encryption</li>
+        </ol>
+        <br/>
+        <br/>
+        <p class='fragment roll-in'>Who controls the lines of transmission?</p>
+        <p class='fragment roll-in'>ISPs, telcos, NSA (prism, xkeyscore)?</p>
+      </section>
+      <section>
+        <h4>Tahoe-LAFS: provider-independent security</h4>
+        <p class='fragment roll-in'>"The service provider never has the ability to read or modify your data in the first place: never"</p>
+        <p class='fragment roll-in'>"Not only is it easy and inexpensive for the service provider to maintain the security of your data, but in fact they couldn't violate its security if they tried"</p>
+        <p><a href='https://tahoe-lafs.org/trac/tahoe-lafs/browser/trunk/docs/about.rst'>from the Tahoe-LAFS public trac</a></p>
+      </section>
+      <section>
+        <h4>Fully Homomorphic Encryption</h4>
+        <ul>
+          <li class='fragment roll-in'>Support for blind processing operations</li>
+          <li class='fragment roll-in'>Data stays encrypted while being transacted upon</li>
+        </ul>
+        <br/>
+        <br/>
+        <p class='fragment roll-in'><a href='https://en.wikipedia.org/wiki/Homomorphic_encryption'>https://en.wikipedia.org/wiki/Homomorphic_encryption</a></p>
       </section>
     </section>
     <section>
@@ -309,39 +348,18 @@
         <p class='fragment roll-in'><a href='http://codeforamerica.org/'>CodeForAmerica.org</a></p>
       </section>
       <section>
+        <h4>An Open App store?</h4>
+        <p>practical killer apps, an open realtime office</p>
+        <p class='fragment roll-in'>even for the windows users</p>
+      </section>
+      <section>
         <h4>take back your data, take back your identity</h4>
         <ul>
           <li class='fragment roll-in'>define your own TOS</li>
           <li class='fragment roll-in'>pay for uptime, not for usage terms</li>
+          <li class='fragment roll-in'>decouple, don't bundle</li>
           <li class='fragment roll-in'>treat your utilities like utilities</li>
         </ul>
-      </section>
-    </section>
-    <section>
-      <section>
-        <h3>Walls of cryptography</h3>
-      </section>
-      <section>
-        <h4>Types of crypto:</h4>
-        <ol>
-          <li class='fragment roll-in'>Disk encryption</li>
-          <li class='fragment roll-in'>File encryption</li>
-          <li class='fragment roll-in'>Network i/o encryption</li>
-        </ol>
-        <br/>
-        <br/>
-        <p class='fragment roll-in'>Who controls the lines of transmission?</p>
-        <p class='fragment roll-in'>ISPs, telcos, NSA (prism, xkeyscore)?</p>
-      </section>
-      <section>
-        <h4>Fully Homomorphic Encryption</h4>
-        <ul>
-          <li class='fragment roll-in'>Support for blind processing operations</li>
-          <li class='fragment roll-in'>Data stays encrypted while being transacted upon</li>
-        </ul>
-        <br/>
-        <br/>
-        <p class='fragment roll-in'><a href='https://en.wikipedia.org/wiki/Homomorphic_encryption'>https://en.wikipedia.org/wiki/Homomorphic_encryption</a></p>
       </section>
     </section>
 
@@ -350,9 +368,11 @@
         <p>For information about running your own OpenShift:</p>
         <p><a href='http://openshift.github.io/'>http:/openshift.github.io</a></p>
         <br/>
-        <p><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=flock2013'>Or, sign up for a free OpenShift Online account<br/>(FLOCK2013)</a></p>
+        <p><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=HTML5'>Or, sign up for a free OpenShift Online account<br/>(HTML5)</a></p>
         <br/>
         <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b></p>
+        <br/>
+        <p class='fragment roll-in'><a href='http://socuteurl.com/cherrycupcakes'>socuteurl.com/cherrycupcakes</a></p>
       </section>
       <section data-state="blackout">
         <img src='../shared/img/stay_classy_cloud_city.jpg'/>
