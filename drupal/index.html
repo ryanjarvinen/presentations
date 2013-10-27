@@ -68,9 +68,8 @@
       </section>
       <section>
         <h1>Code du jour</h1>
-        <p><a href='https://github.com/smerrill/drupal-quickstart'>https://github.com/smerrill/drupal-quickstart</a></p>
+        <p><a href='https://github.com/phase2/drupal-quickstart'>https://github.com/phase2/drupal-quickstart</a></p>
 <br/>
-        <p><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=drupalcampLA13'>Signup with Code - drupalcampLA13</a></p>
       </section>
     </section>
     <section>
@@ -95,26 +94,41 @@
         <div class='fragment roll-in'><img src='../shared/img/PaaS-landscape.png'/></div>
       </section>
       <section>
+        <h2>Terminology (Red Hat)</h2>
+        <ul>
+          <li class="fragment"><strong>Broker – Management host, orchestration of Nodes</strong></li>
+          <li class="fragment"><strong>Node – Compute host containing Gears</strong></li>
+          <li class="fragment"><strong>Gear – Allocation of fixed memory, compute, and storage resources for running applications</strong></li>
+          <li class="fragment"><strong>Cartridge – A technology/framework (Python, Ruby, Javascript, PHP, Perl, Java/JEE, PG, MySQL, Jenkins, PHPMyAdmin, etc.) for application service dependencies</strong></li>
+        </ul>
+      </section>
+      <section>
         <h2>Secure and Efficient</h2>
         <div class='fragment roll-in'><img style='width:50%' src='../shared/img/gear.png'/></div>
         <div class='fragment roll-in'><a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div>
       </section>
       <section>
-        <h2>One Source to Bind Them All</h2>
+        <h2>Open cartridge format</h2>
+        <img style='width:65%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
+      </section>
+      <section>
+        <h2>Release Schedule:</h2>
         <img style='width:60%' src="../shared/img/Three_products.png">
+        <p>All open source, all patches go upstream</p>
       </section>
       <section>
         <h2>OpenShift Online</h2>
         <p>free OpenShift Online accounts:</p>
-        <p class='fragment roll-in'> <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=NodePDX">http://openshift.com</a></p>
+        <p class='fragment roll-in'> <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=BADcamp">http://openshift.com</a></p>
       </section>
       <section>
         <h1>OpenShift Origin</h1>
         <p class='fragment roll-in'><a href="http://openshift.github.io/">http://openshift.github.io</a></p>
       </section>
       <section>
-        <h2>Open cartridge format</h2>
-        <img style='width:65%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
+        <h1>OpenShift Enterprise</h1>
+        <p class='fragment roll-in'><a href="http://openshift.com/">http://openshift.com</a></p>
+        <p>Request a free evaluation</p>
       </section>
       <section>
         <h2 class='fragment roll-in'><span class='fragment roll-in'>Public Cloud</span><span class='fragment roll-in'> + </span><span class='fragment roll-in'>Private Cloud</span><span class='fragment roll-in'> = </span></h2>
@@ -129,55 +143,82 @@
         <h2>Gearing up a new app on OpenShift</h2> 
         <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME APP_CARTRIDGE CART_2 CART_3</code></pre></div>
         <div class='fragment roll-in'>or</div>
-        <div class='fragment roll-in'><pre><code contenteditable>rhc app create dcla php-5.3 mysql-5.1 --from-code=https://github.com/smerrill/drupal-quickstart</code></pre></div>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc app create badcamp https://cartreflect-claytondev.rhcloud.com/reflect?github=phase2/openshift-php-fpm mysql-5.1 https://cartreflect-claytondev.rhcloud.com/reflect?github=phase2/openshift-community-drush-master --from-code=https://github.com/phase2/drupal-quickstart</code></pre></div>
       </section>
       <section>
-<pre><code>Application Options
+<pre><code>The cartridge
+'https://cartreflect-claytondev.rhcloud.com/reflect?github=phase2/openshift-php-fpm' will be
+downloaded and installed
+The cartridge
+'https://cartreflect-claytondev.rhcloud.com/reflect?github=phase2/openshift-community-drush-master'
+will be downloaded and installed
+
+Application Options
 -------------------
-  Namespace:   rjdemo
-  Cartridges:  php-5.3, mysql-5.1
-  Source Code: https://github.com/smerrill/drupal-quickstart
+  Namespace:   shifter
+  Cartridges:
+https://cartreflect-claytondev.rhcloud.com/reflect?github=phase2/openshift-php-fpm, mysql-5.1,
+https://cartreflect-claytondev.rhcloud.com/reflect?github=phase2/openshift-community-drush-master
+  Source Code: https://github.com/phase2/drupal-quickstart
   Gear Size:   default
   Scaling:     no
 
-Creating application 'dcla' ... 
-
+Creating application 'badcamp' ... 
+ Apache server
+Starting PHP-FPM
+PHP-FPM is already running.
+Stopping Apache server
+Stopping PHP-FPM
+ Apache server
+Starting PHP-FPM
 done
 
-  Application dcla was created.
-  The cartridge php deployed a template application
-
-mysql-5.1: Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT
-  Starting Apache+mod_php HTTPD server
   MySQL 5.1 database added.  Please make note of these credentials:
-       Root User: adminz3kcLEm
-   Root Password: 61ajycfyT5uu
-   Database Name: dcla
+
+       Root User: admin4RnvraP
+   Root Password: Vz33rq5hhmm6
+   Database Name: badcamp
+
 Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
-You can manage your new MySQL database by also embedding phpmyadmin-3.4.
+
+You can manage your new MySQL database by also embedding phpmyadmin.
 The phpmyadmin username and password will be the same as the MySQL credentials above.
 
-Waiting for your DNS name to be available ... done</code></pre>
+Waiting for your DNS name to be available ... done
+
+Cloning into 'badcamp'...</code></pre>
       </section>
 	    <section>
-<pre><code contenteditable>Cloning into 'dcla'...
-The authenticity of host 'dcla-rjdemo.rhcloud.com (54.234.77.138)' can't be established.
-RSA key fingerprint is cf:ee:77:cb:0e:fc:02:d7:72:7e:ae:80:c0:90:88:a7.
-Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added 'dcla-rjdemo.rhcloud.com' (RSA) to the list of known hosts.
+<pre><code contenteditable>badcamp @ http://badcamp-shifter.rhcloud.com/ (uuid: 526d3d2d500446a3260004ae)
+------------------------------------------------------------------------------
+  Domain:          shifter
+  Created:         9:19 AM
+  Gears:           1 (defaults to small)
+  Git URL:         ssh://526d3d2d500446a3260004ae@badcamp-shifter.rhcloud.com/~/git/badcamp.git/
+  Initial Git URL: https://github.com/phase2/drupal-quickstart
+  SSH:             526d3d2d500446a3260004ae@badcamp-shifter.rhcloud.com
 
-Your application 'dcla' is now available.
+  phase2-php-5.4 (PHP 5.4)
+  ------------------------
+    From:  https://cartreflect-claytondev.rhcloud.com/reflect?github=phase2/openshift-php-fpm
+    Gears: Located with phase2-drushmaster-0.0.1, mysql-5.1
 
-  URL:        http://dcla-rjdemo.rhcloud.com/
-  SSH to:     51e2dc0f4382eccaae0000e5@dcla-rjdemo.rhcloud.com
-  Git remote: ssh://51e2dc0f4382eccaae0000e5@dcla-rjdemo.rhcloud.com/~/git/dcla.git/
-  Cloned to:  /home/ryan/src/dcla
+  phase2-drushmaster-0.0.1 (Drush (git))
+  --------------------------------------
+    From:  https://cartreflect-claytondev.rhcloud.com/reflect?github=phase2/openshift-community-drush-master
+    Gears: Located with phase2-php-5.4, mysql-5.1
 
-Run 'rhc show-app dcla' for more details about your app.</code></pre>
+  mysql-5.1 (MySQL 5.1)
+  ---------------------
+    Gears:          Located with phase2-php-5.4, phase2-drushmaster-0.0.1
+    Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
+    Database Name:  badcamp
+    Password:       Vz33rq5hhmm6
+    Username:       admin4RnvraP</code></pre>
       </section>
       <section>
         <h2>Success!</h2> 
-        <p>You should now have a basic Drupal app running on OpenShift!</p>
+        <p>You should now have a live Drupal instance running on OpenShift!</p>
         <br/>
         <p class='fragment roll-in'>Your gear is now configured with:</p> 
         <div><ul><li class='fragment roll-in'>it's own git repo</li>
@@ -216,7 +257,7 @@ $hostname = getenv('OPENSHIFT_APP_DNS')  || 'localhost';
       </section>
       <section>
        <h1>secret-free source</h1>
-       <p><a href='https://www.openshift.com/blogs/secret-free-source-on-paas'>https://www.openshift.com/blogs/secret-free-source-on-paas</a></p>
+       <pre><code contenteditable>rhc env help</code></pre>
       </section>
       <section>
         <h2>Adding cartridges to existing applications</h2> 
@@ -235,6 +276,7 @@ $hostname = getenv('OPENSHIFT_APP_DNS')  || 'localhost';
       <section>
         <h1>Release Management with OpenShift</h1>
         <div class='fragment roll-in'><a href='https://www.openshift.com/blogs/release-management-in-the-cloud'>https://www.openshift.com/blogs/release-management-in-the-cloud</a></div>
+        <p class='fragmant'>Or even better, take a look at smerrill's work with Jenkins</p>
       </section>
     </section>
 
@@ -315,14 +357,15 @@ $hostname = getenv('OPENSHIFT_APP_DNS')  || 'localhost';
       <section>
         <p>Come hang out with us:</p>
         <p>#openshift on freenode irc</p>
+        <p>#openshift-dev for ops questions</p>
       </section>
       <section data-state="blackout">
         <p>More information about running Drupal on OpenShift:</p>
+        <p><a href='https://openshift.redhat.com/app/console/application_types?search=drupal'>Drupal Quickstarts for OpenShift</a></p>
         <p><a href='https://www.openshift.com/blogs/how-to-migrate-drupal-to-openshift'>https://www.openshift.com/blogs/how-to-migrate-drupal-to-openshift</a></p>
-        <p><a href='https://github.com/openshift/drupal-example'>https://github.com/openshift/drupal-example</a></p>
         <br/>
         <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b></p>
-        <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=drupalcampLA13'>Signup with Code - drupalcampLA13</a></p>
+        <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=BADcamp'>signup for free</a></p>
       </section>
     </section>
 			</div>
