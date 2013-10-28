@@ -69,7 +69,6 @@
         <h1>Code du jour</h1>
         <p><a href='https://github.com/ryanj/meteor-showcase'>https://github.com/ryanj/meteor-showcase</a></p>
 <br/>
-        <p style='display:none;'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=NOSQLNOW13'>Signup with Code - NOSQLNOW13</a></p>
       </section>
     </section>
 
@@ -111,8 +110,11 @@
 
       <section>
         <section>
-          <h2>OpenShift IS</h2> 
+          <h2>OpenShift is&hellip;</h2> 
           <h1 class='fragment roll-in'><span class='fragment grow'>OPEN SOURCE</span></h1>
+          <h1 class='fragment roll-in'><span class='fragment grow'>hosting</span></h1>
+          <h3 class='fragment roll-in'>and</h3>
+          <h1 class='fragment roll-in'><span class='fragment grow'>auto-scaling</span></h1>
         </section>
       </section>
       <section>
@@ -123,10 +125,12 @@
 	      <section>
           <h2>Client code and Server code</h2>
           <pre><code contenteditable>if (Meteor.isServer) { 
-  ...
+  Meteor.publish("showcase-items", function () {
+    return Showcase.find(); // share everything in the showcase
+  });
 }</code></pre>
           <pre><code contenteditable>if (Meteor.isClient) { 
-  ...
+  Meteor.subscribe("showcase-items");
 }</code></pre>
         </section>
 	      <section>
@@ -284,7 +288,7 @@ Template.nav.username = function () {
       </section>
       <section>
 	      <section>
-          <h2><span class='fragment roll-in'>Smart</span> Packages</h2>
+          <h2><span class='fragment roll-in'>*Smart*</span> Packages</h2>
           <pre><code contenteditable>mrt add jquery
 mrt add bootstrap
 mrt add underscore
@@ -307,15 +311,7 @@ meteor remove autopublish
       </section>
       <section>
 	      <section>
-          <h2>Deploying to OpenShift</h2>
-          <p>GNU / Linux</p>
-          <pre><code contenteditable>tar -xvkf bundle.tar.gz --transform 's|^bundle/||' -C ../meteor/</code></pre>
-          <p>BSD / OSX</p>
-          <pre><code contenteditable>tar -xvkf bundle.tar.gz --transform 's|^bundle/||' -C ../meteor/</code></pre>
-<pre><code contenteditable>cd ../meteor
-git add .
-git commit -am "Adding a meteor.js application bundle"
-git push</code></pre>
+          <h1>Deploying to OpenShift</h1>
         </section>
         <section>
           <h2>Gearing up a new app on OpenShift</h2> 
@@ -404,6 +400,38 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 }</code></pre>
 </div>
         </section>
+        <section>
+          <h2>Add your bundle to the Quickstart</h2>
+          <p>GNU / Linux</p>
+          <pre><code contenteditable>tar -xvkf bundle.tar.gz --transform 's|^bundle/||' -C ../meteor/</code></pre>
+          <p>BSD / OSX</p>
+          <pre><code contenteditable>tar -xvkf bundle.tar.gz --transform 's|^bundle/||' -C ../meteor/</code></pre>
+<pre><code contenteditable>cd ../meteor
+git add .
+git commit -am "Adding a meteor.js application bundle"
+git push</code></pre>
+        </section>
+        <section>
+          <h2>The result</h2>
+          <p class='fragment'><a href='https://github.com/ryanj/instant-showcase'>http://github.com/ryanj/instant-showcase</a></p>
+          <ul>
+            <li class='fragment'>a production-packaged instant app</li>
+            <li class='fragment'>gzipped and minified</li>
+            <li class='fragment'>ready to deploy with a single command:</li>
+          </ul>
+          <pre class='fragment'><code contenteditable>rhc app create showcase nodejs-0.10 mongodb-2.2 --no-git --from-code=https://github.com/ryanj/instant-showcase.git --env GITHUB_CLIENT=$YOUR_GITHUB_CLIENT_TOKEN --env GITHUB_SECRET=$YOUR_GITHUB_CLIENT_SECRET</code></pre>
+        </section>
+        <section>
+          <h2>Free Hosting on OpenShift Online</h2>
+          <ul>
+            <li class='fragment'><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=Meteor'>3 for free</a> - 512MB RAM + 1GB Disk (each)</li>
+            <li class='fragment'>no CC required</li>
+            <li class='fragment'>no time-limit / expiration</li>
+            <li class='fragment'>domain aliasing support</li>
+            <li class='fragment'><a href='http://openshift.com/pricing'>pay to scale up</a></li>
+            <li class='fragment'>or, <a href='http://openshift.github.io/'>run your own open cloud</a></li>
+          </ul>
+        </section>
       </section>
       <section>
         <h2>Realtime front-end alternatives:</h2>
@@ -420,11 +448,11 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
           <p>visit <a href='http://meteor.com/'>http://meteor.com/</a></p>
         </section>
         <section data-state="blackout">
-            <a href='https://www.openshift.com/blogs/cloudy-with-a-chance-of-meteorjs'><img alt='meteor fireballs' src='https://www.openshift.com/sites/default/files/meteorshift_1.png'/></a>
+          <a href='https://www.openshift.com/blogs/cloudy-with-a-chance-of-meteorjs'><img alt='meteor fireballs' src='https://www.openshift.com/sites/default/files/meteorshift_1.png'/></a>
 <br/>
-<p><b><i>Thanks for following along! &nbsp; --ryanj</i></b>
-</p>
-
+<p><b><i>Thanks for following along!<br/>--ryanj</i></b></p>
+<br/>
+<p><a href='http://socuteurl.com/mooshybean'>socuteurl.com/mooshybean</a></p>
         </section>
       </section>
 			</div>
