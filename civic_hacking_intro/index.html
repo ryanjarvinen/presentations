@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Civic Hacking Intro</title>
+
+		<meta name="description" content="An introduction to civic hacking on OpenShift">
+		<meta name="author" content="Ryan Jarvinen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+    <section>
+        <section>
+            <p><i>an introduction to</i></p>
+            <h1>Civic Hacking</h1>
+            <p><i>on</i></p>
+            <img style="disply:block;border:none;background:none;" alt='OpenShift-logo' src='../shared/img/OpenShift_Horizontal_RGB_Reverse.png'/>
+            <br/>
+            <br/>
+            <p><a href='http://bit.ly/1cJtbk2'>http://bit.ly/1cJtbk2</a></p>
+            <p><a href='http://socuteurl.com/snugglewog'>http://socuteurl.com/snugglewog</a></p>
+        </section>
+        <section>
+            <div>presented by</div>
+            <br/>
+            <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+        </section>
+        <section data-state="blackout">
+            <div>
+              <div>Open Platform Evangelist</div>
+              <div>at</div>
+              <div>Red Hat</div>
+              <br/>
+              <div>ryanj@redhat.com</div>
+            </div>
+        </section>
+    </section>
+    <section>
+      <section>
+        <h1>Agenda</h1>
+        <ol>
+          <li class='fragment roll-in'>Civic Hacking Goals</li>
+          <li class='fragment roll-in'>Hosting on OpenShift</li>
+          <li class='fragment roll-in'>Writing clean and reusable code</li>
+          <li class='fragment roll-in'>Local Development Tips</li>
+          <li class='fragment roll-in'>Team Collaboration</li>
+        </ol>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Civic Hacking Goals</h2>
+        <ol>
+          <li class='fragment roll-in'>Craft simple and reusable solutions to civic issues</li>
+          <li class='fragment roll-in'>Deploy a prototype and establish a hub for open collaboration</li>
+          <li class='fragment roll-in'>Focus on user experience</li>
+          <li class='fragment roll-in'>Collect community feedback</li>
+          <li class='fragment roll-in'>Iterate on a solution</li>
+          <li class='fragment roll-in'>Consider plans for automation, sustainability, maintenance, and metrics</li>
+          <li class='fragment roll-in'>Help other neighborhoods replicate your success</li>
+        </ol>
+      </section>
+      <section>
+        <p>OpenShift is an open platform that can help you maintain focus on these high-level goals, accomplishing more in less time.</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>OpenShift is&hellip;</h2> 
+        <h1 class="fragment roll-in">OPEN SOURCE</h1>
+        <h1 class="fragment roll-in">hosting</h1>
+        <h3 class="fragment roll-in">and</h3>
+        <h1 class="fragment roll-in">auto-scaling</h1>
+      </section>
+      <section>
+        <p>providing instant access to all of this, and more:</p>
+        <img src='../shared/img/PaaS-landscape.png'/>
+      </section>
+      <section>
+        <p>Many of these technolgies are bundled / made available as</p>
+        <h3>Cartridges</h3>
+        <img style='width:70%' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge list</code></pre></div>
+      </section>
+      <section>
+        <p>On OpenShift, your application environment is securely incapsulated within a <b><i>Gear</i></b>, providing guaranteed access to system resources</p>
+        <img src='../shared/img/gear.png'/> 
+      </section>
+      <section>
+        <div class='fragment roll-in'><pre><code contenteditable>sudo gem install rhc</code></pre>
+        <p>and</p>
+        <pre><code contenteditable>rhc setup</code></pre></div>
+        <br/>
+        <p class='fragment roll-in'>Will automatically:</p>
+        <ul><li class='fragment roll-in'>authenticate your OpenShift account</li>
+                 <li class='fragment roll-in'>verify your local ssh key configuration</li>
+                 <li class='fragment roll-in'>configure your host url identifier</li></ul>
+      </section>
+      <section>
+        <p>Start by provisioning your application environment and database in a single step:</p>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME CARTRIDGE CART2 CART3</code></pre></div>
+        <div class='fragment roll-in'><p>or</p></div>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc app create citycamp nodejs-0.10 mongodb-2.2</code></pre></div>
+      </section>
+	    <section>
+<p>Command-line output:</p>
+<pre><code>Application Options
+-------------------
+  Namespace:   shifter
+  Cartridges:  nodejs-0.10, mongodb-2.2
+  Gear Size:   default
+  Scaling:     no
+
+Creating application 'citycamp' ... done
+
+Waiting for your DNS name to be available ... done
+
+Downloading the application Git repository ...
+Cloning into 'citycamp'...
+
+Your application code is now in 'citycamp'</code></pre>
+      </section>
+	<section>
+<pre><code contenteditable>citycamp @ http://citycamp-shifter.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
+-------------------------------------------------------------
+  Created:         1:05 PM
+  Gears:           1 (defaults to small)
+  Git URL:        
+ssh://5175981a5973ca7a69000501@citycamp-shifter.rhcloud.com/~/git/citycamp.git/
+  SSH:             5175981a5973ca7a69000501@citycamp-shifter.rhcloud.com
+
+  nodejs-0.10 (Node.js 0.10)
+  ------------------------
+    Gears: Located with mongodb-2.2
+
+  mongodb-2.2 (MongoDB NoSQL Database 2.2)
+  ----------------------------------------
+    Gears:          Located with nodejs-0.10
+    Connection URL:
+mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
+    Database Name:  citycamp
+    Password:       PTk4cCetTj2w
+    Username:       admin
+
+RESULT:
+Application citycamp was created.</code></pre>
+      </section>
+      <section>
+<h2>Success!</h2> 
+<p>You now have a basic node.js and MongoDB skeleton application live on the Internet!</p>
+        <p><a href='http://citycamp-shifter.rhcloud.com/'>http://citycamp-shifter.rhcloud.com/</a></p>
+<br/>
+        <p class='fragment roll-in'>Your gear is now configured with:</p> 
+        <ul><li class='fragment roll-in'>it's own git repo</li>
+                 <li class='fragment roll-in'>it's own web server</li>
+                 <li class='fragment roll-in'>ssh access</li>
+                 <li class='fragment roll-in'>logging</li>
+                 <li class='fragment roll-in'>MongoDB</li>
+                 <li class='fragment roll-in'>publicly accessible DNS</li></ul>
+      </section>
+      <section>
+        <p>Access your remote logs with:</p>
+        <pre><code contenteditable>rhc tail citycamp</code></pre>
+        <p>or connect to your gear directly over ssh:</p>
+        <pre><code contenteditable>rhc ssh citycamp</code></pre>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Writing clean and reusable code</h2>
+      </section>
+      <section>
+        <h3>Environment Variables</h3> 
+        <p>Allow you to write code that will run anywhere</p>
+        <div class='fragment roll-in'><pre><code contenteditable>//provide a sensible default for local development
+mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + db_name;
+//take advantage of openshift env vars when available:
+if(process.env.OPENSHIFT_MONGODB_DB_URL){
+  mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + db_name;
+}</code></pre></div>
+        <div class='fragment roll-in'><pre><code contenteditable>//same advice applies for your webserver's PORT and IP address
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000
+var ip   = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'</code></pre></div>
+      </section>
+      <section>
+        <p>Application passwords, keys, and secrets can be abstracted using the same technique:</p>
+        <div class='fragment roll-in'>
+          <pre><code contenteditable>rhc env set SECRET_KEY=C1V1C_1NN0V4T10N</code></pre>
+          <pre><code contenteditable>rhc env list</code></pre>
+          <pre><code contenteditable>rhc env help</code></pre>
+        </div>
+      </section>
+      <section>
+        <p>Team members can supply their own keys during app creation, for a single step clone+deploy:</p>
+        <pre class='fragment roll-in'><code contenteditable>rhc app create citycamp nodejs-0.10 mongodb-2.2 --from-code=http://github.com/USER/TEAM_REPO.git --env SECRET_KEY=C1V1C_1NN0V4T10N</code></pre>
+        <br/>
+        <p class='fragment roll-in'>Multiply your successes by building reusable and customizable solutions that can be replicated in other communities.<br/>(see <a href='https://www.openshift.com/blogs/nyc-shifts-civic-innovation-into-high-gear'>NYC Shifts Civic Innovation into High-Gear)</a></p>
+      </section>
+      <section>
+        <h3>Deploying updates to your application:</h3>
+        <ol><li class='fragment roll-in'>Add your changes to a changeset<pre><code contenteditable>git add index.html</code></pre></li>
+            <li class='fragment roll-in'>Mark the changeset as a Commit<pre><code contenteditable>git commit -m 'updating H1 to: "Welcome to CityCamp"'</code></pre></li>
+            <li class='fragment roll-in'>Push the Commit to OpenShift<pre><code contenteditable>git push</code></pre></li>
+        </ol>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Tips for Local Development</h2>
+        <p>Starting a local webserver is different in each language. <br/>For nodejs, you can start a local server with:</p>
+        <pre><code contenteditable>npm install</code></pre>
+        <pre><code contenteditable>npm start</code></pre>
+        <p>Use port-forwarding to create a local connection to your remote database instance:</p>
+        <pre><code contenteditable>rhc port-forward citycamp</code></pre>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Team Collaboration</h2>
+        <p>There are several ways to collaborate:
+        <ol>
+            <li class='fragment roll-in'>using <a href='https://www.openshift.com/blogs/seven-steps-to-hackathon-success#collaborate'>github or bitbucket</a></li>
+            <li class='fragment roll-in'>using <a href='https://www.openshift.com/blogs/secret-free-source-on-paas#team_collaboration'>ssh keys</a></li>
+            <li class='fragment roll-in'>or, using <a href='https://www.openshift.com/blogs/online-release-for-november-2013'>OpenShift's new team collaboration tools</a></li>
+        </ol>
+        <br/>
+        <br/>
+        <p class='fragment'>More great hackathon advice is available in our post on:<br/><a href='https://www.openshift.com/blogs/seven-steps-to-hackathon-success'>Seven Steps to Hackathon Success</a></p>
+      </section>
+    </section>
+    <section>
+      <section data-state="blackout">
+        <h2>Need Help?</h2>
+        <ul>
+          <li>Civic Hacking Office Hours: <a href=''>12-2pm today!</a></li>
+          <li>Come hang out with us on IRC: <a href='http://webchat.freenode.net/'>#openshift on Freenode</a></li>
+          <li>Link to these slides: <a href='http://socuteurl.com/snugglewog'>socuteurl.com/snugglewog</a></li>
+          <li>Blog post: <a href=''>Seven Steps to Hackathon Success</a></li>
+          <li>Blog post: <a href=''>Open Source Mapping Basics</a></li>
+          <li>Free hosting on OpenShift: <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=CityCamp">OpenShift Online</a></li>
+          <li>OpenShift source code: <a href="http://openshift.github.io/">OpenShift Origin</a></li>
+          <li>Red Hat Enterprise Support: <a href="https://www.openshift.com/products/enterprise">OpenShift Enterprise</a></li>
+        </ul>
+        <br/>
+        <br/>
+        <p><b><i>* Red Hat is granting additional OpenShift<br/>resources to Code for America cities and Brigades!</i></b></p>
+      </section>
+    </section>
+			</div>
+      <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
