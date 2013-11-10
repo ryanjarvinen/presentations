@@ -110,6 +110,7 @@
         <img src='../shared/img/gear.png'/> 
       </section>
       <section>
+        <h3>Basic Setup</h3>
         <div class='fragment roll-in'><pre><code contenteditable>sudo gem install rhc</code></pre>
         <p>and</p>
         <pre><code contenteditable>rhc setup</code></pre></div>
@@ -120,6 +121,7 @@
                  <li class='fragment roll-in'>configure your host url identifier</li></ul>
       </section>
       <section>
+        <h3>Create an application</h3>
         <p>Start by provisioning your application environment and database in a single step:</p>
         <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME CARTRIDGE CART2 CART3</code></pre></div>
         <br/>
@@ -183,9 +185,10 @@ Application citycamp was created.</code></pre>
                  <li class='fragment roll-in'>publicly accessible DNS</li></ul>
       </section>
       <section>
-        <p>Access your remote logs with:</p>
+        <h3>Accessing your application</h3>
+        <p>You can follow your remote logs with:</p>
         <pre><code contenteditable>rhc tail citycamp</code></pre>
-        <p>or connect to your gear directly over ssh:</p>
+        <p>or connect directly to your app via <b>ssh</b>:</p>
         <pre><code contenteditable>rhc ssh citycamp</code></pre>
       </section>
     </section>
@@ -221,7 +224,8 @@ var ip   = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'</code></pre></div>
         <p class='fragment roll-in'>Multiply your successes by building reusable and customizable solutions that can be replicated in other communities.<br/>(see <a href='https://www.openshift.com/blogs/nyc-shifts-civic-innovation-into-high-gear'>NYC Shifts Civic Innovation into High-Gear)</a></p>
       </section>
       <section>
-        <h3>Deploying updates to your application:</h3>
+        <h3>Deploying updates</h3>
+        <p>A standard git development workflow can be used to rebuild and update your remote application:</p>
         <ol><li class='fragment roll-in'>Add your changes to a changeset<pre><code contenteditable>git add index.html</code></pre></li>
             <li class='fragment roll-in'>Mark the changeset as a Commit<pre><code contenteditable>git commit -m 'updating H1 to: "Welcome to CityCamp"'</code></pre></li>
             <li class='fragment roll-in'>Push the Commit to OpenShift<pre><code contenteditable>git push</code></pre></li>
