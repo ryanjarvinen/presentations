@@ -42,22 +42,20 @@
         <p><a href='http://bit.ly/1cJtbk2'>http://bit.ly/1cJtbk2</a></p>
         <p><a href='http://socuteurl.com/snugglewog'>http://socuteurl.com/snugglewog</a></p>
       </section>
-      <!-- 
-          <section>
-            <div>presented by</div>
-            <br/>
-            <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
-        </section>
-        <section data-state="blackout">
-            <div>
-              <div>Open Platform Evangelist</div>
-              <div>at</div>
-              <div>Red Hat</div>
-              <br/>
-              <div>ryanj@redhat.com</div>
-            </div>
-        </section>
-      --!>
+      <section>
+        <div>presented by</div>
+        <br/>
+        <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+      </section>
+      <section data-state="blackout">
+        <div>
+          <div>Open Platform Evangelist</div>
+          <div>at</div>
+          <div>Red Hat</div>
+          <br/>
+          <div>ryanj@redhat.com</div>
+        </div>
+      </section>
     </section>
     <section>
       <section>
@@ -257,12 +255,65 @@ var ip   = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'</code></pre></div>
       </section>
     </section>
     <section>
+      <section>
+       <h2>What are the brigades up to?</h2>
+      </section>
+      <section>
+<h3>Oakland Brigade Projects</h3>
+<ul>
+  <li class='fragment roll-in'><a href='http://openbudgetoakland.org/'>OpenBudget Oakland</a> <span class='fragment roll-in'>(<a href='https://github.com/adstiles/openbudgetoakland/tree/gh-pages'>d3</a>)</span></li>
+  <li class='fragment roll-in'>Oakland Answers <span class='fragment roll-in'>(<a href='https://github.com/codeforamerica/honolulu_answers'>honolulu answers</a>)</span></li>
+  <li class='fragment roll-in'><a href='http://data.openoakland.org/'>data.openoakland.org</a> <span class='fragment roll-in'>(socrata, CKAN, DKAN)</span></li>
+  <li class='fragment roll-in'><a hred='http://oaklandwiki.org/'>OaklandWiki</a> <span class='fragment roll-in'>(<a href='https://github.com/localwiki/localwiki'>localWiki</a>)</span></li>
+  <li class='fragment roll-in'><a href='http://www.citycouncil.openoakland.org/'>CouncilMatic</a> <span class='fragment roll-in'>(<a href='http://www.councilmatic.org/'>CouncilMatic</a>)</span></li>
+  <li class='fragment roll-in'><a href='http://rikiwiki.electronicartifacts.com/codeforamerica_oakland/opd-crime-statistics'>Crime in Oakland</a> <span class='fragment roll-in'>(<a href='http://www.crimeinchicago.org/'>Crime in Chicago</a>)</span></li>
+  <li class='fragment roll-in'><a href='http://adoptadrainoakland.com/'>Adopt a drain</a> <span class='fragment roll-in'>(<a href='https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart'>or hydrant</a>)</span></li>
+  <li class='fragment roll-in'>more: <a href='http://openoakland.org/projects/'>http://openoakland.org/projects/</a></li>
+</ul>
+      </section>
+      <section>
+        <h3>Adopt a Cause</h3>
+        <p><a href='https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart'>https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart</a></p>
+        <br/>
+        <p>This app should be using PostGIS for spatial queries:</p>
+        <p class='fragment roll-in'><a href='https://www.openshift.com/blogs/get-more-spatial-in-your-database-with-postgis-20-on-openshift'>blog post: More Spatial in Your Database with PostGIS 2.0</a></p>
+      </section>
+      <section>
+        <p>Persist configuration details, <br/>while keeping your source clean:</p>
+        <pre><code contenteditable>rhc app create hydrant ruby-1.9 postgresql-8.4 --from=code=http://github.com/ryanj/adopt-a-hydrant.git --env SECRET_TOKEN="YOUR_SECRET_TOKEN"</code></pre>
+        <br/>
+        <p><a href='http://hydrant-shifter.rhcloud.com/'>http://hydrant-shifter.rhcloud.com/</a></p>
+      </section>
+      <section>
+        <h2>betaNYC</h2>
+        <p><a class='fragment roll-in' href='http://opennyforum.org/'>http://opennyforum.org/</a></p>
+        <p><a class='fragment roll-in' href='https://twitter.com/BetaNYC'>https://twitter.com/BetaNYC</a></p>
+        <p><a class='fragment roll-in' href='http://www.meetup.com/betanyc/'>http://www.meetup.com/betanyc/</a></p>
+        <p><a class='fragment roll-in' href='http://betanyc.tumblr.com/'>http://betanyc.tumblr.com/</a></p>
+        <p><a class='fragment roll-in' href='http://nycopendata.tumblr.com/'>http://nycopendata.tumblr.com</a></p>
+      </section>
+      <section>
+        <h3>Citibike dash</h3>
+        <p><a class='fragment roll-in' href='http://citibike-shifter.rhcloud.com'>http://citibike-shifter.rhcloud.com</a></p>
+        <br/>
+        <p><a class='fragment roll-in' href='http://github.com/ryanj/citibikenyc_dashboard'>http://github.com/ryanj/citibikenyc_dashboard</a></p>
+        <p><a class='fragment roll-in' href='http://github.com/edgar/citibikenyc_dashboard'>http://github.com/edgar/citibikenyc_dashboard</a></p>
+        <br/><p><a class='fragment roll-in' href='https://www.openshift.com/blogs/nyc-shifts-civic-innovation-into-high-gear'><i>NYC Shifts Civic Innovation into High-Gear</i></a></p>
+      </section>
+      <section>
+        <h5>Clone your own bike station dashboard</h5>
+        <pre class='fragment roll-in'><code contenteditable>rhc env set CITIBIKE_NEARBY_STATIONS="268,257,258" -a citibikes</code></pre>
+       <br/>
+        <p><a href='http://citibike-shifter.rhcloud.com/'>http://citibike-shifter.rhcloud.com/</a></p>
+      </section>
+    </section>
+    <section>
       <section data-state="blackout">
         <h2>Need Help?</h2>
         <ul>
-          <li>Civic Hacking Office Hours: <a href='https://plus.google.com/hangouts/_/7acpjv31qa48u2hmnpgss95s4o'>12-2pm Central, 10am-12 Pacific today!</a></li>
           <li>Come hang out with us on IRC: <a href='http://webchat.freenode.net/'>#openshift on Freenode</a></li>
           <li>Link to these slides: <a href='http://socuteurl.com/snugglewog'>socuteurl.com/snugglewog</a></li>
+          <li>Blog post: <a href='https://www.openshift.com/blogs/instant-mapping-applications-with-postgis-and-nodejs'>PostGIS instant mapping apps</a></li>
           <li>Blog post: <a href='https://www.openshift.com/blogs/seven-steps-to-hackathon-success'>Seven Steps to Hackathon Success</a></li>
           <li>Blog post: <a href='https://www.openshift.com/blogs/open-source-mapping-with-php-and-mongodb'>Open Source Mapping Basics</a></li>
           <li>Free hosting on OpenShift: <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=CityCamp">OpenShift Online</a></li>
