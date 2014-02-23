@@ -60,7 +60,7 @@
     </section>
     <section>
       <section id='agenda'>
-        <h1>Agenda</h1>
+        <h3>Agenda</h3>
         <ol>
           <li class='fragment roll-in'><a href="#/opencloud">State of the Open Cloud</a></li>
           <li class='fragment roll-in'><a href="#/rhc">rhc</a></li>
@@ -68,7 +68,6 @@
           <li class='fragment roll-in'><a href="#/git">git</a></li>
           <li class='fragment roll-in'><a href="#/release-management">Release Management</a></li>
           <li class='fragment roll-in'><a href="#/scaling">Scaling</a></li>
-          <li class='fragment roll-in'><a href="#/federated">the Future is Federated</a></li>
         </ol>
       </section>
     </section>
@@ -77,25 +76,53 @@
         <h2>State of the Open Cloud</h2>
       </section>
       <section>
-        <h2>OpenShift is&hellip;</h2> 
-        <h1 class="fragment roll-in">OPEN SOURCE</h1>
-        <h1 class="fragment roll-in">hosting</h1>
-        <h3 class="fragment roll-in">and</h3>
-        <h1 class="fragment roll-in">auto-scaling</h1>
+        <h3>Has it been</h3>
+        <h2 class='fragment'>Liberated?</h2>
+        <ol>
+          <li class="fragment roll-in">The OS <span class='fragment'>&check;</span></li>
+          <li class="fragment roll-in">The Cloud <span class='fragment'><b>?</b></span></li>
+          <li class="fragment roll-in">Infrastructure as a service <span class='fragment'>&check;</span></li>
+          <li class="fragment roll-in">Platform as a service <span class='fragment'>&check;</span></li>
+          <li class="fragment roll-in">Software as a service <span class='fragment'>&times;</span></li>
+        </ol>
       </section>
       <section>
-        <p>Many of these technolgies are bundled / made available as</p>
-        <h3>Cartridges</h3>
-        <img style='width:70%' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
-        <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge list</code></pre></div>
+        <h5>cloud autopsy</h5>
+        <img width="700" height="550" src="../shared/img/paas-overview.png"/>
       </section>
       <section>
-        <p>On OpenShift, your application environment is securely incapsulated within a <b><i>Gear</i></b>, providing guaranteed access to system resources</p>
-        <img src='../shared/img/gear.png'/> 
+        <h3>OpenShift is&hellip;</h3> 
+        <br/>
+        <h2 class="fragment roll-in">OPEN SOURCE</h2>
+        <h3 class="fragment roll-in">hosting,</h3>
+        <h3 class="fragment roll-in">build,</h3>
+        <p class="fragment roll-in"><i>and</i></p>
+        <h3 class="fragment roll-in">auto-scaling</h3>
+        <p class="fragment roll-in">for applications</p>
       </section>
       <section>
         <p>providing instant access to all of this, and more:</p>
         <img src='../shared/img/PaaS-landscape.png'/>
+      </section>
+      <section>
+        <p>these technolgies are bundled / made available as</p>
+        <h3>Cartridges</h3>
+        <img style='width:50%' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge list</code></pre></div>
+      </section>
+      <section>
+        <p>On OpenShift, your application environment is securely incapsulated within a '<i>Gear</i>', providing guaranteed access to system resources</p>
+        <img src='../shared/img/gear.png' /> 
+        <div class='fragment roll-in'>using <a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, and <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div>
+      </section>
+      <section>
+        <h4>OpenShift provides a peaceful environment for Devs AND SysAdmins to work together in</h4>
+        <img width="300" height="303" src="../shared/img/DarthLuke.png">
+        <ul>
+          <li class="fragment"><strong>Operations care about stability and performance</strong></li>
+          <li class="fragment"><strong>Developers just want environments without waiting</strong></li>
+          <li class="fragment"><strong>And neither one wants to have to fight the other to get their work done</strong></li>
+        </ul>
       </section>
     </section>
     <section>
@@ -103,10 +130,14 @@
         <h1>rhc</h1>
       </section>
       <section>
-        <h3>Basic Setup</h3>
-        <div class='fragment roll-in'><pre><code contenteditable>sudo gem install rhc</code></pre>
-        <p>and</p>
-        <pre><code contenteditable>rhc setup</code></pre></div>
+        <p><code>rhc</code> makes it easy for developers to talk to your OpenShift REST API</p>
+        <br/>
+        <h5 class='fragment roll-in'>pre-requisites:</h5>
+        <div class='fragment roll-in'>rubygems, git</div>
+        <pre class='fragment roll-in'><code contenteditable>sudo gem install rhc</code></pre>
+      </section>
+      <section>
+        <pre><code contenteditable>rhc setup</code></pre>
         <br/>
         <p class='fragment roll-in'>Will automatically:</p>
         <ul><li class='fragment roll-in'>authenticate your OpenShift account</li>
@@ -114,12 +145,12 @@
                  <li class='fragment roll-in'>configure your host url identifier</li></ul>
       </section>
       <section id='app-create'>
-        <h3>Creating an application</h3>
+        <h3>Create an application</h3>
         <p>Start by provisioning your application environment and database in a single step:</p>
         <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME CARTRIDGE CART2 CART3</code></pre></div>
         <br/>
         <div class='fragment roll-in'><p>for a basic Nodejs and MongoDB application, run:</p></div>
-        <div class='fragment roll-in'><pre><code contenteditable>rhc app create citycamp nodejs-0.10 mongodb-2.2</code></pre></div>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc app create scale12x nodejs-0.10 mongodb-2.2</code></pre></div>
       </section>
 	    <section>
 <p>&lt;command-line output&gt;</p>
@@ -130,23 +161,23 @@
   Gear Size:   default
   Scaling:     no
 
-Creating application 'citycamp' ... done
+Creating application 'scale12x' ... done
 
 Waiting for your DNS name to be available ... done
 
 Downloading the application Git repository ...
-Cloning into 'citycamp'...
+Cloning into 'scale12x'...
 
-Your application code is now in 'citycamp'</code></pre>
+Your application code is now in 'scale12x'</code></pre>
       </section>
-	<section>
-<pre><code contenteditable>citycamp @ http://citycamp-shifter.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
+      <section>
+<pre><code contenteditable>scale12x @ http://scale12x-shifter.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
 -------------------------------------------------------------
   Created:         1:05 PM
   Gears:           1 (defaults to small)
   Git URL:        
-ssh://5175981a5973ca7a69000501@citycamp-shifter.rhcloud.com/~/git/citycamp.git/
-  SSH:             5175981a5973ca7a69000501@citycamp-shifter.rhcloud.com
+ssh://5175981a5973ca7a69000501@scale12x-shifter.rhcloud.com/~/git/scale12x.git/
+  SSH:             5175981a5973ca7a69000501@scale12x-shifter.rhcloud.com
 
   nodejs-0.10 (Node.js 0.10)
   ------------------------
@@ -157,17 +188,17 @@ ssh://5175981a5973ca7a69000501@citycamp-shifter.rhcloud.com/~/git/citycamp.git/
     Gears:          Located with nodejs-0.10
     Connection URL:
 mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
-    Database Name:  citycamp
+    Database Name:  scale12x
     Password:       PTk4cCetTj2w
     Username:       admin
 
 RESULT:
-Application citycamp was created.</code></pre>
+Application scale12x was created.</code></pre>
       </section>
       <section>
 <h2>Success!</h2> 
 <p>You now have a basic node.js and MongoDB skeleton application live on the Internet!</p>
-        <p><a href='http://citycamp-shifter.rhcloud.com/'>http://citycamp-shifter.rhcloud.com/</a></p>
+        <p><a href='http://scale12x-shifter.rhcloud.com/'>http://scale12x-shifter.rhcloud.com/</a></p>
 <br/>
         <p class='fragment roll-in'>Your gear is now configured with:</p> 
         <ul><li class='fragment roll-in'>it's own git repo</li>
@@ -175,22 +206,22 @@ Application citycamp was created.</code></pre>
                  <li class='fragment roll-in'>ssh access</li>
                  <li class='fragment roll-in'>logging</li>
                  <li class='fragment roll-in'>a database</li>
-                 <li class='fragment roll-in'>publicly accessible DNS</li></ul>
+                 <li class='fragment roll-in'>publicly accessible hostnames, automatic DNS</li></ul>
+      </section>
+      <section>
+        <p>Application details are always available via:</p>
+        <pre class='fragment'><code contenteditable>rhc app show scale12x</code></pre>
+        <br/>
+        <p class='fragment'>You can tail your remote logs with:</p>
+        <pre class='fragment'><code contenteditable>rhc tail scale12x</code></pre>
+        <br/>
+        <p class='fragment'>or, connect directly to your app via <code>ssh</code>:</p>
+        <pre class='fragment'><code contenteditable>rhc ssh scale12x</code></pre>
       </section>
     </section>
     <section>
       <section id='ssh'>
         <h1>SSH</h1>
-      </section>
-      <section>
-        <h3>Accessing your application</h3>
-        <p>You can follow your remote logs with:</p>
-        <pre><code contenteditable>rhc tail citycamp</code></pre>
-        <p>or connect directly to your app via <b>ssh</b>:</p>
-        <pre><code contenteditable>rhc ssh citycamp</code></pre>
-      </section>
-      <section>
-        <h2>Writing clean and reusable code</h2>
       </section>
       <section>
         <h3>Environment Variables</h3> 
@@ -201,6 +232,7 @@ mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + db_name;
 if(process.env.OPENSHIFT_MONGODB_DB_URL){
   mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + db_name;
 }</code></pre></div>
+        <br/>
         <div class='fragment roll-in'><pre><code contenteditable>//same advice applies for your webserver's PORT and IP address
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000
 var ip   = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'</code></pre></div>
@@ -208,36 +240,16 @@ var ip   = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'</code></pre></div>
       <section>
         <p>Application passwords, keys, and secrets can be abstracted using the same technique:</p>
         <div class='fragment roll-in'>
-          <pre><code contenteditable>rhc env set SECRET_KEY=C1V1C_1NN0V4T10N</code></pre>
+          <pre><code contenteditable>rhc env set SECRET_KEY=0P3N_S0URC3</code></pre>
           <pre><code contenteditable>rhc env list</code></pre>
           <pre><code contenteditable>rhc env help</code></pre>
         </div>
       </section>
       <section>
         <p>Team members can supply their own keys during app creation, for a single step clone+deploy:</p>
-        <pre class='fragment roll-in'><code contenteditable>rhc app create citycamp nodejs-0.10 mongodb-2.2 --from-code=http://github.com/USER/TEAM_REPO.git --env SECRET_KEY=C1V1C_1NN0V4T10N</code></pre>
-        <br/>
-        <p class='fragment roll-in'>Multiply your successes by building reusable and customizable solutions that can be replicated in other communities.<br/>(see <a href='https://www.openshift.com/blogs/nyc-shifts-civic-innovation-into-high-gear'>NYC Shifts Civic Innovation into High-Gear)</a></p>
-      </section>
-      <section>
-        <h2>Tips for Local Development</h2>
-        <p>Starting a local webserver is different in each language. <br/>For nodejs, you can start a local server with:</p>
-        <pre><code contenteditable>npm install</code></pre>
-        <pre><code contenteditable>npm start</code></pre>
-        <p>Use port-forwarding to create a local connection to your remote database instance:</p>
-        <pre><code contenteditable>rhc port-forward citycamp</code></pre>
-      </section>
-    </section>
-    <section>
-      <section id='git'>
-      </section>
-      <section>
-        <h3>Deploying updates</h3>
-        <p>A standard git development workflow can be used to rebuild and update your remote application:</p>
-        <ol><li class='fragment roll-in'>Add your changes to a changeset<pre><code contenteditable>git add index.html</code></pre></li>
-            <li class='fragment roll-in'>Mark the changeset as a Commit<pre><code contenteditable>git commit -m 'updating H1 to: "Welcome to CityCamp"'</code></pre></li>
-            <li class='fragment roll-in'>Push the Commit to OpenShift<pre><code contenteditable>git push</code></pre></li>
-        </ol>
+        <pre class='fragment roll-in'><code contenteditable>rhc app create scale12x nodejs-0.10 mongodb-2.2 \
+--from-code=http://github.com/USER/TEAM_REPO.git \
+--env SECRET_KEY=0P3N_S0URC3</code></pre>
       </section>
       <section>
         <h2>Team Collaboration</h2>
@@ -250,21 +262,112 @@ var ip   = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'</code></pre></div>
       </section>
     </section>
     <section>
+      <section id='git'>
+        <h1>git</h1>
+      </section>
+      <section>
+        <h3>Deploying updates</h3>
+        <p>A standard git development workflow can be used to rebuild and update your remote application:</p>
+        <br/>
+        <ol><li class='fragment roll-in'>Add your changes to a changeset<pre><code contenteditable>git add index.html</code></pre></li>
+            <li class='fragment roll-in'>Mark the changeset as a Commit<pre><code contenteditable>git commit -m 'updating H1'</code></pre></li>
+            <li class='fragment roll-in'>Push the Commit to OpenShift<pre><code contenteditable>git push</code></pre></li>
+        </ol>
+      </section>
+      <section>
+        <p>Adding cartridges to existing apps is easy:</p>
+        <div class='fragment roll-in'>
+          <pre><code contenteditable>rhc cartridge add jenkins-1</code></pre>
+          <p>adds jenkins CI to your application's build cycle</p>
+        </div>
+      </section>
+    </section>
+    <section>
+      <section id='release-management'>
+        <h2>Release Management</h2>
+      </section>
+      <section>
+        <h4>Release Tracking & Rollbacks</h4>
+        <pre class='fragment'><code contenteditable>rhc deployment show</code></pre>
+        <pre class='fragment'><code contenteditable>rhc deployment list</code></pre>
+        <pre class='fragment'><code contenteditable>rhc deployment activate CHECKSUM</code></pre>
+        <p class='fragment'>Want to deploy a different branch (not 'master')?</p>
+        <pre class='fragment'><code contenteditable>rhc app configure --deployment-branch MY_BRANCH</code></pre>
+        <p class='fragment'><a href='https://www.openshift.com/blogs/introduction-to-deployments-and-rollbacks-on-openshift'>https://www.openshift.com/blogs/introduction-to-deployments-and-rollbacks-on-openshift</a></p>
+      </section>
+      <section>
+        <h3>Tips for Local Development</h3>
+        <p class='fragment'>Use port-forwarding to create a local connection to your remote database instance:</p>
+        <pre class='fragment'><code contenteditable>rhc port-forward scale12</code></pre>
+        <p class='fragment'>Starting a local webserver is different in each language. <br/>For nodejs, you can start a local server with:</p>
+        <pre class='fragment'><code contenteditable>npm install</code></pre>
+        <pre class='fragment'><code contenteditable>npm start</code></pre>
+        <p class='fragment'><a href='https://www.openshift.com/blogs/set-up-local-access-to-openshift-hosted-services-with-port-forwarding'>https://www.openshift.com/blogs/set-up-local-access-to-openshift-hosted-services-with-port-forwarding</a></p>
+      </section>
+    </section>
+    <section>
+      <section id='scaling'>
+        <h1>Scaling</h1>
+      </section>
+      <section>
+        <p>Spinning up an auto-scaling Linux environment:</p>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc app create scale12 -s nodejs-0.10 mongodb-2.2</code></pre></div>
+        <p class='fragment'>just add "<code>-s</code>" to your <code>app create</code> command</p>
+      </section>
+      <section>
+        <p>Set a min and max scale</p>
+        <p><pre><code contenteditable>rhc cartridge scale nodejs-0.10 -a scale12 --min 2 --max 12</code></pre></p>
+        <div class='fragment'>
+          <p>or, manually scale an application</p>
+          <pre><code contenteditable>rhc app scale-up</code></pre>
+          <pre><code contenteditable>rhc app scale-down</code></pre>
+        </div>
+      </section>
+      <section>
+        <p>From inside a hosted environment:</p>
+        <p><pre><code contenteditable>haproxy_ctld --up</code></pre></p>
+        <p><pre><code contenteditable>haproxy_ctld --down</code></pre></p>
+        <div class='fragment'>
+          <p>HAProxy on / off switches</p>
+          <pre><code contenteditable>haproxy_ctld_daemon start</code></pre>
+          <pre><code contenteditable>haproxy_ctld_daemon stop</code></pre>
+          <pre><code contenteditable>haproxy_ctld_daemon restart</code></pre>
+        </div>
+      </section>
+      <section>
+        <h2>generating load</h2>
+        <div>
+          <p>For scalable applications, generate load from the command line to see automatic scaling in action:</p>
+          <pre><code contenteditable>while true ; do ab -n 1000 -c 50 https://scale12-shifter.rhcloud.com/ ; done</code></pre>
+        </div>
+      </section>
+      <section>
+        <h3>HAProxy Web UI</h3>
+        <p>http://$YOUR_APP_DNS/haproxy-status/</p>
+        <br/>
+        <h3>HAProxy raw data</h3>
+        <p>http://$YOUR_APP_DNS/haproxy-status/;csv</p>
+      </section>
+    </section>
+    <section>
       <section data-state="blackout" id='fin'>
-        <h2>Need Help?</h2>
+        <h1>Questions?</h1>
+      </section>
+    </section>
+    <section>
+      <section data-state="blackout" id='fin'>
+        <h2>Want to learn more?</h2>
         <ul>
           <li>Come hang out with us on IRC: <a href='http://webchat.freenode.net/'>#openshift on Freenode</a></li>
-          <li>Link to these slides: <a href='http://socuteurl.com/snugglewog'>socuteurl.com/snugglewog</a></li>
-          <li>Blog post: <a href='https://www.openshift.com/blogs/instant-mapping-applications-with-postgis-and-nodejs'>PostGIS instant mapping apps</a></li>
+          <li>Link to these slides: <a href='http://socuteurl.com/widdlepuppytail'>http://socuteurl.com/widdlepuppytail</a></li>
           <li>Free hosting on OpenShift: <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=SCALE12">OpenShift Online</a></li>
           <li>OpenShift source code: <a href="http://openshift.github.io/">OpenShift Origin</a></li>
           <li>Red Hat Enterprise Support: <a href="https://www.openshift.com/products/enterprise">OpenShift Enterprise</a></li>
         </ul>
         <br/>
         <br/>
+        <p>presented by:</p>
         <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
-        <p><a href='http://bit.ly/1mq7s5h'>bit.ly/1mq7s5h</a></p>
-        <p><a href='http://socuteurl.com/widdlepuppytail'>socuteurl.com/widdlepuppytail</a></p>
       </section>
     </section>
 			</div>
