@@ -118,12 +118,12 @@
         </section>
         
         <section>
-        <p> Assume on linux
-          </p><ol>
+          <p>on linux:</p>
+          <ol>
             <li class="fragment">Install Apache with Mod_WSGI</li>            
             <li class="fragment">Make sure we have all the Python extensions set so Apache can see them</li>
             <li class="fragment">Configure firewall so that only http, https, and ssh are available to outside world</li>
-            <li class="fragment">Install Postgresql</li>
+            <li class="fragment">Install Postgresql, and plugins</li>
             <li class="fragment">PG_hba.conf, create db user, create db user password, set up access privs, and test account</li>
             <li class="fragment">Create DB, give user permissions to the DB</li>
             <li class="fragment">Set up a git repository and then figure out how to structure and deploy</li>
@@ -131,7 +131,6 @@
             <li class="fragment">Get it working with a public DNS</li>
             <li class="fragment">Now I am stuck maintaining the machine</li>
           </ol>
-          <p></p>
         </section>
         
         <section>
@@ -160,7 +159,7 @@
         </section>
         
         <section>
-          <h3>OpenShift Enterprise or Origin creates a peaceful environment for Devs AND SysAdmins</h3>
+          <h4>OpenShift provides a peaceful environment for Devs AND SysAdmins to work together in</h4>
           <img width="300" height="303" src="../shared/img/DarthLuke.png">
           <ul>
             <li class="fragment"><strong>Operations care about stability and performance</strong></li>
@@ -365,7 +364,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
          <h1 class='fragment roll-in'><span class='fragment roll-in'>Hybrid Cloud</span></h1>
         </section>
         <section>
-            <h2>One Source to Bind Them All</h2>
+            <h2>The Source lives Upstream</h2>
             <img src="../shared/img/Three_products.png">
         </section>
       </section>
