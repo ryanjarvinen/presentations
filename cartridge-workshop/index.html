@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>OpenShift Cartridge Authoring Workshop</title>
+
+		<meta name="description" content="A tour of OpenShift, from the command line">
+		<meta name="author" content="Ryan Jarvinen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+    <section>
+      <section>
+        <img style="disply:block;border:none;background:none;" alt='OpenShift-logo' src='../shared/img/OpenShift_Horizontal_RGB_Reverse.png'/>
+        <h1>Cartridge Authoring</h1>
+        <h1>WorkShop</h1
+        <br/>
+        <p><a href='http://bit.ly/1jAgPYh'>bit.ly/1jAgPYh</a></p>
+      </section>
+      <section id='presented-by'>
+        <div>presented by</div>
+        <br/>
+        <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+      </section>
+      <section data-state="blackout">
+        <div>
+          <div>Open Source Evangelist</div>
+          <div>at</div>
+          <div>Red Hat</div>
+          <br/>
+          <div>ryanj@redhat.com</div>
+        </div>
+      </section>
+    </section>
+    <section>
+      <section id='agenda'>
+        <h3>Agenda</h3>
+        <ol>
+          <li class='fragment roll-in'><a href="#/setup">Set up an OpenShift VM for local development and testing</a></li>
+          <li class='fragment roll-in'><a href="#/basics">The HOW and WHY of Cartridge Authoring on OpenShift</a></li>
+          <li class='fragment roll-in'><a href="#/testing">Testing your changes locally</a></li>
+          <li class='fragment roll-in'><a href="#/cart-reflector">Testing with OpenShift Online and the Cart Reflector</a></li>
+          <li class='fragment roll-in'><a href="#/index">Share your work in the Origin.ly cartridge index</a></li>
+        </ol>
+      </section>
+    </section>
+    <section>
+      <section id="setup">
+        <h2>Cloud Setup / Rain Dance</h2>
+        <p>You'll need a local VM or your own private OpenShift deployment to follow along.</p>
+        <ul class='fragment'>
+          <li>Grab a fresh VM from <a href='https://origin.openshift.com/'>Origin.openshift.com</a>, and then follow the <a href='http://openshift.github.io/documentation/oo_deployment_guide_vm.html'>Origin VM deployment guide</a></li>
+          <li>Or - start with a clean Fedora 19 minimal, RHEL 6.4 minimal, or CentOS 6.5 minimal image - then run the install scripts from <a href='https://install.openshift.com/'>Install.openshift.com</a></li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section id='basics'>
+        <h2>Intro to Cartridges</h2>
+        <p>on</p>
+        <h2>OpenShift</h2>
+      </section>
+      <section>
+        <h3>OpenShift is&hellip;</h3> 
+        <br/>
+        <h2 class="fragment roll-in">OPEN SOURCE</h2>
+        <h3 class="fragment roll-in">hosting,</h3>
+        <h3 class="fragment roll-in">build,</h3>
+        <p class="fragment roll-in"><i>and</i></p>
+        <h3 class="fragment roll-in">auto-scaling</h3>
+        <p class="fragment roll-in">for applications</p>
+      </section>
+      <section>
+        <p>providing instant access to all of this, and more:</p>
+        <img src='../shared/img/PaaS-landscape.png'/>
+      </section>
+      <section>
+        <p>these technolgies are bundled / made available as</p>
+        <h3>Cartridges</h3>
+        <img style='width:50%' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge list</code></pre></div>
+      </section>
+      <section>
+        <p>On OpenShift, your application environment is securely incapsulated within a '<i>Gear</i>', providing guaranteed access to system resources</p>
+        <img src='../shared/img/gear.png' /> 
+        <div class='fragment roll-in'>using <a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, and <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div>
+      </section>
+      <section>
+        <h4>OpenShift provides a peaceful environment for Devs AND SysAdmins to work together in</h4>
+        <img width="300" height="303" src="../shared/img/DarthLuke.png">
+        <ul>
+          <li class="fragment"><strong>Operations care about stability and performance</strong></li>
+          <li class="fragment"><strong>Developers just want environments without waiting</strong></li>
+          <li class="fragment"><strong>And neither one wants to have to fight the other to get their work done</strong></li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section id='development'>
+        <h2>Cartridge Development Resources</h2>
+        <ul>
+          <li><a href='https://github.com/pmorie/presentations'>Pmorie's presentation from DevNation</a></li>
+          <li><a href='http://openshift.github.io/documentation/oo_cartridge_developers_guide.html'>OpenShift Origin Cartridge Developer’s Guide</a></li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section id='testing'>
+        <h2>V2 Cartridge testing on OpenShift</h2>
+        <p><a href='https://www.openshift.com/developers/extend'>Extend OpenShift</a></p>
+        <ol>
+          <li><a href='https://www.openshift.com/blogs/new-openshift-cartridge-format-part-1'>V2 Cart Authoring Part1</a></li>
+          <li><a href='https://www.openshift.com/blogs/new-openshift-cartridge-format-part-2'>V2 Cart Authoring Part2</a></li>
+          <li><a href='https://www.openshift.com/blogs/new-openshift-cartridge-format-part-3'>V2 Cart Authoring Part3</a></li>
+        </ol>
+      </section>
+    </section>
+    <section>
+      <section id='cart-reflector'>
+        <h2>Downloadable Cartridges</h2>
+        <p>Test your downloadable cartridges on OpenShift Online using the Cart Reflector</p>
+        <p><a href='https://www.openshift.com/developers/download-cartridges'>Downloadable Cartridges and the OpenShift Cart reflector</a></p>
+      </section>
+    </section>
+    <section>
+      <section id='index'>
+        <h2>Community Cartridge Index</h2>
+        <p>Visit <a href='https://origin.ly`'>Origin.ly</a> to see what existing carts are available, or to add your open source carts to our community index of apps and services</p>
+      </section>
+    </section>
+    <section>
+      <section data-state="blackout" id='fin'>
+        <h2>Want to learn more?</h2>
+        <ul>
+          <li>Come hang out with us on IRC: <a href='http://webchat.freenode.net/'>#openshift-dev on Freenode</a></li>
+          <li>Link to these slides: <a href='http://bit.ly/1jAgPYh'>bit.ly/1jAgPYh</a></li>
+          <li>Free OpenShift hosting: <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=SCALE12">OpenShift Online</a></li>
+          <li>OpenShift on GitHub: <a href="http://openshift.github.io/">OpenShift.GitHub.io</a></li>
+          <li>OpenShift Cartridge Index: <a href="https://origin.ly">Origin.ly Cartridges and Quickstarts</a></li>
+        </ul>
+        <br/>
+        <br/>
+        <p>presented by:</p>
+        <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+      </section>
+    </section>
+			</div>
+      <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
