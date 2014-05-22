@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Writing portable postgreSQL-backed applications for the Open Cloud</title>
+
+		<meta name="description" content="Learn how to write PostgreSQL-backed applications that can be automatically cloned, built, monitored, and scaled in a matter of minutes">
+		<meta name="author" content="Ryan Jarvinen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+
+		<div class="slides">
+    <section>
+      <section>
+        <h1>PostGIS</h1>
+        <h2>in the Open Cloud</h2>
+        <p>writing portable open source mapping applications</p>
+        <p>with</p>
+        <h2>Leaflet</h2>
+        <p>and</p>
+        <h2>OpenShift</h2>
+        <br/>
+        <p><a href='http://bit.ly/1tpBqGA'>bit.ly/1tpBqGA</a></p>
+        <p><a href='http://ryanjarvinen.com/presentations/postgis-open-cloud'>http://ryanjarvinen.com/presentations/postgis-open-cloud</a></p>
+      </section>
+      <section>
+        <div>presented by</div>
+        <br/>
+        <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+      </section>
+      <section data-state="blackout">
+        <div>
+          <div>Open Source Evangelist</div>
+          <div>at</div>
+          <div>Red Hat</div>
+          <br/>
+          <div>ryanj@redhat.com</div>
+        </div>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Agenda</h2>
+        <ol>
+          <li class='fragment'><a href='#/open-cloud'>Open Cloud Overview</a></li>
+          <li class='fragment'><a href='#/frameworks'>Select a language and a lightweight web framwork</a></li>
+          <li class='fragment'><a href='#/leaflet'>Add Leaflet for client-side map interactions</a></li>
+          <li class='fragment'><a href='#/api'>Build a simple API</a></li>
+          <li class='fragment'><a href='#/pg'>Install and configure PostgreSQL, PostGIS</a></li>
+          <li class='fragment'><a href='#/env-vars'>Use environment variables to keep your code clean</a></li>
+          <li class='fragment'><a href='#/action-hooks'>Bootstrap your DB</a></li>
+          <li class='fragment'><a href='#/launch'>Launch your instant mapping solution</a></li>
+          <li class='fragment'><a href='#/tune'>Learn about tuning PG on OpenShift</a></li>
+        </ol>
+      </section>
+    </section>
+    <section>
+      <section id='open-cloud'>
+        <p style='font-size:larger;'><b>the Cloud</b></p>
+        <p class='fragment roll-in'><i>"what is it made of?"</i></p>
+      </section>
+      <section>
+        <p style='font-size:larger;'>The cloud is:</p>
+        <ul>
+          <li class='fragment roll-in'>hot air?</li>
+          <li class='fragment roll-in'>a series of tubes?</li>
+          <li class='fragment roll-in'>mostly cat photos<span class="fragment roll-in">✓</span></li>
+        </ul>
+      </section>
+      <section>
+        <h1>Infrastructure</h1>
+        <h2 class='fragment'>as a service</h2>
+        <p class='fragment' style='text-align:left;'><i>inputs:</i></p>
+        <ul>
+          <li class='fragment roll-in'><b>Hardware:</b> racks, fiber, routers, storage, compute</li>
+          <li class='fragment roll-in'><b>Software:</b> OpenStack, Eucalyptus, CloudStack, SaltStack</li>
+        </ul>
+        <br/>
+        <br/>
+        <p class='fragment' style='text-align:left;'><i>Result:</i></p>
+        <ul>
+          <li class='fragment'>Easy on-demand Linux environments</li>
+        </ul>
+      </section>
+      <section>
+        <h1>Platform</h1>
+        <h2 class='fragment'>as a service</h2>
+        <p class='fragment' style='text-align:left;'><i>inputs:</i></p>
+        <ul>
+          <li class='fragment roll-in'><b>Hardware:</b> IaaS</li>
+          <li class='fragment roll-in'><b>Software:</b> SELinux, CGroups, Docker, HAProxy, ssh, git</li>
+        </ul>
+        <br/>
+        <br/>
+        <p class='fragment' style='text-align:left;'><i>Result:</i></p>
+        <ul>
+          <li class='fragment'>Horizontally scalable application architectures on-demand</li>
+        </ul>
+      </section>
+      <section>
+        <p>Providing standards-based, open source workflows that answer the question of:</p>
+        <br/>
+        <div class='fragment' style='font-style: italic;font-weight:bold;background:#666;padding:2%;'>
+          <p class='fragment grow' style='padding-bottom:4%'>"How do I</p>
+          <h1 style='display:inline-block;padding-bottom:6%;' class="fragment grow">Build,</h1>
+          <h1 style='display:inline-block;padding-left:7%;padding-bottom:6%;' class="fragment grow">Host,</h1>
+          <h1 style='display:inline-block;padding-left:7%;padding-bottom:6%;'>&amp;</h1>
+          <h1 style='display:inline-block;padding-left:7%;padding-bottom:2%;' class='fragment grow'>Scale</h1>
+          <p class='fragment grow'>my solutions</p><p>on an</p>
+          <p class='fragment grow'>Open Cloud?"</p>
+        </div>
+      </section>
+      <section>
+        <p>Open platforms provide a peaceful environment for Developers AND Operations teams to work together in</h4>
+        <img width="300" height="303" src="../shared/img/DarthLuke.png">
+        <ul>
+          <li class="fragment"><strong>Operations teams can help ensure system-wide stability and performance</strong></li>
+          <li class="fragment"><strong>Developers can quickly provision environments without waiting</strong></li>
+          <li class="fragment"><strong>The discussion shifts towards establishing great policies for scaling in response to demand</strong></li>
+        </ul>
+      </section>
+      <section data-state='alert'>
+        <h2>Terminology (Red Hat)</h2>
+        <ul>
+          <li class="fragment" style='padding-bottom:20px;'><strong>Broker – Management host, orchestration of Nodes</strong></li>
+          <li class="fragment" style='padding-bottom:20px;'><strong>Node – Compute host containing Gears</strong></li>
+          <li class="fragment" style='padding-bottom:20px;'><strong>Gear – Allocation of fixed memory, compute, and storage resources for running applications (SELinux, CGoups)</strong></li>
+          <li class="fragment"><strong>Cartridge – A technology, framework, or application: Python, Ruby, Javascript, PHP, Perl, Java/JEE, PG, MySQL, Jenkins, PHPMyAdmin, etc.</strong></li> 
+        </ul>
+      </section>
+      <section>
+        <h3>An Open Cartridge format</h3>
+        <a href='http://openshift.github.io/documentation/oo_cartridge_developers_guide.html'><img style='width:50%' class='fragment roll-in' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/></a>
+        <p><a href='http://openshift.github.io/documentation/oo_cartridge_developers_guide.html'>cart developer's guide</a></p>
+      </section>
+      <section>
+        <img src='../shared/img/akbar_seems_legit.jpg'/><br/>
+      </section>
+      <section>
+        <h3>OpenShift Release Schedule</h3>
+        <img src="../shared/img/Three_products.png">
+      </section>
+    </section>
+    <section>
+      <section id='frameworks'>
+        <h1>Frameworks</h1>
+        <ul>
+          <li class="fragment">NodeJS / Restify: <br/>
+            <span class='fragment'><a href='https://github.com/ryanj/restify-base'>https://github.com/ryanj/restify-base</a></span>
+          </li>
+          <li class="fragment">Python / Flask: <br/>
+            <span class='fragment'><a href='https://github.com/ryanj/flask-base'>https://github.com/ryanj/flask-base</a></span>
+          </li>
+          <li class="fragment">PHP / Silex: <br/>
+            <span class='fragment'><a href='https://github.com/ryanj/silex-base'>https://github.com/ryanj/silex-base</a></span>
+          </li>
+          <li class="fragment">Ruby / Sinatra: <br/>
+            <span class='fragment'><a href='https://github.com/ryanj/sinatra-base'>https://github.com/ryanj/sinatra-base</a></span>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h3>Language-specific Dependencies</h3>
+        <p>Automatic support for dependency resolution using standard packaging, native to each language:</p>
+        <p><a href='https://github.com/openshift-quickstart/adopt-a-hydrant-openshift-quickstart/blob/master/Gemfile'>gems</a> (ruby), <a href='https://github.com/shekhargulati/todo-flask-openshift-quickstart/blob/master/setup.py'>eggs</a> (python), and <a href='https://github.com/ryanj/darkslides/blob/master/package.json'>npm modules</a> (node.js)</p>
+      </section>
+      <section>
+        <h3>Language-specific DB bindings</h3>
+        <p>For nodejs:</p>
+        <pre><code contenteditable>npm install pg-query --save</code></pre>
+        <p><a href="https://npmjs.org/~brianc">brianc's</a> <a href="https://npmjs.org/package/pg-query"><code>pg-query</code> module</a> makes working with PG exceedingly simple</p>
+        <p>Just map your queries to their related callback functions.</p>
+      </section>
+      <section>
+        <h3>Local development</h3>
+        <p>Resolve dependencies:</p>
+        <pre><code contenteditable>npm install</code></pre>
+        <p>Fire up a local server:</p>
+        <pre><code contenteditable>npm start</code></pre>
+      </section>
+    </section>
+    <section>
+      <section id='leaflet'>
+        <h1>Leaflet</h1>
+      </section>
+      <section>
+        <p>Include a link to Leaflet's css stylesheet and javascript code in your index.html file:</p>
+        <pre><code contenteditable>&lt;link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
+&lt;script src="//cdn.leafletjs.com/leaflet-0.5.1/leaflet.js">&lt;/script></code></pre>
+      </section>
+      <section>
+        <p>Initialize the map:</p>
+        <pre><code contenteditable>var map = L.map('map').setView([37.8, -122.3], 10);
+var markerLayerGroup = L.layerGroup().addTo(map);
+L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
+  maxZoom: 18,
+  minZoom: 5,
+  attribution: 'Map tiles by &lt;a href="http://stamen.com">Stamen Design&lt;/a>, under &lt;a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0&lt;/a>. Data by &lt;a href="http://openstreetmap.org">OpenStreetMap&lt;/a>, under &lt;a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA&lt;/a>.'
+}).addTo(map);</code></pre>
+      </section>
+      <section>
+        <p>Update the Map on load, drag, or zoom:</p>
+        <pre><code contenteditable>function getPins(e){
+  bounds = map.getBounds();
+  url = "parks/within?lat1=" + bounds.getSouthWest().lat + "&lon1=" + bounds.getSouthWest().lng + "&lat2=" + bounds.getNorthEast().lat + "&lon2=" + bounds.getNorthEast().lng;
+  $.get(url, pinTheMap, "json")
+}
+function pinTheMap(data){
+  //clear the current pins
+  map.removeLayer(markerLayerGroup);
+  //add the new pins
+  var markerArray = new Array(data.length)
+  for (var i = 0; i &lt; data.length; i++){
+    park = data[i];
+    markerArray[i] = L.marker([park.lat, park.lon]).bindPopup(park.name);
+  }
+  markerLayerGroup = L.layerGroup(markerArray).addTo(map);
+}
+map.on('dragend', getPins);
+map.on('zoomend', getPins);
+map.whenReady(getPins);
+</code></pre>
+      </section>
+    </section>
+    <section>
+      <section id='api'>
+        <h1>Building an API</h1>
+      </section>
+      <section>
+        <pre><code contenteditable>var config      = require('config'),
+    restify     = require('restify'),
+    fs          = require('fs'),
+    db          = require('./bin/db.js')
+var app = restify.createServer()
+app.use(restify.queryParser())
+app.use(restify.CORS())
+app.use(restify.fullResponse())
+ 
+// Routes
+app.get('/parks/within', db.selectBox);
+app.get('/parks', db.selectAll);
+// Static assets
+app.get(/\/(css|js|img)\/?.*/, restify.serveStatic({directory: './static/'}));
+app.get('/', function (req, res, next)
+{
+  var data = fs.readFileSync(__dirname + '/index.html');
+  res.status(200);
+  res.header('Content-Type', 'text/html');
+  res.end(data.toString().replace(/host:port/g, req.header('Host')));
+});
+ 
+app.listen(config.port, config.ip, function () {
+  console.log( "Listening on " + config.ip + ", port " + config.port )
+});
+</code></pre>
+      </section>
+    </section>
+    <section>
+      <section id='pg'>
+        <h1>PG Setup</h1>
+      </section>
+      <section>
+        <h4>Adding Postgres to existing apps:</h4>
+        <pre><code contenteditable>rhc cartridge add postgres-8.4</code></pre>
+        <p>or</p>
+        <pre><code contenteditable>rhc cartridge add postgres-9.2</code></pre>
+        <br/>
+        <p class="fragment roll-in"><i>done!</i></p>
+        <br/>
+        <p class="fragment roll-in"><a href='https://www.openshift.com/blogs/postgresql-92-comes-to-openshift'>blog post: PostgreSQL 9.2 Comes to OpenShift</a></p>
+      </section>
+      <section>
+        <pre><code contenteditable>function select_box(req, res, next){
+  //clean our input variables before forming our DB query:
+  var query = req.query;
+  var limit = (typeof(query.limit) !== "undefined") ? query.limit : 40;
+  if(!(Number(query.lat1) 
+    && Number(query.lon1) 
+    && Number(query.lat2) 
+    && Number(query.lon2)
+    && Number(limit)))
+  {
+    res.send(500, {http_status:400,error_msg: "this endpoint requires two pair of lat, long coordinates: lat1 lon1 lat2 lon2\na query 'limit' parameter can be optionally specified as well."});
+    return console.error('could not connect to postgres', err);
+  }
+  pg('SELECT gid,name,ST_X(the_geom) as lon,ST_Y(the_geom) as lat FROM ' + table_name+ ' t WHERE ST_Intersects( ST_MakeEnvelope('+query.lon1+", "+query.lat1+", "+query.lon2+", "+query.lat2+", 4326), t.the_geom) LIMIT "+limit+';', function(err, rows, result){
+    if(err) {
+      res.send(500, {http_status:500,error_msg: err})
+      return console.error('error running query', err);
+    }
+    res.send(rows);
+    return rows;
+  })
+};</code></pre>
+      </section>
+    </section>
+    <section>
+      <section id='env-vars'>
+        <h1>Env Vars</h1>
+        <h3>For writing Clean and Portable Code<h3>
+      </section>
+      <section>
+<pre><code contenteditable>rhc app show rss</code></pre>
+<p>Or, while connected over ssh:</p>
+<pre><code contenteditable>env | grep DB</code></pre>
+<pre><code contenteditable>OPENSHIFT_POSTGRESQL_DB_PASSWORD=lXcFVx4hIZgR
+OPENSHIFT_POSTGRESQL_DB_SOCKET=/var/lib/openshift/523672f7e0b8cd02d70003bc/postgresql/socket/
+OPENSHIFT_POSTGRESQL_DB_HOST=127.7.8.130
+OPENSHIFT_POSTGRESQL_DB_PID=/var/lib/openshift/523672f7e0b8cd02d70003bc/postgresql/pid/postgres.pid
+OPENSHIFT_POSTGRESQL_DB_USERNAME=adminpahue6e
+OPENSHIFT_POSTGRESQL_DB_URL=postgresql://adminpahue6e:lXcFVx4hIZgR@127.7.8.130:5432
+OPENSHIFT_POSTGRESQL_DB_PORT=5432
+OPENSHIFT_POSTGRESQL_DB_LOG_DIR=/var/lib/openshift/523672f7e0b8cd02d70003bc/postgresql/log/</code></pre>
+      </section>
+      <section>
+        <p>Persist configuration details, <br/>while keeping your source clean:</p>
+        <pre><code contenteditable>module.exports = {
+  port: process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000,
+  ip: process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
+  pg_config: process.env.OPENSHIFT_POSTGRESQL_DB_URL || 'postgresql://127.0.0.1:5432',
+  table_name: process.env.OPENSHIFT_APP_NAME || process.env.PG_MAP_TABLE_NAME || 'parks'
+}</code></pre>
+      </section>
+      <section>
+        <h3>Environment Variables</h3>
+        <p>Listing your custom env vars:</p>
+        <pre><code contenteditable>cd myapp 
+rhc env list</code></pre>
+        <p>Setting a variable:</p>
+        <pre><code contenteditable>rhc env set SECRET_TOKEN="a1fdacc3b1d14d6a92ed1219ed304d02529f535085262a90c39f072ef6de0ee9fe3a3d0194f02a2a8eb3"</code></pre>
+        <p>Help with configuration:</p>
+        <pre><code contenteditable>rhc help env</code></pre>
+      </section>
+      <section>
+        <p>Or, supply additional keys during the app creation process:</p>
+        <pre><code contenteditable>rhc app create hydrant ruby-1.9 postgresql-8.4 --from=code=http://github.com/ryanj/adopt-a-hydrant.git --env SECRET_TOKEN="YOUR_SECRET_TOKEN"</code></pre>
+        <p><a href='http://hydrant-shifter.rhcloud.com/'>http://hydrant-shifter.rhcloud.com/</a></p>
+      </section>
+      <section>
+        <h3>Advanced DB services mapping</h3>
+        <p><a href='https://www.openshift.com/blogs/set-up-local-access-to-openshift-hosted-services-with-port-forwarding'>Using port-forwarding for local dev</a></p>
+        <p><a href='https://www.openshift.com/blogs/cloud-connections-how-to-use-openshift-with-external-databases'>Or, connect to existing hosted PG services</a></p>
+      </section>
+    </section>
+    <section>
+      <section id='action-hooks'>
+        <h2>Automate your DB Setup</h2>
+      </section>
+      <section>
+        <h3>Action Hooks</h3>
+        <ol>
+          <li class="fragment roll-in">enable postgis</li>
+          <li class="fragment roll-in">create your table schema</li>
+          <li class="fragment roll-in">add a geospatial index</li>
+          <li class="fragment roll-in">bootstrap your db</li>
+        </ol>
+        <br/>
+        <br/>
+        <p class="fragment roll-in"><a href='https://github.com/ryanj/restify-postGIS/'>https://github.com/ryanj/restify-postGIS/tree/master/.openshift/action_hooks</a></p>
+      </section>
+      <section>
+        <pre><code contenteditable>var config      = require('config'),
+    pg          = require('pg-query')
+var pg_config   = config.pg_config,
+    table_name  = config.table_name;
+pg.connectionParameters = pg_config + '/' +table_name;
+var points = require('../parkcoord.json');
+ 
+function initDB(){
+  pg('CREATE EXTENSION postgis;', createDBSchema);
+} 
+function createDBSchema(err, rows, result) {
+  if(err && err.code == "ECONNREFUSED"){
+    return console.error("DB connection unavailable, see README notes for setup assistance\n", err);
+  }
+  var query = "CREATE TABLE "+table_name+
+    " ( gid serial NOT NULL, name character varying(240), the_geom geometry, CONSTRAINT "+table_name+ "_pkey PRIMARY KEY (gid), CONSTRAINT enforce_dims_geom CHECK (st_ndims(the_geom) = 2), CONSTRAINT enforce_geotype_geom CHECK (geometrytype(the_geom) = 'POINT'::text OR the_geom IS NULL),CONSTRAINT enforce_srid_geom CHECK (st_srid(the_geom) = 4326) ) WITH ( OIDS=FALSE );";
+  pg(query, addSpatialIndex);
+};</code></pre>
+      </section>
+      <section>
+        <pre><code contenteditable>function addSpatialIndex(err, rows, result) {
+  pg("CREATE INDEX "+table_name+"_geom_gist ON "+table_name+" USING gist (the_geom);", importMapPoints);
+}
+function importMapPoints(err, rows, result) {
+  var query = "Insert into "+table_name+" (name, the_geom) VALUES " + points.map(mapPinSQL).join(",") + ';';
+  pg(query, function(err, rows, result) {
+    var response = 'Data import completed!';
+    return response;
+  });
+};
+function mapPinSQL(pin) {
+  var query = '';  
+  if(typeof(pin) == 'object'){
+    query = "('" + pin.Name.replace(/'/g,"''") + "', ST_GeomFromText('POINT(" + pin.pos[0] +" "+ pin.pos[1] + " )', 4326))";  
+  }
+  return query;
+};</code></pre>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>Results!</h1>
+        <ul>
+          <li class="fragment">NodeJS / restify: <br/>
+            <span class='fragment'><a href='https://github.com/ryanj/restify-postGIS'>https://github.com/ryanj/restify-postGIS</a></span>
+          </li>
+          <li class="fragment">Python / Flask: <br/>
+            <span class='fragment'><a href='https://github.com/ryanj/flask-postGIS'>https://github.com/ryanj/flask-postGIS</a></span>
+          </li>
+          <li class="fragment">Java / Hibernate: <br/>
+            <span class='fragment'><a href='https://github.com/thesteve0/parkshibernatespatial'>https://github.com/thesteve0/parkshibernatespatial</a></span>
+          </li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section id='launch'>
+        <h1>Launch Time!</h1>
+        <p class='fragment'>Spin up a fresh app from the command line:</p>
+        <pre class='fragment'><code contenteditable>rhc app create myapp cart1 cart2 --from-code=http://github.com/user/repo.git</code></pre>
+        <p class='fragment'>For our nodejs example:</p>
+        <pre class='fragment'><code contenteditable>rhc app create parks nodejs-0.10 postgres-9.2 --from-code=http://github.com/user/repo.git</code></pre>
+        <br/>
+        <p class='fragment'><a href='http://parkgis-shifter.rhcloud.com/'>http://parkgis-shifter.rhcloud.com/</a></p>
+      </section>
+      <section>
+        <h3>Web Workflows for Launching Apps</h3>
+        <p><a href='https://www.openshift.com/blogs/customizing-openshifts-web-based-app-creation-workflow'>Customizing OpenShift's Web-based App Creation Workflow</a></p>
+      </section>
+      <section>
+        <h3>Open Source Ribbons for Launching apps!</h3>
+        <p><a href='https://www.openshift.com/blogs/instant-hosting-of-open-source-projects-with-github-style-ribbons'>Instant Hosting of Open Source Projects with GitHub-style Ribbons</a></p>
+      </section>
+    </section>
+    <section>
+      <section id='tune'>
+        <h1>Tuning PG</h1>
+        <p class='fragment'>aka, where is my pg_hba.conf, and postgresql.conf?</p>
+      </section>
+      <section>
+        <p>Some PG tuning notes were recently posted in the <a href='https://www.openshift.com/blogs/more-online-features-for-april-2014#pg-tuning'>OpenShift Online release announcement for April 2014</a></p>
+        <pre><code contenteditable>OPENSHIFT_POSTGRESQL_SHARED_BUFFERS</code></pre>
+        <pre><code contenteditable>OPENSHIFT_POSTGRESQL_MAX_CONNECTIONS</code></pre>
+        <br/>
+        <br/>
+        <p>More general tuning advice: <a href='https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server'>https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server</a></p>
+      </section>
+      <section>
+<h3>Advanced configurations</h3>
+<ul>
+  <li class='fragment'>Watch out for statistics collector issues in the pg-9.2 cart</li>
+</ul>
+<br/>
+<br/>
+<p class='fragment'>Take a look at the latest from CruchyData!</h3>
+<ul>
+  <li class='fragment'><a href='https://github.com/crunchyds/openshift-postgres-cartridge'>9.3 cart is available</a></li>
+  <li class='fragment'><a href='https://github.com/crunchyds/openshift-postgres-rls-cartridge'>9.4 devel with RLS patch</a></li>
+</ul>
+      </section>
+      <section>
+<h2>HA for PG by CrunchyData</h2>
+<p>See their release announcement for additional details: <a href='http://crunchydatasolutions.com/crunchy-latest/crunchy-announces-high-availability-postgresql-for-openshift-enterprise/'>crunchydatasolutions.com</a></p>
+<br/>
+<p>Including support for LB, geographic failover, Master-slave replication, and more!</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Join the Community</h2>
+        <ul>
+          <li class="fragment">We accept pull requests</li>
+          <li class="fragment">Help with anything from core, quickstarts, and cartridges, to small typo fixes in the command line tools </li>
+          <li class="fragment">PEPs for major feature enhancements</li>
+          <li class="fragment"><a href="https://github.com/openshift/origin-server/blob/master/CONTRIBUTING.md" class="roll">Contribution Guidelines</a></li>
+          <li class="fragment"><a href="https://trello.com/openshift" class="roll"><span data-title="Public Trello cards">Public Trello cards</span></a></li>
+          <li class="fragment"><a href="https://tcms-openshift.rhcloud.com/plan/2/openshift-origin" class="roll"><span data-title="Public Test plans">Public Test plans</span></a></li>
+          <li class="fragment"><a href="https://bugzilla.redhat.com/" class="roll"><span data-title="Public Bugzilla">Public Bugzilla</span></a></li>
+          <li class="fragment"><a href="https://www.openshift.com/ideas" class="roll"><span data-title="Voting on Features">Vote on Features</span></a></li>
+        </ul>  
+      </section>
+      <section>
+        <h2>Origin.ly</h2>
+        <p><a href='http://origin.ly/search?query=postgres'>The Origin.ly Appication and Cartridge index</a></p>
+      </section>
+      <section>
+        <h2>OpenShift Core Roadmap:</h2>
+        <ul>
+          <li class="fragment"><a href='http://www.projectatomic.io/'>Project Atomic</a></li>
+          <li class="fragment"><a href='https://www.openshift.com/blogs/technical-thoughts-on-openshift-and-docker'>Docker</a></li>
+          <li class="fragment"><a href='https://www.openshift.com/blogs/geard-the-intersection-of-paas-docker-and-project-atomic'>GearD</a></li>
+        </ul>
+      </section>
+      <section>
+        <p>Check out the upstream source: <br/><a href='http://openshift.github.com/'>OpenShift Origin</a></p>
+        <br/>
+        <p>Try our hosted solution (3 apps free): <br/><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=PGCon2014'>OpenShift Online</a></p>
+        <br/>
+        <p>Request an evaluation for: <br/><a href='https://www.openshift.com/products/enterprise'>OpenShift Enterprise</a></p>
+      </section>
+      <section data-state="blackout" id='bye'>
+        <h1>Thank You!</h1>
+        <p>See my post on this topic for more info: <a href='https://www.openshift.com/blogs/instant-mapping-applications-with-postgis-and-nodejs'>Instant Mapping Applications with PostGIS and Nodejs</a></p>
+        <br/>
+        <p>Link to these slides: <a href='http://bit.ly/1tpBqGA'>bit.ly/1tpBqGA</a></p>
+        <br/>
+        <p><b><i>See you next time!<br/> &nbsp; --ryanj</i></b></p>
+      </section>
+    </section>
+
+			</div>
+      <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
