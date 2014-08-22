@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Open Platform Architectures</title>
+
+		<meta name="author" content="ryan jarvinen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+ <section>
+      <section id='Open-Platform-Architectures-at-Red-Hat'>
+        <h1>Open Platform</h1>
+        <h1>Architectures</h1>
+        <p><i>at</i></p>
+        <img style="disply:block;border:none;background:none;" alt='OpenShift-logo' src='http://ryanjarvinen.com/presentations/shared/img/RH_logo-trans_reverse.png'/>
+        <br/>
+        <p><a href='http://bit.ly/1ttmLu8'>bit.ly/1ttmLu8</a></p>
+      </section>
+      <section id='presented-by' data-state="blackout">
+        <div>presented by</div>
+        <br/>
+        <p><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></p>
+        <p><a href="http://ryanjarvinen.com"><img src="http://ryanjarvinen.com/presentations/shared/img/moo_openshift_horizontal.png"/></a></p>
+      </section>
+    </section>
+    <section>
+      <section id='agenda'>
+        <h3>Agenda</h3>
+        <ol>
+          <li class='fragment roll-in'><a href="#/opencloud">State of the Open Cloud</a></li>
+          <li class='fragment roll-in'><a href="#/IaaS">Infrastructure as a Service</a></li>
+          <li class='fragment roll-in'><a href="#/open-platforms">Open Platforms</a></li>
+          <li class='fragment roll-in'><a href="#/cartridges">Cartridges</a></li>
+          <li class='fragment roll-in'><a href="#/roadmap">Roadmap</a></li>
+        </ol>
+      </section>
+    </section>
+    <section>
+      <section id="opencloud">
+        <h2>State of the Open Cloud</h2>
+      </section>
+      <section>
+        <h3>Has it been</h3>
+        <h2 class='fragment'>Liberated?</h2>
+        <ol>
+          <li class="fragment roll-in">The OS <span class='fragment'>&check;</span></li>
+          <li class="fragment roll-in">The Cloud <span class='fragment'><b>?</b></span></li>
+          <li class="fragment roll-in">Infrastructure as a service <span class='fragment'>&check;</span></li>
+          <li class="fragment roll-in">Platform as a service <span class='fragment'>&check;</span></li>
+          <li class="fragment roll-in">Software as a service <span class='fragment'>&times;</span></li>
+        </ol>
+      </section>
+      <section>
+        <h5>cloud autopsy</h5>
+        <img width="700" height="550" src="http://ryanjarvinen.com/presentations/shared/img/paas-overview.png"/>
+      </section>
+    </section>
+    <section>
+      <section id="IaaS">
+        <h1>Infrastucture</h1>
+        <h2>As a Service</h2>
+      </section>
+      <section id="iaas-options">
+<h3>choices</h3>
+<ul>
+  <li class='fragment'>Eucalyptus</li>
+  <li class='fragment'>SaltStack</li>
+  <li class='fragment'>Cloudstack</li>
+  <li class='fragment'>OpenStack <span class='fragment'>(RDO)</span</li>
+</ul>
+      </section>
+    </section>
+    <section>
+      <section id="open-platforms">
+        <h1>Open Platforms</h1>
+        <p>a.k.a. "Platform as a Service"</p>
+      </section>
+      <section id="about-openshift">
+        <h3>OpenShift is&hellip;</h3> 
+        <br/>
+        <h2 class="fragment roll-in">OPEN SOURCE</h2>
+        <h3 class="fragment roll-in">hosting,</h3>
+        <h3 class="fragment roll-in">build,</h3>
+        <p class="fragment roll-in"><i>and</i></p>
+        <h3 class="fragment roll-in">auto-scaling</h3>
+        <p class="fragment roll-in">for applications</p>
+        <p class="fragment roll-in"><small>for docker</small></p>
+      </section>
+      <section>
+        <p>OpenShift provides a clean separation of concerns that helps Developers AND SysAdmins work together</p>
+        <img width="300" height="303" src="http://ryanjarvinen.com/presentations/shared/img/DarthLuke.png">
+        <ul>
+          <li class="fragment"><strong>Operations care about stability and performance</strong></li>
+          <li class="fragment"><strong>Developers just want environments without waiting</strong></li>
+          <li class="fragment"><strong>And neither one wants to have to fight the other to get their work done</strong></li>
+        </ul>
+      </section>
+      <section>
+        <p>offering instant access to all of this, and more:</p>
+        <img src='http://ryanjarvinen.com/presentations/shared/img/PaaS-landscape.png'/>
+      </section>
+      <section>
+        <p>these technolgies are bundled / made available as</p>
+        <h3>Cartridges</h3>
+        <img style='width:50%' alt='OpenShift Cartridge' src='http://ryanjarvinen.com/presentations/shared/img/Openshift-Cartridge.png'/>
+      </section>
+ 
+ 
+      <section>
+        <p>On OpenShift, your application environment is securely incapsulated within a '<i>Gear</i>', providing guaranteed access to system resources</p>
+        <img src='http://ryanjarvinen.com/presentations/shared/img/gear.png' /> 
+        <div class='fragment roll-in'>using <a href='http://en.wikipedia.org/wiki/Security-Enhanced_Linux'>SELinux</a>, and <a href='http://en.wikipedia.org/wiki/Cgroups'>Cgroups</a></div>
+      </section>
+        <section>
+          <h2>Machine Types</h2>
+          <img src="http://ryanjarvinen.com/presentations/shared/img/broker-node.png"/>
+        </section>
+ 
+        <section>
+          <h2>The Broker is responsible for state, DNS, and authentication.</h2>
+          <img src="http://ryanjarvinen.com/presentations/shared/img/broker-view.png"/>
+        </section>
+ 
+        <section>
+          <h2>Applications are hosted on 'Node' machines</h2>
+          <img src="http://ryanjarvinen.com/presentations/shared/img/selinux.png"/>
+        </section>
+        <section>
+          <h2>Flow of request</h2>
+          <img src="http://ryanjarvinen.com/presentations/shared/img/flow.png"/>
+        </section>
+ 
+        <section>
+          <h2>Multi-tenant networking</h2>
+          <img src="http://ryanjarvinen.com/presentations/shared/img/networking.png"/>
+        </section>
+ 
+        <section>
+          <h2>Whole Stack</h2>
+          <img src="http://ryanjarvinen.com/presentations/shared/img/whole-stack.png"/>
+        </section>
+ 
+        <section>
+            <h2>The Source lives Upstream</h2>
+            <img src="http://ryanjarvinen.com/presentations/shared/img/Three_products.png">
+        </section>
+        <section>
+          <h1>OpenShift Origin</h1>
+          <p class='fragment roll-in'><a href="http://openshift.github.io/">http://openshift.github.io</a></p>
+        </section>
+        <section>
+          <h3>Installing in "the cloud"</h3>
+          <ul>
+            <li><a href="http://install.openshift.com">install.openshift.com</a></li>
+            <li><a href="https://github.com/openstack/heat-templates/openshift-origin" class="roll"><span data-title="Install Instructions">via OpenStack+Heat</span></a></li>
+            <li><a href="http://presentations-techsmacktalk.rhcloud.com/hplandl/img/install-instructions.pdf" class="roll"><span data-title="Install Instructions">Origin on Cloudstack</span></a></li>
+          </ul>
+        </section>
+        <section id="docs" data-markdown>
+## docs
+ 
+[https://openshift.github.io/documentation/index.html](https://openshift.github.io/documentation/index.html)
+ 
+        </section>
+    </section>
+    <section>
+      <section id="cartridges">
+          <h1>Cartridges</h1>
+          <a href='http://openshift.github.io/documentation/oo_cartridge_developers_guide.html'><img style='width:50%' class='fragment roll-in' alt='OpenShift Cartridge' src='http://ryanjarvinen.com/presentations/shared/img/Openshift-Cartridge.png'/></a>
+      </section>
+      <section>
+          <p><a href='http://openshift.github.io/documentation/oo_cartridge_developers_guide.html'>cart developer's guide</a></p>
+          <p><a href='http://ryanjarvinen.com/presentations/cartridge-workshop/'>Cartridge workshop (presentation)</a></p>
+          <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge list</code></pre></div>
+      </section>
+      <section data-markdown>
+## Demos
+ 
+load carts from a url
+ 
+      rhc app create APP_NAME CART_MANIFEST_URL
+ 
+add carts to your whitelist:
+ 
+      oo-admin-ctl-cartridge -c import --url https://raw.githubusercontent.com/gshipley/openshift-cartridge-logentries/master/metadata/manifest.yml --activate
+
+list the available system cartridges:
+ 
+      sudo oo-admin-ctl-cartridge -c list
+
+remove cartridges from the listing:
+
+      sudo oo-admin-ctl-cartridge -c deactivate --ids gshipley-logentries-1.0
+
+      </section>
+      <section data-markdown>
+## Origin.ly
+ 
+[origin.ly](http://origin.ly)
+ 
+      </section>
+    </section>
+    <section>
+      <section id='roadmap'>
+        <h1>Roadmap</h1>
+        <p>PEPs <a href="https://openshift.github.io/documentation/index.html" class="roll"><span data-title="https://openshift.github.io/documentation/index.html">https://openshift.github.io/documentation/index.html</span></a></p>
+        <p>Current work and roadmap is on Trello <a href="https://trello.com/openshift" class="roll"><span data-title="https://trello.com/openshift">https://trello.com/openshift</span></a></p>
+      </section>
+      <section id='future'>
+        <h1>The Future</h1>
+        <p class='fragment'><a href="https://www.docker.com/"><img src="https://d3oypxn00j2a10.cloudfront.net/0.8.0/img/nav/docker-logo-loggedout.png" alt="docker"/></a></p>
+        <p class='fragment'><a href="http://www.projectatomic.io/"><img src="http://www.projectatomic.io/images/logo.svg" alt="project atomic"/></a></p>
+        <p class='fragment'><a href="https://github.com/GoogleCloudPlatform/kubernetes">kubernetes</a></p>
+      </section>
+      <section id='blogs'>
+<h2>Announcements</h2>
+ 
+<a href="https://www.openshift.com/blogs/openshift-v3-platform-combines-docker-kubernetes-atomic-and-more">OpenShift v3 Platform Combines Docker, Kubernetes, Atomic and More</a>
+      </section>
+    </section>
+    <section>
+      <section data-state="blackout" id='questions'>
+        <h1>Questions?</h1>
+      </section>
+    </section>
+    <section>
+      <section data-state="blackout" id='fin'>
+        <h2>Want to learn more?</h2>
+        <ul>
+          <li>Come hang out with us on IRC: <a href='http://webchat.freenode.net/'>#openshift on Freenode</a></li>
+          <li>Link to these slides: <a href='http://bit.ly/1ttmLu8'>bit.ly/1ttmLu8</a></li>
+          <li>Free hosting on OpenShift: <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=linuxcon14">OpenShift Online</a></li>
+          <li>OpenShift source code: <a href="http://openshift.github.io/">OpenShift Origin</a></li>
+          <li>Red Hat Enterprise Support: <a href="https://www.openshift.com/products/enterprise">OpenShift Enterprise</a></li>
+        </ul>
+        <br/>
+        <br/>
+        <p>presented by:</p>
+        <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+      </section>
+    </section>
+			</div>
+      <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
