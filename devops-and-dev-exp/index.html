@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>DevOps and the Developer Experience at OpenShift</title>
+
+		<meta name="author" content="ryan jarvinen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+<section>
+  <section id='DevOps-and-the-Developer-Experience-at-OpenShift'>
+    <h1>DevOps</h1>
+    <p>and</p>
+    <h1>Developer Experience</h1>
+    <p><i>at</i></p>
+    <img style="disply:block;border:none;background:none;" alt='OpenShift-logo' src='http://ryanjarvinen.com/presentations/shared/img/OpenShift_Horizontal_RGB_Reverse.png'/>
+    <br/>
+    <p><a href='http://bit.ly/YJ1qCS'>bit.ly/YJ1qCS</a></p>
+  </section>
+  <section id='presented-by' data-state="blackout">
+    <p>presented by</p>
+    <p><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></p>
+    <p><a href="http://ryanjarvinen.com"><img src="http://ryanjarvinen.com/presentations/shared/img/moo_openshift_horizontal.png"/></a></p>
+    <p class='fragment'>Developer Experience Engineer</p>
+  </section>
+</section>
+<section>
+  <section id="motivations">
+    <h2>motivations</h2>
+  </section>
+  <section id="early-adopter">
+    <p><a href="http://slackware.com"><img src="http://www.slackware.com/~msimons/slackware/grfx/shared/slack-penguin-color.gif"></a></p>
+    <p>Slackware 2.x (~1995)</p>
+    <p class='fragment'>CD came bundled with a book</p>
+  </section>
+  <section id="dev-advocates">
+    <h2>Developer Advocates</h2>
+    <p><a href="http://www.meetup.com/developeradvocates/"><img src="http://photos1.meetupstatic.com/photos/event/2/4/9/1/global_43689361.jpeg"></a></p>
+    <p><a href="http://www.meetup.com/members/5799882/" class="roll"><span data-title="one of 87 meetup groups">one of 87 meetup groups</span></a></p>
+  </section>
+  <section id="whats-in-a-name">
+    <h3>What's in a Name?</h3>
+    <p class='fragment'>Developer Evangelists</p>
+    <p class='fragment'>and</p>
+    <p class='fragment'>Developer Advocates</p>
+    <br/>
+    <h2 class='fragment'>developer experience experts</h2>
+  </section>
+</section>
+<section>
+  <section id='agenda'>
+    <h2>Agenda</h2>
+    <ol>
+      <li class='fragment roll-in'><a href="#/devops">What is DevOps?</a></li>
+      <li class='fragment roll-in'><a href="#/dev-ex">What is Developer Experience?</a></li>
+      <li class='fragment roll-in'><a href="#/APIs">APIs</a></li>
+      <li class='fragment roll-in'><a href="#/command-line">Command line tools (rhc, ssh, git)</a></li>
+      <li class='fragment roll-in'><a href="#/web">Web Workflows</a></li>
+    </ol>
+  </section>
+</section>
+<section>
+  <section id="devops">
+    <h2>What is&hellip;</h2>
+    <h1 class='fragment'>DevOps<span class='fragment'>?</span></h1>
+  </section>
+  <section id="job-desc">
+    <h2>Job Description</h2>
+    <ol>
+      <li class='fragment'>uptime</li>
+      <li class='fragment'>release management</li>
+      <li class='fragment'>MAGIC!</li>
+      <li class='fragment'>reliability <span class="fragment">(uptime)</span></li>
+      <li class='fragment'>tribal knowledge <span class="fragment">(proprietary secrets)</span></li>
+      <li class='fragment'>config management</li>
+      <li class='fragment'>hand-waving <span class="fragment">(&amp; fist shaking)</span></li>
+      <li class='fragment'>uptime</li>
+    </ol>
+  </section>
+  <section id="cloud-overview">
+    <h5>cloud overview</h5>
+    <img width="700" height="550" src="http://ryanjarvinen.com/presentations/shared/img/paas-overview.png"/>
+  </section>
+</section>
+<section>
+  <section id="dev-ex">
+    <h2>What is&hellip;</h2>
+    <h1 class='fragment'>Developer Experience?</h1>
+  </section>
+  <section id="usability">
+    <p>It all boils down to&hellip;</p>
+    <h2 class='fragment'>usability</h2>
+  </section>
+  <section id="experiences">
+    <h3>experiences</h3>
+    <ol>
+      <li class='fragment'>interfaces (APIS, Web, CLI)</li>     
+      <li class='fragment'>docs</li>
+      <li class='fragment'>community management</li>
+    </ol>
+    <br/>
+    <br/>
+    <p class='fragment'>For PaaS, the focus in on streamlining interactions between traditional Development and Operations teams</p>
+  </section>
+  <section id="dev-rel">
+    <h3>Lost in the</h3>
+    <h1>Developer Zone!</h1>
+    <p class='fragment'>If you work in developer relations, please don't put your users in a "developer zone"</p>
+  </section>
+  <section id="successful-outreach">
+    <h3>Developer Outreach</h3>
+    <p>Building a great developer program requires:</p>
+    <ol>
+      <li class='fragment'>Metrics - define performance goals and collect plenty of usage data</li>
+      <li class='fragment'>Analysis - make data-driven decisions to improve the health of your community</li>
+      <li class='fragment'>Community - be responsive to questions and highlight your top contributors</li>
+      <li class='fragment'>Documentation - minimize pain points by improving docs and usage examples</li>
+    </ol>
+  </section>
+</section>
+<section>
+  <section "community-management">
+    <h2>Community Management</h2>
+  </section>
+  <section "community-solutions">
+    <h3>Stack Overflow</h3>
+    <p>integrated StackOverflow search helps make community answers easier to find</p>
+    <p><a href="https://www.openshift.com/search/gcse?query=npm+devDependencies#gsc.tab=0&gsc.q=npm%20devDependencies&gsc.page=1">For example, try searching for "<code>devDependencies</code>"</a></p>
+  </section>
+  <section "community-feedback">
+    <h3>UserVoice</h3>
+    <p>vote on features</p>
+    <p><a href="https://openshift.uservoice.com/">openshift.uservoice.com</a></p>
+  </section>
+  <section "support">
+    <h2>Support Options</h2>
+    <ul>
+      <li><a href="http://webchat.freenode.net/?channels=openshift&uio=d4">Freenode IRC #openshift</a></li>
+      <li><a href="http://help.openshift.com">help.openshift.com</a></li>
+      <li><a href="https://bugzilla.redhat.com/enter_bug.cgi?product=OpenShift%20Online">bugzilla</a></li>
+      <li><a href="https://access.redhat.com/support/offerings/openshift/">file a ticket</a> (<a href="https://www.openshift.com/products/pricing">support plan required</a>)</li>
+    </ul>
+  </section>
+</section>
+<section>
+  <section id="APIs">
+    <h1>APIs</h1>
+    <p class="fragment"><a href="https://www.openshift.com/developers/rest-api-tutorial">Getting Started with the OpenShift REST API</a></p>
+    <p class="fragment"><a href="https://access.redhat.com/documentation/en-US/OpenShift/2.0/html/REST_API_Guide/">Complete REST API docs</a></p>
+  </section>
+</section>
+<section>
+  <section id="command-line" data-markdown>
+## The Command Line
+  </section>
+  <section id='rhc'>
+    <h1>rhc</h1>
+    <p class="fragment"><code>rhc</code> makes it easy for developers to talk to the OpenShift REST API</p>
+    <br/>
+    <h5 class='fragment'>pre-requisites:</h5>
+    <div class='fragment'>rubygems, git</div>
+    <pre class='fragment'><code contenteditable>sudo gem install rhc</code></pre>
+  </section>
+  <section>
+    <pre><code contenteditable>rhc setup</code></pre>
+    <br/>
+    <p class='fragment roll-in'>Will automatically:</p>
+    <ul><li class='fragment roll-in'>authenticate your OpenShift account</li>
+             <li class='fragment roll-in'>verify your local ssh key configuration</li>
+             <li class='fragment roll-in'>configure your host url identifier</li></ul>
+  </section>
+  <section id='app-create'>
+    <h3>Create an application</h3>
+    <p>Start by provisioning your application environment and database in a single step:</p>
+    <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME CARTRIDGE CART2 CART3</code></pre></div>
+    <br/>
+    <div class='fragment roll-in'><p>for a basic Nodejs and MongoDB application, run:</p></div>
+    <div class='fragment roll-in'><pre><code contenteditable>rhc app create myapp nodejs-0.10 mongodb-2.4</code></pre></div>
+  </section>
+  <section>
+<p>&lt;command-line output&gt;</p>
+<pre><code>Application Options
+-------------------
+  Namespace:   shifter
+  Cartridges:  nodejs-0.10, mongodb-2.4
+  Gear Size:   default
+  Scaling:     no
+
+Creating application 'myapp' ... done
+
+Waiting for your DNS name to be available ... done
+
+Downloading the application Git repository ...
+Cloning into 'myapp'...
+
+Your application code is now in 'myapp'</code></pre>
+  </section>
+  <section>
+<pre><code contenteditable>myapp @ http://myapp-shifter.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
+-------------------------------------------------------------
+  Created:         1:05 PM
+  Gears:           1 (defaults to small)
+  Git URL:        
+ssh://5175981a5973ca7a69000501@myapp-shifter.rhcloud.com/~/git/myapp.git/
+  SSH:             5175981a5973ca7a69000501@myapp-shifter.rhcloud.com
+
+  nodejs-0.10 (Node.js 0.10)
+  ------------------------
+Gears: Located with mongodb-2.4
+
+  mongodb-2.4 (MongoDB NoSQL Database 2.4)
+  ----------------------------------------
+Gears:          Located with nodejs-0.10
+Connection URL:
+mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
+Database Name:  myapp
+Password:       PTk4cCetTj2w
+Username:       admin
+
+RESULT:
+Application myapp was created.</code></pre>
+  </section>
+  <section>
+<h2>Success!</h2> 
+<p>You now have a basic node.js and MongoDB application live on the Internet!</p>
+    <p><a href='http://myapp-shifter.rhcloud.com/'>http://myapp-shifter.rhcloud.com/</a></p>
+<br/>
+    <p class='fragment roll-in'>Your instance is now configured with:</p> 
+    <ul><li class='fragment roll-in'>it's own git repo</li>
+             <li class='fragment roll-in'>it's own web server</li>
+             <li class='fragment roll-in'>ssh access</li>
+             <li class='fragment roll-in'>logging</li>
+             <li class='fragment roll-in'>a database</li>
+             <li class='fragment roll-in'>publicly accessible hostnames, automatic DNS</li></ul>
+  </section>
+  <section>
+    <p>Application details are always available via:</p>
+    <pre class='fragment'><code contenteditable>rhc app show myapp</code></pre>
+    <br/>
+    <p class='fragment'>You can tail your remote logs with:</p>
+    <pre class='fragment'><code contenteditable>rhc tail myapp</code></pre>
+    <br/>
+    <p class='fragment'>or, connect directly to your app via <code>ssh</code>:</p>
+    <pre class='fragment'><code contenteditable>rhc ssh myapp</code></pre>
+  </section>
+  <section id='ssh'>
+    <h1>SSH</h1>
+  </section>
+  <section id='git'>
+    <h1>git</h1>
+  </section>
+  <section>
+    <h3>Deploying updates</h3>
+    <p>A standard git development workflow can be used to rebuild and update your remote application:</p>
+    <br/>
+    <ol><li class='fragment roll-in'>Add your changes to a changeset<pre><code contenteditable>git add index.html</code></pre></li>
+        <li class='fragment roll-in'>Mark the changeset as a Commit<pre><code contenteditable>git commit -m 'updating H1'</code></pre></li>
+        <li class='fragment roll-in'>Push the Commit to OpenShift<pre><code contenteditable>git push</code></pre></li>
+    </ol>
+  </section>
+</section>
+
+<section>
+  <section id="extending-openshift">
+    <h2>Extending OpenShift</h2>
+  </section>
+  <section>
+    <p>Technolgies are bundled and made available as</p>
+    <h3>Cartridges</h3>
+    <img style='width:50%' alt='OpenShift Cartridge' src='http://ryanjarvinen.com/presentations/shared/img/Openshift-Cartridge.png'/>
+    <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge list</code></pre></div>
+  </section>
+  <section>
+    <p>providing instant access to all of this, and more:</p>
+    <img src='http://ryanjarvinen.com/presentations/shared/img/PaaS-landscape.png'/>
+  </section>
+  <section>
+    <p>Adding services to an existing apps is easy:</p>
+    <div class='fragment roll-in'>
+      <pre><code contenteditable>rhc cartridge add jenkins-1</code></pre>
+      <p>adds jenkins CI to your application's build cycle</p>
+    </div>
+  </section>
+  <section id="cartridge-hacking" data-markdown>
+    <p>Make services available to developers by writing cartridges and adding them to your list:</p>
+    <ul>
+      <li class="fragment"><a href="http://openshift.github.io/documentation/oo_cartridge_developers_guide.html"><span data-title="OpenShift Origin Cartridge Developer’s Guide">OpenShift Origin Cartridge Developer’s Guide</span></a></li>
+      <li class="fragment"><a href="https://github.com/pmorie/presentations"><span data-title="Pmorie's presentation from DevNation">Pmorie's presentation from DevNation</span></a></li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <section id="web">
+    <h1>Web Experiences</h1>
+  </section>
+  <section id='launch' data-markdown>
+## launching apps on the web
+
+[Launching Applications with OpenShift's Web-Based Workflow](https://www.openshift.com/blogs/launching-applications-with-openshifts-web-based-workflow)
+  </section>
+  <section id='add-ons' data-markdown>
+## Adding Services to an existing app
+
+&lt;demo&gt;
+
+  </section>
+  <section id='scaling'>
+    <h1>Scaling</h1>
+    <p>&lt;demo&gt;</p>
+  </section>
+  <section>
+    <p>Spinning up an auto-scaling Linux environment:</p>
+    <div class='fragment roll-in'><pre><code contenteditable>rhc app create myapp -s nodejs-0.10 mongodb-2.4</code></pre></div>
+    <p class='fragment'>just add "<code>-s</code>" to your <code>app create</code> command</p>
+  </section>
+  <section>
+    <p>Set a min and max scale</p>
+    <p><pre><code contenteditable>rhc cartridge scale nodejs-0.10 -a myapp --min 2 --max 12</code></pre></p>
+    <div class='fragment'>
+      <p>or, manually scale an application</p>
+      <pre><code contenteditable>rhc app scale-up</code></pre>
+      <pre><code contenteditable>rhc app scale-down</code></pre>
+    </div>
+  </section>
+  <section>
+    <p>From inside a hosted environment:</p>
+    <p><pre><code contenteditable>haproxy_ctld --up</code></pre></p>
+    <p><pre><code contenteditable>haproxy_ctld --down</code></pre></p>
+    <div class='fragment'>
+      <p>HAProxy on / off switches</p>
+      <pre><code contenteditable>haproxy_ctld_daemon start</code></pre>
+      <pre><code contenteditable>haproxy_ctld_daemon stop</code></pre>
+      <pre><code contenteditable>haproxy_ctld_daemon restart</code></pre>
+    </div>
+  </section>
+</section>
+
+
+
+
+<section>
+  <section id='release-management'>
+    <h2>Release Management</h2>
+  </section>
+  <section>
+    <h4>Release Tracking & Rollbacks</h4>
+    <pre class='fragment'><code contenteditable>rhc deployment list</code></pre>
+    <pre class='fragment'><code contenteditable>rhc deployment activate CHECKSUM</code></pre>
+    <p class='fragment'>Want to deploy a different branch (not 'master')?</p>
+    <pre class='fragment'><code contenteditable>rhc app configure --deployment-branch MY_BRANCH</code></pre>
+    <p class='fragment'><a href='https://www.openshift.com/blogs/introduction-to-deployments-and-rollbacks-on-openshift'>https://www.openshift.com/blogs/introduction-to-deployments-and-rollbacks-on-openshift</a></p>
+  </section>
+  <section>
+    <h3>Tips for Local Development</h3>
+    <p class='fragment'>Use port-forwarding to create a local connection to your remote database instance:</p>
+    <pre class='fragment'><code contenteditable>rhc port-forward myapp</code></pre>
+    <p class='fragment'>Starting a local webserver is different in each language. <br/>For nodejs, you can start a local server with:</p>
+    <pre class='fragment'><code contenteditable>npm install</code></pre>
+    <pre class='fragment'><code contenteditable>npm start</code></pre>
+    <p class='fragment'><a href='https://www.openshift.com/blogs/set-up-local-access-to-openshift-hosted-services-with-port-forwarding'>https://www.openshift.com/blogs/set-up-local-access-to-openshift-hosted-services-with-port-forwarding</a></p>
+  </section>
+</section>
+
+
+<section>
+  <section>
+    <h3>Environment Variables</h3> 
+    <p>Allow you to write code that will run anywhere</p>
+    <div class='fragment roll-in'><pre><code contenteditable>//provide a sensible default for local development
+mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + db_name;
+//take advantage of openshift env vars when available:
+if(process.env.OPENSHIFT_MONGODB_DB_URL){
+  mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + db_name;
+}</code></pre></div>
+    <br/>
+    <div class='fragment roll-in'><pre><code contenteditable>//same advice applies for your webserver's PORT and IP address
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000
+var ip   = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'</code></pre></div>
+  </section>
+  <section>
+    <p>Application passwords, keys, and secrets can be abstracted using the same technique:</p>
+    <div class='fragment roll-in'>
+      <pre><code contenteditable>rhc env set SECRET_KEY=0P3N_S0URC3</code></pre>
+      <pre><code contenteditable>rhc env list</code></pre>
+      <pre><code contenteditable>rhc env help</code></pre>
+    </div>
+  </section>
+  <section>
+    <p>Team members can supply their own keys during app creation, for a single step clone+deploy:</p>
+    <pre class='fragment roll-in'><code contenteditable>rhc app create myapp nodejs-0.10 mongodb-2.4 \
+--from-code=http://github.com/USER/TEAM_REPO.git \
+--env SECRET_KEY=0P3N_S0URC3</code></pre>
+  </section>
+</section>
+
+<section>
+  <section id="the-future-of-devops">
+  <h2>The future of</h2>
+  <h1>DevOps</h1>
+    <ul>
+      <li class="fragment">compose your platform using interchangeable OSS components</li>
+      <li class="fragment">customize or extend platforms in useful ways (openshift cartridge hacking)</li>
+      <li class="fragment">build great developer experiences using standard tools, and open workflows</li>
+    </ul>
+  </section>
+</section>
+<section>
+  <section>
+    <p>OpenShift provides a clean separation of concerns that helps Developers AND SysAdmins work together</p>
+    <img width="300" height="303" src="http://ryanjarvinen.com/presentations/shared/img/DarthLuke.png">
+    <ul>
+      <li class="fragment"><strong>Operations teams can focus on stability and performance</strong></li>
+      <li class="fragment"><strong>Developers get secure Linux environments without waiting</strong></li>
+      <li class="fragment"><strong>And, neither team wants to fight the other in order to do their job</strong></li>
+    </ul>
+  </section>
+  <section data-state="blackout" id='questions'>
+    <h1>Questions?</h1>
+  </section>
+  <section data-state="blackout" id='fin'>
+    <h2>Want to learn more?</h2>
+    <ul>
+      <li>Come hang out with us on IRC: <a href='http://webchat.freenode.net/'>#openshift on Freenode</a></li>
+      <li>Link to these slides: <a href='http://bit.ly/YJ1qCS'>bit.ly/YJ1qCS</a></li>
+      <li>Free hosting on OpenShift: <a href="https://openshift.redhat.com/app/account/new?web_user[promo_code]=LINUXCON14">OpenShift Online</a></li>
+      <li>OpenShift source code: <a href="http://openshift.github.io/">OpenShift Origin</a></li>
+      <li>Red Hat Enterprise Support: <a href="https://www.openshift.com/products/enterprise">OpenShift Enterprise</a></li>
+    </ul>
+    <br/>
+    <br/>
+    <p>presented by:</p>
+    <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+  </section>
+</section>
+			</div>
+      <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
