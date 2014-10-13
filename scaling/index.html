@@ -284,6 +284,18 @@ var hostname = process.env.OPENSHIFT_APP_DNS       || 'localhost';
         </div>
       </section>
       <section>
+        <h2>Cloud Env</h2>
+        <p><a href="https://github.com/ryanj/config-multipaas"><code>config-multipaas</code></a> is a <code>config-chain</code> wrapper that provides a consistent naming scheme for cloud server configs (from OpenShift, Heroku)</p>
+        <pre class='fragment'><code contenteditable>npm install --save config-multipaas</code></pre>
+        <p class='fragment'>Add your own configs using the <a href="https://github.com/dominictarr/config-chain#boring-api-docs"><code>config-chain</code> API</a></p>
+        <pre class='fragment'><code contenteditable>var cc = require('config-multipaas')
+var config = cc({ additional_configs: "just like config-chain!" });</code></pre>
+        <p class='fragment'>When cloud configs are not available, local development configs are returned</p>
+        <pre class='fragment'><code contenteditable>app.listen(config.get('PORT'), config.get('IP'), function () {
+  console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT') )
+})</code></pre>
+      </section>
+      <section>
         <h2>Adding cartridges to existing applications</h2> 
         <div class='fragment roll-in'>
           <p>This command should make mongodb services avilable to your application if run from within your local application source folder</p>
@@ -299,7 +311,7 @@ var hostname = process.env.OPENSHIFT_APP_DNS       || 'localhost';
         <br/>
         <div class='fragment roll-in'>
           <p>Run the above command from within an openshift gear to bypass wifi issues.</p><p>Connect to one of your OpenShift apps from the command line: </p>
-          <pre><code contenteditable>rhc shh APP_NAME</code></pre>
+          <pre><code contenteditable>rhc ssh APP_NAME</code></pre>
         </div>
       </section>
     </section>
