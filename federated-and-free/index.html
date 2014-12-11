@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Federated and Free | Distributed and Decentralized Application Architectures</title>
+
+		<meta name="description" content="Centralized social networks (FB, Google+, and twitter) provide a common location for folks to flock to, helping you to make connections and to share valuable experiences while online. But, who can you trust to store your data securely? Catch a glimpse of what future social networks may look like, as we explore the underlying architecture of federated network applications.">
+		<meta name="author" content="Ryan Jarvinen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+
+		<div class="slides">
+    <section>
+      <section>
+        <h1>Federated and Free</h1>
+        <p>Distributed and Decentralized Application Architectures</p>
+        <br/>
+        <p><a href='http://bit.ly/1eF0Toa'>bit.ly/1eF0Toa</a></p>
+        <p><a href='http://socuteurl.com/cherrycupcakes'>socuteurl.com/cherrycupcakes</a></p>
+      </section>
+      <section>
+        <div>presented by</div>
+        <br/>
+        <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+      </section>
+      <section data-state="blackout">
+        <div>
+          <div>Open Platform Evangelist</div>
+          <div>at</div>
+          <div>Red Hat</div>
+          <br/>
+          <div>ryanj@redhat.com</div>
+        </div>
+      </section>
+    </section>
+    <section>
+      <section>
+        <p>One thing that the cloud has taught me</p>
+        <p class='fragment roll-in'>is to plan for failure</p>
+      </section>
+      <section>
+        <p>Is your social network provider too big to fail?</p>
+        <p><img src='../shared/img/building_on_a_cloud.jpg'/></p>
+        <p class='fragment roll-in'><i><b>"What's the worst that could happen?"</b></i></p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Welcome to Cloud City</h2>
+      </section>
+      <section>
+        <h2>Who owns your data?</h2>
+      </section>
+      <section>
+        <p><i><b>Hint:</b> Read the TOS, it may not be you</i></p>
+      </section>
+      <section>
+        <p><i>Can your data be exported in an open format?</i></p>
+      </section>
+      <section>
+        <p><a href='https://www.google.com/settings/takeout'><img src='../shared/img/account_export.png'/></a></p>
+      </section>
+      <section>
+        <h2>Terms of Service</h2>
+        <p class='fragment roll-in'>No negotiation</p>
+        <p class='fragment roll-in'>Subject to change at any moment</p>
+        <p class='fragment roll-in'>You may be banned without warning</p>
+        <p class='fragment roll-in'><img alt='change of terms' src='../shared/img/new_terms.jpg'/></p>
+      </section>
+      <section>
+        <p><i>What happens in Cloud City, stays in Cloud City</i></p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Who brokers your identity?</h2>
+      </section>
+      <section>
+        <ul>
+          <li class='fragment roll-in'>your email provider?</li>
+          <li class='fragment roll-in'>your phone company?</li>
+          <li class='fragment roll-in'>credit agencies?</li>
+          <li class='fragment roll-in'>your SSN?</li>
+          <li class='fragment roll-in'>google, apple (have you rooted)</li>
+          <li class='fragment roll-in'>facebook</li>
+          <li class='fragment roll-in'>linkedin</li>
+          <li class='fragment roll-in'>twitter</li>
+          <li class='fragment roll-in'>github</li>
+        </ul>
+      </section>
+      <section>
+        <img alt='cloud deal gets worse' src='../shared/img/cloud_deal_gets_worse.jpg'/>
+      </section>
+      <section>
+        <h3>Nymrights</h3>
+        <p><a href='http://nymrights.org/'>http://nymrights.org</a></p>
+        <br/>
+        <p>Focused on:</p>
+        <ul>
+          <li class='fragment roll-in'>stopping discrimination</li>
+          <li class='fragment roll-in'>preserving your right to privacy</li>
+        </ul>
+        <br/>
+        <br/>
+        <p class='fragment roll-in'>German Telemedia Act</p>
+      </section>
+      <section>
+        <p>What about laws in the US?</p>
+        <p class='fragment roll-in'>As we move our lives online, we often lose the ability to negotiate with the businesses we deal with on a daily basis</p>
+        <p class='fragment roll-in'>No democratic process to work with</p>
+        <p class='fragment roll-in'>Only free market supply and demand to rely on</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Establishing an Open Protocol for decentralized identity on the web</h2>
+      </section>
+      <section>
+        <h3>identity standards</h3>
+        <ul>
+          <li class='fragment roll-in'><a href='http://openid.net/'>OpenID</a></li>
+          <li class='fragment roll-in'><a href='http://oauth.net/core/1.0/'>OAuth</a></li>
+          <li class='fragment roll-in'><a href='http://oauth.net/2/'>OAuth2</a></li>
+          <li class='fragment roll-in'><a href='https://en.wikipedia.org/wiki/BrowserID'>BrowserID / Persona</a></li>
+        </ul>
+        <p class='fragment roll-in'>open protocols, but currently access control is still generally centralized</p>
+      </section>
+      <section>
+        <h3><a href='https://en.wikipedia.org/wiki/BrowserID'>BrowserID / Persona</a></h3>
+        <ul>
+          <li class='fragment roll-in'>based on the VerifiedEmailProtocol</li>
+          <li class='fragment roll-in'>focus on privacy</li>
+          <li class='fragment roll-in'>browser integration</li>
+          <li class='fragment roll-in'>provides identity bridging to support existing client auth schemes (OpenID, OAuth)</li>
+        </ul>
+      </section>
+      <section>
+        <h3>what happens when we get locked out?<h3>
+        <p><img src='../shared/img/cloud_data_export_lockout.png'/></p>
+      </section>
+      <section>
+        <p class='fragment roll-in'>Or, better yet: <b><span class='fragment roll-in'>"what is our switching cost?"</span></b></p>
+        <p class='fragment roll-in'>In a way, the tech industry has recently been strugling with the same question in regard to hardware / infrastucture (IaaS)</p>
+        <p class='fragment roll-in'>Who is the customer? Do I have any control?</p>
+      </section>
+      <section>
+        <p>I have two words to describe this condition:</p>
+        <p><span class='fragment roll-in'>Stockholm</span> <span class='fragment roll-in'>Syndrome</span></p>
+      </section>
+      <section>
+        <h3>As a consumer, I seek out utilities that specialize in serving my interests</h3>
+        <ul>
+          <li class='fragment roll-in'>Cell phone contracts (why I buy my own cell phone hardware)</li>
+          <li class='fragment roll-in'>Does your ISP prioritize their own video streaming solution over other data sharing the same wire?</li>
+          <li class='fragment roll-in'>"I like being able to fire people"</li>
+          <li class='fragment roll-in'>I like businesses that develop and adopt standards, enabling communities, ecosystems</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Who does your online presence broker recognize as their customers?</h3>
+        <p class='fragment roll-in'>Most are advertising or info focused</p>
+      </section>
+      <section>
+        <h3>App.net - the open version of twitter?</h3>
+        <ul>
+          <li class='fragment roll-in'>you are the customer!</li>
+          <li class='fragment roll-in'>an incentive for profit that is well aligned with the interests of their consumers <span class='fragment roll-in'>(sustainable $)?</span></li>
+          <li class='fragment roll-in'>is adertising a valid form of monetization? (opt-in, personalized?)</li>
+          <li class='fragment roll-in'>can I host my own? is there lock in?</li>
+          <li class='fragment roll-in'>is it a walled garden?  will it ever reach crititcal mass? if it does, will it become too big to fail?</li>
+          <li class='fragment roll-in'>platform and product are still tightly coupled</li>
+        </ul>
+      </section>
+      <section>
+        <p>Identity managers have incredible control over their platforms</p>
+        <ol>
+          <li class='fragment roll-in'>Identity and platform must be decoupled</li>
+          <li class='fragment roll-in'>We need a platform as a service!</li>
+          <li class='fragment roll-in'>We want open systems all the way down</li>
+        </ol>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>Starting over from scratch</h3>
+        <h2>With an Open Cloud</h2>
+      </section>
+      <section>
+        <h3>The solution will need to be:</h3>
+        <ol>
+          <li class='fragment roll-in'>open, secure</li>
+          <li class='fragment roll-in'>properly monetized, good incentives</li>
+          <li class='fragment roll-in'>no lock in, minimal switching cost</li>
+        </ol>
+        <br/>
+        <br/>
+        <p class='fragment roll-in'>Reality check:</p> 
+        <ul>
+          <li class='fragment roll-in'>uptime is critical</li>
+          <li class='fragment roll-in'>decouple platform and product. pay for serice uptime</li>
+          <li class='fragment roll-in'>interop, portability is critical</li>
+        </ul>
+      </section>
+      <section>
+        <h3>But who wants to do all of this work anyway?</h3>
+        <p class='fragment roll-in'>Thats why we have OpenShift Online</p>
+        <p class='fragment roll-in'>don't like RedHat? Try GetUpCloud.com</p>
+        <p class='fragment roll-in'>I have a feeling that you may see some major IaaS providers offering their own OpenShift managed hosting service soon</p>
+      </section>
+      <section>
+        <h3>Open Source the Cloud</h3>
+        <ol>
+          <li class='fragment roll-in'>OS - liberated!</li>
+          <li class='fragment roll-in'>Infrastructure - liberated! (OpenStack, RDO)</li>
+          <li class='fragment roll-in'>Platform - liberated! (OpenShift)</li>
+          <li class='fragment roll-in'>Integrate with OpenStack or other open systems to use your existing identity, authentication, authorization services.</li>
+          <li class='fragment roll-in'>Host your own OpenID, OAuth, etc..</li>
+        </ol>
+      </section>
+      <section>
+        <p>The cloud is a free market for services. We're seeing a lot of specialization in storage, compute, caching, hosting, monitoring - all being handled by different open and pluggable vendor solutions.</p>
+        <br/>
+        <h3 class='fragment roll-in'>Predictions?</h3>
+        <ul>
+          <li class='fragment roll-in'>Domain registries that support OAuth-style provisioning</li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Meanwhile, back in cloud city&hellip;</h2>
+        <img class='fragment roll-in' src='../shared/img/dubai-abobe-clouds.jpg'/>
+      </section>
+      <section>
+        <h3>Diaspora</h3>
+        <ul>
+          <li class='fragment roll-in'>decentralized social</li>
+          <li class='fragment roll-in'>multi-home pub/sub style arch</li>
+          <li class='fragment roll-in'><a href='https://diasporafoundation.org/'>Diaspora Foundation</a></li>
+          <li class='fragment roll-in'><a href='https://joindiaspora.com/'>http://JoinDiaspora.com</a></li>
+          <li class='fragment roll-in'>Focus on privacy, freedom, users owning their own data</li>
+          <li class='fragment roll-in'>Interoperability</li>
+        </ul>
+      </section>
+      <section>
+        <h4>Establishing a protocol, or not:</h4>
+        <ul>
+          <li class='fragment roll-in'>decouple identity and data / activity</li>
+          <li class='fragment roll-in'>interact with folks across social hubs (federation)</li>
+          <li class='fragment roll-in'><a href='http://opensocial.org/'>OpenSocial</a> (old, now proprietary?)</li>
+          <li class='fragment roll-in'><a href='https://tent.io/'>tent.io</a> (developing a protocol, asking great questions)</li>
+          <li class='fragment roll-in'><a href='http://pump.io/'>pump.io</a> (activitystreams)</li>
+          <li class='fragment roll-in'><a href='https://owncloud.com/'>OwnCloud</a> (Dropbox and more?)</li>
+          <li class='fragment roll-in'><a href='https://tahoe-lafs.org/trac/tahoe-lafs'>Tahoe-LAFS</a> (Least-Authority FS)</li>
+        </ul>
+      </section>
+      <section>
+        <p>Figure A:</p>
+        <p><img src='../shared/img/tent_diagram.png'/></p>
+      </section>
+      <section>
+        <p>Figure B:</p>
+        <p><img src='../shared/img/Centralised-decentralised-distributed.png'/></p>
+      </section>
+      <section>
+        <h4>Open Data formats, standards, projects to keep an eye on:</h4>
+        <ul>
+          <li class='fragment roll-in'>RSS 3.0</li>
+          <li class='fragment roll-in'>Activity Streams 3.0</li>
+          <li class='fragment roll-in'>GNU Social</li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>The solution will need to be&hellip;</h2>
+      </section>
+      <section>
+        <p>Are we there yet?</p>
+        <ol>
+          <li class='fragment roll-in'>open, secure, reliable</li>
+          <li class='fragment roll-in'>standards based</li>
+          <li class='fragment roll-in'>properly monetized, good alignment of incentives</li>
+          <li class='fragment roll-in'>distributed, decentralized, and scalable</li>
+          <li class='fragment roll-in'>no lock in, minimal switching cost</li>
+        </ol>
+      </section>
+      <section>
+        <p><a href='http://apps.owncloud.com/content/show.php/Mozilla+Persona+user+backend?content=151521'><img src='../shared/img/owncloud-persona.png'/></a></p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>Walls of cryptography</h3>
+      </section>
+      <section>
+        <h4>Types of crypto:</h4>
+        <ol>
+          <li class='fragment roll-in'>Disk encryption</li>
+          <li class='fragment roll-in'>File encryption</li>
+          <li class='fragment roll-in'>Network i/o encryption</li>
+        </ol>
+        <br/>
+        <br/>
+        <p class='fragment roll-in'>Who controls the lines of transmission?</p>
+        <p class='fragment roll-in'>ISPs, telcos, NSA (prism, xkeyscore)?</p>
+      </section>
+      <section>
+        <h4>Tahoe-LAFS: provider-independent security</h4>
+        <p class='fragment roll-in'>"The service provider never has the ability to read or modify your data in the first place: never"</p>
+        <p class='fragment roll-in'>"Not only is it easy and inexpensive for the service provider to maintain the security of your data, but in fact they couldn't violate its security if they tried"</p>
+        <p><a href='https://tahoe-lafs.org/trac/tahoe-lafs/browser/trunk/docs/about.rst'>from the Tahoe-LAFS public trac</a></p>
+      </section>
+      <section>
+        <h4>Fully Homomorphic Encryption</h4>
+        <ul>
+          <li class='fragment roll-in'>Support for blind processing operations</li>
+          <li class='fragment roll-in'>Data stays encrypted while being transacted upon</li>
+        </ul>
+        <br/>
+        <br/>
+        <p class='fragment roll-in'><a href='https://en.wikipedia.org/wiki/Homomorphic_encryption'>https://en.wikipedia.org/wiki/Homomorphic_encryption</a></p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h4>Building communities around an open infrastucture, OS, and platform</h4>
+        <ul>
+          <li class='fragment roll-in'><a href='http://openshift.github.io/'>OpenShift Origin</a></li>
+          <li class='fragment roll-in'><a href='http://codeforamerica.org/'>Code For America</a></li>
+          <li class='fragment roll-in'><a href='https://en.wikipedia.org/wiki/CryptoParty'>CryptoParty</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>code for america</h3>
+        <p>An organization built around:</p>
+        <ul>
+          <li class='fragment roll-in'>Civic app development</li>
+          <li class='fragment roll-in'>Community building</li>
+          <li class='fragment roll-in'>Hackathons</li>
+          <li class='fragment roll-in'>Democracy</li>
+          <li class='fragment roll-in'>Open data policies</li>
+        </ul>
+        <p class='fragment roll-in'><a href='http://codeforamerica.org/'>CodeForAmerica.org</a></p>
+      </section>
+      <section>
+        <h4>An Open App store?</h4>
+        <p>practical killer apps, an open realtime office</p>
+        <p class='fragment roll-in'>even for the windows users</p>
+        <br/>
+        <p class='fragment roll-in'><a href='http://app-shifter.rhcloud.com/'>app-shifter.rhcloud.com</a></p>
+      </section>
+    </section>
+    <section>
+      <section data-state="blackout">
+        <h3>take back your data, take back your identity</h3>
+        <ul>
+          <li class='fragment roll-in'>it's your content, define your own TOS</li>
+          <li class='fragment roll-in'>pay for uptime, not for usage terms</li>
+          <li class='fragment roll-in'>decouple, don't bundle</li>
+          <li class='fragment roll-in'>treat your utilities like utilities</li>
+        </ul>
+      </section>
+      <section data-state="blackout">
+        <p>For information about running your own OpenShift:</p>
+        <p><a href='http://openshift.github.io/'>http:/openshift.github.io</a></p>
+        <br/>
+        <p><a href='https://openshift.redhat.com/app/account/new?web_user[promo_code]=HTML5Dev13'>Or, sign up for a free OpenShift Online account<br/>(HTML5Dev13)</a></p>
+        <br/>
+        <p><b><i>Thanks for following along! &nbsp; --ryanj</i></b></p>
+      </section>
+      <section data-state="blackout">
+        <a href='http://socuteurl.com/cherrycupcakes'><img src='../shared/img/stay_classy_cloud_city.jpg'/><br/>socuteurl.com/cherrycupcakes</a>
+      </section>
+    </section>
+
+			</div>
+      <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
