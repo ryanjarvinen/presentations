@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>OpenShift Hackathon Bootcamp</title>
+
+		<meta name="description" content="Get ready to win that Hackathon with a production app on OpenShift">
+		<meta name="author" content="Ryan Jarvinen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../shared/css/reveal.min.css">
+		<link rel="stylesheet" href="../shared/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../shared/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../shared/css/print/pdf.css" type="text/css" media="print">
+
+		<!--[if lt IE 9]>
+		<script src="../shared/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+    <section>
+      <section>
+        <p><i>Welcome to the</i></p>
+        <img style="disply:block;border:none;background:none;width:80%;" alt='OpenShift-logo' src='../shared/img/OpenShift_Horizontal_RGB_Reverse.png'/>
+        <br/>
+        <br/>
+        <h2>Hackathon Bootcamp</h2>
+        <br/>
+        <p><a href='http://bit.ly/hackathon-howto'>bit.ly/hackathon-howto</a></p>
+      </section>
+      <section>
+        <div>presented by</div>
+        <br/>
+        <div><a href='http://ryanjarvinen.com/'>ryan jarvinen</a> / <a href='http://twitter.com/ryanj/'>@ryanj</a></div>
+      </section>
+      <section data-state="blackout">
+        <div>
+          <div>Open Source Evangelist</div>
+          <div>at</div>
+          <div>Red Hat</div>
+          <br/>
+          <div>ryanj@redhat.com</div>
+        </div>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Hackathon Goals</h2>
+        <ol>
+          <li class='fragment roll-in'>Accomplish more, in less time</li>
+          <li class='fragment roll-in'>Establish a vision for user experience and design goals</li>
+          <li class='fragment roll-in'>Deploy a prototype and iterate on a solution</li>
+          <li class='fragment roll-in'>Prepare a demo and/or presentation that will effectively address the goals of the event</li>
+          <li class='fragment roll-in'>"Sell" your project to the judges</li>
+        </ol>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Agenda</h2>
+        <ol>
+          <li class='fragment roll-in'>Hosting on OpenShift </li>
+          <li class='fragment roll-in'>Authoring config-free solutions</li>
+          <li class='fragment roll-in'>Team collaboration</li>
+          <li class='fragment roll-in'>Local development advice</li>
+        </ol>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>OpenShift is&hellip;</h2> 
+        <h1 class="fragment roll-in">OPEN SOURCE</h1>
+        <h1 class="fragment roll-in">hosting</h1>
+        <h3 class="fragment roll-in">and</h3>
+        <h1 class="fragment roll-in">auto-scaling</h1>
+      </section>
+      <section>
+        <p>Many of these technolgies are bundled / made available as</p>
+        <h3>Cartridges</h3>
+        <img style='width:70%' alt='OpenShift Cartridge' src='../shared/img/Openshift-Cartridge.png'/>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc cartridge list</code></pre></div>
+      </section>
+      <section>
+        <p>OpenShift delivers secure, containerized environments - providing guaranteed access to system resources</p>
+        <img src='../shared/img/gear.png'/> 
+      </section>
+      <section>
+        <img src='../shared/img/Docker-logo.png'/> 
+      </section>
+      <section>
+        <h3>Basic Setup</h3>
+        <div class='fragment roll-in'><pre><code contenteditable>sudo gem install rhc</code></pre>
+        <p>and</p>
+        <pre><code contenteditable>rhc setup</code></pre></div>
+        <br/>
+        <p class='fragment roll-in'>Will automatically:</p>
+        <ul><li class='fragment roll-in'>authenticate your OpenShift account</li>
+                 <li class='fragment roll-in'>verify your local ssh key configuration</li>
+                 <li class='fragment roll-in'>configure your host url identifier</li></ul>
+      </section>
+      <section>
+        <h3>Creating an application</h3>
+        <p>Start by provisioning your application environment and database in a single step:</p>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc app create APP_NAME CARTRIDGE CART2 CART3</code></pre></div>
+        <br/>
+        <div class='fragment roll-in'><p>for a basic Nodejs and MongoDB application, run:</p></div>
+        <div class='fragment roll-in'><pre><code contenteditable>rhc app create citycamp nodejs-0.10 mongodb-2.4</code></pre></div>
+      </section>
+	    <section>
+<p>&lt;command-line output&gt;</p>
+<pre><code>Application Options
+-------------------
+  Namespace:   shifter
+  Cartridges:  nodejs-0.10, mongodb-2.4
+  Gear Size:   default
+  Scaling:     no
+
+Creating application 'citycamp' ... done
+
+Waiting for your DNS name to be available ... done
+
+Downloading the application Git repository ...
+Cloning into 'citycamp'...
+
+Your application code is now in 'citycamp'</code></pre>
+      </section>
+	<section>
+<pre><code contenteditable>citycamp @ http://citycamp-shifter.rhcloud.com/ (uuid: 5175981a5973ca7a69000501)
+-------------------------------------------------------------
+  Created:         1:05 PM
+  Gears:           1 (defaults to small)
+  Git URL:        
+ssh://5175981a5973ca7a69000501@citycamp-shifter.rhcloud.com/~/git/citycamp.git/
+  SSH:             5175981a5973ca7a69000501@citycamp-shifter.rhcloud.com
+
+  nodejs-0.10 (Node.js 0.10)
+  ------------------------
+    Gears: Located with mongodb-2.4
+
+  mongodb-2.4 (MongoDB NoSQL Database 2.4)
+  ----------------------------------------
+    Gears:          Located with nodejs-0.10
+    Connection URL:
+mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
+    Database Name:  citycamp
+    Password:       PTk4cCetTj2w
+    Username:       admin
+
+RESULT:
+Application citycamp was created.</code></pre>
+      </section>
+      <section>
+<h2>Success!</h2> 
+<p>You now have a basic node.js and MongoDB skeleton application live on the Internet!</p>
+        <p><a href='http://citycamp-shifter.rhcloud.com/'>http://citycamp-shifter.rhcloud.com/</a></p>
+<br/>
+        <p class='fragment roll-in'>Your gear is now configured with:</p> 
+        <ul><li class='fragment roll-in'>it's own git repo</li>
+                 <li class='fragment roll-in'>it's own web server</li>
+                 <li class='fragment roll-in'>ssh access</li>
+                 <li class='fragment roll-in'>logging</li>
+                 <li class='fragment roll-in'>a database</li>
+                 <li class='fragment roll-in'>publicly accessible DNS</li></ul>
+      </section>
+      <section>
+        <h3>Accessing your application</h3>
+        <p>You can follow your remote logs with:</p>
+        <pre><code contenteditable>rhc tail citycamp</code></pre>
+        <p>or connect directly to your app via <b>ssh</b>:</p>
+        <pre><code contenteditable>rhc ssh citycamp</code></pre>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Writing clean and reusable code</h2>
+      </section>
+      <section>
+        <h3>Environment Variables</h3> 
+        <p>Allow you to write code that will run anywhere</p>
+        <div class='fragment roll-in'><pre><code contenteditable>//provide a sensible default for local development
+mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + db_name;
+//take advantage of openshift env vars when available:
+if(process.env.OPENSHIFT_MONGODB_DB_URL){
+  mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + db_name;
+}</code></pre></div>
+        <div class='fragment roll-in'><pre><code contenteditable>//same advice applies for your webserver's PORT and IP address
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000
+var ip   = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'</code></pre></div>
+      </section>
+      <section>
+        <p>Application passwords, keys, and secrets can be abstracted using the same technique:</p>
+        <div class='fragment roll-in'>
+          <pre><code contenteditable>rhc env set SECRET_KEY=C1V1C_1NN0V4T10N</code></pre>
+          <pre><code contenteditable>rhc env list</code></pre>
+          <pre><code contenteditable>rhc env help</code></pre>
+        </div>
+      </section>
+      <section>
+        <h3>Deploying updates</h3>
+        <p>A standard git development workflow can be used to rebuild and update your remote application:</p>
+        <ol><li class='fragment roll-in'>Add your changes to a changeset<pre><code contenteditable>git add index.html</code></pre></li>
+            <li class='fragment roll-in'>Mark the changeset as a Commit<pre><code contenteditable>git commit -m 'updating H1 to: "Welcome to CityCamp"'</code></pre></li>
+            <li class='fragment roll-in'>Push the Commit to OpenShift<pre><code contenteditable>git push</code></pre></li>
+        </ol>
+      </section>
+      <section>
+        <h2>Starter Projects</h2>
+        <p>Time is limited, so it's usually best to start with a stack that you're already somewhat familiar with.</p>
+        <p>Check out the <a href='https://hub.openshift.com'>OpenShift Hub</a> for examples of pre-canned open source frameworks that are ready to run in a single click.</p>
+      </section>
+      <section>
+        <h2>Tips for Local Development</h2>
+        <p>Starting a local webserver is different in each language. <br/>For nodejs, you can start a local server with:</p>
+        <pre><code contenteditable>npm install</code></pre>
+        <pre><code contenteditable>npm start</code></pre>
+        <p>Use port-forwarding to create a local connection to your remote database instance:</p>
+        <pre><code contenteditable>rhc port-forward citycamp</code></pre>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h2>Team Collaboration</h2>
+        <p>There are several ways to collaborate:
+        <ol>
+            <li class='fragment roll-in'>using <a href='https://www.openshift.com/blogs/seven-steps-to-hackathon-success#collaborate'>github or bitbucket</a></li>
+            <li class='fragment roll-in'>using <a href='https://www.openshift.com/blogs/secret-free-source-on-paas#team_collaboration'>ssh keys</a></li>
+            <li class='fragment roll-in'>or add team members using <a href='https://www.openshift.com/blogs/online-release-for-november-2013'>OpenShift's team collaboration tools</a></li>
+        </ol>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h4>Budget your time</h4>
+        <a href='https://www.openshift.com/blogs/seven-steps-to-hackathon-success'>Seven Steps to Hackathon Success</a>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>Additional Example Repos</h3>
+        <div style="width:50%;float:left;">
+        <p>REST APIs and static files:</p>
+        <ul>
+          <li><a href='https://github.com/ryanj/nodejs-custom-version-openshift'>nodejs-0.12 (JS)</a></li>
+          <li><a href='http://github.com/ryanj/http-base'>http (JS)</a></li>
+          <li><a href='http://github.com/ryanj/restify-base'>Restify (JS)</a></li>
+          <li><a href='http://github.com/ryanj/hapi-base'>Hapi (JS)</a></li>
+          <li><a href='http://github.com/ryanj/silex-base'>Silex (PHP)</a></li>
+          <li><a href='http://github.com/ryanj/flask-base'>Flask (PYTHON)</a></li>
+          <li><a href='http://github.com/ryanj/sinatra-base'>Sinatra (RUBY)</a></li>
+        </ul>
+        </div>
+        <div style="width:50%;float:right;">
+        <p>with Leaflet maps:</p>
+        <ul>
+          <li><a href='https://github.com/ryanj/restify-postGIS'>Restify+PostGIS (JS)</a></li>
+          <li><a href='https://github.com/ryanj/restify-mongodb-parks'>Restify+MongoDB (JS)</a></li>
+          <li><a href='https://github.com/openshift-quickstart/silex-mongodb-parks'>Silex+MongoDB (PHP)</a></li>
+          <li><a href='http://github.com/ryanj/flask-postGIS'>Flask+PostGIS (PYTHON)</a></li>
+          <li><a href='https://github.com/openshift-quickstart/openshift-mongo-flask-example'>Flask+MongoDB (PYTHON)</a></li>
+          <li><a href='https://github.com/thesteve0/javaparks'>JaxRS+MongoDB (JAVA)</a></li>
+          <li><a href='https://github.com/openshift-quickstart/spatial-ruby-openshift-quickstart'>Sinatra+MongoDB (RUBY)</a></li>
+        </ul>
+        </div>
+      </section>
+    </section>
+    <section>
+      <section data-state="blackout">
+        <h2>Want Help?</h2>
+        <ul>
+          <li>These slides: <a href='http://bit.ly/hackathon-howto'>bit.ly/hackathon-howto</a></li>
+          <li>OpenShift DevCenter: <a href='http://developers.openshift.com/'>developers.openshift.com</a></li>
+          <li>OpenShift Hub: <a href='https://hub.openshift.com/'>Starter projects and examples</a></li>
+          <li>Blog posts: 
+            <ul>
+              <li><a href='https://www.openshift.com/blogs/seven-steps-to-hackathon-success'>Seven Steps to Hackathon Success</a></li>
+              <li><a href='https://www.openshift.com/blogs/open-source-mapping-with-php-and-mongodb'>Open Source Mapping Basics</a></li>
+              <li><a href='https://www.openshift.com/blogs/instant-mapping-applications-with-postgis-and-nodejs'>PostGIS instant mapping apps</a></li>
+             </ul>
+          </li>
+          <li>Questions on StackOverflow: <a href='http://stackoverflow.com/questions/tagged/openshift'>stackoverflow.com/questions/tagged/openshift</a></li>
+          <li>Come hang out with us on IRC: <a href='http://webchat.freenode.net/'>#openshift on Freenode</a></li>
+        </ul>
+      </section>
+    </section>
+			</div>
+      <img style="position:fixed;width:15%;z-index:30;bottom:20px;left:20px;" src="../shared/img/RH_logo-trans_reverse.png"/>
+		</div>
+
+		<script src="../shared/lib/js/head.min.js"></script>
+		<script src="../shared/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../shared/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../shared/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../shared/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../shared/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../shared/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: '../shared/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20043816-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	</body>
+</html>
